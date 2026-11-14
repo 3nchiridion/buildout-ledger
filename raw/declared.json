@@ -151,7 +151,7 @@
    "tier": "chips",
    "layer": "chips",
    "parent": null,
-   "cik": null,
+   "cik": "0001730168",
    "note": "Designs custom accelerators (XPUs) and networking for others, including Google TPUs."
   },
   {
@@ -273,7 +273,7 @@
    "layer": null,
    "parent": null,
    "cik": null,
-   "note": "A financial instrument, not a company: $27.3B of notes issued by Beignet Investor LLC (Blue Owl funds) to finance the Meta\u2013Blue Owl Hyperion data-center venture in Louisiana."
+   "note": "A financial instrument, not a company: $27.3B of notes issued by Beignet Investor LLC (Blue Owl funds) to finance the Meta–Blue Owl Hyperion data-center venture in Louisiana."
   },
   {
    "id": "spacex",
@@ -647,7 +647,7 @@
    "layer": "chips",
    "parent": null,
    "cik": null,
-   "note": "Maker of the lithography machines every leading-edge chip needs. Led Mistral's Series C with \u20ac1.3B for about 11%."
+   "note": "Maker of the lithography machines every leading-edge chip needs. Led Mistral's Series C with €1.3B for about 11%."
   },
   {
    "id": "intel",
@@ -1009,6 +1009,22 @@
   "coreweave|PaymentsToAcquirePropertyPlantAndEquipment": {
    "metric": "capex",
    "definition": "Purchases of property and equipment (cash-flow statement)."
+  },
+  "microsoft|RevenueRemainingPerformanceObligation": {
+   "metric": "rpo",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing."
+  },
+  "google|RevenueRemainingPerformanceObligation": {
+   "metric": "rpo",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing."
+  },
+  "coreweave|RevenueRemainingPerformanceObligation": {
+   "metric": "rpo",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end."
+  },
+  "broadcom|RevenueRemainingPerformanceObligation": {
+   "metric": "rpo",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end."
   }
  },
  "flows": [
@@ -2293,7 +2309,7 @@
    "type": "equity",
    "status": "contracted",
    "amount_usd": 500000000.0,
-   "amount_qualifier": "computed: 6,756,756 Class N shares at the $74 midpoint of the $70\u201378 IPO range",
+   "amount_qualifier": "computed: 6,756,756 Class N shares at the $74 midpoint of the $70–78 IPO range",
    "date": "2026-11-10",
    "grade": "filed",
    "level": "map",
@@ -2327,7 +2343,7 @@
    "type": "equity",
    "status": "contracted",
    "amount_usd": 1000000000.0,
-   "amount_qualifier": "computed: 13,513,513 Class N shares at the $74 midpoint of the $70\u201378 IPO range",
+   "amount_qualifier": "computed: 13,513,513 Class N shares at the $74 midpoint of the $70–78 IPO range",
    "date": "2026-11-10",
    "grade": "filed",
    "level": "entity",
@@ -2344,7 +2360,7 @@
    "type": "equity",
    "status": "contracted",
    "amount_usd": 1000000000.0,
-   "amount_qualifier": "computed: 13,513,513 Class N shares at the $74 midpoint of the $70\u201378 IPO range",
+   "amount_qualifier": "computed: 13,513,513 Class N shares at the $74 midpoint of the $70–78 IPO range",
    "date": "2026-11-10",
    "grade": "filed",
    "level": "entity",
@@ -2560,7 +2576,7 @@
    "type": "purchase_commitment",
    "status": "contracted",
    "amount_usd": null,
-   "amount_qualifier": "11 PPAs and 2 storage agreements, about 2.5 GW, online 2026\u20132028",
+   "amount_qualifier": "11 PPAs and 2 storage agreements, about 2.5 GW, online 2026–2028",
    "date": "2025-12-08",
    "grade": "announced",
    "level": "entity",
@@ -2679,13 +2695,13 @@
    "type": "equity",
    "status": "announced",
    "amount_usd": 1500000000.0,
-   "amount_qualifier": "\u20ac1.3B (about $1.5B); about 11% fully diluted; lead investor in the Series C",
+   "amount_qualifier": "€1.3B (about $1.5B); about 11% fully diluted; lead investor in the Series C",
    "date": "2025-09-09",
    "grade": "announced",
    "level": "map",
-   "title": "ASML leads Mistral's Series C with \u20ac1.3B",
+   "title": "ASML leads Mistral's Series C with €1.3B",
    "label": "Equity",
-   "definition": "ASML will lead Mistral AI's Series C funding round, investing \u20ac1.3 billion, under a long-term collaboration agreement.",
+   "definition": "ASML will lead Mistral AI's Series C funding round, investing €1.3 billion, under a long-term collaboration agreement.",
    "source_title": "ASML press release, 9 Sep 2025",
    "source_url": "https://investor.asml.com/news-releases/news-release-details/asml-mistral-ai-enter-strategic-partnership"
   },
@@ -2696,13 +2712,13 @@
    "type": "equity",
    "status": "cash_moved",
    "amount_usd": null,
-   "amount_qualifier": "part of a \u20ac1.7B round; Nvidia's share not disclosed",
+   "amount_qualifier": "part of a €1.7B round; Nvidia's share not disclosed",
    "date": "2025-09-09",
    "grade": "reported",
    "level": "entity",
-   "title": "Nvidia joins Mistral's \u20ac1.7B round",
+   "title": "Nvidia joins Mistral's €1.7B round",
    "label": "Equity",
-   "definition": "AP reported that ASML's \u20ac1.3 billion is part of a \u20ac1.7 billion round that also involves Nvidia.",
+   "definition": "AP reported that ASML's €1.3 billion is part of a €1.7 billion round that also involves Nvidia.",
    "source_title": "AP via WTOP, 9 Sep 2025",
    "source_url": "https://wtop.com/news/2025/09/asml-invests-1-5b-in-french-ai-startup-mistral-forming-european-tech-alliance"
   },
@@ -3050,7 +3066,7 @@
    "title": "Microsoft holds about 27% of OpenAI after the recapitalization",
    "label": "Owns ~27%",
    "definition": "Following the recapitalization, Microsoft holds an investment in OpenAI Group PBC valued at about $135 billion, roughly 27% on an as-converted diluted basis.",
-   "source_title": "Microsoft, The next chapter of the Microsoft\u2013OpenAI partnership",
+   "source_title": "Microsoft, The next chapter of the Microsoft–OpenAI partnership",
    "source_url": "https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/"
   },
   {
@@ -3067,7 +3083,7 @@
    "title": "Blue Owl funds own 80% of Meta's Hyperion campus",
    "label": "Owns 80%",
    "definition": "Blue Owl funds own 80% of the Hyperion joint venture and made a cash contribution of about $7 billion; Meta keeps 20% and received a one-time distribution of about $3 billion. Drawn as ownership, not a money flow, so it is not counted twice with the Hyperion bonds.",
-   "source_title": "Meta\u2013Blue Owl press release via Fierce Network, Oct 2025",
+   "source_title": "Meta–Blue Owl press release via Fierce Network, Oct 2025",
    "source_url": "https://www.fierce-network.com/newswire/investment-firm-take-80-stake-metas-hyperion-data-center"
   },
   {
@@ -3264,13 +3280,13 @@
    "type": "purchase_commitment",
    "status": "contracted",
    "amount_usd": 7970000000.0,
-   "amount_qualifier": "11.95 trillion won (about \u20ac6.91B, about $7.97B) of EUV tools by the end of 2027, per its regulatory filing",
+   "amount_qualifier": "11.95 trillion won (about €6.91B, about $7.97B) of EUV tools by the end of 2027, per its regulatory filing",
    "date": "2026-03-24",
    "grade": "reported",
    "level": "map",
    "title": "SK hynix orders about $8B of ASML EUV scanners",
    "label": "EUV tools",
-   "definition": "SK hynix's board decided to buy \u20ac6.913 billion of EUV scanner equipment from ASML, valued at \u20a911.95 trillion, to be completed by the end of 2027, per its regulatory filing in Seoul as reported by Dow Jones.",
+   "definition": "SK hynix's board decided to buy €6.913 billion of EUV scanner equipment from ASML, valued at ₩11.95 trillion, to be completed by the end of 2027, per its regulatory filing in Seoul as reported by Dow Jones.",
    "source_title": "Dow Jones via Morningstar, 24 Mar 2026",
    "source_url": "https://www.morningstar.com/news/dow-jones/202603241694/sk-hynix-to-buy-8-billion-of-asml-euv-equipment"
   },
@@ -4077,7 +4093,7 @@
    "title": "CNBC: Nvidia paying about $20B in the Groq deal",
    "detail": "CNBC reported, citing a Groq investor, that Nvidia would pay about $20 billion; the companies did not disclose a value.",
    "grade": "reported",
-   "source_title": "Constellation Research on the Groq\u2013Nvidia deal, Dec 2025",
+   "source_title": "Constellation Research on the Groq–Nvidia deal, Dec 2025",
    "source_url": "https://www.constellationr.com/node/41173"
   }
  ],
@@ -4390,7 +4406,7 @@
   },
   {
    "topic": "Nvidia, Microsoft and AMD in Anthropic's IPO placement",
-   "note": "The amended S-1 says Google's $10B placement funds part of an earlier commitment. It does not say, in the sections read, whether Nvidia's $10B, Microsoft's $1B and AMD's $2.5B are new money or fund their 2025\u201326 commitments, so they are recorded in the placement event only, not as new lines."
+   "note": "The amended S-1 says Google's $10B placement funds part of an earlier commitment. It does not say, in the sections read, whether Nvidia's $10B, Microsoft's $1B and AMD's $2.5B are new money or fund their 2025–26 commitments, so they are recorded in the placement event only, not as new lines."
   },
   {
    "topic": "Terafab",
@@ -4398,7 +4414,7 @@
   },
   {
    "topic": "Energy deals before July 2025",
-   "note": "Microsoft\u2013Constellation (Three Mile Island restart, Sep 2024), Microsoft\u2013Brookfield (10.5 GW, May 2024), Amazon\u2013Talen (1.92 GW, Jun 2025) and Meta\u2013Constellation (Clinton, Jun 2025) predate the window, so they are not on the map."
+   "note": "Microsoft–Constellation (Three Mile Island restart, Sep 2024), Microsoft–Brookfield (10.5 GW, May 2024), Amazon–Talen (1.92 GW, Jun 2025) and Meta–Constellation (Clinton, Jun 2025) predate the window, so they are not on the map."
   },
   {
    "topic": "xAI's turbines",
@@ -4409,7 +4425,7 @@
    "note": "The OnePWR deal (1.7 GW, about $3.4B) is reported by the FT only; recorded as an event, not a line, and OnePWR is not added as a player."
   },
   {
-   "topic": "Google\u2013DTE and turbine makers",
+   "topic": "Google–DTE and turbine makers",
    "note": "DTE's 1 GW contract for Google's Michigan campus and turbine orders at GE Vernova and Caterpillar lack a dated primary source naming the AI buyer."
   },
   {
@@ -4434,7 +4450,7 @@
   },
   {
    "topic": "ASML's customer dollars",
-   "note": "ASML's 2025 20-F says four customers each exceeded 10% of sales, together \u20ac20.0B, without naming them. Only SK hynix's disclosed \u20ac6.9B EUV order is drawn with a dollar figure."
+   "note": "ASML's 2025 20-F says four customers each exceeded 10% of sales, together €20.0B, without naming them. Only SK hynix's disclosed €6.9B EUV order is drawn with a dollar figure."
   },
   {
    "topic": "Gemini 4 Hydrogen",
@@ -4602,7 +4618,7 @@
     "r-oai-gpt56",
     "r-goog-hydrogen"
    ],
-   "note": "Unreachable sources replaced with the companies' own pages. Nvidia\u2013Groq now shows no amount, since the companies gave none; CNBC's $20B is kept as a reported event. Qwen3-Max dated to Alibaba's 24 Sep 2025 release. Gemini 4 Hydrogen held off the map until a Google page confirms it."
+   "note": "Unreachable sources replaced with the companies' own pages. Nvidia–Groq now shows no amount, since the companies gave none; CNBC's $20B is kept as a reported event. Qwen3-Max dated to Alibaba's 24 Sep 2025 release. Gemini 4 Hydrogen held off the map until a Google page confirms it."
   },
   {
    "date": "2026-11-14",
@@ -4614,7 +4630,7 @@
     "p-tesla-fsd",
     "r-oai-gpt56"
    ],
-   "note": "Independent check of the new application rows and the remaining unchecked rows: Tesla\u2013Samsung set to $16.4B, the figure in the cited report; SK hynix\u2013ASML set to $7.97B from the won amount in its filing; claims the cited pages did not make were removed (Amazon's milestone funding, Anduril's valuation, FSD as the basis of Robotaxi); GPT-5.6 re-cited to OpenAI's launch post."
+   "note": "Independent check of the new application rows and the remaining unchecked rows: Tesla–Samsung set to $16.4B, the figure in the cited report; SK hynix–ASML set to $7.97B from the won amount in its filing; claims the cited pages did not make were removed (Amazon's milestone funding, Anduril's valuation, FSD as the basis of Robotaxi); GPT-5.6 re-cited to OpenAI's launch post."
   }
  ],
  "verification_addressed": [
@@ -4687,7 +4703,9 @@
   "u-oai-g42"
  ],
  "verification_pending": [
-  "r-oai-gpt56"
+  "r-oai-gpt56",
+  "m-amzn-backlog-2606",
+  "m-nbis-backlog-2606"
  ],
  "releases": [
   {
@@ -5878,6 +5896,32 @@
    "definition": "Annualized revenue reported by The Information, as relayed by Fast Company. Perplexity has not published it.",
    "source_title": "Fast Company, Maybe we were wrong about Perplexity, 3 Sep 2026",
    "source_url": "https://fastcompany.com/91600914/maybe-we-were-wrong-about-perplexity"
+  },
+  {
+   "id": "m-amzn-backlog-2606",
+   "entity": "amazon",
+   "metric": "backlog",
+   "value": 496000000000,
+   "unit": "usd",
+   "as_of": "2026-06-30",
+   "available": "2026-07-30",
+   "grade": "announced",
+   "definition": "AWS backlog as stated on Amazon's second-quarter 2026 earnings call. Amazon does not tag this figure in its XBRL filings.",
+   "source_title": "Amazon Q2 2026 earnings call transcript (The Motley Fool), 30 Jul 2026",
+   "source_url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/amazon-amzn-q2-2026-earnings-call-transcript/"
+  },
+  {
+   "id": "m-nbis-backlog-2606",
+   "entity": "nebius",
+   "metric": "backlog",
+   "value": 37490000000,
+   "unit": "usd",
+   "as_of": "2026-06-30",
+   "available": "2026-09-14",
+   "grade": "reported",
+   "definition": "Remaining performance obligations at the end of the second quarter of 2026, as reported in press coverage of Nebius's filing.",
+   "source_title": "24/7 Wall St., 14 Sep 2026",
+   "source_url": "https://247wallst.com/investing/2026/09/14/nebius-keeps-getting-my-money-there-is-one-reason-and-it-is-not-hype/"
   }
  ],
  "metric_defaults": {
@@ -5897,6 +5941,9 @@
   },
   "monthly_users": {
    "definition": "Monthly active users of the Gemini app, as Alphabet's CEO states them on earnings calls. Not comparable with ChatGPT's weekly figure."
+  },
+  "backlog": {
+   "definition": "Contracted backlog as the company states it: revenue under contract and not yet recognized."
   }
  },
  "metric_checks": [
@@ -6109,7 +6156,7 @@
      "url": "https://www.trendingtopics.eu/neoclouds-challenge-the-hyperscalers-in-big-bets-on-ai-infrastructure/"
     }
    ],
-   "not_drawn": "Not drawn: the Microsoft\u2013CoreWeave contracts predate July 2025, and no new primary-sourced deal between them has been found since."
+   "not_drawn": "Not drawn: the Microsoft–CoreWeave contracts predate July 2025, and no new primary-sourced deal between them has been found since."
   },
   {
    "id": "ref-microsoft-nebius",
@@ -6347,7 +6394,7 @@
    "what": "GPUs and equity",
    "maps": [
     {
-     "name": "AI News on the AMD\u2013Anthropic deal, Jul 2026",
+     "name": "AI News on the AMD–Anthropic deal, Jul 2026",
      "url": "https://www.artificialintelligence-news.com/news/amd-anthropic-ai-infrastructure-deal/"
     }
    ]
@@ -6359,7 +6406,7 @@
    "what": "leasing capacity (talks only)",
    "maps": [
     {
-     "name": "AI News on the AMD\u2013Anthropic deal, Jul 2026",
+     "name": "AI News on the AMD–Anthropic deal, Jul 2026",
      "url": "https://www.artificialintelligence-news.com/news/amd-anthropic-ai-infrastructure-deal/"
     }
    ],
@@ -6374,5 +6421,13 @@
    "conditions": "regulatory approvals",
    "close_evidence": "Nvidia 8-K or newsroom post announcing completion"
   }
- ]
+ ],
+ "stress": {
+  "unscored": {
+   "spacex": "SpaceX discloses no contracted backlog, and its launch and satellite businesses are far larger than the contracts on this ledger, so its exposure is not scored."
+  },
+  "revenue_year": [
+   "nvidia"
+  ]
+ }
 }

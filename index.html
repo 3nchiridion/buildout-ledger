@@ -167,6 +167,15 @@ td{border-bottom:1px solid var(--line);padding:5px 8px 5px 0;vertical-align:top}
 td.r,th.r{text-align:right}
 .pass{color:var(--ok)} .fail{color:var(--bad)} .warn{color:var(--warn)}
 
+#tw{display:block;width:100%;margin:6px 0 4px;touch-action:pan-y;cursor:pointer;-webkit-user-select:none;user-select:none}
+.twbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 0}
+.twbar .k{font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.twbar button{border:1px solid var(--line-2);border-radius:999px;padding:5px 11px;background:#fff;font-size:12.5px;color:var(--ink-2)}
+.twbar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.twbar button.ghost{border-style:dashed}
+.twlead{font-size:15px;margin:6px 0 2px}
+.lnk{text-decoration:underline;color:inherit;padding:0;font:inherit}
+body.phone .twbar button{padding:7px 12px;font-size:13px}
 /* ---------- phones: a top bar with three tabs, the map as a vertical stack, details in a bottom sheet ---------- */
 #mbar,#mmenu,#msearch,#m-fit,#grab,#mscrim,.ph-only{display:none}
 body.phone .ph-only,body.land .ph-only{display:block}
@@ -183,7 +192,7 @@ body.land #mbar{grid-template-columns:auto minmax(240px,360px) 1fr auto auto;gri
 .mic{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:#fff;display:grid;place-items:center;color:var(--ink)}
 #m-find{grid-area:f} #m-menu{grid-area:m}
 .mseg{grid-area:s;display:flex;gap:3px;padding:3px;border-radius:11px;background:var(--paper-2);border:1px solid var(--line)}
-.mseg button{flex:1;height:34px;border-radius:8px;font:600 13.5px var(--sans);color:var(--ink-2)}
+.mseg button{flex:1;height:34px;border-radius:8px;font:600 13px var(--sans);color:var(--ink-2);padding:0 2px}
 .mseg button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #00000024}
 body.phone #sheet{top:auto;left:0;right:0;bottom:0;width:auto;height:var(--sheet-h,60vh);border-left:0;border-top:1px solid var(--line-2);border-radius:16px 16px 0 0;box-shadow:0 -10px 30px #0000001f;transform:translateY(var(--sheet-off,0px));transition:transform .32s cubic-bezier(.2,.85,.25,1);z-index:6}
 body.phone #sheet.drag{transition:none}
@@ -284,6 +293,7 @@ details.dsec summary{font:600 11px var(--mono);letter-spacing:.06em;text-transfo
   <button class="btn" id="b-labels" aria-pressed="false">All labels</button>
   <button class="btn" id="b-rows" aria-pressed="false">Rows</button>
   <button class="btn" id="b-loops" aria-pressed="false" title="Suppliers putting money into their own customers">Loops</button>
+  <button class="btn" id="b-tower" aria-pressed="false" title="Pull a player out and see who is left exposed">Tower</button>
   <button class="btn" id="b-checks" aria-pressed="false">Checks</button>
   <button class="btn" id="b-tour">Tour</button>
   <button class="btn" id="b-export">Export PNG</button>
@@ -294,7 +304,7 @@ details.dsec summary{font:600 11px var(--mono);letter-spacing:.06em;text-transfo
 <aside id="sheet" aria-label="Details" data-state="peek"><div id="grab"><button id="grab-btn" aria-label="Show details"><i></i></button><button id="sheet-x" aria-label="Close" hidden>×</button></div><div id="panel" aria-live="polite"></div></aside>
 <div id="mbar">
   <div class="mt"><b>The AI Buildout Ledger</b><span id="m-ed" hidden></span></div>
-  <div class="mseg" role="tablist" aria-label="View"><button data-mv="map" aria-pressed="true">Map</button><button data-mv="loops" aria-pressed="false">Loops</button><button data-mv="deals" aria-pressed="false">Deals</button></div>
+  <div class="mseg" role="tablist" aria-label="View"><button data-mv="map" aria-pressed="true">Map</button><button data-mv="loops" aria-pressed="false">Loops</button><button data-mv="deals" aria-pressed="false">Deals</button><button data-mv="tower" aria-pressed="false">Tower</button></div>
   <button class="mic" id="m-find" aria-label="Find a player"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M11.8 11.8 16 16"/></svg></button>
   <button class="mic" id="m-menu" aria-label="More options" aria-haspopup="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><circle cx="3.5" cy="9" r="1.8"/><circle cx="9" cy="9" r="1.8"/><circle cx="14.5" cy="9" r="1.8"/></svg></button>
 </div>
@@ -572,7 +582,7 @@ function setMode(mode, instant){
   try { history.replaceState(null, '', modeHash()); } catch (_) {}
 }
 
-const modeHash = () => { const p = [mGoal ? 'layers' : fGoal ? 'arranged' : '', drawer === 'loops' ? 'loops' : '', sel ? sel.id : ''].filter(Boolean).join('/'); return p ? '#' + p : location.pathname + location.search; };   // #layers/chatgpt links straight to a trace
+const modeHash = () => { const p = [mGoal ? 'layers' : fGoal ? 'arranged' : '', drawer === 'loops' ? 'loops' : drawer === 'tower' ? 'tower' : '', sel ? sel.id : ''].filter(Boolean).join('/'); return p ? '#' + p : location.pathname + location.search; };   // #layers/chatgpt links straight to a trace
 
 /* ---------- the arranged view: money runs left to right through the stack, each column ordered to cut crossings ---------- */
 const BANDS = [{id:'capital', label:'Capital'}, {id:'applications', label:'Applications'}, {id:'models', label:'Models'}, {id:'infrastructure', label:'Infrastructure'}, {id:'chips', label:'Chips'}, {id:'energy', label:'Energy'}];
@@ -768,7 +778,7 @@ function refresh(){
     `<div class="stat"><b>${V.all.length + V.obs.length + V.events.length + V.met.length}</b><span>sourced rows</span></div>` +
     `<div class="show"><span>Show</span>${[['all', 'Everything'], ['nopress', 'Without press reports'], ['moved', 'Money moved only']].map(([k, t]) => `<button data-show="${k}" aria-pressed="${showMode === k}">${t}</button>`).join('')}</div>`;
   if (!wide && ORDER) stackLayout();
-  if (L) renderPanel(); if (drawer) renderDrawer();
+  if (L) renderPanel(); if (drawer === 'tower' && $('#tw')){ towerBuild(); towerText(); } else if (drawer) renderDrawer();
 }
 
 /* ---------- view ---------- */
@@ -921,6 +931,7 @@ function frame(ts){
   if (!wide){ const sh = cam.k > 1.05; if (sh !== fitShown){ fitShown = sh; $('#m-fit').hidden = !sh; } }
   if (playing){ tNow = Math.min(T1, tNow + (T1 - T0) / (16 * 60)); if (tNow >= T1) stopPlay(); refresh(); }
   if (wide || !(drawer || (phone && sheetState === 'full'))) draw(ctx, false);
+  if (drawer === 'tower') drawTower();
   requestAnimationFrame(frame);
 }
 function draw(c, forExport){
@@ -1166,7 +1177,7 @@ function bindSheet(){
 /* ---------- the phone's top bar: three tabs, search, and a menu for the rest ---------- */
 function bindPhone(){
   $('.mseg').addEventListener('click', e => { const b = e.target.closest('[data-mv]'); if (!b) return; if (phone) setSheet('peek');
-    if (b.dataset.mv === 'map') setDrawer(null); else if (b.dataset.mv === 'loops'){ loopTab = 'map'; setDrawer('loops'); } else setDrawer('rows'); });
+    if (b.dataset.mv === 'map') setDrawer(null); else if (b.dataset.mv === 'loops'){ loopTab = 'map'; setDrawer('loops'); } else setDrawer(b.dataset.mv === 'tower' ? 'tower' : 'rows'); });
   $('#m-find').onclick = openSearch; $('#ms-x').onclick = closeSearch;
   $('#ms-in').addEventListener('input', () => renderSearch($('#ms-in').value));
   $('#ms-in').addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); if (e.key === 'Enter'){ const b = $('#ms-list [data-pick]'); if (b) b.click(); } });
@@ -1208,7 +1219,7 @@ function menuAct(b){
 function fromHash(h){
   const parts = decodeURIComponent((h == null ? location.hash : h).slice(1)).split('/').filter(Boolean);
   for (const id of parts){
-    if (id === 'layers') setMode('layers', true); else if (id === 'arranged') setMode(wide ? 'flow' : 'layers', true); else if (id === 'loops'){ loopTab = 'map'; setDrawer('loops'); }
+    if (id === 'layers') setMode('layers', true); else if (id === 'arranged') setMode(wide ? 'flow' : 'layers', true); else if (id === 'loops'){ loopTab = 'map'; setDrawer('loops'); } else if (id === 'tower') setDrawer('tower');
     else if (ents[id]) select({kind:'entity', id}); else if (V.flows.some(f => f.id === id)) select({kind:'flow', id});
   }
   return parts.length > 0;
@@ -1370,7 +1381,7 @@ function series(id, metric){
     <p class="def">${esc(last.definition)} Hatched bars are derived by subtracting year-to-date figures.</p>
     ${rng ? `<p class="def"><span class="warn">Trackers disagree.</span> ${rng.values.map(v => `${money(v.value_usd)} (${esc(v.basis)}) ${chip(v.grade)}`).join(' vs ')}</p>` : ''}`;
 }
-const MET = {revenue_quarter:'Revenue per quarter', run_rate:'Run-rate revenue', coding_run_rate:'Claude Code run-rate revenue', weekly_users:'Weekly active users', monthly_users:'Monthly active users', subscribers:'Paying subscribers', api_tokens_per_min:'API tokens per minute', purchase_commitments:'Purchase commitments'};
+const MET = {backlog:'Contracted backlog', revenue_quarter:'Revenue per quarter', run_rate:'Run-rate revenue', coding_run_rate:'Claude Code run-rate revenue', weekly_users:'Weekly active users', monthly_users:'Monthly active users', subscribers:'Paying subscribers', api_tokens_per_min:'API tokens per minute', purchase_commitments:'Purchase commitments'};
 const QUAL = {'more than':'>', 'about':'~', 'under':'<', 'nearly':'~', 'at least':'≥'};
 const count = v => v >= 1e9 ? (v / 1e9).toFixed(v % 1e9 ? 2 : 0).replace(/\.?0+$/, '') + 'B' : Math.round(v / 1e6) + 'M';
 const mval = m => (QUAL[m.qualifier] || '') + (m.unit === 'usd' ? money(m.value) : count(m.value));
@@ -1449,7 +1460,7 @@ $('#play').addEventListener('click', () => { if (playing) return stopPlay(); if 
 /* ---------- tools: arrangement, labels, the ledger itself, the proof, export ---------- */
 function bindTools(){
   const tog = name => setDrawer(drawer === name ? null : name);
-  $('#b-loops').onclick = () => tog('loops'); $('#b-tour').onclick = () => tour(0);
+  $('#b-loops').onclick = () => tog('loops'); $('#b-tower').onclick = () => tog('tower'); $('#b-tour').onclick = () => tour(0);
   $('#stats').addEventListener('click', e => { const b = e.target.closest('[data-show]'); if (b){ showMode = b.dataset.show; refresh(); } });
   const find = $('#find'); $('#find-list').innerHTML = L.entities.map(e => `<option value="${esc(e.name)}">`).join('');
   const go = () => { const q = find.value.trim().toLowerCase(); if (!q) return; const e = L.entities.find(x => x.name.toLowerCase() === q) || L.entities.find(x => x.name.toLowerCase().startsWith(q)) || L.entities.find(x => x.name.toLowerCase().includes(q));
@@ -1467,14 +1478,14 @@ function bindTools(){
   else ex.onclick = () => save(null);               // on a standalone site, a plain download works
 }
 function setDrawer(name){
-  drawer = name; for (const k of ['rows', 'checks', 'loops']) $('#b-' + k).setAttribute('aria-pressed', drawer === k);
-  const tab = drawer === 'loops' ? 'loops' : drawer === 'rows' ? 'deals' : 'map';
+  drawer = name; for (const k of ['rows', 'checks', 'loops', 'tower']) $('#b-' + k).setAttribute('aria-pressed', drawer === k);
+  const tab = drawer === 'loops' ? 'loops' : drawer === 'rows' ? 'deals' : drawer === 'tower' ? 'tower' : 'map';
   document.querySelectorAll('.mseg [data-mv]').forEach(b => b.setAttribute('aria-pressed', b.dataset.mv === tab));
   $('#drawer').classList.toggle('open', !!drawer); if (drawer){ renderDrawer(); $('#drawer').scrollTop = 0; }
   try { history.replaceState(null, '', modeHash()); } catch (_) {}
 }
 const CHECK = {quarter_vs_ytd:'Reported quarter equals change in year-to-date', four_quarters_vs_ttm:'Four quarters equal reported trailing twelve months', yoy_pct:'Growth recomputed from two quarters matches the filing:', rounds_to:'Quarter rounds to the figure in the filing:', sum_rounds_to:'Four quarters sum to the stated full year:'};
-$('#drawer').addEventListener('click', e => { if (e.target.closest('#d-close')) return setDrawer(null); const df = e.target.closest('[data-dealf]'); if (df){ dealF = df.dataset.dealf; renderDrawer(); return; } const t = e.target.closest('[data-ltab]'); if (t){ loopTab = t.dataset.ltab; renderDrawer(); return; }
+$('#drawer').addEventListener('click', e => { if (e.target.closest('#d-close')) return setDrawer(null); const tq = e.target.closest('[data-twq]'); if (tq){ towerSet(tq.dataset.twq ? tq.dataset.twq.split(',') : []); return; } const tt = e.target.closest('[data-twt]'); if (tt){ TW.thr = +tt.dataset.twt; towerBuild(); towerText(); return; } const df = e.target.closest('[data-dealf]'); if (df){ dealF = df.dataset.dealf; renderDrawer(); return; } const t = e.target.closest('[data-ltab]'); if (t){ loopTab = t.dataset.ltab; renderDrawer(); return; }
   const b = e.target.closest('[data-flowlink]'); if (b && V.all.find(f => f.id === b.dataset.flowlink)) select({kind:'flow', id:b.dataset.flowlink});
   const n = e.target.closest('[data-entlink]'); if (n) select({kind:'entity', id:n.dataset.entlink}); });
 /* ---------- loops as a map: one star per customer, its suppliers around it; each spoke is a closed loop ---------- */
@@ -1547,6 +1558,198 @@ function hookLoopMap(){
     box.querySelectorAll('.lp').forEach(l => { if (l.dataset.s === id || l.dataset.c === id){ l.classList.add('on'); box.querySelectorAll(`.lm [data-node="${l.dataset.c}"], .lm [data-node="${l.dataset.s}"]`).forEach(x => { if (x.closest('figure') === l.closest('figure')) x.classList.add('on'); }); } }); });
   box.addEventListener('mouseleave', clear);
 }
+/* ---------- the tower: a stress test drawn as a block tower. The ledger decides what falls; the drawing only shows it ---------- */
+const TW = {pulled: new Set(), thr: 0.5, yaw: 0.78, pose: {}, blocks: [], res: null, hits: [], cw: 0, ch: 0, key: ''};
+const TWN = {capital: 3, models: 3, infrastructure: 9, chips: 3, energy: 3}, TWORDER = ['capital', 'models', 'infrastructure', 'chips', 'energy'];
+const hash01 = (s, k) => { let h = 2166136261 ^ (k || 0); for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 10000) / 10000; };
+const stressFlows = () => V.flows.filter(f => f.type === 'equity' || f.type === 'purchase_commitment' || f.type === 'debt');
+// what each player's exposure is measured against: its contracted backlog where one is filed or stated; a year of revenue where the ledger says so
+function stressBases(){
+  const b = {};
+  for (const o of V.obs.slice().sort((x, y) => x.period_end < y.period_end ? -1 : 1)) if (o.metric === 'rpo') b[o.subject] = {kind: 'backlog', v: o.value_usd, grade: 'filed', asof: o.period_end, row: o};
+  for (const m of V.met.slice().sort((x, y) => x.as_of < y.as_of ? -1 : 1)) if (m.metric === 'backlog' && (!b[m.entity] || b[m.entity].asof <= m.as_of)) b[m.entity] = {kind: 'backlog', v: m.value, grade: m.grade, asof: m.as_of, row: m};
+  for (const id of (L.stress && L.stress.revenue_year) || []){
+    const q = V.obs.filter(o => o.subject === id && o.metric === 'revenue' && o.period_start).sort((x, y) => x.period_end < y.period_end ? -1 : 1).slice(-4);
+    if (q.length === 4) b[id] = {kind: 'revenue', v: q.reduce((t, o) => t + o.value_usd, 0), grade: 'filed', asof: q[3].period_end, row: q[3]};
+  }
+  return b;
+}
+// distress spreads in proportion to exposure (the DebtRank idea): a player is hit by its worst channel
+function stressRun(pulled){
+  const F = stressFlows(), base = stressBases(), uns = (L.stress && L.stress.unscored) || {}, a = f => f.amount_usd || 0;
+  const ids = [...V.live], h = {}, info = {}; ids.forEach(i => h[i] = pulled.has(i) ? 1 : 0);
+  const inn = {}, out = {}; for (const f of F){ (inn[f.payee] = inn[f.payee] || []).push(f); (out[f.payer] = out[f.payer] || []).push(f); }
+  for (let it = 0; it < 40; it++){
+    let ch = false;
+    for (const i of ids){
+      if (pulled.has(i) || uns[i]) continue;
+      const I = inn[i] || [], O = out[i] || [];
+      const ord = I.filter(f => f.type === 'purchase_commitment'), allOrd = ord.reduce((t, f) => t + a(f), 0), lostOrd = ord.reduce((t, f) => t + a(f) * h[f.payer], 0);
+      const bs = base[i], den = Math.max(bs ? bs.v : 0, allOrd), A = den ? lostOrd / den : 0;
+      const fund = I.filter(f => f.type !== 'purchase_commitment' && f.status !== 'cash_moved'), lostF = fund.reduce((t, f) => t + a(f) * h[f.payer], 0);
+      const bills = O.filter(f => f.type === 'purchase_commitment').reduce((t, f) => t + a(f), 0), B = bills ? lostF / bills : 0;
+      let C = 0, put = 0, lostS = 0;
+      if (!ents[i].layer){ put = O.reduce((t, f) => t + a(f), 0); lostS = O.reduce((t, f) => t + a(f) * h[f.payee], 0); C = put ? lostS / put : 0; }
+      const v = Math.min(1, Math.max(A, B, C));
+      if (v > h[i] + 1e-6){
+        h[i] = v; ch = true;
+        info[i] = A >= B && A >= C ? {ch: 'orders', lost: lostOrd, of: den, base: bs && bs.v >= allOrd ? bs : null, from: ord.filter(f => a(f) * h[f.payer] > 0)}
+                : B >= C ? {ch: 'funding', lost: lostF, of: bills, from: fund.filter(f => a(f) * h[f.payer] > 0)}
+                : {ch: 'stake', lost: lostS, of: put, from: O.filter(f => a(f) * h[f.payee] > 0)};
+      }
+    }
+    if (!ch) break;
+  }
+  return {h, info, base, uns};
+}
+function towerBuild(){
+  const cand = {}; for (const id of V.live){ const e = ents[id]; if (e.kind === 'product' || e.kind === 'sink' || !V.total[id]) continue; (cand[e.layer || 'capital'] = cand[e.layer || 'capital'] || []).push(id); }
+  const blocks = []; let row = 0;
+  for (const band of TWORDER){
+    const list = (cand[band] || []).sort((x, y) => V.total[y] - V.total[x]).slice(0, TWN[band]);
+    for (let i = 0; i < list.length; i += 3){ const three = list.slice(i, i + 3), slots = three.length === 3 ? [0, -1, 1] : three.length === 2 ? [-0.5, 0.5] : [0]; three.forEach((id, k) => blocks.push({id, row, slot: slots[k], band})); row++; }
+  }
+  TW.blocks = blocks; TW.rows = row;
+  for (const id of [...TW.pulled]) if (!V.live.has(id)) TW.pulled.delete(id);
+  TW.res = stressRun(TW.pulled);
+  // each block's order in the cascade, for staggering the fall
+  const fallen = blocks.filter(b => !TW.pulled.has(b.id) && TW.res.h[b.id] >= TW.thr).sort((x, y) => TW.res.h[y.id] - TW.res.h[x.id] || x.row - y.row);
+  fallen.forEach((b, i) => b.order = i);
+  const stand = b => !TW.pulled.has(b.id) && TW.res.h[b.id] < TW.thr, live = []; for (let r = 0; r < row; r++) live[r] = blocks.some(b => b.row === r && stand(b));
+  for (const b of blocks){
+    const along = b.row % 2 ? 1.5708 : 0, ax = Math.cos(along), az = Math.sin(along), sx = -az, sz = ax, sg = hash01(b.id, 1) < 0.5 ? -1 : 1, hv = TW.res.h[b.id] || 0;
+    const below = live.slice(0, b.row).filter(Boolean).length, x0 = sx * b.slot, z0 = sz * b.slot;
+    let t;
+    if (TW.pulled.has(b.id)){ const fwd = (ax * -0.707 + az * 0.707) >= 0 ? 1 : -1, dist = 3.3 + hash01(b.id, 2) * 1.5; t = {st: 'pulled', x: x0 + ax * fwd * dist, y: 0.3, z: z0 + az * fwd * dist, yaw: along + (hash01(b.id, 3) - 0.5) * 0.5, roll: 0, delay: 0, dur: 0.75}; }
+    else if (hv >= TW.thr){ const ang = -2.356 + (hash01(b.id, 4) - 0.5) * 1.7, dist = 2.7 + hash01(b.id, 5) * 2.4; t = {st: 'fallen', x: Math.cos(ang) * -dist * -1, y: 0.3, z: Math.sin(ang) * dist * -1, yaw: along + (hash01(b.id, 6) - 0.5) * 2.2, roll: 3.1416 * (hash01(b.id, 7) < 0.5 ? 1 : 2), delay: 0.35 + (b.order || 0) * 0.13, dur: 0.95}; }
+    else { const o = hv >= 0.08 ? 0.12 + hv * 0.9 : 0; t = {st: 'stand', x: x0 + ax * sg * o, y: 0.3 + below * 0.6, z: z0 + az * sg * o, yaw: along + (hv >= 0.08 ? sg * hv * 0.1 : 0), roll: 0, delay: 0, dur: 0.6}; }
+    t.key = [t.st, t.x.toFixed(2), t.y.toFixed(2), t.z.toFixed(2)].join('|'); b.t = t;
+    const P = TW.pose[b.id];
+    if (!P) TW.pose[b.id] = {cur: {x: t.x, y: t.y, z: t.z, yaw: t.yaw, roll: t.roll}, key: t.key, anim: null};
+    else if (P.key !== t.key){ P.key = t.key; P.anim = reduce ? null : {from: {...P.cur}, to: t, t0: clock + t.delay, dur: t.dur}; if (reduce) P.cur = {x: t.x, y: t.y, z: t.z, yaw: t.yaw, roll: t.roll}; }
+  }
+}
+function towerStep(){
+  for (const b of TW.blocks){
+    const P = TW.pose[b.id], A = P && P.anim; if (!A) continue;
+    const u = Math.max(0, Math.min(1, (clock - A.t0) / A.dur)), f = A.from, t = A.to, drop = t.y < f.y - 0.01;
+    const uh = drop ? 1 - Math.pow(1 - u, 3) : ease(u), uv = drop ? u * u * u : ease(u);
+    P.cur = {x: f.x + (t.x - f.x) * uh, y: f.y + (t.y - f.y) * uv, z: f.z + (t.z - f.z) * uh, yaw: f.yaw + (t.yaw - f.yaw) * ease(u), roll: f.roll + (t.roll - f.roll) * ease(u)};
+    if (u >= 1) P.anim = null;
+  }
+}
+function drawTower(){
+  const cvs = $('#tw'); if (!cvs) return;
+  const ph = 0.44, w = cvs.clientWidth, s = Math.max(40, Math.min(w / 5.4, 84, wide ? (innerHeight * 0.6 - 46) / (TW.rows * 0.6 * Math.cos(ph) + 7.8 * Math.sin(ph)) : 1e9)), cph = Math.cos(ph), sph = Math.sin(ph);
+  const towerH = TW.rows * 0.6, hgt = Math.round(s * (towerH * cph + 2.2 * sph + 5.6 * sph) + 46);
+  if (w !== TW.cw || hgt !== TW.ch){ TW.cw = w; TW.ch = hgt; cvs.style.height = hgt + 'px'; cvs.width = w * DPR; cvs.height = hgt * DPR; }
+  towerStep();
+  const c = cvs.getContext('2d'), th = TW.yaw, cy = Math.cos(th), sy = Math.sin(th), ox = w / 2, oy = 22 + s * (towerH * cph + 2.2 * sph);
+  const proj = (x, y, z) => { const xv = x * cy + z * sy, zv = -x * sy + z * cy; return {x: ox + xv * s, y: oy - (y * cph - zv * sph) * s, d: zv * cph + y * sph}; };
+  const cam = [-sy * cph, sph, cy * cph], ink = css('--ink');
+  c.setTransform(DPR, 0, 0, DPR, 0, 0); c.clearRect(0, 0, w, hgt);
+  // the table
+  const g = [[-5.4, -5.4], [5.4, -5.4], [5.4, 5.4], [-5.4, 5.4]].map(([x, z]) => proj(x, 0, z));
+  c.beginPath(); g.forEach((p, i) => i ? c.lineTo(p.x, p.y) : c.moveTo(p.x, p.y)); c.closePath(); c.fillStyle = css('--paper'); c.fill(); c.strokeStyle = css('--line'); c.lineWidth = 1; c.stroke();
+  const foot = [[-1.5, -1.5], [1.5, -1.5], [1.5, 1.5], [-1.5, 1.5]].map(([x, z]) => proj(x, 0, z));
+  c.beginPath(); foot.forEach((p, i) => i ? c.lineTo(p.x, p.y) : c.moveTo(p.x, p.y)); c.closePath(); c.setLineDash([4, 4]); c.strokeStyle = css('--line-2'); c.stroke(); c.setLineDash([]);
+  const stand = b => b.t.st === 'stand', topRow = Math.max(-1, ...TW.blocks.filter(stand).map(b => b.row));
+  const items = TW.blocks.map(b => { const P = TW.pose[b.id].cur, moving = !!TW.pose[b.id].anim, cen = proj(P.x, P.y, P.z);
+    return {b, P, key: stand(b) && !moving ? b.row * 100 + cen.d : (cen.d > 0 ? 1e5 : -1e5) + cen.d}; }).sort((x, y) => x.key - y.key);
+  TW.hits = [];
+  for (const {b, P} of items){
+    const e = ents[b.id], hv = TW.res.h[b.id] || 0, st = b.t.st, pulled = st === 'pulled', moving = !!TW.pose[b.id].anim;
+    const A = [Math.cos(P.yaw), 0, Math.sin(P.yaw)], S0 = [-A[2], 0, A[0]], cr = Math.cos(P.roll), sr = Math.sin(P.roll);
+    const U = [S0[0] * sr, cr, S0[2] * sr], S = [S0[0] * cr, -sr, S0[2] * cr];
+    const pt = (i, j, k) => proj(P.x + A[0] * 1.5 * i + S[0] * 0.5 * j + U[0] * 0.3 * k, P.y + A[1] * 1.5 * i + S[1] * 0.5 * j + U[1] * 0.3 * k, P.z + A[2] * 1.5 * i + S[2] * 0.5 * j + U[2] * 0.3 * k);
+    const dot = n => n[0] * cam[0] + n[1] * cam[1] + n[2] * cam[2], neg = v => [-v[0], -v[1], -v[2]];
+    const faces = [];
+    for (const sg of [1, -1]){
+      if (dot(sg > 0 ? U : neg(U)) > 0.02) faces.push({kind: 'top', q: [pt(-1, -1, sg), pt(1, -1, sg), pt(1, 1, sg), pt(-1, 1, sg)], shade: 0, ex: A, ey: S, w: 3, hh: 1, hid: st === 'stand' && !moving && b.row < topRow});
+      if (dot(sg > 0 ? S : neg(S)) > 0.02) faces.push({kind: 'side', q: [pt(-1, sg, -1), pt(1, sg, -1), pt(1, sg, 1), pt(-1, sg, 1)], shade: 0.07, ex: A, ey: U, w: 3, hh: 0.6,
+        hid: st === 'stand' && !moving && TW.blocks.some(o => o !== b && o.row === b.row && o.t.st === 'stand' && Math.abs(o.slot - b.slot - sg) < 0.6)});
+      if (dot(sg > 0 ? A : neg(A)) > 0.02) faces.push({kind: 'end', q: [pt(sg, -1, -1), pt(sg, 1, -1), pt(sg, 1, 1), pt(sg, -1, 1)], shade: 0.15, ex: S, ey: U, w: 1, hh: 0.6, hid: false});
+    }
+    c.globalAlpha = st === 'fallen' && !moving ? 0.82 : 1;
+    for (const f of faces){
+      c.beginPath(); f.q.forEach((p, i) => i ? c.lineTo(p.x, p.y) : c.moveTo(p.x, p.y)); c.closePath();
+      c.fillStyle = pulled ? ink : tint(e); c.fill();
+      if (f.shade){ c.fillStyle = pulled ? `rgba(255,255,255,${f.shade})` : `rgba(22,23,27,${f.shade})`; c.fill(); }
+      c.strokeStyle = pulled ? '#ffffff55' : ink; c.lineWidth = 1.3; c.lineJoin = 'round'; c.stroke();
+    }
+    TW.hits.push({id: b.id, polys: faces.map(f => f.q)});
+    // the name sits on the largest face that is in view
+    const area = q => Math.abs((q[1].x - q[0].x) * (q[3].y - q[0].y) - (q[1].y - q[0].y) * (q[3].x - q[0].x));
+    const f = faces.filter(f => !f.hid).sort((x, y) => area(y.q) - area(x.q))[0];
+    if (f){
+      const o0 = proj(P.x, P.y, P.z), p1 = proj(P.x + f.ex[0], P.y + f.ex[1], P.z + f.ex[2]), p2 = proj(P.x + f.ey[0], P.y + f.ey[1], P.z + f.ey[2]);
+      let ux = (p1.x - o0.x) / s, uy = (p1.y - o0.y) / s, vx = (p2.x - o0.x) / s, vy = (p2.y - o0.y) / s;
+      if (ux < 0){ ux = -ux; uy = -uy; } if (vy > 0){ vx = -vx; vy = -vy; }
+      const mid = {x: (f.q[0].x + f.q[2].x) / 2, y: (f.q[0].y + f.q[2].y) / 2}, fw = f.w * s, fh = f.hh * s;
+      const sub = pulled ? 'pulled' : hv >= 0.08 ? Math.round(hv * 100) + '% lost' : TW.res.uns[b.id] ? 'not scored' : money(V.total[b.id]);
+      c.save(); c.transform(ux, uy, -vx, -vy, mid.x, mid.y);
+      const lines = f.kind === 'end' && e.name.includes(' ') ? wrap2(e.name) : [e.name];
+      c.font = bodyFont(10); const tw = Math.max(...lines.map(l => c.measureText(l).width)), fs = Math.min(15, (fw - 10) / tw * 10, (fh - 6) / (lines.length * 1.15 + 1.05));
+      if (fs * Math.hypot(ux, uy) >= 5.2){
+        c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = pulled ? '#fff' : ink; c.font = bodyFont(fs);
+        const lh = fs * 1.12, sf = Math.max(6, fs * 0.74), tot = lines.length * lh + sf * 1.15, y0 = -tot / 2 + lh / 2;
+        lines.forEach((l, i) => c.fillText(l, 0, y0 + i * lh));
+        c.font = `${hv >= 0.08 && !pulled ? 700 : 500} ${sf}px ${MONO}`; c.fillStyle = pulled ? '#ffffffb3' : hv >= TW.thr ? css('--bad') : hv >= 0.08 ? css('--warn') : css('--muted');
+        c.fillText(sub, 0, y0 + (lines.length - 1) * lh + lh / 2 + sf * 0.62);
+      }
+      c.restore();
+    }
+    c.globalAlpha = 1;
+  }
+}
+function wrap2(name){ const w = name.split(' '); let best = [name], bw = 1e9; for (let i = 1; i < w.length; i++){ const a = w.slice(0, i).join(' '), b = w.slice(i).join(' '), m = Math.max(a.length, b.length); if (m < bw){ bw = m; best = [a, b]; } } return best; }
+function towerPick(x, y){
+  const inside = (q, x, y) => { let on = false; for (let i = 0, j = q.length - 1; i < q.length; j = i++) if ((q[i].y > y) !== (q[j].y > y) && x < (q[j].x - q[i].x) * (y - q[i].y) / (q[j].y - q[i].y) + q[i].x) on = !on; return on; };
+  for (let i = TW.hits.length - 1; i >= 0; i--) if (TW.hits[i].polys.some(q => inside(q, x, y))) return TW.hits[i].id;
+  return null;
+}
+function towerSet(ids){ TW.pulled = new Set(ids); towerBuild(); towerText(); }
+function towerHTML(){
+  const thr = [[0.34, 'a third'], [0.5, 'half'], [0.67, 'two thirds']], on = id => V.live.has(id);
+  const quick = [['openai'], ['anthropic'], ['openai', 'anthropic'], ['nvidia'], ['microsoft']].filter(q => q.every(on));
+  return `<h2>The tower</h2><p class="note">A stress test, not a forecast. The ${TW.blocks.length} players carrying the most money on the ledger are stacked by who pays whom: capital at the bottom, then the labs, the clouds, chips and energy. ${wide ? 'Click' : 'Tap'} a block to pull it and see who is left exposed. Drag sideways to look around the corner.</p>
+    <div class="twbar"><span class="k">Pull</span>${quick.map(q => `<button data-twq="${q.join(',')}">${q.map(i => esc(ents[i].name)).join(' + ')}</button>`).join('')}<button data-twq="" class="ghost">Put all back</button></div>
+    <div class="twbar"><span class="k">A block falls when it loses</span>${thr.map(([v, t]) => `<button data-twt="${v}" aria-pressed="${TW.thr === v}">${t}</button>`).join('')}</div>
+    <canvas id="tw" aria-label="Block tower of the largest players; pull a block to see which others fall"></canvas>
+    <div id="tw-out"></div>
+    <h3>The rule</h3><p class="def">Pulling a block assumes that player pays and funds nothing more. Each other player is then scored on its worst exposure, as a share: a supplier by the orders it would lose against its contracted backlog (from its filings where it reports one, otherwise the contracts on this ledger); a lab by the promised funding it would lose against the bills it owes; an investor or bond by the share of its money on this ledger that sits in a fallen block. Losses pass on in proportion, so a supplier that loses 45% of its backlog passes 45% of the damage to whoever it pays. This follows DebtRank, a method central-bank researchers use for contagion. It follows the Show filter above: press-only rows count unless you leave them out.</p>
+    <h3>What it leaves out</h3><p class="def">Cash on hand, profits, and the fact that contracts can be renegotiated or resold to another customer. Multi-year contracts are counted in full against today's backlog. Rows with no disclosed amount carry no weight, so a blank is not a zero. Nvidia files no backlog, so its lost orders are measured against a year of revenue. Applications are not on the tower. ${Object.entries(TW.res.uns).map(([, t]) => esc(t)).join(' ')}</p>
+    <h3>Backlogs used</h3><div class="mlist">${Object.entries(TW.res.base).sort((a, b) => b[1].v - a[1].v).map(([id, b]) => `<div class="row"><div class="t"><span><b>${esc(ents[id].name)}</b> · ${b.kind === 'revenue' ? 'revenue, last four quarters' : 'contracted backlog'}</span><span class="num">${money(b.v)}</span></div><div class="m">as of <span class="num">${day(b.asof)}</span> ${chip(b.grade)} ${src(b.row)}</div></div>`).join('')}</div>`;
+}
+function towerText(){
+  const out = $('#tw-out'); if (!out) return;
+  const R = TW.res, name = id => esc(ents[id].name), onT = new Set(TW.blocks.map(b => b.id));
+  document.querySelectorAll('[data-twt]').forEach(b => b.setAttribute('aria-pressed', TW.thr === +b.dataset.twt));
+  if (!TW.pulled.size){ out.innerHTML = `<p class="note twlead">Nothing pulled yet. Every block stands.</p>`; return; }
+  const hit = Object.keys(R.h).filter(i => !TW.pulled.has(i) && R.h[i] >= 0.08).sort((a, b) => R.h[b] - R.h[a]);
+  const fell = hit.filter(i => R.h[i] >= TW.thr), strained = hit.filter(i => R.h[i] < TW.thr);
+  const why = i => { const x = R.info[i], pct = Math.round(R.h[i] * 100) + '%';
+    const from = x.from.slice().sort((a, b) => (b.amount_usd || 0) - (a.amount_usd || 0)).slice(0, 3).map(f => `<button data-flowlink="${esc(f.id)}" class="lnk">${name(x.ch === 'stake' ? f.payee : f.payer)} ${money(f.amount_usd)}</button>`).join(', ');
+    if (x.ch === 'orders') return `${pct} of its ${x.base ? (x.base.kind === 'revenue' ? 'yearly revenue' : 'contracted backlog') : 'contracts on this ledger'} at risk: ${money(x.lost)} of ${money(x.of)}${x.base ? ' ' + chip(x.base.grade) : ' <span class="chip unchecked">ledger only</span>'}. Orders from ${from}.`;
+    if (x.ch === 'funding') return `${pct} of the bills it owes left unfunded: ${money(x.lost)} of promised money against ${money(x.of)} of commitments. Funding from ${from}.`;
+    return `${pct} of its money on this ledger sits in blocks that fell or are strained: ${money(x.lost)} of ${money(x.of)}. Held in ${from}.`; };
+  const row = i => `<div class="row"><div class="t"><span><button data-entlink="${esc(i)}"><b>${name(i)}</b></button>${onT.has(i) ? '' : ' <span class="tag">not on the tower</span>'}</span><span class="num" style="color:${R.h[i] >= TW.thr ? css('--bad') : css('--warn')}">${Math.round(R.h[i] * 100)}%</span></div><div class="m">${why(i)}</div></div>`;
+  out.innerHTML = `<p class="twlead"><b>Pull ${[...TW.pulled].map(name).join(' and ')}:</b> ${fell.length ? fell.length + (fell.length === 1 ? ' player falls' : ' players fall') : 'nobody falls'}${strained.length ? ', ' + strained.length + (strained.length === 1 ? ' is' : ' are') + ' strained' : ''}.</p>
+    ${fell.length ? `<h3>Falls (loses ${TW.thr === 0.5 ? 'half' : TW.thr < 0.5 ? 'a third' : 'two thirds'} or more)</h3><div class="mlist">${fell.map(row).join('')}</div>` : ''}
+    ${strained.length ? `<h3>Strained</h3><div class="mlist">${strained.map(row).join('')}</div>` : ''}`;
+}
+function hookTower(){
+  const cvs = $('#tw'); if (!cvs) return; TW.cw = 0;
+  let d = null;
+  cvs.addEventListener('pointerdown', e => { d = {x: e.clientX, y: e.clientY, yaw: TW.yaw, moved: 0, rot: false}; });
+  cvs.addEventListener('pointermove', e => { if (!d) return; const dx = e.clientX - d.x, dy = e.clientY - d.y; d.moved = Math.max(d.moved, Math.hypot(dx, dy));
+    if (!d.rot && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)){ d.rot = true; try { cvs.setPointerCapture(e.pointerId); } catch (_) {} }
+    if (d.rot) TW.yaw = Math.max(0.2, Math.min(1.37, d.yaw - dx * 0.008)); });
+  const up = e => { if (!d) return; const was = d; d = null; if (was.moved > 8) return;
+    const r = cvs.getBoundingClientRect(), id = towerPick(e.clientX - r.left, e.clientY - r.top); if (!id) return;
+    const p = new Set(TW.pulled); p.has(id) ? p.delete(id) : p.add(id); towerSet([...p]); };
+  cvs.addEventListener('pointerup', up); cvs.addEventListener('pointercancel', () => { d = null; });
+}
 function renderDrawer(){
   drawDrawer();
   if (!wide) $('#drawer-body').querySelectorAll('table').forEach(t => { if (t.parentNode.classList.contains('tscroll')) return; const w = document.createElement('div'); w.className = 'tscroll'; t.replaceWith(w); w.appendChild(t); });
@@ -1572,6 +1775,7 @@ function dealsCards(D){
 }
 function drawDrawer(){
   const D = $('#drawer-body');
+  if (drawer === 'tower'){ towerBuild(); D.innerHTML = towerHTML(); hookTower(); towerText(); return; }
   if (drawer === 'rows' && !wide) return dealsCards(D);
   if (drawer === 'loops'){
     const lp = loops(), name = id => esc(ents[id].name), link = f => `<button class="num" data-flowlink="${esc(f.id)}" style="color:inherit;text-decoration:underline">${isMoney(f) ? money(f.amount_usd) : 'stake'}</button>`;

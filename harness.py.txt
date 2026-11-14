@@ -200,7 +200,7 @@ def build(asof, run_id, with_history=True):
         x = {**{k: v for k, v in mdef.get(m["metric"], {}).items()}, **m}
         metrics.append(x)
     mnames = {"revenue_quarter": "revenue", "run_rate": "run-rate revenue", "coding_run_rate": "Claude Code run-rate", "weekly_users": "weekly users",
-              "monthly_users": "monthly users", "subscribers": "subscribers", "api_tokens_per_min": "API tokens per minute", "purchase_commitments": "purchase commitments"}
+              "monthly_users": "monthly users", "subscribers": "subscribers", "api_tokens_per_min": "API tokens per minute", "purchase_commitments": "purchase commitments", "backlog": "contracted backlog"}
     def mval(m):
         v = m["value"]
         if m["unit"] == "usd": return fmt(v)
@@ -309,6 +309,7 @@ def build(asof, run_id, with_history=True):
         },
         "entities": ents, "flows": flows, "observations": obs, "events": events, "ranges": ranges,
         "releases": releases, "metrics": metrics, "coverage": coverage,
+        "stress": dec.get("stress", {}),
         "checks": checks, "corrections": dec.get("corrections", []),
         "runs": [{"id": run_id, "as_of": asof.isoformat(), "rows": len(flows) + len(obs) + len(events) + len(releases) + len(metrics)}],
         "watchlist": [{"entity": k.split("|")[0], "concept": k.split("|")[1], "url": xbrl_url(*k.split("|"))} for k in dec["concepts"]],

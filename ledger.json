@@ -180,7 +180,7 @@
    "tier": "chips",
    "layer": "chips",
    "parent": null,
-   "cik": null,
+   "cik": "0001730168",
    "note": "Designs custom accelerators (XPUs) and networking for others, including Google TPUs."
   },
   {
@@ -5963,6 +5963,101 @@
    "source_title": "SEC XBRL, 10-Q 0001018724-26-000040"
   },
   {
+   "id": "o-broadcom-rpo-2025-08-03",
+   "subject": "broadcom",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-08-03",
+   "value_usd": 27500000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001730168-25-000098",
+   "available": "2025-09-10",
+   "as_of": "2025-09-10",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001730168-25-000098"
+  },
+  {
+   "id": "o-broadcom-rpo-2025-11-02",
+   "subject": "broadcom",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-11-02",
+   "value_usd": 33300000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-K",
+   "accn": "0001730168-25-000121",
+   "available": "2025-12-18",
+   "as_of": "2025-12-18",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-K 0001730168-25-000121"
+  },
+  {
+   "id": "o-broadcom-rpo-2026-02-01",
+   "subject": "broadcom",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-02-01",
+   "value_usd": 45000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001730168-26-000016",
+   "available": "2026-03-11",
+   "as_of": "2026-03-11",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001730168-26-000016"
+  },
+  {
+   "id": "o-broadcom-rpo-2026-05-03",
+   "subject": "broadcom",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-05-03",
+   "value_usd": 164600000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001730168-26-000054",
+   "available": "2026-06-09",
+   "as_of": "2026-06-09",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001730168-26-000054"
+  },
+  {
+   "id": "o-broadcom-rpo-2026-08-02",
+   "subject": "broadcom",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-08-02",
+   "value_usd": 179200000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001730168-26-000080",
+   "available": "2026-09-10",
+   "as_of": "2026-09-10",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001730168-26-000080"
+  },
+  {
    "id": "o-coreweave-capex-2025-03-31",
    "subject": "coreweave",
    "metric": "capex",
@@ -6074,6 +6169,101 @@
    "as_of": "2026-08-12",
    "definition": "Purchases of property and equipment (cash-flow statement).",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json",
+   "source_title": "SEC XBRL, 10-Q 0001769628-26-000366"
+  },
+  {
+   "id": "o-coreweave-rpo-2025-06-30",
+   "subject": "coreweave",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-06-30",
+   "value_usd": 30100000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001769628-25-000041",
+   "available": "2025-08-13",
+   "as_of": "2025-08-13",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001769628-25-000041"
+  },
+  {
+   "id": "o-coreweave-rpo-2025-09-30",
+   "subject": "coreweave",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-09-30",
+   "value_usd": 50000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001769628-25-000062",
+   "available": "2025-11-13",
+   "as_of": "2025-11-13",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001769628-25-000062"
+  },
+  {
+   "id": "o-coreweave-rpo-2025-12-31",
+   "subject": "coreweave",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-12-31",
+   "value_usd": 60700000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-K",
+   "accn": "0001769628-26-000104",
+   "available": "2026-03-02",
+   "as_of": "2026-03-02",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-K 0001769628-26-000104"
+  },
+  {
+   "id": "o-coreweave-rpo-2026-03-31",
+   "subject": "coreweave",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-03-31",
+   "value_usd": 98800000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001769628-26-000222",
+   "available": "2026-05-08",
+   "as_of": "2026-05-08",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001769628-26-000222"
+  },
+  {
+   "id": "o-coreweave-rpo-2026-06-30",
+   "subject": "coreweave",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-06-30",
+   "value_usd": 103700000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001769628-26-000366",
+   "available": "2026-08-12",
+   "as_of": "2026-08-12",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json",
    "source_title": "SEC XBRL, 10-Q 0001769628-26-000366"
   },
   {
@@ -6207,6 +6397,120 @@
    "as_of": "2026-10-29",
    "definition": "Purchases of property and equipment (cash-flow statement), Alphabet-wide. Excludes finance leases.",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json",
+   "source_title": "SEC XBRL, 10-Q 0001652044-26-000084"
+  },
+  {
+   "id": "o-google-rpo-2025-06-30",
+   "subject": "google",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-06-30",
+   "value_usd": 108200000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001652044-25-000062",
+   "available": "2025-07-24",
+   "as_of": "2025-07-24",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001652044-25-000062"
+  },
+  {
+   "id": "o-google-rpo-2025-09-30",
+   "subject": "google",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-09-30",
+   "value_usd": 157700000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001652044-25-000091",
+   "available": "2025-10-30",
+   "as_of": "2025-10-30",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001652044-25-000091"
+  },
+  {
+   "id": "o-google-rpo-2025-12-31",
+   "subject": "google",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-12-31",
+   "value_usd": 242800000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-K",
+   "accn": "0001652044-26-000018",
+   "available": "2026-02-05",
+   "as_of": "2026-02-05",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-K 0001652044-26-000018"
+  },
+  {
+   "id": "o-google-rpo-2026-03-31",
+   "subject": "google",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-03-31",
+   "value_usd": 467600000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001652044-26-000048",
+   "available": "2026-04-30",
+   "as_of": "2026-04-30",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001652044-26-000048"
+  },
+  {
+   "id": "o-google-rpo-2026-06-30",
+   "subject": "google",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-06-30",
+   "value_usd": 519500000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001652044-26-000071",
+   "available": "2026-07-23",
+   "as_of": "2026-07-23",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001652044-26-000071"
+  },
+  {
+   "id": "o-google-rpo-2026-09-30",
+   "subject": "google",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-09-30",
+   "value_usd": 567700000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001652044-26-000084",
+   "available": "2026-10-29",
+   "as_of": "2026-10-29",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json",
    "source_title": "SEC XBRL, 10-Q 0001652044-26-000084"
   },
   {
@@ -6473,6 +6777,120 @@
    "as_of": "2026-10-28",
    "definition": "Cash paid for additions to property and equipment (cash-flow statement). Excludes assets acquired under finance leases.",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json",
+   "source_title": "SEC XBRL, 10-Q 0001193125-26-436133"
+  },
+  {
+   "id": "o-microsoft-rpo-2025-06-30",
+   "subject": "microsoft",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-06-30",
+   "value_usd": 375000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-K",
+   "accn": "0000950170-25-100235",
+   "available": "2025-07-30",
+   "as_of": "2025-07-30",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-K 0000950170-25-100235"
+  },
+  {
+   "id": "o-microsoft-rpo-2025-09-30",
+   "subject": "microsoft",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-09-30",
+   "value_usd": 398000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001193125-25-256321",
+   "available": "2025-10-29",
+   "as_of": "2025-10-29",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001193125-25-256321"
+  },
+  {
+   "id": "o-microsoft-rpo-2025-12-31",
+   "subject": "microsoft",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2025-12-31",
+   "value_usd": 631000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001193125-26-027207",
+   "available": "2026-01-28",
+   "as_of": "2026-01-28",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001193125-26-027207"
+  },
+  {
+   "id": "o-microsoft-rpo-2026-03-31",
+   "subject": "microsoft",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-03-31",
+   "value_usd": 633000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001193125-26-191507",
+   "available": "2026-04-29",
+   "as_of": "2026-04-29",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-Q 0001193125-26-191507"
+  },
+  {
+   "id": "o-microsoft-rpo-2026-06-30",
+   "subject": "microsoft",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-06-30",
+   "value_usd": 684000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-K",
+   "accn": "0001193125-26-323660",
+   "available": "2026-07-29",
+   "as_of": "2026-07-29",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json",
+   "source_title": "SEC XBRL, 10-K 0001193125-26-323660"
+  },
+  {
+   "id": "o-microsoft-rpo-2026-09-30",
+   "subject": "microsoft",
+   "metric": "rpo",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "period_start": null,
+   "period_end": "2026-09-30",
+   "value_usd": 683000000000,
+   "derived": false,
+   "derivation": null,
+   "grade": "filed",
+   "form": "10-Q",
+   "accn": "0001193125-26-436133",
+   "available": "2026-10-28",
+   "as_of": "2026-10-28",
+   "definition": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json",
    "source_title": "SEC XBRL, 10-Q 0001193125-26-436133"
   },
   {
@@ -7118,6 +7536,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-google-rpo-2025-06-30",
+   "date": "2025-07-24",
+   "entities": [
+    "google"
+   ],
+   "flow": null,
+   "observation": "o-google-rpo-2025-06-30",
+   "level": "entity",
+   "title": "Google contracted backlog $108.2B for period ending 2025-06-30",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001652044-25-000062",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-f-tesla-samsung",
    "date": "2025-07-28",
    "entities": [
@@ -7161,6 +7594,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-K 0000950170-25-100235",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-microsoft-rpo-2025-06-30",
+   "date": "2025-07-30",
+   "entities": [
+    "microsoft"
+   ],
+   "flow": null,
+   "observation": "o-microsoft-rpo-2025-06-30",
+   "level": "entity",
+   "title": "Microsoft contracted backlog $375.0B for period ending 2025-06-30",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-K 0000950170-25-100235",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-f-army-palantir",
@@ -7268,6 +7716,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001769628-25-000041",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-coreweave-rpo-2025-06-30",
+   "date": "2025-08-13",
+   "entities": [
+    "coreweave"
+   ],
+   "flow": null,
+   "observation": "o-coreweave-rpo-2025-06-30",
+   "level": "entity",
+   "title": "CoreWeave contracted backlog $30.1B for period ending 2025-06-30",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001769628-25-000041",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-f-fluidstack-terawulf",
@@ -7508,6 +7971,21 @@
    "grade": "reported",
    "source_title": "SiliconANGLE, 10 Sep 2025",
    "source_url": "https://siliconangle.com/2025/09/10/openai-oracle-strike-300b-cloud-computing-deal-power-ai/"
+  },
+  {
+   "id": "e-o-broadcom-rpo-2025-08-03",
+   "date": "2025-09-10",
+   "entities": [
+    "broadcom"
+   ],
+   "flow": null,
+   "observation": "o-broadcom-rpo-2025-08-03",
+   "level": "entity",
+   "title": "Broadcom contracted backlog $27.5B for period ending 2025-08-03",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001730168-25-000098",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-o-oracle-capex-2025-08-31",
@@ -8080,6 +8558,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-microsoft-rpo-2025-09-30",
+   "date": "2025-10-29",
+   "entities": [
+    "microsoft"
+   ],
+   "flow": null,
+   "observation": "o-microsoft-rpo-2025-09-30",
+   "level": "entity",
+   "title": "Microsoft contracted backlog $398.0B for period ending 2025-09-30 (+6% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001193125-25-256321",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-o-google-capex-2025-09-30",
    "date": "2025-10-30",
    "entities": [
@@ -8093,6 +8586,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001652044-25-000091",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-google-rpo-2025-09-30",
+   "date": "2025-10-30",
+   "entities": [
+    "google"
+   ],
+   "flow": null,
+   "observation": "o-google-rpo-2025-09-30",
+   "level": "entity",
+   "title": "Google contracted backlog $157.7B for period ending 2025-09-30 (+46% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001652044-25-000091",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-o-meta-capex-2025-09-30",
@@ -8303,6 +8811,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001769628-25-000062",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-coreweave-rpo-2025-09-30",
+   "date": "2025-11-13",
+   "entities": [
+    "coreweave"
+   ],
+   "flow": null,
+   "observation": "o-coreweave-rpo-2025-09-30",
+   "level": "entity",
+   "title": "CoreWeave contracted backlog $50.0B for period ending 2025-09-30 (+66% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001769628-25-000062",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-r-xai-grok41",
@@ -8579,6 +9102,21 @@
    "source_url": "https://www.eenews.net/articles/michigan-regulators-sign-off-on-power-contracts-for-7b-stargate-data-center"
   },
   {
+   "id": "e-o-broadcom-rpo-2025-11-02",
+   "date": "2025-12-18",
+   "entities": [
+    "broadcom"
+   ],
+   "flow": null,
+   "observation": "o-broadcom-rpo-2025-11-02",
+   "level": "entity",
+   "title": "Broadcom contracted backlog $33.3B for period ending 2025-11-02 (+21% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-K 0001730168-25-000121",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-f-goog-intersect",
    "date": "2025-12-22",
    "entities": [
@@ -8819,6 +9357,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-microsoft-rpo-2025-12-31",
+   "date": "2026-01-28",
+   "entities": [
+    "microsoft"
+   ],
+   "flow": null,
+   "observation": "o-microsoft-rpo-2025-12-31",
+   "level": "map",
+   "title": "Microsoft contracted backlog $631.0B for period ending 2025-12-31 (+59% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001193125-26-027207",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-o-meta-capex-2025-12-31",
    "date": "2026-01-29",
    "entities": [
@@ -8891,6 +9444,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-K 0001652044-26-000018",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-google-rpo-2025-12-31",
+   "date": "2026-02-05",
+   "entities": [
+    "google"
+   ],
+   "flow": null,
+   "observation": "o-google-rpo-2025-12-31",
+   "level": "entity",
+   "title": "Google contracted backlog $242.8B for period ending 2025-12-31 (+54% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-K 0001652044-26-000018",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-r-ant-opus46",
@@ -9208,6 +9776,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-coreweave-rpo-2025-12-31",
+   "date": "2026-03-02",
+   "entities": [
+    "coreweave"
+   ],
+   "flow": null,
+   "observation": "o-coreweave-rpo-2025-12-31",
+   "level": "entity",
+   "title": "CoreWeave contracted backlog $60.7B for period ending 2025-12-31 (+21% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-K 0001769628-26-000104",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-r-oai-gpt54",
    "date": "2026-03-05",
    "entities": [
@@ -9267,6 +9850,21 @@
    "grade": "filed",
    "source_title": "Nebius Form 6-K, 11 Mar 2026",
    "source_url": "https://www.sec.gov/Archives/edgar/data/1513845/000110465926026163/tm268532d1_6k.htm"
+  },
+  {
+   "id": "e-o-broadcom-rpo-2026-02-01",
+   "date": "2026-03-11",
+   "entities": [
+    "broadcom"
+   ],
+   "flow": null,
+   "observation": "o-broadcom-rpo-2026-02-01",
+   "level": "entity",
+   "title": "Broadcom contracted backlog $45.0B for period ending 2026-02-01 (+35% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001730168-26-000016",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-o-oracle-capex-2026-02-28",
@@ -9723,6 +10321,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-microsoft-rpo-2026-03-31",
+   "date": "2026-04-29",
+   "entities": [
+    "microsoft"
+   ],
+   "flow": null,
+   "observation": "o-microsoft-rpo-2026-03-31",
+   "level": "entity",
+   "title": "Microsoft contracted backlog $633.0B for period ending 2026-03-31 (+0% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001193125-26-191507",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-o-amazon-capex-2026-03-31",
    "date": "2026-04-30",
    "entities": [
@@ -9751,6 +10364,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001652044-26-000048",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-google-rpo-2026-03-31",
+   "date": "2026-04-30",
+   "entities": [
+    "google"
+   ],
+   "flow": null,
+   "observation": "o-google-rpo-2026-03-31",
+   "level": "map",
+   "title": "Google contracted backlog $467.6B for period ending 2026-03-31 (+93% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001652044-26-000048",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-o-meta-capex-2026-03-31",
@@ -9797,6 +10425,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001769628-26-000222",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-coreweave-rpo-2026-03-31",
+   "date": "2026-05-08",
+   "entities": [
+    "coreweave"
+   ],
+   "flow": null,
+   "observation": "o-coreweave-rpo-2026-03-31",
+   "level": "entity",
+   "title": "CoreWeave contracted backlog $98.8B for period ending 2026-03-31 (+63% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001769628-26-000222",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-f-rounds-anduril",
@@ -10024,6 +10667,21 @@
    "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/0001628280-26-041150.txt"
   },
   {
+   "id": "e-o-broadcom-rpo-2026-05-03",
+   "date": "2026-06-09",
+   "entities": [
+    "broadcom"
+   ],
+   "flow": null,
+   "observation": "o-broadcom-rpo-2026-05-03",
+   "level": "map",
+   "title": "Broadcom contracted backlog $164.6B for period ending 2026-05-03 (+266% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001730168-26-000054",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-r-ant-fable5",
    "date": "2026-06-09",
    "entities": [
@@ -10222,6 +10880,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-google-rpo-2026-06-30",
+   "date": "2026-07-23",
+   "entities": [
+    "google"
+   ],
+   "flow": null,
+   "observation": "o-google-rpo-2026-06-30",
+   "level": "entity",
+   "title": "Google contracted backlog $519.5B for period ending 2026-06-30 (+11% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001652044-26-000071",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-r-ant-opus5",
    "date": "2026-07-24",
    "entities": [
@@ -10251,6 +10924,36 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-K 0001193125-26-323660",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-microsoft-rpo-2026-06-30",
+   "date": "2026-07-29",
+   "entities": [
+    "microsoft"
+   ],
+   "flow": null,
+   "observation": "o-microsoft-rpo-2026-06-30",
+   "level": "entity",
+   "title": "Microsoft contracted backlog $684.0B for period ending 2026-06-30 (+8% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-K 0001193125-26-323660",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
+   "id": "e-m-amzn-backlog-2606",
+   "date": "2026-07-30",
+   "entities": [
+    "amazon"
+   ],
+   "flow": null,
+   "metric": "m-amzn-backlog-2606",
+   "level": "entity",
+   "title": "Amazon contracted backlog: $496.0B as of 2026-06-30",
+   "detail": "AWS backlog as stated on Amazon's second-quarter 2026 earnings call. Amazon does not tag this figure in its XBRL filings.",
+   "grade": "announced",
+   "source_title": "Amazon Q2 2026 earnings call transcript (The Motley Fool), 30 Jul 2026",
+   "source_url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/amazon-amzn-q2-2026-earnings-call-transcript/"
   },
   {
    "id": "e-o-meta-capex-2026-06-30",
@@ -10344,6 +11047,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001769628-26-000366",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-coreweave-rpo-2026-06-30",
+   "date": "2026-08-12",
+   "entities": [
+    "coreweave"
+   ],
+   "flow": null,
+   "observation": "o-coreweave-rpo-2026-06-30",
+   "level": "entity",
+   "title": "CoreWeave contracted backlog $103.7B for period ending 2026-06-30 (+5% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001769628-26-000366",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-r-xai-grok46",
@@ -10513,6 +11231,21 @@
    "source_url": "https://openai.com/index/gpt-6-astra/"
   },
   {
+   "id": "e-o-broadcom-rpo-2026-08-02",
+   "date": "2026-09-10",
+   "entities": [
+    "broadcom"
+   ],
+   "flow": null,
+   "observation": "o-broadcom-rpo-2026-08-02",
+   "level": "entity",
+   "title": "Broadcom contracted backlog $179.2B for period ending 2026-08-02 (+9% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001730168-26-000080",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-o-oracle-capex-2026-08-31",
    "date": "2026-09-11",
    "entities": [
@@ -10541,6 +11274,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001193125-26-389274",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001341439/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
+   "id": "e-m-nbis-backlog-2606",
+   "date": "2026-09-14",
+   "entities": [
+    "nebius"
+   ],
+   "flow": null,
+   "metric": "m-nbis-backlog-2606",
+   "level": "entity",
+   "title": "Nebius contracted backlog: $37.5B as of 2026-06-30",
+   "detail": "Remaining performance obligations at the end of the second quarter of 2026, as reported in press coverage of Nebius's filing.",
+   "grade": "reported",
+   "source_title": "24/7 Wall St., 14 Sep 2026",
+   "source_url": "https://247wallst.com/investing/2026/09/14/nebius-keeps-getting-my-money-there-is-one-reason-and-it-is-not-hype/"
   },
   {
    "id": "e-r-ant-fable51",
@@ -11001,6 +11749,21 @@
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
   },
   {
+   "id": "e-o-microsoft-rpo-2026-09-30",
+   "date": "2026-10-28",
+   "entities": [
+    "microsoft"
+   ],
+   "flow": null,
+   "observation": "o-microsoft-rpo-2026-09-30",
+   "level": "entity",
+   "title": "Microsoft contracted backlog $683.0B for period ending 2026-09-30 (-0% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Company-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001193125-26-436133",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
    "id": "e-amzn-guide",
    "date": "2026-10-29",
    "entities": [
@@ -11028,6 +11791,21 @@
    "grade": "filed",
    "source_title": "SEC XBRL, 10-Q 0001652044-26-000084",
    "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "id": "e-o-google-rpo-2026-09-30",
+   "date": "2026-10-29",
+   "entities": [
+    "google"
+   ],
+   "flow": null,
+   "observation": "o-google-rpo-2026-09-30",
+   "level": "entity",
+   "title": "Google contracted backlog $567.7B for period ending 2026-09-30 (+9% vs prior period)",
+   "detail": "Remaining performance obligations: contracted revenue not yet recognized, at period end. Alphabet-wide, as tagged in the filing.",
+   "grade": "filed",
+   "source_title": "SEC XBRL, 10-Q 0001652044-26-000084",
+   "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
   },
   {
    "id": "e-o-amazon-capex-2026-09-30",
@@ -12585,6 +13363,32 @@
    "grade": "reported",
    "source_title": "Fast Company, Maybe we were wrong about Perplexity, 3 Sep 2026",
    "source_url": "https://fastcompany.com/91600914/maybe-we-were-wrong-about-perplexity"
+  },
+  {
+   "definition": "AWS backlog as stated on Amazon's second-quarter 2026 earnings call. Amazon does not tag this figure in its XBRL filings.",
+   "id": "m-amzn-backlog-2606",
+   "entity": "amazon",
+   "metric": "backlog",
+   "value": 496000000000,
+   "unit": "usd",
+   "as_of": "2026-06-30",
+   "available": "2026-07-30",
+   "grade": "announced",
+   "source_title": "Amazon Q2 2026 earnings call transcript (The Motley Fool), 30 Jul 2026",
+   "source_url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/amazon-amzn-q2-2026-earnings-call-transcript/"
+  },
+  {
+   "definition": "Remaining performance obligations at the end of the second quarter of 2026, as reported in press coverage of Nebius's filing.",
+   "id": "m-nbis-backlog-2606",
+   "entity": "nebius",
+   "metric": "backlog",
+   "value": 37490000000,
+   "unit": "usd",
+   "as_of": "2026-06-30",
+   "available": "2026-09-14",
+   "grade": "reported",
+   "source_title": "24/7 Wall St., 14 Sep 2026",
+   "source_url": "https://247wallst.com/investing/2026/09/14/nebius-keeps-getting-my-money-there-is-one-reason-and-it-is-not-hype/"
   }
  ],
  "coverage": [
@@ -13176,6 +13980,14 @@
    "reason": "Not drawn: reported talks only; nothing signed."
   }
  ],
+ "stress": {
+  "unscored": {
+   "spacex": "SpaceX discloses no contracted backlog, and its launch and satellite businesses are far larger than the contracts on this ledger, so its exposure is not scored."
+  },
+  "revenue_year": [
+   "nvidia"
+  ]
+ },
  "checks": [
   {
    "check": "quarter_vs_ytd",
@@ -13475,9 +14287,9 @@
  ],
  "runs": [
   {
-   "id": "run-2026-11-14l",
+   "id": "run-2026-11-14-tower",
    "as_of": "2026-11-14",
-   "rows": 584
+   "rows": 632
   }
  ],
  "watchlist": [
@@ -13530,6 +14342,26 @@
    "entity": "coreweave",
    "concept": "PaymentsToAcquirePropertyPlantAndEquipment",
    "url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment.json"
+  },
+  {
+   "entity": "microsoft",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
+   "entity": "google",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
+   "entity": "coreweave",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001769628/us-gaap/RevenueRemainingPerformanceObligation.json"
+  },
+  {
+   "entity": "broadcom",
+   "concept": "RevenueRemainingPerformanceObligation",
+   "url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001730168/us-gaap/RevenueRemainingPerformanceObligation.json"
   }
  ],
  "gaps": [
@@ -13697,8 +14529,8 @@
  "backtest": {
   "from": "2026-09-01",
   "to": "2026-11-14",
-  "rows_at_from": 443,
-  "rows_at_to": 536,
+  "rows_at_from": 483,
+  "rows_at_to": 584,
   "new_rows": [
    "e-amzn-guide",
    "e-anth-onepwr",
@@ -13733,14 +14565,18 @@
    "e-m-chatgpt-wau-2610",
    "e-m-gemini-mau-2610",
    "e-m-gemini-tpm-2610",
+   "e-m-nbis-backlog-2606",
    "e-m-pplx-rr-2601",
    "e-m-pplx-rr-2609",
    "e-msft-guide",
    "e-nvda-hf-terms",
    "e-o-amazon-capex-2026-09-30",
+   "e-o-broadcom-rpo-2026-08-02",
    "e-o-google-capex-2026-09-30",
+   "e-o-google-rpo-2026-09-30",
    "e-o-meta-capex-2026-09-30",
    "e-o-microsoft-capex-2026-09-30",
+   "e-o-microsoft-rpo-2026-09-30",
    "e-o-oracle-capex-2026-08-31",
    "e-o-oracle-rpo-2026-08-31",
    "e-oai-round-11",
@@ -13783,12 +14619,16 @@
    "m-chatgpt-wau-2610",
    "m-gemini-mau-2610",
    "m-gemini-tpm-2610",
+   "m-nbis-backlog-2606",
    "m-pplx-rr-2601",
    "m-pplx-rr-2609",
    "o-amazon-capex-2026-09-30",
+   "o-broadcom-rpo-2026-08-02",
    "o-google-capex-2026-09-30",
+   "o-google-rpo-2026-09-30",
    "o-meta-capex-2026-09-30",
    "o-microsoft-capex-2026-09-30",
+   "o-microsoft-rpo-2026-09-30",
    "o-oracle-capex-2026-08-31",
    "o-oracle-rpo-2026-08-31",
    "u-samsung-asml",
@@ -14955,7 +15795,9 @@
    "u-oai-g42"
   ],
   "pending": [
-   "r-oai-gpt56"
+   "r-oai-gpt56",
+   "m-amzn-backlog-2606",
+   "m-nbis-backlog-2606"
   ]
  }
 }
