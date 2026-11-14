@@ -1615,13 +1615,25 @@ function towerBuild(){
   // each block's order in the cascade, for staggering the fall
   const fallen = blocks.filter(b => !TW.pulled.has(b.id) && TW.res.h[b.id] >= TW.thr).sort((x, y) => TW.res.h[y.id] - TW.res.h[x.id] || x.row - y.row);
   fallen.forEach((b, i) => b.order = i);
-  const stand = b => !TW.pulled.has(b.id) && TW.res.h[b.id] < TW.thr, live = []; for (let r = 0; r < row; r++) live[r] = blocks.some(b => b.row === r && stand(b));
+  const stand0 = b => !TW.pulled.has(b.id) && TW.res.h[b.id] < TW.thr;
+  // gravity: a row holds up what is above it only with its middle block, or with both outer blocks. One outer block alone, and the tower above tips over
+  let failRow = -1, failSign = 0;
+  for (let r = 0; r < row && failRow < 0; r++){
+    const sl = blocks.filter(b => b.row === r && stand0(b)).map(b => b.slot); if (!sl.length) continue;
+    const ok = sl.some(v => Math.abs(v) < 0.1) || (sl.some(v => v < 0) && sl.some(v => v > 0));
+    if (!ok && blocks.some(b => b.row > r && stand0(b))){ failRow = r; failSign = sl[0] > 0 ? -1 : 1; }
+  }
+  const toppled = b => failRow >= 0 && b.row > failRow && stand0(b), stand = b => stand0(b) && !toppled(b);
+  TW.toppled = blocks.filter(toppled).map(b => b.id); TW.failAt = failRow >= 0 ? blocks.filter(b => b.row === failRow && stand0(b)).map(b => b.id) : [];
+  const fAl = failRow % 2 ? 1.5708 : 0, fdx = -Math.sin(fAl) * failSign, fdz = Math.cos(fAl) * failSign, fax = Math.cos(fAl), faz = Math.sin(fAl);
+  const live = []; for (let r = 0; r < row; r++) live[r] = blocks.some(b => b.row === r && stand(b));
   for (const b of blocks){
     const along = b.row % 2 ? 1.5708 : 0, ax = Math.cos(along), az = Math.sin(along), sx = -az, sz = ax, sg = hash01(b.id, 1) < 0.5 ? -1 : 1, hv = TW.res.h[b.id] || 0;
     const below = live.slice(0, b.row).filter(Boolean).length, x0 = sx * b.slot, z0 = sz * b.slot;
     let t;
     if (TW.pulled.has(b.id)){ const fwd = (ax * -0.707 + az * 0.707) >= 0 ? 1 : -1, dist = 3.3 + hash01(b.id, 2) * 1.5; t = {st: 'pulled', x: x0 + ax * fwd * dist, y: 0.3, z: z0 + az * fwd * dist, yaw: along + (hash01(b.id, 3) - 0.5) * 0.5, roll: 0, delay: 0, dur: 0.75}; }
     else if (hv >= TW.thr){ const ang = -2.356 + (hash01(b.id, 4) - 0.5) * 1.7, dist = 2.7 + hash01(b.id, 5) * 2.4; t = {st: 'fallen', x: Math.cos(ang) * -dist * -1, y: 0.3, z: Math.sin(ang) * dist * -1, yaw: along + (hash01(b.id, 6) - 0.5) * 2.2, roll: 3.1416 * (hash01(b.id, 7) < 0.5 ? 1 : 2), delay: 0.35 + (b.order || 0) * 0.13, dur: 0.95}; }
+    else if (toppled(b)){ const k = b.row - failRow, dd = 1.9 + k * 0.42 + hash01(b.id, 8) * 0.35, lat = (hash01(b.id, 9) - 0.5) * 2.2; t = {st: 'toppled', x: fdx * dd + fax * lat, y: 0.3, z: fdz * dd + faz * lat, yaw: along + (hash01(b.id, 6) - 0.5) * 1.4, roll: 3.1416, delay: 0.75 + k * 0.09, dur: 0.85}; }
     else { const o = hv >= 0.08 ? 0.12 + hv * 0.9 : 0; t = {st: 'stand', x: x0 + ax * sg * o, y: 0.3 + below * 0.6, z: z0 + az * sg * o, yaw: along + (hv >= 0.08 ? sg * hv * 0.1 : 0), roll: 0, delay: 0, dur: 0.6}; }
     t.key = [t.st, t.x.toFixed(2), t.y.toFixed(2), t.z.toFixed(2)].join('|'); b.t = t;
     const P = TW.pose[b.id];
@@ -1670,7 +1682,7 @@ function drawTower(){
         hid: st === 'stand' && !moving && TW.blocks.some(o => o !== b && o.row === b.row && o.t.st === 'stand' && Math.abs(o.slot - b.slot - sg) < 0.6)});
       if (dot(sg > 0 ? A : neg(A)) > 0.02) faces.push({kind: 'end', q: [pt(sg, -1, -1), pt(sg, 1, -1), pt(sg, 1, 1), pt(sg, -1, 1)], shade: 0.15, ex: S, ey: U, w: 1, hh: 0.6, hid: false});
     }
-    c.globalAlpha = st === 'fallen' && !moving ? 0.82 : 1;
+    c.globalAlpha = (st === 'fallen' || st === 'toppled') && !moving ? 0.82 : 1;
     for (const f of faces){
       c.beginPath(); f.q.forEach((p, i) => i ? c.lineTo(p.x, p.y) : c.moveTo(p.x, p.y)); c.closePath();
       c.fillStyle = pulled ? ink : tint(e); c.fill();
@@ -1686,7 +1698,7 @@ function drawTower(){
       let ux = (p1.x - o0.x) / s, uy = (p1.y - o0.y) / s, vx = (p2.x - o0.x) / s, vy = (p2.y - o0.y) / s;
       if (ux < 0){ ux = -ux; uy = -uy; } if (vy > 0){ vx = -vx; vy = -vy; }
       const mid = {x: (f.q[0].x + f.q[2].x) / 2, y: (f.q[0].y + f.q[2].y) / 2}, fw = f.w * s, fh = f.hh * s;
-      const sub = pulled ? 'pulled' : hv >= 0.08 ? Math.round(hv * 100) + '% lost' : TW.res.uns[b.id] ? 'not scored' : money(V.total[b.id]);
+      const sub = pulled ? 'pulled' : st === 'toppled' && hv < 0.08 ? 'toppled' : hv >= 0.08 ? Math.round(hv * 100) + '% lost' : TW.res.uns[b.id] ? 'not scored' : money(V.total[b.id]);
       c.save(); c.transform(ux, uy, -vx, -vy, mid.x, mid.y);
       const lines = f.kind === 'end' && e.name.includes(' ') ? wrap2(e.name) : [e.name];
       c.font = bodyFont(10); const tw = Math.max(...lines.map(l => c.measureText(l).width)), fs = Math.min(15, (fw - 10) / tw * 10, (fh - 6) / (lines.length * 1.15 + 1.05));
@@ -1717,7 +1729,7 @@ function towerHTML(){
     <div class="twbar"><span class="k">A block falls when it loses</span>${thr.map(([v, t]) => `<button data-twt="${v}" aria-pressed="${TW.thr === v}">${t}</button>`).join('')}</div>
     <canvas id="tw" aria-label="Block tower of the largest players; pull a block to see which others fall"></canvas>
     <div id="tw-out"></div>
-    <h3>The rule</h3><p class="def">Pulling a block assumes that player pays and funds nothing more. Each other player is then scored on its worst exposure, as a share: a supplier by the orders it would lose against its contracted backlog (from its filings where it reports one, otherwise the contracts on this ledger); a lab by the promised funding it would lose against the bills it owes; an investor or bond by the share of its money on this ledger that sits in a fallen block. Losses pass on in proportion, so a supplier that loses 45% of its backlog passes 45% of the damage to whoever it pays. This follows DebtRank, a method central-bank researchers use for contagion. It follows the Show filter above: press-only rows count unless you leave them out.</p>
+    <h3>The rule</h3><p class="def">Pulling a block assumes that player pays and funds nothing more. Each other player is then scored on its worst exposure, as a share: a supplier by the orders it would lose against its contracted backlog (from its filings where it reports one, otherwise the contracts on this ledger); a lab by the promised funding it would lose against the bills it owes; an investor or bond by the share of its money on this ledger that sits in a fallen block. Losses pass on in proportion, so a supplier that loses 45% of its backlog passes 45% of the damage to whoever it pays. This follows DebtRank, a method central-bank researchers use for contagion. Gravity then applies as in the game: a row holds up the blocks above it only with its middle block or both outer blocks, and when it can't, everything above topples. Toppled blocks are marked as toppled, not as exposed. It follows the Show filter above: press-only rows count unless you leave them out.</p>
     <h3>What it leaves out</h3><p class="def">Cash on hand, profits, and the fact that contracts can be renegotiated or resold to another customer. Multi-year contracts are counted in full against today's backlog. Rows with no disclosed amount carry no weight, so a blank is not a zero. Nvidia files no backlog, so its lost orders are measured against a year of revenue. Applications are not on the tower. ${Object.entries(TW.res.uns).map(([, t]) => esc(t)).join(' ')}</p>
     <h3>Backlogs used</h3><div class="mlist">${Object.entries(TW.res.base).sort((a, b) => b[1].v - a[1].v).map(([id, b]) => `<div class="row"><div class="t"><span><b>${esc(ents[id].name)}</b> · ${b.kind === 'revenue' ? 'revenue, last four quarters' : 'contracted backlog'}</span><span class="num">${money(b.v)}</span></div><div class="m">as of <span class="num">${day(b.asof)}</span> ${chip(b.grade)} ${src(b.row)}</div></div>`).join('')}</div>`;
 }
@@ -1735,6 +1747,7 @@ function towerText(){
     return `${pct} of its money on this ledger sits in blocks that fell or are strained: ${money(x.lost)} of ${money(x.of)}. Held in ${from}.`; };
   const row = i => `<div class="row"><div class="t"><span><button data-entlink="${esc(i)}"><b>${name(i)}</b></button>${onT.has(i) ? '' : ' <span class="tag">not on the tower</span>'}</span><span class="num" style="color:${R.h[i] >= TW.thr ? css('--bad') : css('--warn')}">${Math.round(R.h[i] * 100)}%</span></div><div class="m">${why(i)}</div></div>`;
   out.innerHTML = `<p class="twlead"><b>Pull ${[...TW.pulled].map(name).join(' and ')}:</b> ${fell.length ? fell.length + (fell.length === 1 ? ' player falls' : ' players fall') : 'nobody falls'}${strained.length ? ', ' + strained.length + (strained.length === 1 ? ' is' : ' are') + ' strained' : ''}.</p>
+    ${TW.toppled.length ? `<p class="note"><b>Then the tower tips over.</b> With only ${TW.failAt.map(name).join(' and ')} left on one edge of its row, nothing holds up the ${TW.toppled.length} block${TW.toppled.length === 1 ? '' : 's'} above: ${TW.toppled.map(name).join(', ')}. That is gravity, not exposure. Their own scores are listed below where they have one.</p>` : ''}
     ${fell.length ? `<h3>Falls (loses ${TW.thr === 0.5 ? 'half' : TW.thr < 0.5 ? 'a third' : 'two thirds'} or more)</h3><div class="mlist">${fell.map(row).join('')}</div>` : ''}
     ${strained.length ? `<h3>Strained</h3><div class="mlist">${strained.map(row).join('')}</div>` : ''}`;
 }
