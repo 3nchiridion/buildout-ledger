@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The AI Buildout Ledger</title>
+<meta name="description" content="An interactive map of who pays whom to build AI, from filings and company announcements. Every line is a sourced row.">
+<link rel="canonical" href="https://buildoutledger.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The AI Buildout Ledger">
+<meta property="og:title" content="The AI Buildout Ledger">
+<meta property="og:description" content="An interactive map of who pays whom to build AI, from filings and company announcements. Every line is a sourced row.">
+<meta property="og:url" content="https://buildoutledger.com/">
+<meta property="og:image" content="https://buildoutledger.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The AI Buildout Ledger: the money committed to building AI, mapped across applications, models, infrastructure, chips and energy.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F5F1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* One visual world: ink on paper. Colour belongs to money; bodies stay neutral and carry their layer as a pale tint.
+     Layout: full-bleed board, header top-left, reading panel right, time along the bottom. */
+  color-scheme: light;
+  --paper:#F6F5F1; --paper-2:#EFEDE7; --card:#FFFFFF; --line:#DEDBD3; --line-2:#C8C4BA;
+  --ink:#16171B; --ink-2:#3B3E46; --muted:#6C717D; --dim:#9AA0AA;
+  --equity:#1F5BD6; --commit:#E0561C; --capex:#12865A; --debt:#8A3EC8; --link:#8E939C;
+  --t-applications:#FBE7EE; --t-models:#E6EDFB; --t-infrastructure:#E2F2E9; --t-chips:#FCEEDC; --t-energy:#F7F0D3; --t-capital:#EDEBE6;
+  --ok:#1E7F4C; --warn:#A86A12; --bad:#BF3A2B; --release:#C0266D;
+  --sans:"Anthropic Sans","Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Anthropic Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font:14px/1.45 var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:var(--equity);text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--equity);outline-offset:2px;border-radius:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+#stage{position:fixed;inset:0;display:block;width:100%;height:100%;touch-action:none}
+#stage.drag{cursor:grabbing !important}
+#msg{position:fixed;inset:0;display:grid;place-items:center;color:var(--muted);padding:24px;text-align:center}
+
+header{position:fixed;left:24px;top:18px;max-width:min(620px,calc(100vw - 940px));min-width:min(420px,calc(100vw - 420px));pointer-events:none}
+h1{font:700 30px/1.05 var(--sans);letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance}
+.sub{color:var(--ink-2);margin:0 0 12px;font-size:13.5px;max-width:52ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px}
+.stat b{display:block;font:600 18px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat span{color:var(--muted);font-size:11.5px}
+.stat.total{flex-basis:100%}
+.split{display:flex;height:8px;border-radius:2px;overflow:hidden;margin:6px 0 5px;max-width:440px;background:var(--paper-2)}
+.split i{display:block;min-width:2px}
+.s-moved{background:var(--ink)} .s-signed{background:#646872} .s-ann{background:#B9BDC5} .s-press{background:repeating-linear-gradient(135deg,var(--warn) 0 2px,#F3E6D2 2px 5px)}
+.skey{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:11.5px;color:var(--ink-2);max-width:560px}
+.skey i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.skey .gross{color:var(--muted);flex-basis:100%}
+.mini{display:none;font-size:11.5px;color:var(--muted);line-height:1.45;flex-basis:100%}
+.mini b{font:600 12.5px var(--mono);color:var(--ink)}
+@media (min-width:821px) and (max-width:1560px){ .stat:not(.total){display:none} .mini{display:block} .sub{margin-bottom:8px} }
+.show{display:flex;flex-wrap:wrap;gap:4px;align-items:center;align-self:flex-end;pointer-events:auto;font-size:11.5px;color:var(--muted)}
+.show button{border:1px solid var(--line-2);border-radius:999px;padding:2px 9px;background:#ffffffd9;font-size:11.5px;color:var(--ink-2)}
+.show button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#find{border:1px solid var(--line-2);background:#ffffffd9;border-radius:999px;padding:6px 12px;font:500 12.5px var(--sans);width:150px;color:var(--ink)}
+#find:focus{outline:2px solid var(--equity);outline-offset:1px}
+.seg{display:inline-flex;gap:4px;margin:2px 0 6px}
+.seg button{border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;font-size:12px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.unchecked{border-style:dotted;color:var(--ink-2)}
+#tour{position:fixed;left:24px;bottom:124px;width:350px;background:var(--card);border:1px solid var(--ink);border-radius:12px;padding:12px 14px 12px;box-shadow:0 10px 28px #0000002a;z-index:6}
+#edition{display:block;margin:0 0 8px;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);pointer-events:auto}
+#edition a{color:inherit}
+#tour p{margin:6px 0 10px;font-size:13.5px;color:var(--ink-2)}
+#tour .acts{display:flex;justify-content:flex-end;gap:6px}
+#tour .acts .on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+.tools{position:fixed;right:392px;top:16px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:520px}
+.btn{border:1px solid var(--line-2);background:#ffffffd9;border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:500;backdrop-filter:blur(6px)}
+.btn:hover{border-color:var(--ink-2)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+#sheet{position:fixed;right:0;top:0;bottom:0;width:376px;background:var(--card);border-left:1px solid var(--line);display:flex;flex-direction:column}
+#panel{flex:1;min-height:0;overflow:auto;padding:20px 20px 110px}
+#sab{position:fixed;bottom:0;left:0;width:0;height:env(safe-area-inset-bottom);visibility:hidden;pointer-events:none}
+aside h2{font:700 24px/1.1 var(--sans);letter-spacing:-.015em;margin:2px 0 4px;text-wrap:balance}
+aside h3{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.kicker{font:500 11px var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.back{font-size:12.5px;color:var(--muted);padding:0 0 10px}
+.back:hover{color:var(--ink)}
+.note{color:var(--ink-2);font-size:12.8px;margin:6px 0 0}
+.row{display:block;width:100%;text-align:left;border-top:1px solid var(--line);padding:9px 0}
+button.row:hover{background:var(--paper)}
+.row .t{display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+.row .t b{font-weight:600}
+.row .m{color:var(--muted);font-size:12px;margin-top:2px}
+.row .amt{font:600 13px var(--mono);white-space:nowrap}
+.chip{display:inline-block;font:600 9.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:1px 5px;border:1px solid var(--line-2);color:var(--muted);vertical-align:1px}
+.chip.filed{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.announced{border-color:var(--ink);color:var(--ink)}
+.chip.reported{border-style:dashed;color:var(--warn);border-color:var(--warn)}
+.sw{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:6px;border-radius:2px}
+.ents{display:flex;flex-wrap:wrap;gap:6px}
+.ents .btn{background:var(--card)}
+.grp{margin:8px 0 2px;font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:70px;margin-top:6px}
+.bars i{flex:1;background:#BFD9CB;border-radius:2px 2px 0 0;min-height:2px}
+.bars i.d{background:repeating-linear-gradient(135deg,#BFD9CB 0 3px,#E7F1EB 3px 6px)}
+.bars i.last{background:var(--capex)}
+.axis{display:flex;justify-content:space-between;color:var(--dim);font:11px var(--mono);margin-top:3px}
+.def{color:var(--ink-2);font-size:12.5px;margin:4px 0 0}
+
+#time{position:fixed;left:24px;right:400px;bottom:14px;background:#ffffffe6;border:1px solid var(--line);border-radius:12px;padding:9px 14px 8px;backdrop-filter:blur(8px)}
+.trow{display:flex;align-items:center;gap:12px}
+#play{border:1px solid var(--line-2);border-radius:999px;width:32px;height:32px;flex:none;font-size:11px;background:var(--card)}
+#asof{font:600 13px var(--mono);min-width:104px}
+.track{position:relative;flex:1;height:32px}
+.track input{position:absolute;inset:0;width:100%;margin:0;appearance:none;-webkit-appearance:none;background:transparent;height:32px}
+.track input::-webkit-slider-runnable-track{height:2px;background:var(--line-2)}
+.track input::-moz-range-track{height:2px;background:var(--line-2)}
+.track input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:22px;border-radius:3px;background:var(--ink);margin-top:-10px;border:0}
+.track input::-moz-range-thumb{width:14px;height:22px;border-radius:3px;background:var(--ink);border:0}
+.ticks{position:absolute;left:7px;right:7px;top:0;height:32px;pointer-events:none}
+.ticks i{position:absolute;top:6px;width:2px;height:8px;background:var(--ink-2);border-radius:1px}
+.ticks i.reported{background:var(--warn)}
+.ticks i.rel{background:var(--release);width:3px;top:3px;height:12px}
+.rel-row .m b{color:var(--ink-2);font-weight:600}
+.tag{display:inline-block;font:600 9.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;border-radius:3px;padding:1px 5px;color:var(--release);border:1px solid var(--release);vertical-align:1px}
+.mchart{width:100%;height:96px;display:block;margin-top:6px;overflow:visible}
+.mchart text{font:10px var(--mono);fill:var(--muted)}
+.latest td{padding:5px 6px 5px 0;vertical-align:top}
+.latest button{color:var(--ink);font-weight:600;text-align:left}
+.ticks span{position:absolute;bottom:-3px;font:10.5px var(--mono);color:var(--dim);transform:translateX(-50%)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--ink-2);font-size:11.5px;margin-top:6px;align-items:center}
+.legend svg{vertical-align:middle;margin-right:5px}
+.legend .sep{width:1px;height:14px;background:var(--line-2)}
+
+#drawer{position:fixed;left:24px;right:400px;top:150px;bottom:112px;background:var(--card);border:1px solid var(--line-2);border-radius:12px;overflow:auto;padding:16px 18px;display:none;box-shadow:0 10px 30px #0000001a}
+#drawer.open{display:block}
+#d-close{position:sticky;top:0;float:right;margin:-6px -8px 0 8px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line-2);background:#fff;font-size:18px;line-height:1;color:var(--ink-2);z-index:2}
+#drawer h2{font:700 22px var(--sans);margin:0 0 4px}
+.seg{display:inline-flex;gap:4px;margin:2px 0 0 10px;vertical-align:4px}
+.seg button{border:1px solid var(--line-2);border-radius:999px;padding:2px 10px;background:#fff;font-size:12px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lstrip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 4px}
+.lstrip .k{font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.lchip{border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;background:#fff;font-size:12px;color:var(--ink-2);display:inline-flex;gap:6px;align-items:baseline}
+.lchip .c{font:700 12px var(--mono);color:var(--ink)} .lchip span:last-child{font:11px var(--mono);color:var(--muted)}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;margin-top:8px;align-items:start}
+@media (max-width:820px){.lgrid{grid-template-columns:1fr}}
+.lstar{margin:0;border:1px solid var(--line);border-radius:10px;padding:8px 8px 2px;background:var(--paper)}
+.lstar figcaption{font-size:13px;color:var(--ink-2);padding:2px 4px} .lstar figcaption span{display:block;font:11px var(--mono);color:var(--muted);margin-top:2px}
+.lm{display:block;max-width:100%;height:auto;margin:0 auto}
+.lmbox.hot .lchip{opacity:.4} .lmbox.hot .lchip.on{opacity:1;border-color:var(--ink)}
+.lm text{font-family:var(--sans)} .lm .mono{font-family:var(--mono)}
+.lm .lbl{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.lm .lp{transition:opacity .15s} .lmbox.hot .lp{opacity:.12} .lmbox.hot .lp.on{opacity:1}
+.lm .nd{cursor:pointer} .lm path[data-flowlink]{cursor:pointer}
+.lmbox.hot .nd{opacity:.3} .lmbox.hot .nd.on{opacity:1}
+#drawer h3{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line-2);padding:5px 8px 5px 0;position:sticky;top:-16px;background:var(--card)}
+td{border-bottom:1px solid var(--line);padding:5px 8px 5px 0;vertical-align:top}
+td.r,th.r{text-align:right}
+.pass{color:var(--ok)} .fail{color:var(--bad)} .warn{color:var(--warn)}
+
+/* ---------- phones: a top bar with three tabs, the map as a vertical stack, details in a bottom sheet ---------- */
+#mbar,#mmenu,#msearch,#m-fit,#grab,#mscrim,.ph-only{display:none}
+body.phone .ph-only,body.land .ph-only{display:block}
+body.phone .desk-only,body.land .desk-only{display:none}
+body.phone header,body.land header,body.phone .tools,body.land .tools{display:none}
+body.phone,body.land{-webkit-text-size-adjust:100%}
+body.phone button,body.land button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+body.phone #mbar,body.land #mbar{display:grid;position:fixed;left:0;right:0;top:0;z-index:5;background:#F6F5F1EB;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 8px) max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));gap:8px 6px;align-items:center;-webkit-user-select:none;user-select:none}
+body.phone #mbar{grid-template-columns:1fr auto auto;grid-template-areas:"t f m" "s s s"}
+body.land #mbar{grid-template-columns:auto minmax(240px,360px) 1fr auto auto;grid-template-areas:"t s . f m";padding-top:6px;padding-bottom:6px}
+.mt{grid-area:t;min-width:0}
+.mt b{display:block;font:700 17px/1.15 var(--sans);letter-spacing:-.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mt span{display:block;font:600 9.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin-top:2px}
+.mic{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:#fff;display:grid;place-items:center;color:var(--ink)}
+#m-find{grid-area:f} #m-menu{grid-area:m}
+.mseg{grid-area:s;display:flex;gap:3px;padding:3px;border-radius:11px;background:var(--paper-2);border:1px solid var(--line)}
+.mseg button{flex:1;height:34px;border-radius:8px;font:600 13.5px var(--sans);color:var(--ink-2)}
+.mseg button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #00000024}
+body.phone #sheet{top:auto;left:0;right:0;bottom:0;width:auto;height:var(--sheet-h,60vh);border-left:0;border-top:1px solid var(--line-2);border-radius:16px 16px 0 0;box-shadow:0 -10px 30px #0000001f;transform:translateY(var(--sheet-off,0px));transition:transform .32s cubic-bezier(.2,.85,.25,1);z-index:6}
+body.phone #sheet.drag{transition:none}
+@media (prefers-reduced-motion:reduce){body.phone #sheet{transition:none}}
+body.phone #sheet[data-state="peek"] #panel,body.phone #sheet[data-state="half"] #panel{overflow:hidden;touch-action:none}
+body.phone #grab{display:block;position:relative;height:28px;flex:none;touch-action:none}
+#grab-btn{position:absolute;inset:0;display:grid;place-items:center;width:100%}
+#grab-btn i{display:block;width:40px;height:5px;border-radius:3px;background:var(--line-2)}
+#sheet-x{position:absolute;right:10px;top:8px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);background:#fff;font-size:19px;line-height:1;color:var(--ink-2);z-index:1}
+body.phone #panel{padding:0 16px calc(28px + env(safe-area-inset-bottom));overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+body.phone .back{display:none}
+body.phone aside h2{font-size:22px;padding-right:44px}
+body.phone aside .kicker{padding-right:44px}
+body.land #sheet{top:var(--mtop);width:320px}
+body.land #panel{padding:12px 14px calc(24px + env(safe-area-inset-bottom))}
+body.phone #time,body.land #time{left:0;right:0;bottom:var(--peek);border-radius:0;border-width:1px 0 0;padding:3px max(12px,env(safe-area-inset-right)) 1px max(12px,env(safe-area-inset-left));background:#FFFFFFF0;z-index:3}
+body.land #time{right:320px;bottom:0}
+body.phone .legend,body.land .legend{display:none}
+body.phone #play,body.land #play{width:30px;height:30px}
+body.phone #asof,body.land #asof{min-width:0;font-size:12px;white-space:nowrap}
+body.phone .trow,body.land .trow{gap:10px}
+body.phone .ticks span,body.land .ticks span{font-size:9.5px}
+body.phone #drawer,body.land #drawer{left:0;right:0;top:var(--mtop);bottom:calc(var(--peek) + var(--timeh));border:0;border-radius:0;box-shadow:none;padding:14px 14px 28px;z-index:4;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+body.land #drawer{right:320px;bottom:var(--timeh)}
+body.phone #d-close,body.land #d-close{display:none}
+body.phone #drawer h2,body.land #drawer h2{font-size:20px}
+body.phone .lstrip,body.land .lstrip{flex-wrap:nowrap;overflow-x:auto;margin:4px -14px 6px;padding:0 14px 2px;scrollbar-width:none}
+.lstrip-k{font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+body.phone .lchip,body.land .lchip{flex:none}
+body.phone #tour{left:10px;right:10px;width:auto;top:calc(var(--mtop) + 10px);bottom:auto;z-index:8}
+body.land #tour{left:10px;width:340px;top:auto;bottom:calc(var(--timeh) + 8px);z-index:8}
+#mscrim{position:fixed;inset:0;z-index:8;background:#16171b2e}
+body.phone #mscrim:not([hidden]),body.land #mscrim:not([hidden]){display:block}
+#mmenu{position:fixed;right:10px;top:calc(var(--mtop) + 6px);width:min(310px,calc(100vw - 20px));max-height:calc(var(--vh) - var(--mtop) - 20px);overflow:auto;background:#fff;border:1px solid var(--line-2);border-radius:14px;box-shadow:0 16px 44px #00000038;padding:6px;z-index:9}
+body.phone #mmenu:not([hidden]),body.land #mmenu:not([hidden]){display:block}
+.mm-h{font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 10px 4px}
+#mmenu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 10px;border-radius:9px;font-size:15px;text-align:left;color:var(--ink)}
+#mmenu button small{color:var(--muted);font-size:12px}
+#mmenu button[aria-pressed="true"]::after{content:"✓";font-weight:700}
+#mmenu button:active{background:var(--paper)}
+#msearch{position:fixed;inset:0;z-index:10;background:var(--paper);flex-direction:column}
+body.phone #msearch:not([hidden]),body.land #msearch:not([hidden]){display:flex}
+.ms-bar{display:flex;gap:8px;align-items:center;padding:calc(env(safe-area-inset-top) + 10px) 12px 10px;border-bottom:1px solid var(--line);background:#fff}
+#ms-in{flex:1;min-width:0;height:44px;border:1px solid var(--line-2);border-radius:11px;padding:0 12px;font:500 16px var(--sans);color:var(--ink);background:var(--paper)}
+#ms-x{font:600 15px var(--sans);padding:0 6px;color:var(--equity);height:44px}
+#ms-list{flex:1;overflow:auto;padding:4px 12px calc(24px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+#ms-list .grp{margin:14px 0 4px}
+#ms-list button{display:flex;width:100%;justify-content:space-between;align-items:center;gap:12px;min-height:50px;border-bottom:1px solid var(--line);text-align:left;font-size:16px}
+#ms-list button span{font:12px var(--mono);color:var(--muted);white-space:nowrap}
+#m-fit{position:fixed;right:12px;top:calc(var(--mtop) + 10px);z-index:3;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:#fff;font:600 13px var(--sans);box-shadow:0 2px 10px #0000001f}
+body.phone #m-fit:not([hidden]),body.land #m-fit:not([hidden]){display:block}
+.hl-t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:1px}
+.hl-t b{font:700 27px/1.15 var(--mono);letter-spacing:-.02em}
+.hl-t span{color:var(--muted);font-size:12.5px}
+.hl .split{max-width:none;margin:7px 0 6px;height:9px}
+.hl .skey{font-size:12.5px;gap:3px 14px;max-width:none}
+.plegend{display:flex;flex-wrap:wrap;gap:7px 14px;color:var(--ink-2);font-size:12.5px;align-items:center}
+.plegend svg{vertical-align:middle;margin-right:6px}
+.plegend .sep{display:none}
+.peekline{font:600 13px var(--mono);color:var(--ink-2);margin:5px 0 0}
+.dchips{display:flex;gap:6px;overflow-x:auto;margin:10px -14px 8px;padding:0 14px 2px;scrollbar-width:none}
+.dchips button{flex:none;border:1px solid var(--line-2);border-radius:999px;padding:7px 12px;font-size:13px;background:#fff;color:var(--ink-2)}
+.dchips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dchips button span{font:12px var(--mono);opacity:.75;margin-left:4px}
+.cards{display:flex;flex-direction:column;gap:8px}
+.card{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+.card:active{background:var(--paper)}
+.card .c1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.card .c1 .who{min-width:0}
+.card .c1 b{font-weight:650}
+.card .amt{font:700 16px var(--mono);white-space:nowrap}
+.card .c2{color:var(--ink-2);font-size:13px;margin-top:3px}
+.card .c3{color:var(--muted);font-size:12px;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.card .ln{display:inline-block;width:22px;height:0;border-top:3px solid;vertical-align:middle;margin-right:5px;border-radius:2px}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px}
+.tscroll table{min-width:560px}
+details.dsec{border-top:1px solid var(--line);margin-top:14px;padding-top:6px}
+details.dsec summary{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px 0;cursor:pointer}
+.mlist .row{padding:10px 0}
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="Map of money flows in the AI buildout. Use the entity buttons in the side panel to explore without a pointer."></canvas>
+<div id="msg">Loading the ledger…</div>
+
+<header>
+  <div id="edition" hidden></div>
+  <h1>The AI Buildout Ledger</h1>
+  <p class="sub">Who pays whom to build AI, read from filings and company announcements. Every line on the map is a sourced row.</p>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="tools">
+  <input id="find" list="find-list" placeholder="Find a player" aria-label="Find a player" autocomplete="off"><datalist id="find-list"></datalist>
+  <button class="btn" id="b-reset" hidden>Put everything back</button>
+  <button class="btn" id="b-layers" aria-pressed="false">Five layers</button>
+  <button class="btn" id="b-flow" aria-pressed="false" title="Money runs left to right; deals that run backwards loop over the top">Arranged</button>
+  <button class="btn" id="b-labels" aria-pressed="false">All labels</button>
+  <button class="btn" id="b-rows" aria-pressed="false">Rows</button>
+  <button class="btn" id="b-loops" aria-pressed="false" title="Suppliers putting money into their own customers">Loops</button>
+  <button class="btn" id="b-checks" aria-pressed="false">Checks</button>
+  <button class="btn" id="b-tour">Tour</button>
+  <button class="btn" id="b-export">Export PNG</button>
+</div>
+
+<section id="drawer" aria-live="polite"><button id="d-close" aria-label="Close">×</button><div id="drawer-body"></div></section>
+<div id="tour" hidden role="dialog" aria-label="Guided start"><div class="kicker" id="tour-k"></div><p id="tour-t"></p><div class="acts"><button class="btn" id="tour-skip">Skip</button><button class="btn on" id="tour-next">Next</button></div></div>
+<aside id="sheet" aria-label="Details" data-state="peek"><div id="grab"><button id="grab-btn" aria-label="Show details"><i></i></button><button id="sheet-x" aria-label="Close" hidden>×</button></div><div id="panel" aria-live="polite"></div></aside>
+<div id="mbar">
+  <div class="mt"><b>The AI Buildout Ledger</b><span id="m-ed" hidden></span></div>
+  <div class="mseg" role="tablist" aria-label="View"><button data-mv="map" aria-pressed="true">Map</button><button data-mv="loops" aria-pressed="false">Loops</button><button data-mv="deals" aria-pressed="false">Deals</button></div>
+  <button class="mic" id="m-find" aria-label="Find a player"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M11.8 11.8 16 16"/></svg></button>
+  <button class="mic" id="m-menu" aria-label="More options" aria-haspopup="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><circle cx="3.5" cy="9" r="1.8"/><circle cx="9" cy="9" r="1.8"/><circle cx="14.5" cy="9" r="1.8"/></svg></button>
+</div>
+<div id="mscrim" hidden></div>
+<div id="mmenu" role="menu" hidden></div>
+<div id="msearch" hidden role="dialog" aria-label="Find a player"><div class="ms-bar"><input id="ms-in" type="search" placeholder="Find a player" autocomplete="off" enterkeyhint="search" aria-label="Find a player"><button id="ms-x">Cancel</button></div><div id="ms-list"></div></div>
+<button id="m-fit" hidden>Fit to width</button>
+<div id="sab"></div>
+
+<div id="time">
+  <div class="trow">
+    <button id="play" aria-label="Play timeline">▶</button>
+    <div id="asof" class="num"></div>
+    <div class="track">
+      <div class="ticks" id="ticks"></div>
+      <input id="scrub" type="range" min="0" max="100" step="1" value="100" aria-label="Show the ledger as of this date">
+    </div>
+  </div>
+  <div class="legend" id="legend"></div>
+</div>
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = css('--sans'), MONO = css('--mono');
+const COL = {equity:css('--equity'), purchase_commitment:css('--commit'), capex:css('--capex'), debt:css('--debt'), product:css('--link'), uses:css('--link'), owns:css('--link')};
+const REL = css('--release');
+const TYPE = {equity:'Equity investment', purchase_commitment:'Purchase commitment', capex:'Capital spending', debt:'Debt', product:'Makes (product)', uses:'Uses (no money shown)', owns:'Owns'};
+const STATUS = {cash_moved:'Cash moved', contracted:'Contracted', announced:'Announced', reported:'Reported'};
+const DASH = {cash_moved:[], contracted:[12,6], announced:[4,6], reported:[1.5,5]};
+const KIND = {company:'Company', product:'Product', sink:'Spending sink', instrument:'Financial instrument', investor:'Investor', government:'Government buyer'};
+const LAYERS = [{id:'applications',label:'Applications',y:-370},{id:'models',label:'Models',y:-185},{id:'infrastructure',label:'Infrastructure',y:0},{id:'chips',label:'Chips',y:185},{id:'energy',label:'Energy',y:370}];
+LAYERS.forEach(l => { l.y0 = l.y; l.h = 168; l.mU = 0; });   // y0: the map's pull; y and h: the five-layer stack, sized to its rows in layout()
+const LY = Object.fromEntries(LAYERS.map(l => [l.id, l]));
+const BOX = {w:1560, h:168}, CAP = {x:BOX.w / 2 + 70, w:270};
+const tint = e => css('--t-' + (e.layer || 'capital'));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money = v => v == null ? 'undisclosed' : v >= 1e12 ? '$' + (v/1e12).toFixed(2) + 'T' : v >= 1e11 ? '$' + Math.round(v/1e9) + 'B' : '$' + (v/1e9).toFixed(1) + 'B';
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const day = s => { const [y,m,d] = s.split('-').map(Number); return d + ' ' + MON[m-1] + ' ' + y; };
+const toN = s => Date.parse(s + 'T00:00:00Z') / 864e5;
+const fromN = n => new Date(n * 864e5).toISOString().slice(0,10);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMoney = f => f.type !== 'product' && f.type !== 'uses' && f.type !== 'owns';
+const ease = t => t * t * (3 - 2 * t);
+
+let L, ents = {}, nodes = {}, homeMap = {}, homeCake = {}, T0, T1, tNow, sel = null, hover = null, drawer = null, allLabels = false, loopTab = 'map';
+let mGoal = 0, mBlend = 0, fGoal = 0, fBlend = 0, homeFlow = {}, FL = null;
+let showMode = 'all', traceDir = 'down', PENDING = new Set(), HEAD = null;
+const PAPER = css('--paper');
+const cam = {x:0, y:0, k:1, goal:null};
+const cv = $('#stage'), ctx = cv.getContext('2d');
+let W = 0, H = 0, DPR = 1, panelW = 376, wide = true;
+let phone = false, land = false, RECT = null, MTOP = 0, SAB = 0, TIMEH = 0, homeStack = {}, SB = null, ORDER = null, lastStackW = 0, lastCls = '';
+let touring = false, TOURB = 0, sheetState = 'peek', VIEW = null, inert = null, PINCH = false, fitShown = false, dealF = 'all', LEGEND = '';
+// phones get their own arrangement: portrait phones a bottom sheet, landscape phones a narrow side panel
+function classify(){
+  W = innerWidth; H = innerHeight;
+  const small = W <= 820 || (H <= 500 && W > H);
+  land = small && W > H && H <= 500; phone = small && !land; wide = !small; panelW = wide ? 376 : land ? 320 : 0;
+  document.body.classList.toggle('phone', phone); document.body.classList.toggle('land', land);
+  return phone ? 'phone' : land ? 'land' : 'wide';
+}
+classify();
+
+fetch('ledger.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init)
+  .catch(e => { $('#msg').textContent = 'The ledger file could not be loaded (' + e.message + '). Reload the page; if it persists, the latest run did not publish.'; });
+
+function init(data){
+  L = data; $('#msg').remove();
+  if (L.edition){   // a frozen copy for an article: says so, and points to the live map
+    const ed = $('#edition'); ed.hidden = false;
+    ed.innerHTML = `Edition of ${esc(day(L.edition.date))} · frozen; the daily updates continue on <a href="${esc(L.edition.live_url)}" target="_blank" rel="noopener">the live map</a>`;
+    document.title = `The AI Buildout Ledger · ${day(L.edition.date)} edition`;
+  }
+  PENDING = new Set(((L.verification && L.verification.pending) || []).map(x => x.split('@')[0]));   // rows the independent check hasn't reached yet
+  L.entities.forEach(e => ents[e.id] = e);
+  T0 = toN('2025-07-01'); T1 = toN(L.as_of); tNow = T1;
+  const sc = $('#scrub'); sc.min = T0; sc.max = T1; sc.value = T1;
+  sc.addEventListener('input', () => { stopPlay(); tNow = +sc.value; refresh(); });
+  if (L.edition){ $('#m-ed').hidden = false; $('#m-ed').textContent = 'Frozen edition · ' + day(L.edition.date); }
+  refresh(); layout();
+  buildTicks(); buildLegend(); renderPanel();
+  addEventListener('resize', resize); resize();
+  bindPointer(); bindTools(); bindPhone();
+  const h0 = location.hash;
+  if (!wide) setMode('layers', true);   // on a phone the map opens as the stack
+  const linked = fromHash(h0); addEventListener('hashchange', () => fromHash());
+  let seen = false; try { seen = localStorage.getItem('abl-tour') === '1'; } catch (_) {}
+  if (!linked && !seen) setTimeout(() => tour(0), 700);
+  if (document.fonts) document.fonts.ready.then(() => { sizeCache = {}; });
+  requestAnimationFrame(frame);
+  if (/[?&]debug\b/.test(location.search)) window.__L = {view, toScreen, home, nodes, cam, select, setSheet, st: () => ({cls: document.body.className, k: +cam.k.toFixed(3), RECT, SB: SB && {BW: Math.round(SB.BW), h: Math.round(SB.height), bands: SB.bands.map(b => [b.id, b.ids.length, Math.round(b.h)]), big: Object.keys(homeStack).map(id => [id, Math.round(size(id).w), Math.round(size(id).h)]).sort((a, b) => b[1] - a[1]).slice(0, 8)}, s: +view().s.toFixed(3), sheet: sheetState, sel, drawer, mode: modeNow(), hash: location.hash})};
+}
+
+/* ---------- body shapes and sizes (world units) ---------- */
+let sizeCache = {};
+const BASE = 15;   // body type size in world units; bodies are sized so their names always fit inside
+const MINF = [10.5, 9.5];   // smallest on-screen name size: the map and five layers, then the arranged view
+let BS = 1;        // when zoomed far out, bodies grow on screen so names never drop below a readable size
+const PLAN = {cake: 1.7, flow: 1.7};   // ...but never past the growth each arranged layout was spaced for, so bodies never collide
+function bodyFont(px){ return `600 ${px}px ${SANS}`; }
+function wrap(c, text, maxW){
+  const words = text.split(' '); if (words.length === 1) return [text];
+  let best = [text];
+  for (let i = 1; i < words.length; i++){ const a = words.slice(0, i).join(' '), b = words.slice(i).join(' '); if (Math.max(c.measureText(a).width, c.measureText(b).width) < Math.max(...best.map(x => c.measureText(x).width))) best = [a, b]; }
+  return c.measureText(text).width <= maxW ? [text] : best;
+}
+function size(id){
+  const e = ents[id], tot = (V.total[id] || 0) / 1e9, key = id + '|' + Math.round(tot) + (wide ? '' : 'p'), P = !wide;   // phones draw compact bodies
+  if (sizeCache[key]) return sizeCache[key];
+  ctx.font = bodyFont(BASE);
+  let s;
+  if (e.kind === 'product'){ const w = ctx.measureText(e.name).width + (P ? 26 : 32); s = {shape:'pill', w, h:P ? 32 : 36, r:w / 2}; }
+  else if (e.kind === 'instrument'){ const w = Math.max(ctx.measureText(e.name).width + (P ? 40 : 48), P ? 100 : 120); s = {shape:'tag', w, h:P ? 42 : 50, r:w / 2}; }
+  else if (e.kind === 'sink'){ const lines = wrap(ctx, e.name, 130), w = Math.max(P ? 128 : 150, ...lines.map(l => ctx.measureText(l).width + (P ? 28 : 34))); const side = Math.max(w, P ? 60 + Math.sqrt(tot) * 1.2 : 80 + Math.sqrt(tot) * 2.4); s = {shape:'sink', w:side, h:Math.max(P ? 64 : 78, side * (P ? 0.5 : 0.62)), r:side / 2, lines}; }
+  else if (P){   // phones: a chip with the name and, beside it, the money it touches; more money, a larger chip
+    const inv = e.kind !== 'company', lines = ctx.measureText(e.name).width > 200 ? wrap(ctx, e.name, 200) : [e.name], tw = Math.max(...lines.map(l => ctx.measureText(l).width));
+    ctx.font = `500 ${BASE * 0.8}px ${MONO}`; const am = V.total[id] ? ctx.measureText(money(V.total[id])).width + 7 : 0;
+    const g = Math.min(1, Math.sqrt(tot) / 28), w = tw + am + 26 + (inv ? 8 : 0) + g * 22, h = 32 + (lines.length - 1) * 17 + (inv ? 12 : 0) + g * 16;
+    s = {shape: inv ? 'ichip' : 'chip', w, h, r: Math.min(w, h) / 2, lines, am};
+  }
+  else {
+    const lines = wrap(ctx, e.name, 104), tw = Math.max(...lines.map(l => ctx.measureText(l).width));
+    const fit = Math.max(tw / 2 + 11, lines.length > 1 ? 36 : 28) + (e.kind === 'investor' || e.kind === 'government' ? 8 : 0);
+    const r = Math.min(78, Math.max(fit, 26 + Math.sqrt(tot) * 1.4));
+    s = {shape: e.kind === 'investor' || e.kind === 'government' ? 'investor' : 'circle', w:r * 2, h:r * 2, r, lines};
+  }
+  return sizeCache[key] = s;
+}
+function inside(id, p, pad){
+  const n = nodes[id], s0 = size(id), s = {shape: s0.shape, w: s0.w * BS, h: s0.h * BS, r: s0.r * BS};
+  if (s.shape === 'circle' || s.shape === 'investor') return Math.hypot(p.x - n.x, p.y - n.y) < s.r + pad;
+  return Math.abs(p.x - n.x) < s.w / 2 + pad && Math.abs(p.y - n.y) < s.h / 2 + pad;
+}
+
+/* ---------- arrangements: a mind map from a force layout, and the five-layer stack ---------- */
+function hash(s){ let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return ((h >>> 0) % 10000) / 10000; }
+// lay bodies along a line in order, zig-zagging across it only as far as needed to fit `avail`.
+// along: the line runs down the page, so the amount label under a body adds to its length on the line
+function pack(ids, R, U, gap, avail, maxDz, along){
+  const n = ids.length; if (!n) return {at: [], dz: 0};
+  const run = dz => { const at = []; ids.forEach((id, i) => { let x = 0;
+    if (i){ const j = ids[i - 1], need = R(id) + R(j) + gap + (along ? U(j) : 0), v = Math.max(0, 2 * dz - (along ? 0 : Math.max(U(id), U(j))));
+      x = at[i - 1] + (dz ? Math.max(0.55 * (R(id) + R(j)), Math.sqrt(Math.max(0, need * need - v * v))) : need); }
+    if (i > 1){ const j = ids[i - 2]; x = Math.max(x, at[i - 2] + R(id) + R(j) + gap + (along ? U(j) : 0)); }
+    at.push(x); }); return at; };
+  let dz = 0, at = run(0);
+  const ext = at => at[n - 1] + R(ids[0]) + R(ids[n - 1]) + (along ? U(ids[n - 1]) : 0);
+  while (ext(at) > avail && dz < maxDz){ dz += 4; at = run(dz); }
+  const lo = -R(ids[0]), span = at[n - 1] + R(ids[n - 1]) + (along ? U(ids[n - 1]) : 0) - lo; return {at: at.map(x => x - lo - span / 2), dz, ok: span <= avail};
+}
+const availWH = () => [Math.max(320, innerWidth - (innerWidth > 820 ? 376 : 0) - 48), Math.max(260, innerWidth > 820 ? innerHeight - 136 - headTop() : innerHeight * 0.54 - 224)];
+function layout(){
+  const ids = L.entities.map(e => e.id), E = L.flows.map(f => [f.payer, f.payee, !isMoney(f) ? 130 : f.type === 'capex' ? 420 : 310]);
+  const P = {}; ids.forEach(id => { const e = ents[id]; P[id] = {x: (hash(id) - 0.5) * 1100, y: e.layer ? LY[e.layer].y0 * 0.75 : (hash(id + 'y') - 0.5) * 300, vx:0, vy:0}; });
+  const rad = id => Math.max(size(id).w, size(id).h) / 2;
+  for (let it = 0; it < 900; it++){
+    const cool = 1 - it / 900, F = {}; ids.forEach(id => F[id] = {x:0, y:0});
+    for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++){
+      const a = P[ids[i]], b = P[ids[j]], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy) || 0.1, min = rad(ids[i]) + rad(ids[j]) + 110;
+      const f = 70000 / (d * d) + (d < min ? (min - d) * 0.6 : 0);
+      F[ids[i]].x += dx / d * f; F[ids[i]].y += dy / d * f; F[ids[j]].x -= dx / d * f; F[ids[j]].y -= dy / d * f;
+    }
+    for (const [u, v, len] of E){ const a = P[u], b = P[v], dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 0.1, f = (d - len) * 0.025; F[u].x += dx / d * f; F[u].y += dy / d * f; F[v].x -= dx / d * f; F[v].y -= dy / d * f; }
+    for (const id of ids){
+      const e = ents[id], p = P[id];
+      if (e.kind === 'sink'){ F[id].y += (560 - p.y) * 0.2; F[id].x -= p.x * 0.05; }
+      else if (e.layer) F[id].y += (LY[e.layer].y0 * 1.1 - p.y) * 0.03;
+      F[id].x -= p.x * 0.004; F[id].y -= p.y * 0.002;
+      const m = Math.hypot(F[id].x, F[id].y), step = Math.min(m, 14 * cool + 0.5);
+      if (m > 0){ p.x += F[id].x / m * step; p.y += F[id].y / m * step; }
+    }
+  }
+  homeMap = Object.fromEntries(ids.map(id => [id, {x: P[id].x, y: P[id].y}]));
+  // five layers: order each row by where its neighbours sit, a few sweeps of the barycentre heuristic
+  const rows = Object.fromEntries(LAYERS.map(l => [l.id, ids.filter(id => ents[id].layer === l.id).sort((a, b) => homeMap[a].x - homeMap[b].x)]));
+  const nb = id => L.flows.filter(f => f.payer === id || f.payee === id).map(f => f.payer === id ? f.payee : f.payer);
+  const under = (id, k) => ((V.total[id] && ents[id].kind !== 'product' ? 16 : 0) + (V.latest[id] ? 20 : 0)) * k;
+  // each row packs its bodies by their real sizes, zig-zagging only as far as it must; each box grows to hold its row
+  let ok = true;
+  const cake = BSe => {
+    const R = id => Math.max(size(id).w, size(id).h) / 2 * BSe, U = id => under(id, BSe), pos = {}, packs = {}; ok = true;
+    for (const l of LAYERS){ const r = rows[l.id], p = pack(r, R, U, 26, BOX.w - 190, 160, false); packs[l.id] = p; ok = ok && p.ok;
+      l.mU = Math.max(0, ...r.map(U)); l.h = Math.max(168, 2 * p.dz + 2 * Math.max(0, ...r.map(R)) + l.mU + 34); }
+    let t = -(LAYERS.reduce((a, l) => a + l.h, 0) + 17 * (LAYERS.length - 1)) / 2;
+    for (const l of LAYERS){ l.y = t + l.h / 2; t += l.h + 17; const p = packs[l.id];
+      rows[l.id].forEach((id, i) => pos[id] = {x: 65 + p.at[i], y: l.y + 6 - l.mU / 2 + (p.dz ? (i % 2 ? p.dz : -p.dz) : 0)}); }
+    return {pos, R, U};
+  };
+  let pos = cake(1).pos;
+  for (let sweep = 0; sweep < 6; sweep++){
+    for (const l of LAYERS) rows[l.id].sort((a, b) => { const bc = id => { const xs = nb(id).filter(x => pos[x]).map(x => pos[x].x); return xs.length ? xs.reduce((s, x) => s + x, 0) / xs.length : pos[id].x; }; return bc(a) - bc(b); });
+    pos = cake(1).pos;
+  }
+  const capital = ids.filter(id => !ents[id].layer).sort((a, b) => { const y = id => { const xs = nb(id).filter(x => pos[x]).map(x => pos[x].y); return xs.length ? Math.min(...xs) : 0; }; return y(a) - y(b); });
+  // the phone stack reads capital left to right by where its money lands
+  ORDER = {rows, capital: capital.slice().sort((a, b) => { const x = id => { const xs = nb(id).filter(q => pos[q]).map(q => pos[q].x); return xs.length ? xs.reduce((t, v) => t + v, 0) / xs.length : 0; }; return x(a) - x(b); }), under};
+  const full = BSe => {
+    const {pos, R, U} = cake(BSe), top = LAYERS[0].y - LAYERS[0].h / 2, bot = LAYERS[4].y + LAYERS[4].h / 2, mR = Math.max(0, ...capital.map(R));
+    const cp = pack(capital, R, U, 18, bot - top - 84, 220, true); ok = ok && cp.ok; CAP.w = Math.max(270, 2 * (cp.dz + mR) + 44);
+    capital.forEach((id, i) => pos[id] = {x: CAP.x + CAP.w / 2 + (cp.dz ? (i % 2 ? cp.dz : -cp.dz) : 0), y: (top + 56 + bot - 20) / 2 + cp.at[i]});
+    return {pos, top, bot};
+  };
+  // the stack takes whatever width makes it fill the screen best: wide rows need less zig-zag, so less height
+  const [aw, ah] = availWH(), setW = w => { BOX.w = w; CAP.x = w / 2 + 70; };
+  let best = null;
+  for (let w = 1560; w <= 3400; w += 60){
+    setW(w);
+    for (let BSe = 1; BSe <= 2.6001; BSe += 0.1){   // the most growth that names still need and the stack can take while fitting
+      const g = full(BSe), fit = Math.min(aw / (CAP.x + CAP.w + BOX.w / 2), ah / (g.bot - g.top));
+      if (BSe > 1 && (fit < 0.252 || BSe > Math.max(1, MINF[0] / (BASE * fit)) + 0.1)) break;
+      const c = {w, BSe, fit, ok, name: BASE * fit * BSe};
+      if (!best || (c.ok && !best.ok) || (c.ok === best.ok && c.name > best.name + 1e-6)) best = c;
+    }
+  }
+  setW(best.w); homeCake = full(best.BSe).pos; PLAN.cake = best.BSe;
+  layoutFlow(); stackLayout(true);
+  ids.forEach(id => nodes[id] = {x: homeMap[id].x, y: homeMap[id].y, vx:0, vy:0, held:null});
+}
+// phones: the five layers become a vertical stack with capital on top, each band wrapping its players into rows,
+// sized so that, fitted to the screen's width, names read at about 11px; money runs down the page
+// a body's slot in a row: wide enough for the model badge under it, too
+function slotW(id){
+  const r0 = V.latest[id]; if (!r0) return size(id).w;
+  const bf = BASE * 0.66; ctx.font = `600 ${bf}px ${MONO}`; return Math.max(size(id).w, ctx.measureText(shortModel(r0)).width + bf * 2.2 + 4);
+}
+function stackLayout(rank){
+  if (!ORDER) return;
+  const mw = W - panelW - 12; lastStackW = mw;
+  const BW = Math.max(400, Math.min(1500, mw / (11.5 / BASE) - 16)), inner = BW - 24, gx = 10, gy = 10;
+  const {rows, capital} = ORDER, under = id => (V.latest[id] ? 23 : 0) + (V.total[id] && !size(id).am && ents[id].kind !== 'product' ? 17 : 0);
+  if (rank || !ORDER.rank){   // largest first, so each band reads as a ranking; a product sits with its maker, or ranks by its maker's money
+    const val = id => V.total[id] || (ents[id].parent && V.total[ents[id].parent]) || 0, root = id => { const pa = ents[id].parent; return pa && ents[pa] && ents[pa].layer === ents[id].layer ? pa : id; };
+    const srt = ids => { const ix = {}; ids.forEach((id, i) => ix[id] = i); return ids.slice().sort((a, c) => val(root(c)) - val(root(a)) || (root(a) === root(c) ? (a === root(a) ? -1 : c === root(c) ? 1 : ix[a] - ix[c]) : ix[root(a)] - ix[root(c)]) || ix[a] - ix[c]); };
+    ORDER.rank = {capital: srt(capital)}; for (const l of LAYERS) ORDER.rank[l.id] = srt(rows[l.id]);
+  }
+  const old = SB ? Object.fromEntries(SB.bands.map(b => [b.id, b])) : {};
+  const bands = [...LAYERS.map(l => ({id: l.id, label: l.label})), {id: 'capital', label: 'Capital'}].map(b => ({...b, ids: ORDER.rank[b.id].filter(id => V.live.has(id))}));
+  const pos = {}; let y = 0;
+  for (const b of bands){
+    const lines = []; let cur = [], cw = 0;
+    for (const id of b.ids){ const w = slotW(id); if (cur.length && cw + gx + w > inner){ lines.push(cur); cur = []; cw = 0; } cw += (cur.length ? gx : 0) + w; cur.push(id); }
+    if (cur.length) lines.push(cur);
+    let ry = y + 40;
+    for (const ln of lines){
+      const hh = Math.max(...ln.map(id => size(id).h)), uu = Math.max(0, ...ln.map(id => under(id)));
+      const tw = ln.reduce((t, id) => t + slotW(id), 0) + gx * (ln.length - 1); let x = -tw / 2;
+      for (const id of ln){ const z = slotW(id); pos[id] = {x: x + z / 2, y: ry + hh / 2}; x += z + gx; }
+      ry += hh + uu + gy;
+    }
+    b.top = y; b.h = Math.max(84, ry - y + 2); y += b.h + 12;
+    const o = old[b.id]; b.dt = o ? o.dt : b.top; b.dh = o ? o.dh : b.h;   // drawn edges ease toward the new ones
+  }
+  for (const id of Object.keys(homeStack)) if (!pos[id]) pos[id] = homeStack[id];   // players not live yet keep a spot to grow from
+  SB = {bands, BW, height: y - 12}; homeStack = pos;
+}
+function home(id){
+  const n = nodes[id]; if (n.held) return n.held;
+  const a = homeMap[id], b = (!wide && homeStack[id]) || homeCake[id], f = homeFlow[id] || a, t = ease(mBlend), u = ease(fBlend);
+  const p = {x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t};
+  return {x: p.x + (f.x - p.x) * u, y: p.y + (f.y - p.y) * u};
+}
+const modeNow = () => mGoal ? 'layers' : fGoal ? 'flow' : 'map';
+function setMode(mode, instant){
+  if (modeNow() === mode) return;
+  mGoal = mode === 'layers' ? 1 : 0; fGoal = mode === 'flow' ? 1 : 0; sel = null;
+  for (const id in nodes) nodes[id].held = null;
+  $('#b-reset').hidden = true;
+  cam.goal = {x: 0, y: 0, k: 1};
+  if (reduce || instant){ mBlend = mGoal; fBlend = fGoal; Object.assign(cam, cam.goal); cam.goal = null; for (const id in nodes){ const h = home(id); Object.assign(nodes[id], {x: h.x, y: h.y, vx: 0, vy: 0}); } }
+  $('#b-layers').setAttribute('aria-pressed', mode === 'layers'); $('#b-flow').setAttribute('aria-pressed', mode === 'flow'); renderPanel();
+  try { history.replaceState(null, '', modeHash()); } catch (_) {}
+}
+
+const modeHash = () => { const p = [mGoal ? 'layers' : fGoal ? 'arranged' : '', drawer === 'loops' ? 'loops' : '', sel ? sel.id : ''].filter(Boolean).join('/'); return p ? '#' + p : location.pathname + location.search; };   // #layers/chatgpt links straight to a trace
+
+/* ---------- the arranged view: money runs left to right through the stack, each column ordered to cut crossings ---------- */
+const BANDS = [{id:'capital', label:'Capital'}, {id:'applications', label:'Applications'}, {id:'models', label:'Models'}, {id:'infrastructure', label:'Infrastructure'}, {id:'chips', label:'Chips'}, {id:'energy', label:'Energy'}];
+const isD = id => id[0] === '~';
+function solve1D(t, sepAt){        // closest positions to the targets that keep order and minimum gaps
+  const blocks = [];
+  for (let i = 0; i < t.length; i++){
+    let b = {items: [i], offs: [0], sum: t[i], n: 1, pos: t[i]};
+    while (blocks.length){
+      const p = blocks[blocks.length - 1], base = p.offs[p.offs.length - 1] + sepAt(b.items[0]);
+      if (p.pos + base <= b.pos) break;
+      b.items.forEach((it, k) => { p.items.push(it); p.offs.push(base + b.offs[k]); p.sum += t[it] - (base + b.offs[k]); p.n++; });
+      p.pos = p.sum / p.n; blocks.pop(); b = p;
+    }
+    blocks.push(b);
+  }
+  const out = []; for (const b of blocks) b.items.forEach((it, k) => out[it] = b.pos + b.offs[k]); return out;
+}
+function layoutFlow(){
+  const bi = Object.fromEntries(BANDS.map((b, i) => [b.id, i])), band = id => bi[ents[id].layer || 'capital'];
+  const ids = L.entities.map(e => e.id), money = L.flows.filter(f => isMoney(f) && ents[f.payer] && ents[f.payee] && f.payer !== f.payee);
+  // inside a band, whoever pays sits one column left of whoever is paid (Microsoft before the neoclouds it rents from)
+  const depth = Object.fromEntries(ids.map(id => [id, 0])), adj = {};
+  const reach = (s, t) => { const st = [s], seen = new Set([s]); while (st.length){ const u = st.pop(); if (u === t) return true; for (const w of adj[u] || []) if (!seen.has(w)){ seen.add(w); st.push(w); } } return false; };
+  const intra = money.filter(f => band(f.payer) === band(f.payee)).sort((a, b) => (b.amount_usd || 0) - (a.amount_usd || 0)).filter(f => { if (reach(f.payee, f.payer)) return false; (adj[f.payer] ||= []).push(f.payee); return true; });
+  for (let it = 0; it < 12; it++) for (const f of intra) depth[f.payee] = Math.max(depth[f.payee], depth[f.payer] + 1);
+  BANDS.forEach((_, b) => { const mine = ids.filter(id => band(id) === b); for (let d = Math.max(0, ...mine.map(id => depth[id])); d > 0; d--){ const at = mine.filter(id => depth[id] === d); if (at.length < 3) at.forEach(id => depth[id] = d - 1); } });
+  const nb = BANDS.map((_, b) => { const mine = ids.filter(id => band(id) === b); return mine.length ? Math.max(...mine.map(id => depth[id])) + 1 : 0; });
+  const start = []; let C = 0; nb.forEach((n, b) => { start[b] = C; C += n; });
+  const col = Object.fromEntries(ids.map(id => [id, start[band(id)] + depth[id]]));
+  const colBand = Array.from({length: C}, (_, c) => BANDS.findIndex((_, b) => c >= start[b] && c < start[b] + nb[b]));
+  const cols = Array.from({length: C}, () => []); ids.forEach(id => cols[col[id]].push(id));
+  // a flow that skips columns gets a waypoint in each column it crosses, so it threads between bodies
+  const way = {}, segs = [], wgt = f => 1 + Math.sqrt((f.amount_usd || 0) / 1e9) * 0.15;
+  for (const f of L.flows){
+    if (!ents[f.payer] || !ents[f.payee] || f.payer === f.payee) continue;
+    const a = col[f.payer], b = col[f.payee];
+    if (!isMoney(f)){ if (Math.abs(a - b) === 1) segs.push(a < b ? [f.payer, f.payee, 0.6] : [f.payee, f.payer, 0.6]); continue; }
+    if (b <= a) continue;
+    const chain = [f.payer]; for (let c = a + 1; c < b; c++){ const d = '~' + f.id + '~' + c; cols[c].push(d); chain.push(d); }
+    chain.push(f.payee); way[f.id] = chain.slice(1, -1);
+    for (let i = 0; i + 1 < chain.length; i++) segs.push([chain[i], chain[i + 1], wgt(f)]);
+  }
+  const Lt = {}, Rt = {}; for (const [u, v, w] of segs){ (Rt[u] ||= []).push([v, w]); (Lt[v] ||= []).push([u, w]); }
+  // order each column by where its neighbours sit, sweeping left to right and back (barycentre heuristic)
+  const pos = {}, norm = cl => cl.forEach((id, i) => pos[id] = cl.length > 1 ? i / (cl.length - 1) : 0.5);
+  cols.forEach(cl => { cl.sort((a, b) => (isD(a) ? 0 : -(V.total[a] || 0)) - (isD(b) ? 0 : -(V.total[b] || 0))); norm(cl); });
+  const crossings = () => { let n = 0; for (let c = 0; c + 1 < C; c++){ const e = segs.filter(([u, v]) => col[u] === c || (isD(u) && +u.split('~')[2] === c)).map(([u, v]) => [pos[u], pos[v]]); for (let i = 0; i < e.length; i++) for (let j = i + 1; j < e.length; j++) if ((e[i][0] - e[j][0]) * (e[i][1] - e[j][1]) < 0) n++; } return n; };
+  let best = cols.map(cl => [...cl]), bestX = crossings();
+  for (let s = 0; s < 24; s++){
+    const down = s % 2 === 0, nbr = down ? Lt : Rt;
+    for (const c of down ? [...cols.keys()] : [...cols.keys()].reverse()){
+      const bc = {}; for (const id of cols[c]){ const ns = nbr[id] || [], sw = ns.reduce((t, [, w]) => t + w, 0); bc[id] = sw ? ns.reduce((t, [n, w]) => t + w * pos[n], 0) / sw : pos[id]; }
+      cols[c].sort((a, b) => bc[a] - bc[b]); norm(cols[c]);
+    }
+    const x = crossings(); if (x < bestX){ bestX = x; best = cols.map(cl => [...cl]); }
+  }
+  best.forEach((cl, c) => { cols[c] = cl; norm(cl); });
+  // back flows (a later layer paying an earlier one) loop over the top; shorter loops sit lower so loops nest
+  const back = money.filter(f => col[f.payee] < col[f.payer]).sort((a, b) => (col[a.payer] - col[a.payee]) - (col[b.payer] - col[b.payee]));
+  const lane = {}, sub = {}, gsize = {}, grp = {};
+  back.forEach(f => (grp[col[f.payer] + '|' + col[f.payee]] ||= []).push(f));
+  const groups = Object.values(grp).map(fs => ({fs, lo: col[fs[0].payee], hi: col[fs[0].payer]})).sort((a, b) => (a.hi - a.lo) - (b.hi - b.lo)), placedG = [];
+  for (const G of groups){ let l = 0; for (const q of placedG) if (q.lo <= G.hi && G.lo <= q.hi) l = Math.max(l, q.l + 1); G.l = l; placedG.push(G);
+    G.fs.sort((a, b) => (a.amount_usd || 0) - (b.amount_usd || 0)).forEach((f, k) => { lane[f.id] = l; sub[f.id] = k; gsize[f.id] = G.fs.length; }); }
+  const nLanes = groups.length ? Math.max(...groups.map(G => G.l)) + 1 : 0;
+  const laneH = Array.from({length: nLanes}, (_, l) => 14 + 3.5 * (Math.max(1, ...groups.filter(G => G.l === l).map(G => G.fs.length)) - 1));
+  const laneBase = laneH.map((_, l) => laneH.slice(0, l).reduce((t, h) => t + h, 0)), laneTotal = laneH.reduce((t, h) => t + h, 0);
+  // place: vertical stacks pulled toward their neighbours, then gaps restored; bodies grow on screen when zoomed out, so plan for it
+  const geom = BSe => {
+    const hh = id => isD(id) ? 8 : size(id).h * BSe, wd = id => isD(id) ? 0 : size(id).w * BSe;
+    const zig = cols.map(cl => cl.filter(id => !isD(id)).length > 6);
+    const under = id => isD(id) ? 0 : ((V.total[id] && ents[id].kind !== 'product' ? 16 : 0) + (V.latest[id] ? 20 : 0)) * BSe;   // amount line and model badge below a body
+    const cw = cols.map((cl, c) => Math.max(60, ...cl.map(wd)) * (zig[c] ? 1.9 : 1)), xo = c => cw[c] / 1.9 * 0.45;
+    const sep = (c, a, b) => isD(a) && isD(b) ? 5.5 : isD(a) || isD(b) ? (hh(a) + hh(b)) / 2 + under(a) + 9
+      : zig[c] && 2 * xo(c) > (wd(a) + wd(b)) / 2 + 24 ? Math.max((hh(a) + hh(b)) / 2 * 0.56 + 8, under(a) + 10) : (hh(a) + hh(b)) / 2 + under(a) + 20;
+    const S = cols.map((cl, c) => { const s = [0], cum = [0]; let r1 = -1, r2 = -1;
+      cl.forEach((id, i) => { if (i){ let v = sep(c, cl[i - 1], id); if (zig[c] && !isD(id) && r2 >= 0) v = Math.max(v, (hh(cl[r2]) + hh(id)) / 2 + under(cl[r2]) + 14 - (cum[i - 1] - cum[r2])); s[i] = v; cum[i] = cum[i - 1] + v; } if (!isD(id)){ r2 = r1; r1 = i; } });
+      return s; });
+    const xs = []; cw.forEach((w, c) => xs.push(c ? xs[c - 1] + cw[c - 1] / 2 + w / 2 + (colBand[c] === colBand[c - 1] ? 110 : 170) : 0));
+    const mid = (xs[0] + xs[C - 1]) / 2; for (let c = 0; c < C; c++) xs[c] -= mid;
+    const y = {}; cols.forEach((cl, c) => { let t = 0; cl.forEach((id, i) => { if (i) t += S[c][i]; y[id] = t; }); cl.forEach(id => y[id] -= t / 2); });
+    for (let it = 0; it < 40; it++) cols.forEach((cl, c) => {
+      const target = cl.map(id => { const ns = [...(Lt[id] || []), ...(Rt[id] || [])], sw = ns.reduce((t, [, w]) => t + w, 0); return 0.92 * (sw ? (isD(id) ? 0.1 : 0.5) * y[id] + (isD(id) ? 0.9 : 0.5) * ns.reduce((t, [n, w]) => t + w * y[n], 0) / sw : y[id]); });
+      solve1D(target, i => S[c][i]).forEach((v, i) => y[cl[i]] = v);
+    });
+    const P = {}; cols.forEach((cl, c) => { let k = 0; cl.forEach(id => { const xo = zig[c] && !isD(id) ? (k++ % 2 ? 1 : -1) * cw[c] / 1.9 * 0.45 : 0; P[id] = {x: xs[c] + xo, y: y[id]}; }); });
+    const real = ids.filter(id => P[id]);
+    const top = Math.min(...real.map(id => P[id].y - hh(id) / 2)), bottom = Math.max(...real.map(id => P[id].y + hh(id) / 2 + 26));
+    return {P, xs, cw, top, bottom, x0: xs[0] - cw[0] / 2 - 30, x1: xs[C - 1] + cw[C - 1] / 2 + 30};
+  };
+  const [aw, ah] = availWH();
+  let BSe = 1, g;
+  for (let k = 0; k < 10; k++){ g = geom(BSe); const fit = Math.min(aw / (g.x1 - g.x0 + 80), ah / (g.bottom + 44 - (g.top - 118 - laneTotal))), nb = fit < 0.24 ? Math.max(1, BSe * fit / 0.24) : Math.min(1.9, Math.max(1, MINF[1] / (BASE * fit))); if (Math.abs(nb - BSe) < 0.01) break; BSe = (BSe + nb) / 2; }
+  g = geom(BSe);
+  const yOf = f => g.top - 58 - laneBase[lane[f.id]] - sub[f.id] * 3.5;
+  homeFlow = Object.fromEntries(ids.map(id => [id, g.P[id]]));
+  const bands = BANDS.map((b, i) => nb[i] ? {id: b.id, label: b.label, x0: g.xs[start[i]] - g.cw[start[i]] / 2 - 26, x1: g.xs[start[i] + nb[i] - 1] + g.cw[start[i] + nb[i] - 1] / 2 + 26} : null).filter(Boolean);
+  PLAN.flow = BSe;
+  FL = {col, way: Object.fromEntries(Object.entries(way).map(([k, ds]) => [k, ds.map(d => g.P[d])])), lane, sub, gsize, nLanes, yOf, laneTop: g.top - 58 - laneTotal - 8, top: g.top, bottom: g.bottom, x0: g.x0, x1: g.x1, xs: g.xs, cw: g.cw, bands, crossings: bestX};
+}
+const hcurve = pts => { const out = [pts[0]]; for (let i = 0; i + 1 < pts.length; i++){ const p = pts[i], q = pts[i + 1], mx = (q.x - p.x) * 0.5, n = Math.max(6, Math.ceil(Math.hypot(q.x - p.x, q.y - p.y) / 14)); for (let k = 1; k <= n; k++){ const t = k / n, u = 1 - t; out.push({x: u*u*u*p.x + 3*u*u*t*(p.x + mx) + 3*u*t*t*(q.x - mx) + t*t*t*q.x, y: u*u*u*p.y + 3*u*u*t*p.y + 3*u*t*t*q.y + t*t*t*q.y}); } } return out; };
+const rpoly = (pts, rad) => {
+  const out = [pts[0]], line = (a, b) => { const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 14)); for (let k = 1; k <= n; k++) out.push({x: a.x + (b.x - a.x) * k / n, y: a.y + (b.y - a.y) * k / n}); };
+  for (let i = 1; i < pts.length - 1; i++){
+    const a = out[out.length - 1], b = pts[i], c = pts[i + 1], d1 = Math.hypot(b.x - a.x, b.y - a.y) || 1, d2 = Math.hypot(c.x - b.x, c.y - b.y) || 1, r = Math.min(rad, d1 / 2, d2 / 2);
+    const p1 = {x: b.x + (a.x - b.x) / d1 * r, y: b.y + (a.y - b.y) / d1 * r}, p2 = {x: b.x + (c.x - b.x) / d2 * r, y: b.y + (c.y - b.y) / d2 * r};
+    line(a, p1); for (let k = 1; k <= 6; k++){ const t = k / 6, u = 1 - t; out.push({x: u*u*p1.x + 2*u*t*b.x + t*t*p2.x, y: u*u*p1.y + 2*u*t*b.y + t*t*p2.y}); }
+  }
+  line(out[out.length - 1], pts[pts.length - 1]); return out;
+};
+function flowGeometry(v){
+  const live = V.flows.filter(f => V.live.has(f.payer) && V.live.has(f.payee) && f.payer !== f.payee), col = FL.col;
+  const plan = live.map(f => { const a = col[f.payer], b = col[f.payee], kind = !isMoney(f) ? 'link' : b > a ? 'fwd' : b < a ? 'back' : 'same';
+    const out = kind === 'back' ? 'L' : kind === 'link' && b < a ? 'L' : 'R', inn = kind === 'fwd' || (kind === 'link' && b >= a) ? 'L' : 'R'; return {f, kind, out, inn}; });
+  // gutter slots for loops: the highest loop hugs the column, lower loops step outward, so loops never cut each other
+  const slot = {}, gk = f => col[f.payer] + '|' + col[f.payee], bump = (key, v) => { const l = slot[key] ||= []; if (!l.includes(v)) l.push(v); };
+  for (const p of plan) if (p.kind === 'back'){ bump('up' + col[p.f.payer], gk(p.f)); bump('dn' + col[p.f.payee], gk(p.f)); } else if (p.kind === 'same') bump('sd' + col[p.f.payer], p.f.id);
+  const laneOfG = {}; for (const p of plan) if (p.kind === 'back') laneOfG[gk(p.f)] = FL.lane[p.f.id];
+  for (const k in slot) if (!k.startsWith('sd')) slot[k].sort((a, b) => laneOfG[b] - laneOfG[a]);
+  const j = (key, v) => slot[key].indexOf(v), inner = f => (FL.gsize[f.id] - 1 - FL.sub[f.id]) * 3.5;
+  // ports: each body's lines leave and arrive in the order of where they are going, so they fan out without crossing
+  const ports = {}, other = (p, end) => { const f = p.f; if (p.kind === 'back') return -1e6 - FL.lane[f.id] * 1e3 - FL.sub[f.id];
+    if (p.kind === 'fwd'){ const w = FL.way[f.id] || []; return end === 'out' ? (w[0] || nodes[f.payee]).y : (w[w.length - 1] || nodes[f.payer]).y; }
+    return nodes[end === 'out' ? f.payee : f.payer].y; };
+  for (const p of plan){ (ports[p.f.payer + p.out] ||= []).push({p, end:'out', key: other(p, 'out')}); (ports[p.f.payee + p.inn] ||= []).push({p, end:'in', key: other(p, 'in')}); }
+  const at = {};
+  for (const k in ports){ const list = ports[k].sort((a, b) => a.key - b.key), id = k.slice(0, -1), side = k.slice(-1), s = size(id), n = nodes[id];
+    const hh = s.h * BS / 2, hw = s.w * BS / 2, r = s.r * BS, round = s.shape === 'circle' || s.shape === 'investor', sp = Math.min(11, hh * 1.3 / Math.max(1, list.length - 1));
+    list.forEach((q, i) => { const dy = (i - (list.length - 1) / 2) * sp, dx = round ? Math.sqrt(Math.max(0, r * r - dy * dy)) : hw; at[q.p.f.id + q.end] = {x: n.x + (side === 'R' ? dx : -dx), y: n.y + dy}; }); }
+  return plan.map(({f, kind}) => {
+    const a = at[f.id + 'out'], b = at[f.id + 'in'], ca = col[f.payer], cb = col[f.payee]; let world;
+    if (kind === 'fwd') world = hcurve([a, ...(FL.way[f.id] || []), b]);
+    else if (kind === 'back'){ const Y = FL.yOf(f), ux = FL.xs[ca] - FL.cw[ca] / 2 - 18 - j('up' + ca, gk(f)) * 12 - inner(f), dx = FL.xs[cb] + FL.cw[cb] / 2 + 18 + j('dn' + cb, gk(f)) * 12 + inner(f);
+      world = rpoly([a, {x: ux, y: a.y}, {x: ux, y: Y}, {x: dx, y: Y}, {x: dx, y: b.y}, b], 16); }
+    else if (kind === 'same'){ const X = FL.xs[ca] + FL.cw[ca] / 2 + 16 + j('sd' + ca, f.id) * 6; world = rpoly([a, {x: Math.max(X, a.x + 14), y: a.y}, {x: Math.max(X, b.x + 14), y: b.y}, b], 14); }
+    else world = hcurve([a, b]);
+    const pad = 2 / v.s, keep = world.filter((p, i) => i === 0 || i === world.length - 1 || (!inside(f.payer, p, pad) && !inside(f.payee, p, pad)));
+    return {f, k: 0, loop: kind === 'back', pts: keep.map(p => toScreen(p, v)), w: widthOf(f) * Math.max(0.65, Math.min(1.3, v.s * 1.4))};
+  }).filter(g => g.pts.length > 3);
+}
+function drawFlowBands(c, v, a){
+  c.globalAlpha = a; const top = FL.top - 40, bot = FL.bottom + 22;
+  FL.bands.forEach((b, i) => {
+    const n = L.entities.filter(e => (e.layer || 'capital') === b.id && V.live.has(e.id)).length, p = toScreen({x: b.x0, y: top}, v), q = toScreen({x: b.x1, y: bot}, v);
+    roundRect(c, p.x, p.y, q.x - p.x, q.y - p.y, 16 * v.s); c.fillStyle = css('--t-' + b.id) + (b.id === 'capital' ? '80' : '73'); c.fill(); c.strokeStyle = css('--line-2'); c.lineWidth = 1; c.stroke();
+    c.textAlign = 'left'; c.fillStyle = css('--ink'); c.font = `600 ${Math.max(10, 13 * v.s)}px ${MONO}`; c.fillText(b.label.toUpperCase(), p.x + 14 * v.s, p.y + 22 * v.s);
+    c.fillStyle = css('--muted'); c.font = `400 ${Math.max(9, 11 * v.s)}px ${MONO}`; c.fillText(n + (n === 1 ? ' player' : ' players'), p.x + 14 * v.s, p.y + 38 * v.s);
+    if (i){ const prev = FL.bands[i - 1], m = toScreen({x: (prev.x1 + b.x0) / 2, y: top + 18}, v); c.textAlign = 'center'; c.fillStyle = css('--muted'); c.font = `600 ${Math.max(11, 16 * v.s)}px ${SANS}`; c.fillText('→', m.x, m.y); }
+  });
+  if (FL.nLanes){ const p = toScreen({x: FL.x1 - 10, y: FL.laneTop - 6}, v); c.textAlign = 'right'; c.fillStyle = css('--ink-2'); c.font = `600 ${Math.max(9.5, 11.5 * v.s)}px ${MONO}`;
+    c.fillText('LOOPS OVER THE TOP · money running back up the stack: a supplier investing in its own customer', p.x, p.y); }
+  c.globalAlpha = 1;
+}
+
+/* ---------- the ledger as of the chosen date ---------- */
+const iso = () => fromN(tNow);
+function flowAt(f){
+  const t = iso(); let h = null;
+  for (const x of f.history) if (x.available <= t) h = x;
+  return h && {...f, amount_usd: h.amount_usd, as_of: h.as_of, amount_qualifier: h.amount_qualifier, source_title: h.source_title};
+}
+let V = {flows:[], events:[], obs:[], rel:[], met:[], latest:{}, total:{}, live:new Set()};
+function refresh(){
+  const t = iso();
+  V.all = L.flows.map(flowAt).filter(Boolean);
+  V.flows = V.all.filter(f => showMode === 'all' || (showMode === 'nopress' ? f.grade !== 'reported' : !isMoney(f) || f.status === 'cash_moved'));
+  V.events = L.events.filter(e => e.date <= t);
+  V.obs = L.observations.filter(o => o.available <= t);
+  V.rel = (L.releases || []).filter(r => r.date <= t);
+  V.met = (L.metrics || []).filter(m => m.available <= t);
+  V.latest = {}; V.rel.filter(r => !r.rollout).forEach(r => { V.latest[r.entity] = r; });
+  V.total = {};
+  V.flows.filter(isMoney).forEach(f => { for (const id of [f.payer, f.payee]) V.total[id] = (V.total[id] || 0) + (f.amount_usd || 0); });
+  V.live = new Set(V.flows.flatMap(f => [f.payer, f.payee]).concat(V.events.flatMap(e => e.entities)));
+  if (sel && sel.kind === 'flow' && !V.flows.find(f => f.id === sel.id)) sel = null;
+  $('#asof').textContent = day(t); $('#scrub').value = tNow;
+  // the headline counts only what filings and the companies themselves state, split by how real it is; press-only rows are shown but not added in
+  const base = V.all.filter(f => f.type === 'equity' || f.type === 'purchase_commitment'), sum = fs => fs.reduce((s, f) => s + (f.amount_usd || 0), 0);
+  const firm = base.filter(f => f.grade !== 'reported');
+  const seg = [['s-moved', 'money moved', sum(firm.filter(f => f.status === 'cash_moved'))], ['s-signed', 'signed, not yet paid', sum(firm.filter(f => f.status === 'contracted'))],
+               ['s-ann', 'announced, not signed', sum(firm.filter(f => f.status !== 'cash_moved' && f.status !== 'contracted'))], ['s-press', 'press reports only, not counted', sum(base.filter(f => f.grade === 'reported'))]];
+  const tot = seg[0][2] + seg[1][2] + seg[2][2], all_ = tot + seg[3][2] || 1; HEAD = {tot, seg};
+  const capex = V.all.filter(f => f.type === 'capex' && f.status === 'cash_moved').reduce((s, f) => s + (f.amount_usd || 0), 0);
+  $('#stats').innerHTML =
+    `<div class="stat total"><b>${money(tot)}</b><span>committed and invested, as filings and the companies themselves state it</span>
+      <div class="split">${seg.map(([k, , v]) => `<i class="${k}" style="flex:${v / all_}"></i>`).join('')}</div>
+      <div class="skey">${seg.map(([k, label, v]) => `<span><i class="${k}"></i>${money(v)} ${label}</span>`).join('')}<span class="gross">Gross: counted again at each layer it passes through; multi-year deals in full.</span></div></div>` +
+    `<div class="mini"><b>${money(capex)}</b> filed cash capex, last four quarters · <b>${V.live.size}</b> players · <b>${V.rel.length}</b> model releases since Jul 2025 · <b>${V.all.length + V.obs.length + V.events.length + V.met.length}</b> sourced rows</div>` +
+    `<div class="stat"><b>${money(capex)}</b><span>filed cash capex, last four quarters</span></div>` +
+    `<div class="stat"><b>${V.live.size}</b><span>players</span></div>` +
+    `<div class="stat"><b>${V.rel.length}</b><span>model releases since Jul 2025</span></div>` +
+    `<div class="stat"><b>${V.all.length + V.obs.length + V.events.length + V.met.length}</b><span>sourced rows</span></div>` +
+    `<div class="show"><span>Show</span>${[['all', 'Everything'], ['nopress', 'Without press reports'], ['moved', 'Money moved only']].map(([k, t]) => `<button data-show="${k}" aria-pressed="${showMode === k}">${t}</button>`).join('')}</div>`;
+  if (!wide && ORDER) stackLayout();
+  if (L) renderPanel(); if (drawer) renderDrawer();
+}
+
+/* ---------- view ---------- */
+function resize(){
+  DPR = Math.min(2, devicePixelRatio || 1); const cls = classify();
+  cv.width = W * DPR; cv.height = H * DPR;
+  measure();
+  if (L){
+    if (lastCls && cls !== lastCls){ layout(); buildLegend(); if (!wide && !mGoal) setMode('layers', true); renderPanel(); }   // crossing between phone and wide screens: arrange again; phones keep to the stack
+    else if (!wide && Math.abs(W - panelW - 12 - lastStackW) > 24) stackLayout();
+  }
+  lastCls = cls;
+  if (phone) setSheet(sheetState, true);
+}
+// the chrome a phone draws over the board: the map lives between the top bar and the timeline
+function measure(){
+  const R = document.documentElement.style;
+  R.setProperty('--vh', H + 'px'); SAB = $('#sab').offsetHeight || 0;
+  R.setProperty('--peek', (phone ? 96 + SAB : 0) + 'px');
+  if (wide){ RECT = null; return; }
+  MTOP = Math.round($('#mbar').getBoundingClientRect().bottom); R.setProperty('--mtop', MTOP + 'px');
+  const tr = $('#time').getBoundingClientRect(); TIMEH = Math.round(tr.height); R.setProperty('--timeh', TIMEH + 'px');
+  RECT = {left: 6, right: W - panelW - 6, top: MTOP + 2, bottom: tr.top - 2};
+}
+function bbox(){
+  const ids = L.entities.filter(e => V.live.has(e.id)).map(e => e.id);
+  const box = homes => { let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; for (const id of ids){ const h = homes[id], sz = size(id); x0 = Math.min(x0, h.x - sz.w / 2); x1 = Math.max(x1, h.x + sz.w / 2); y0 = Math.min(y0, h.y - sz.h / 2); y1 = Math.max(y1, h.y + sz.h / 2 + 22); } return {x0, x1, y0, y1}; };
+  const a = box(homeMap), b = !wide && SB ? {x0: -SB.BW / 2, x1: SB.BW / 2, y0: 0, y1: SB.height} : {x0: -BOX.w / 2, x1: CAP.x + CAP.w, y0: LAYERS[0].y - LAYERS[0].h / 2, y1: LAYERS[4].y + LAYERS[4].h / 2}, t = ease(mBlend);
+  const u = ease(fBlend), f = FL ? {x0: FL.x0 - 40, x1: FL.x1 + 40, y0: FL.laneTop - 44, y1: FL.bottom + 44} : a;
+  const m = k => { const p = a[k] + (b[k] - a[k]) * t; return p + (f[k] - p) * u; };
+  return {x0: m('x0'), x1: m('x1'), y0: m('y0'), y1: m('y1')};
+}
+function view(){
+  if (!wide && RECT){   // phones: fit the width, keep the top under the bars, and let the rest pan
+    const b = bbox(), fit = Math.max(0.1, (RECT.right - RECT.left) / (b.x1 - b.x0 + 12));
+    return {cx: (RECT.left + RECT.right) / 2, cy: RECT.top + 6 + (b.y1 - b.y0) * fit / 2, s: fit * cam.k, ox: (b.x0 + b.x1) / 2 + cam.x, oy: (b.y0 + b.y1) / 2 + cam.y};
+  }
+  const top = headTop(), bottom = H - 136, left = 24, right = W - panelW - 24;
+  const b = bbox(), raw = Math.min((right - left) / (b.x1 - b.x0), (bottom - top) / (b.y1 - b.y0)), fit = Math.max(0.19, raw);
+  // when the map is held at its smallest readable size and still does not fit, pin its top under the header and let the rest pan
+  const hh = (b.y1 - b.y0) * fit, cy = hh > bottom - top + 1 ? top + hh / 2 : (top + bottom) / 2;
+  return {cx: (left + right) / 2, cy, s: fit * cam.k, ox: (b.x0 + b.x1) / 2 + cam.x, oy: (b.y0 + b.y1) / 2 + cam.y};
+}
+const headTop = () => { const h = document.querySelector('header'); return Math.max(178, h ? h.getBoundingClientRect().bottom + 14 : 178); };
+const toScreen = (p, v) => ({x: v.cx + (p.x - v.ox) * v.s, y: v.cy + (p.y - v.oy) * v.s});
+const toWorld = (x, y, v) => ({x: (x - v.cx) / v.s + v.ox, y: (y - v.cy) / v.s + v.oy});
+const widthOf = f => !isMoney(f) ? 1.4 : f.amount_usd ? Math.min(11, 1.8 + Math.sqrt(f.amount_usd / 1e9) * 0.5) : 1.8;
+
+/* ---------- motion: springs toward home, a lean toward what you hold, and no overlaps ---------- */
+function step(){
+  if (mBlend !== mGoal){ mBlend += (mGoal - mBlend) * 0.065; if (Math.abs(mGoal - mBlend) < 0.002) mBlend = mGoal; }
+  if (fBlend !== fGoal){ fBlend += (fGoal - fBlend) * 0.065; if (Math.abs(fGoal - fBlend) < 0.002) fBlend = fGoal; }
+  if (cam.goal){ const g = cam.goal; cam.x += (g.x - cam.x) * 0.1; cam.y += (g.y - cam.y) * 0.1; cam.k += (g.k - cam.k) * 0.1; if (Math.abs(g.k - cam.k) < 0.002 && Math.hypot(g.x - cam.x, g.y - cam.y) < 0.5) cam.goal = null; }
+  if (inert){ cam.x += inert.x; cam.y += inert.y; inert.x *= 0.93; inert.y *= 0.93; if (Math.hypot(inert.x, inert.y) * (VIEW ? VIEW.s : 1) < 0.12) inert = null; }
+  if (!wide){ softClamp(); if (SB) for (const b of SB.bands){ b.dt += (b.top - b.dt) * 0.12; b.dh += (b.h - b.dh) * 0.12; } }
+  const ids = Object.keys(nodes).filter(id => V.live.has(id)), grabbed = drag && drag.id;
+  for (const id of ids){
+    const n = nodes[id]; if (id === grabbed) continue;
+    const h = home(id); let fx = (h.x - n.x) * 0.09, fy = (h.y - n.y) * 0.09;
+    if (grabbed && !n.held && V.flows.some(f => (f.payer === id && f.payee === grabbed) || (f.payee === id && f.payer === grabbed))){ const g = nodes[grabbed]; fx += (g.x - n.x) * 0.012; fy += (g.y - n.y) * 0.012; }
+    const ra = Math.max(size(id).w, size(id).h) / 2 * BS;
+    if (wide || mBlend < 0.98) for (const o of ids){ if (o === id) continue; const m = nodes[o], dx = n.x - m.x, dy = n.y - m.y, d = Math.hypot(dx, dy) || 1, min = ra + Math.max(size(o).w, size(o).h) / 2 * BS + 24; if (d < min){ const p = (min - d) * 0.05; fx += dx / d * p; fy += dy / d * p; } }
+    if (reduce){ n.x = h.x; n.y = h.y; continue; }
+    n.vx = (n.vx + fx) * 0.74; n.vy = (n.vy + fy) * 0.74; n.x += n.vx; n.y += n.vy;
+  }
+}
+
+// phones: the board can be flung, but it springs back so the stack never leaves the screen
+function softClamp(){
+  if (!RECT || (drag && drag.moved > 0) || PINCH || cam.goal) return;
+  const v = view(), b = bbox(), top = toScreen({x: 0, y: b.y0}, v).y, bot = toScreen({x: 0, y: b.y1}, v).y, lx = toScreen({x: b.x0, y: 0}, v).x, rx = toScreen({x: b.x1, y: 0}, v).x;
+  const vt = Math.max(RECT.top, TOURB) + 6, vb = (phone ? Math.min(RECT.bottom, H - sheetVis(sheetState)) : RECT.bottom) - 6;
+  let dy = 0, dx = 0;
+  if (bot - top <= vb - vt || top > vt) dy = top - vt; else if (bot < vb) dy = bot - vb;
+  if (rx - lx <= RECT.right - RECT.left) dx = (lx + rx) / 2 - (RECT.left + RECT.right) / 2; else if (lx > RECT.left) dx = lx - RECT.left; else if (rx < RECT.right) dx = rx - RECT.right;
+  if (Math.abs(dx) > 0.4 || Math.abs(dy) > 0.4){ cam.x += dx / v.s * 0.2; cam.y += dy / v.s * 0.2; if (inert && ((dy > 0 && inert.y < 0) || (dy < 0 && inert.y > 0))) inert.y *= 0.5; }
+}
+/* flows: a bowed curve between two bodies, trimmed at each body's edge; parallel flows fan out */
+function geometry(v){
+  const seen = {};
+  return V.flows.filter(f => V.live.has(f.payer) && V.live.has(f.payee)).map(f => {
+    const key = [f.payer, f.payee].sort().join('|'), k = seen[key] = (seen[key] ?? -1) + 1, sign = f.payer < f.payee ? 1 : -1;
+    const A = nodes[f.payer], B = nodes[f.payee], dx = B.x - A.x, dy = B.y - A.y, dist = Math.hypot(dx, dy) || 1;
+    const bow = isMoney(f) ? (0.13 * dist + 34 * k) * sign * (k % 2 ? -1 : 1) : 0;
+    const C = {x: (A.x + B.x) / 2 - dy / dist * bow, y: (A.y + B.y) / 2 + dx / dist * bow};
+    const world = []; for (let i = 0; i <= 64; i++){ const t = i / 64, u = 1 - t; world.push({x: u*u*A.x + 2*u*t*C.x + t*t*B.x, y: u*u*A.y + 2*u*t*C.y + t*t*B.y}); }
+    const pad = 3 / v.s, keep = world.filter(p => !inside(f.payer, p, pad) && !inside(f.payee, p, pad + 4 / v.s));
+    return {f, k, pts: keep.map(p => toScreen(p, v)), w: widthOf(f) * (wide ? Math.max(0.65, Math.min(1.3, v.s * 1.4)) : Math.max(0.5, Math.min(0.9, v.s * 0.85)))};
+  }).filter(g => g.pts.length > 3);
+}
+// everything a body depends on, followed down the stack to energy: who it pays, who they pay, and on to the end.
+// A product starts at the company that makes it. Stakes inside one layer are left out: they are investments, not supply.
+const LIDX = {applications: 0, models: 1, infrastructure: 2, chips: 3, energy: 4};
+function chain(id){
+  const lv = x => ents[x].layer ? LIDX[ents[x].layer] : -1, es = new Set([id]), fl = new Set(), q = [id];
+  for (const f of V.flows) if (f.type === 'product' && f.payee === id && ents[f.payer]){ fl.add(f.id); if (!es.has(f.payer)){ es.add(f.payer); q.push(f.payer); } }
+  while (q.length){
+    const u = q.shift();
+    for (const f of V.flows){
+      const p = f.payee;
+      if (f.payer !== u || p === u || !ents[p] || !ents[p].layer || !(isMoney(f) || f.type === 'uses')) continue;
+      if (lv(p) < lv(u) || (lv(p) === lv(u) && f.type === 'equity')) continue;
+      fl.add(f.id); if (!es.has(p)){ es.add(p); q.push(p); }
+    }
+  }
+  return {ents: es, flows: fl};
+}
+// who funds a body: its investors and lenders, then theirs. A product starts at the company that makes it.
+function chainUp(id){
+  const es = new Set([id]), fl = new Set(), q = [id];
+  for (const f of V.flows) if (f.type === 'product' && f.payee === id && ents[f.payer]){ fl.add(f.id); if (!es.has(f.payer)){ es.add(f.payer); q.push(f.payer); } }
+  while (q.length){
+    const u = q.shift();
+    for (const f of V.flows){
+      if (f.payee !== u || f.payer === u || !ents[f.payer] || !(f.type === 'equity' || f.type === 'debt' || f.type === 'owns')) continue;
+      fl.add(f.id); if (!es.has(f.payer)){ es.add(f.payer); q.push(f.payer); }
+    }
+  }
+  return {ents: es, flows: fl};
+}
+const trace = id => traceDir === 'up' ? chainUp(id) : chain(id);
+// a loop: a supplier puts its own money into a customer that has also committed money back to it
+function loops(){
+  const inv = {}, back = {}, sum = a => a.reduce((t, f) => t + (isMoney(f) && f.amount_usd || 0), 0);
+  for (const f of V.all){
+    if (!ents[f.payer] || !ents[f.payee] || f.payer === f.payee) continue;
+    if (f.type === 'equity' || f.type === 'debt' || f.type === 'owns') (inv[f.payer + '|' + f.payee] ||= []).push(f);
+    if (f.type === 'purchase_commitment' || f.type === 'capex') (back[f.payee + '|' + f.payer] ||= []).push(f);
+  }
+  const by = {};
+  for (const k in inv) if (back[k]){ const [s, c] = k.split('|'); (by[s] ||= []).push({c, inv: inv[k], back: back[k], i: sum(inv[k]), b: sum(back[k])}); }
+  return Object.entries(by).map(([s, ls]) => { const i = ls.reduce((t, l) => t + l.i, 0), b = ls.reduce((t, l) => t + l.b, 0), both = ls.filter(l => l.i && l.b), ci = both.reduce((t, l) => t + l.i, 0), cb = both.reduce((t, l) => t + l.b, 0);
+    return {s, ls: ls.sort((x, y) => y.b - x.b), i, b, cents: cb ? Math.round(100 * ci / cb) : null}; })
+    .sort((a, b) => b.b - a.b || b.ls.length - a.ls.length);
+}
+function related(){
+  const s = sel || (hover && hover.kind === 'entity' ? hover : null);
+  if (!s) return null;
+  if (s.kind === 'flow'){ const f = V.flows.find(f => f.id === s.id); return f && {ents: new Set([f.payer, f.payee]), flows: new Set([f.id])}; }
+  const fl = V.flows.filter(f => f.payer === s.id || f.payee === s.id);
+  const r = {ents: new Set([s.id, ...fl.flatMap(f => [f.payer, f.payee])]), flows: new Set(fl.map(f => f.id))};
+  if (s === sel){ r.direct = new Set(r.flows); const c = trace(s.id); c.ents.forEach(x => r.ents.add(x)); c.flows.forEach(x => r.flows.add(x)); }   // a click traces the whole chain; a hover shows direct links only
+  return r;
+}
+
+/* ---------- drawing ---------- */
+let G = [], N = [], clock = 0, drag = null, playing = false;
+function frame(ts){
+  clock = ts / 1000; step();
+  if (!wide){ const sh = cam.k > 1.05; if (sh !== fitShown){ fitShown = sh; $('#m-fit').hidden = !sh; } }
+  if (playing){ tNow = Math.min(T1, tNow + (T1 - T0) / (16 * 60)); if (tNow >= T1) stopPlay(); refresh(); }
+  if (wide || !(drawer || (phone && sheetState === 'full'))) draw(ctx, false);
+  requestAnimationFrame(frame);
+}
+function draw(c, forExport){
+  const v = view(); VIEW = v; BS = Math.min(mBlend > 0.5 ? (wide ? PLAN.cake : 1) : fBlend > 0.5 ? PLAN.flow : Infinity, Math.max(1, MINF[fGoal && fBlend > 0.5 ? 1 : 0] / (BASE * v.s)));
+  c.setTransform(DPR, 0, 0, DPR, 0, 0);
+  c.fillStyle = css('--paper'); c.fillRect(0, 0, W, H);
+  const gs = 40 * v.s; if (gs > 12){ const o = toScreen({x: 0, y: 0}, v); c.fillStyle = '#16171b14'; for (let x = ((o.x % gs) + gs) % gs; x < W; x += gs) for (let y = ((o.y % gs) + gs) % gs; y < H; y += gs) c.fillRect(x - 0.8, y - 0.8, 1.6, 1.6); }
+  const rel = related(), mt = ease(mBlend), ft = ease(fBlend);
+  if (mt > 0.01) drawLayers(c, v, mt);
+  if (ft > 0.01) drawFlowBands(c, v, ft);
+  G = fGoal && ft > 0.25 ? flowGeometry(v) : geometry(v);
+  N = L.entities.filter(e => V.live.has(e.id)).map(e => ({e, p: toScreen(nodes[e.id], v), s: size(e.id)}));
+  for (const g of G) if (!isMoney(g.f)) drawFlow(c, g, rel);
+  for (const g of G) if (isMoney(g.f)) drawFlow(c, g, rel);
+  for (const n of N) drawNode(c, n, rel, v);
+  drawFlowLabels(c, rel);
+  if (!wide && SB && mt > 0.01) drawStackLabels(c, v, mt);
+  if (forExport) stamp(c);
+}
+function roundRect(c, x, y, w, h, r){ c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function drawLayers(c, v, a){
+  if (!wide && SB) return drawStack(c, v, a);
+  c.globalAlpha = a;
+  for (const ly of LAYERS){
+    const n = L.entities.filter(e => e.layer === ly.id && V.live.has(e.id)).length;
+    const p = toScreen({x: -BOX.w / 2, y: ly.y - ly.h / 2}, v), w = BOX.w * v.s, h = ly.h * v.s;
+    roundRect(c, p.x, p.y, w, h, 18 * v.s); c.fillStyle = n ? '#ffffff99' : '#ffffff55'; c.fill();
+    c.strokeStyle = n ? css('--ink') : css('--line-2'); c.lineWidth = 1.4; c.stroke();
+    c.textAlign = 'left'; c.fillStyle = css('--ink'); c.font = `600 ${Math.max(10, 13 * v.s)}px ${MONO}`;
+    c.fillText(ly.label.toUpperCase(), p.x + 18 * v.s, p.y + 28 * v.s);
+    c.fillStyle = css('--muted'); c.font = `400 ${Math.max(9, 11 * v.s)}px ${MONO}`;
+    c.fillText(n ? n + (n === 1 ? ' player' : ' players') : 'no rows yet', p.x + 18 * v.s, p.y + 45 * v.s);
+  }
+  const p = toScreen({x: CAP.x, y: LAYERS[0].y - LAYERS[0].h / 2}, v), w = CAP.w * v.s, h = (LAYERS[4].y + LAYERS[4].h / 2 - LAYERS[0].y + LAYERS[0].h / 2) * v.s;
+  roundRect(c, p.x, p.y, w, h, 18 * v.s); c.setLineDash([6, 5]); c.strokeStyle = css('--line-2'); c.lineWidth = 1.4; c.stroke(); c.setLineDash([]);
+  c.textAlign = 'left'; c.fillStyle = css('--ink'); c.font = `600 ${Math.max(10, 13 * v.s)}px ${MONO}`; c.fillText('CAPITAL', p.x + 18 * v.s, p.y + 28 * v.s);
+  c.fillStyle = css('--muted'); c.font = `400 ${Math.max(9, 11 * v.s)}px ${MONO}`; c.fillText('outside the stack', p.x + 18 * v.s, p.y + 45 * v.s);
+  c.globalAlpha = 1;
+}
+function drawStack(c, v, a){
+  c.globalAlpha = a;
+  for (const b of SB.bands){
+    const n = b.ids.length, cap = b.id === 'capital';
+    const p = toScreen({x: -SB.BW / 2, y: b.dt}, v), w = SB.BW * v.s, h = b.dh * v.s;
+    roundRect(c, p.x, p.y, w, h, 16 * v.s); c.fillStyle = n && !cap ? '#ffffff99' : '#ffffff55'; c.fill();
+    if (cap) c.setLineDash([6, 5]); c.strokeStyle = n && !cap ? css('--ink') : css('--line-2'); c.lineWidth = 1.3; c.stroke(); c.setLineDash([]);
+  }
+  c.globalAlpha = 1;
+}
+function drawStackLabels(c, v, a){
+  const P = css('--paper'), f1 = `600 ${Math.min(14, Math.max(10.5, 13 * v.s))}px ${MONO}`, f2 = `400 ${Math.min(12, Math.max(9.5, 11 * v.s))}px ${MONO}`;
+  c.globalAlpha = a; c.textAlign = 'left'; c.textBaseline = 'middle';
+  for (const b of SB.bands){
+    const n = b.ids.length, cap = b.id === 'capital', lab = b.label.toUpperCase(), sub = (cap ? 'funds every layer · ' : '') + (n ? n + (n === 1 ? ' player' : ' players') : 'no rows yet');
+    const top = toScreen({x: 0, y: b.dt}, v).y, bot = toScreen({x: 0, y: b.dt + b.dh}, v).y, lx = Math.max(RECT ? RECT.left + 14 : 14, toScreen({x: -SB.BW / 2, y: 0}, v).x + 14 * v.s);
+    let ly = top + 21 * v.s; const pin = RECT ? RECT.top + 16 : -1e9, stuck = ly < pin;
+    if (stuck) ly = Math.min(pin, bot - 14);
+    if (ly < (RECT ? RECT.top - 10 : -20) || ly > H) continue;
+    c.font = f1; const w1 = c.measureText(lab).width; c.font = f2; const w2 = c.measureText(sub).width;
+    if (stuck){ c.fillStyle = '#16171b14'; roundRect(c, lx - 9, ly - 12, w1 + w2 + 26, 25, 12.5); c.fill(); }
+    c.fillStyle = stuck ? '#ffffff' : P; roundRect(c, lx - 8, ly - 11, w1 + w2 + 24, 22, 11); c.fill();
+    if (stuck){ c.strokeStyle = css('--line-2'); c.lineWidth = 1; c.stroke(); }
+    c.font = f1; c.fillStyle = css('--ink'); c.fillText(lab, lx, ly + 0.5); c.font = f2; c.fillStyle = css('--muted'); c.fillText(sub, lx + w1 + 8, ly + 0.5);
+  }
+  c.textBaseline = 'alphabetic'; c.globalAlpha = 1;
+}
+function drawFlow(c, g, rel){
+  const {f, pts} = g, on = !rel || rel.flows.has(f.id), hot = hover && hover.kind === 'flow' && hover.id === f.id, money = isMoney(f), quiet = g.loop && !(rel && rel.flows.has(f.id)) && !hot, w = quiet ? Math.min(g.w, 1.6) : g.w;
+  const col = COL[f.type], last = pts.length - 1;
+  c.globalAlpha = on ? (quiet ? 0.55 : money ? 1 : fGoal && !(rel && rel.flows.has(f.id)) ? 0.22 : 0.8) : 0.08;
+  const hl = money ? Math.max(11, w * 2.3) : 7;                                 // arrowhead length
+  // trim the line so it ends at the base of the arrowhead
+  let end = last; while (end > 1 && Math.hypot(pts[end].x - pts[last].x, pts[end].y - pts[last].y) < hl * 0.75) end--;
+  c.strokeStyle = col; c.lineCap = f.status === 'reported' ? 'round' : 'butt'; c.lineJoin = 'round';
+  c.lineWidth = Math.max(money ? 1.6 : 1.2, w + (hot ? 1.5 : 0));
+  const dash = money ? DASH[f.status].map(x => x * Math.max(1, w * 0.45)) : (f.type === 'uses' ? [3, 4] : []);
+  c.setLineDash(dash);
+  c.beginPath(); for (let i = 0; i <= end; i++) i ? c.lineTo(pts[i].x, pts[i].y) : c.moveTo(pts[i].x, pts[i].y); c.stroke();
+  if (money && PENDING.has(f.id) && c.lineWidth >= 2.4){ const lw = c.lineWidth; c.strokeStyle = PAPER; c.lineWidth = Math.max(0.9, lw * 0.42); c.stroke(); c.strokeStyle = col; c.lineWidth = lw; }   // hollow: not yet independently checked
+  c.setLineDash([]);
+  if (f.type === 'product'){ c.fillStyle = col; c.beginPath(); c.arc(pts[last].x, pts[last].y, 2.6, 0, 7); c.fill(); c.globalAlpha = 1; return; }
+  const a = pts[Math.max(0, last - 4)], b = pts[last], ang = Math.atan2(b.y - a.y, b.x - a.x), hw = hl * 0.52;
+  c.fillStyle = col; c.beginPath(); c.moveTo(b.x, b.y);
+  c.lineTo(b.x - Math.cos(ang) * hl - Math.sin(ang) * hw, b.y - Math.sin(ang) * hl + Math.cos(ang) * hw);
+  c.lineTo(b.x - Math.cos(ang) * hl * 0.78, b.y - Math.sin(ang) * hl * 0.78);
+  c.lineTo(b.x - Math.cos(ang) * hl + Math.sin(ang) * hw, b.y - Math.sin(ang) * hl - Math.cos(ang) * hw); c.closePath(); c.fill();
+  if (!reduce && on && f.status === 'cash_moved' && money){     // only money that actually moved gets motion
+    const n = Math.max(2, Math.min(7, Math.round(w)));
+    for (let i = 0; i < n; i++){
+      const t = (clock * 0.1 + i / n) % 1, p = pts[Math.floor(t * end)];
+      c.globalAlpha = 0.95 * Math.sin(t * Math.PI); c.fillStyle = '#ffffff'; c.beginPath(); c.arc(p.x, p.y, Math.max(1.6, w * 0.28), 0, 7); c.fill();
+    }
+  }
+  c.globalAlpha = 1;
+}
+function drawFlowLabels(c, rel){
+  const placed = [], hit = r => placed.some(q => r.x < q.x + q.w && r.x + r.w > q.x && r.y < q.y + q.h && r.y + r.h > q.y);
+  const vs = VIEW.s * BS; for (const n of N){ const w = n.s.w * vs, h = n.s.h * vs; placed.push({x: n.p.x - w / 2, y: n.p.y - h / 2, w, h}); }
+  const order = G.filter(g => isMoney(g.f)).sort((a, b) => (b.f.amount_usd || 0) - (a.f.amount_usd || 0));
+  for (const g of order){
+    const f = g.f, inRel = rel && rel.flows.has(f.id), focus = inRel && (!rel.direct || rel.direct.has(f.id)), hot = hover && hover.kind === 'flow' && hover.id === f.id;
+    const show = hot || focus || (inRel && f.amount_usd) || (!rel && (allLabels || ((f.amount_usd || 0) >= (wide ? 2e10 : 1e11) && !g.loop)));   // further down a traced chain, only sized rows get a label, and only where it fits
+    if (!show) continue;
+    const amt = f.amount_usd ? money(f.amount_usd) : 'undisclosed', lab = f.label || '';
+    c.font = `700 11.5px ${MONO}`; const w1 = c.measureText(amt).width; c.font = `500 10.5px ${SANS}`; const w2 = c.measureText(lab).width;
+    const bw = Math.max(w1, w2) + 14, bh = lab ? 32 : 19;
+    let box = null;
+    for (const t of g.loop ? [0.9, 0.84, 0.95, 0.78, 0.7, 0.5] : wide ? [0.5, 0.36, 0.64, 0.26, 0.74] : [0.5, 0.36, 0.64, 0.26, 0.74, 0.18, 0.82]){ const p = g.pts[Math.floor((g.pts.length - 1) * t)], r = {x: p.x - bw / 2, y: p.y - bh / 2, w: bw, h: bh}; if (!hit(r)){ box = r; break; } }
+    if (!box){ if (!(focus || hot) || (!wide && !hot)) continue; const p = g.pts[Math.floor((g.pts.length - 1) / 2)]; box = {x: p.x - bw / 2, y: p.y - bh / 2, w: bw, h: bh}; }
+    placed.push(box);
+    c.globalAlpha = 1; c.fillStyle = '#ffffff'; roundRect(c, box.x, box.y, bw, bh, 4); c.fill();
+    c.strokeStyle = COL[f.type]; c.lineWidth = 1.3; c.setLineDash(f.status === 'reported' ? [2, 2] : []); c.stroke(); c.setLineDash([]);
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.fillStyle = f.amount_usd ? COL[f.type] : css('--muted'); c.font = `700 11.5px ${MONO}`; c.fillText(amt, box.x + bw / 2, box.y + (lab ? 10 : bh / 2 + 0.5));
+    if (lab){ c.fillStyle = css('--ink-2'); c.font = `500 10.5px ${SANS}`; c.fillText(lab, box.x + bw / 2, box.y + 23); }
+    c.textBaseline = 'alphabetic';
+  }
+}
+function drawNode(c, n, rel, v){
+  const {e, p, s} = n, on = !rel || rel.ents.has(e.id), picked = sel && sel.kind === 'entity' && sel.id === e.id, hot = hover && hover.kind === 'entity' && hover.id === e.id, up = drag && drag.id === e.id && drag.moved > 5;
+  const k = v.s * BS * (up ? 1.06 : 1), w = s.w * k, h = s.h * k, r = s.r * k, ink = css('--ink');
+  c.globalAlpha = on ? 1 : 0.22;
+  if (up || picked){ c.fillStyle = '#16171b1f'; c.beginPath(); c.ellipse(p.x + 3, p.y + h / 2 + 8, w * 0.42, Math.max(4, h * 0.1), 0, 0, 7); c.fill(); }
+  c.lineWidth = picked ? 3 : 1.8; c.strokeStyle = ink;
+  if (s.shape === 'circle' || s.shape === 'investor'){
+    c.fillStyle = tint(e); c.beginPath(); c.arc(p.x, p.y, r, 0, 7); c.fill(); c.stroke();
+    if (s.shape === 'investor'){ c.lineWidth = 1.2; c.beginPath(); c.arc(p.x, p.y, r - 5, 0, 7); c.stroke(); }
+  } else if (s.shape === 'chip' || s.shape === 'ichip'){
+    const rr = Math.min(h / 2, 11 * k); c.fillStyle = tint(e); roundRect(c, p.x - w / 2, p.y - h / 2, w, h, rr); c.fill(); c.stroke();
+    if (s.shape === 'ichip'){ c.lineWidth = 1.1; roundRect(c, p.x - w / 2 + 3.5 * k, p.y - h / 2 + 3.5 * k, w - 7 * k, h - 7 * k, Math.max(2, rr - 3.5 * k)); c.stroke(); }
+  } else if (s.shape === 'pill'){
+    c.fillStyle = tint(e); roundRect(c, p.x - w / 2, p.y - h / 2, w, h, h / 2); c.fill(); c.lineWidth = picked ? 2.6 : 1.3; c.stroke();
+  } else if (s.shape === 'sink'){
+    c.fillStyle = ink; roundRect(c, p.x - w / 2, p.y - h / 2, w, h, 8 * k); c.fill();
+    c.save(); roundRect(c, p.x - w / 2, p.y - h / 2, w, h, 8 * k); c.clip(); c.strokeStyle = '#ffffff14'; c.lineWidth = 1;
+    for (let x = -h; x < w; x += 9 * k){ c.beginPath(); c.moveTo(p.x - w / 2 + x, p.y + h / 2); c.lineTo(p.x - w / 2 + x + h, p.y - h / 2); c.stroke(); } c.restore();
+  } else if (s.shape === 'tag'){
+    const nX = 12 * k; c.fillStyle = '#ffffff'; c.beginPath();
+    c.moveTo(p.x - w / 2 + nX, p.y - h / 2); c.lineTo(p.x + w / 2, p.y - h / 2); c.lineTo(p.x + w / 2, p.y + h / 2); c.lineTo(p.x - w / 2 + nX, p.y + h / 2); c.lineTo(p.x - w / 2, p.y); c.closePath();
+    c.fill(); c.setLineDash([5, 3]); c.lineWidth = picked ? 2.6 : 1.5; c.stroke(); c.setLineDash([]);
+    c.fillStyle = ink; c.beginPath(); c.arc(p.x - w / 2 + nX + 4 * k, p.y, 2.6 * k, 0, 7); c.fill();
+  }
+  if (hot && !picked){ c.globalAlpha = on ? 0.5 : 0.2; c.lineWidth = 1; c.strokeStyle = ink; if (s.shape === 'circle' || s.shape === 'investor'){ c.beginPath(); c.arc(p.x, p.y, r + 5, 0, 7); c.stroke(); } else { roundRect(c, p.x - w / 2 - 5, p.y - h / 2 - 5, w + 10, h + 10, 10); c.stroke(); } c.globalAlpha = on ? 1 : 0.22; }
+  // name inside the body
+  const fs = Math.max(6, BASE * k);
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  const eyebrow = {investor:'INVESTOR', government:'GOVERNMENT', instrument:'BOND', sink:'CAPEX SINK'}[e.kind];
+  const lines = s.lines || [e.name], lh = fs * 1.12, off = eyebrow ? fs * 0.45 : 0, chipAm = s.am ? s.am * k : 0;
+  const nx = p.x + (e.kind === 'instrument' ? 6 * k : 0) - chipAm / 2;
+  if (eyebrow){ c.font = `600 ${Math.max(7, fs * 0.62)}px ${MONO}`; c.fillStyle = e.kind === 'sink' ? '#ffffffb3' : css('--muted'); c.fillText(eyebrow, nx, p.y - (lines.length * lh) / 2 - fs * 0.15 + off - fs * 0.35); }
+  c.font = bodyFont(fs); c.fillStyle = e.kind === 'sink' ? '#ffffff' : ink;
+  lines.forEach((l, i) => c.fillText(l, nx, p.y - (lines.length - 1) * lh / 2 + i * lh + off));
+  if (chipAm){ const nw = Math.max(...lines.map(l => c.measureText(l).width)); c.font = `500 ${fs * 0.8}px ${MONO}`; c.fillStyle = css('--ink-2'); c.textAlign = 'left'; c.fillText(money(V.total[e.id]), nx + nw / 2 + 7 * k, p.y + (lines.length - 1) * lh / 2 + off); c.textAlign = 'center'; }
+  let below = h / 2;
+  if (V.total[e.id] && e.kind !== 'product' && !chipAm){ c.font = `500 ${Math.max(9, fs * 0.74)}px ${MONO}`; c.fillStyle = css('--muted'); c.fillText(money(V.total[e.id]), p.x, p.y + h / 2 + fs * 0.95); below += fs * 1.55; }
+  const r0 = V.latest[e.id];
+  if (r0){   // latest model badge: what this product runs on at the chosen date
+    const bf = Math.max(7.5, fs * 0.66), label = shortModel(r0), fresh = tNow - toN(r0.date) <= 21;
+    c.font = `600 ${bf}px ${MONO}`; const tw = c.measureText(label).width, bw = tw + bf * 1.3 + (fresh ? bf * 0.9 : 0), bh = bf * 1.75, by = p.y + below + bf * 0.55;
+    c.fillStyle = '#ffffff'; roundRect(c, p.x - bw / 2, by, bw, bh, bh / 2); c.fill(); c.lineWidth = 1; c.strokeStyle = fresh ? REL : css('--line-2'); c.stroke();
+    if (fresh){ c.fillStyle = REL; c.beginPath(); c.arc(p.x - bw / 2 + bf * 0.75, by + bh / 2, bf * 0.27, 0, 7); c.fill(); }
+    c.fillStyle = css('--ink-2'); c.fillText(label, p.x + (fresh ? bf * 0.45 : 0), by + bh / 2 + 0.5);
+  }
+  c.textBaseline = 'alphabetic'; c.globalAlpha = 1;
+}
+function shortModel(r){ return r.model.replace(/^Claude /, '').split(/ and |, /)[0].replace(/ \(.*\)$/, '').replace(/ for every.*$/, ''); }
+function stamp(c){
+  const nar = W < 600, m = nar ? 16 : 24;
+  if (nar){ c.fillStyle = css('--paper') + 'F2'; c.fillRect(0, 0, W, 86); }
+  c.textAlign = 'left'; c.fillStyle = css('--ink'); c.font = `700 ${nar ? 22 : 28}px ${SANS}`; c.fillText('The AI Buildout Ledger', m, nar ? 36 : 46);
+  c.font = `500 12px ${MONO}`; c.fillStyle = css('--muted');
+  if (nar){ c.fillText('As of ' + day(iso()) + ' · every line is a sourced row', m, 56); c.fillText('colour = type of money · dash = status', m, 72); }
+  else c.fillText('As of ' + day(iso()) + ' · every line is a sourced row · colour = type of money · dash = status', m, 68);
+  const items = Object.entries(TYPE).filter(([k]) => isMoney({type:k}) && V.flows.some(f => f.type === k)); c.font = `500 12px ${SANS}`;
+  const rows = [[]]; let x = m; for (const it of items){ const w = 40 + c.measureText(it[1]).width; if (x + w > W - m && rows[rows.length - 1].length){ rows.push([]); x = m; } rows[rows.length - 1].push(it); x += w; }
+  if (nar){ c.fillStyle = css('--paper') + 'F2'; c.fillRect(0, H - 14 - rows.length * 20, W, rows.length * 20 + 14); }
+  rows.forEach((r, i) => { let x = m; const y = H - 22 - (rows.length - 1 - i) * 20; for (const [k, name] of r){ c.fillStyle = COL[k]; c.fillRect(x, y - 5, 20, 3.5); c.fillStyle = css('--ink-2'); c.fillText(name, x + 26, y); x += 40 + c.measureText(name).width; } });
+}
+
+/* ---------- picking and gestures: drag a body to move it, drag the board to pan, scroll or pinch to zoom ---------- */
+function pick(x, y){
+  const v = view(), w = toWorld(x, y, v);
+  for (const n of [...N].reverse()) if (inside(n.e.id, w, 4 / v.s)) return {kind:'entity', id:n.e.id};
+  let best = null, bd = 8;
+  for (const g of G) for (const p of g.pts){ const d = Math.hypot(x - p.x, y - p.y) - g.w / 2; if (d < bd){ bd = d; best = {kind:'flow', id:g.f.id}; } }
+  return best;
+}
+function select(s){
+  sel = s; renderPanel(); $('#panel').scrollTop = 0;
+  if (!wide){ $('#sheet-x').hidden = !s; if (phone){ if (s && sheetState === 'peek' && !touring) setSheet('half'); else if (!s) setSheet('peek'); } if (s) focusOn(s); }
+  try { history.replaceState(null, '', modeHash()); } catch (_) {}
+}
+function focusOn(s){
+  if (wide || !RECT || drawer) return;
+  const f = s.kind === 'flow' && V.flows.find(x => x.id === s.id), ids = s.kind === 'entity' ? [s.id] : f ? [f.payer, f.payee] : [];
+  if (!ids.length || !ids.every(id => nodes[id])) return;
+  const v = view(), pts = ids.map(id => toScreen(home(id), v)), p = {x: pts.reduce((t, q) => t + q.x, 0) / pts.length, y: pts.reduce((t, q) => t + q.y, 0) / pts.length};
+  const tb = Math.max(RECT.top, TOURB + 4);
+  const vb = phone ? Math.min(RECT.bottom, H - sheetVis(sheetState === 'peek' && !touring ? 'half' : sheetState)) : RECT.bottom, ty = (tb + vb) / 2;
+  inert = null; cam.goal = {x: cam.k > 1.05 ? cam.x + (p.x - (RECT.left + RECT.right) / 2) / v.s : cam.x, y: cam.y + (p.y - ty) / v.s, k: cam.k};
+}
+/* ---------- the phone's bottom sheet: a peek that always says something, half for reading next to the map, full for everything ---------- */
+const peekPx = () => phone ? 96 + SAB : 0;
+function sheetVis(st){ const full = H - MTOP - 4; return st === 'full' ? full : st === 'half' ? Math.round(Math.min(Math.max(H * 0.5, 320), full - 40)) : peekPx(); }
+function setSheet(st, instant){
+  if (!phone) return;
+  sheetState = st; const S = $('#sheet'), hgt = H - MTOP - 4;
+  if (instant) S.classList.add('drag');
+  S.style.setProperty('--sheet-h', hgt + 'px'); S.style.setProperty('--sheet-off', (hgt - sheetVis(st)) + 'px'); S.dataset.state = st;
+  $('#grab-btn').setAttribute('aria-label', st === 'peek' ? 'Show details' : st === 'half' ? 'Show everything' : 'Show less');
+  if (instant) requestAnimationFrame(() => S.classList.remove('drag'));
+}
+function bindSheet(){
+  const S = $('#sheet'); let d = null;
+  const hgt = () => H - MTOP - 4;
+  S.addEventListener('pointerdown', e => {
+    if (!phone || e.target.closest('#sheet-x') || !(sheetState !== 'full' || e.target.closest('#grab'))) return;
+    d = {id: e.pointerId, y0: e.clientY, off0: hgt() - sheetVis(sheetState), last: e.clientY, t: performance.now(), v: 0, active: false, grab: !!e.target.closest('#grab')};
+  });
+  S.addEventListener('pointermove', e => {
+    if (!d || e.pointerId !== d.id) return;
+    const dy = e.clientY - d.y0;
+    if (!d.active){ if (Math.abs(dy) < 7) return; d.active = true; try { S.setPointerCapture(d.id); } catch (_) {} S.classList.add('drag'); }
+    const now = performance.now(); d.v = 0.6 * d.v + 0.4 * (e.clientY - d.last) / Math.max(8, now - d.t); d.last = e.clientY; d.t = now;
+    S.style.setProperty('--sheet-off', Math.max(0, Math.min(hgt() - peekPx(), d.off0 + dy)) + 'px');
+  });
+  const end = e => {
+    if (!d || e.pointerId !== d.id) return;
+    const was = d; d = null;
+    if (!was.active){
+      if (was.grab) setSheet(sheetState === 'peek' ? 'half' : sheetState === 'half' ? 'full' : 'peek');
+      else if (sheetState === 'peek' && !e.target.closest('button,a')) setSheet('half');
+      return;
+    }
+    S.classList.remove('drag');
+    const vis = hgt() - parseFloat(S.style.getPropertyValue('--sheet-off')) - was.v * 220;
+    setSheet(['peek', 'half', 'full'].reduce((best, st) => Math.abs(sheetVis(st) - vis) < Math.abs(sheetVis(best) - vis) ? st : best, 'peek'));
+  };
+  S.addEventListener('pointerup', end);
+  S.addEventListener('pointercancel', e => { if (d && e.pointerId === d.id){ if (d.active) end(e); else d = null; } });
+  $('#sheet-x').onclick = () => select(null);
+}
+/* ---------- the phone's top bar: three tabs, search, and a menu for the rest ---------- */
+function bindPhone(){
+  $('.mseg').addEventListener('click', e => { const b = e.target.closest('[data-mv]'); if (!b) return; if (phone) setSheet('peek');
+    if (b.dataset.mv === 'map') setDrawer(null); else if (b.dataset.mv === 'loops'){ loopTab = 'map'; setDrawer('loops'); } else setDrawer('rows'); });
+  $('#m-find').onclick = openSearch; $('#ms-x').onclick = closeSearch;
+  $('#ms-in').addEventListener('input', () => renderSearch($('#ms-in').value));
+  $('#ms-in').addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); if (e.key === 'Enter'){ const b = $('#ms-list [data-pick]'); if (b) b.click(); } });
+  $('#ms-list').addEventListener('click', e => { const b = e.target.closest('[data-pick]'); if (!b) return; closeSearch(); setDrawer(null); select({kind: 'entity', id: b.dataset.pick}); });
+  $('#m-menu').onclick = () => $('#mmenu').hidden ? openMenu() : closeMenu();
+  $('#mscrim').onclick = closeMenu;
+  $('#mmenu').addEventListener('click', e => { const b = e.target.closest('button'); if (b) menuAct(b); });
+  $('#m-fit').onclick = () => { inert = null; const v = view(), yc = (RECT.top + Math.min(RECT.bottom, H - sheetVis(sheetState))) / 2, s1 = v.s, s2 = v.s / cam.k; cam.goal = {x: 0, y: cam.y + (yc - v.cy) * (1 / s1 - 1 / s2), k: 1}; };
+  bindSheet();
+}
+function openSearch(){ closeMenu(); $('#msearch').hidden = false; $('#ms-in').value = ''; renderSearch(''); $('#ms-in').focus(); }
+function closeSearch(){ $('#msearch').hidden = true; $('#ms-in').blur(); }
+function renderSearch(q){
+  q = q.trim().toLowerCase();
+  const live = L.entities.filter(e => V.live.has(e.id));
+  const item = e => `<button data-pick="${esc(e.id)}"><b>${esc(e.name)}</b><span>${e.layer ? esc(LY[e.layer].label) : 'Capital'}${V.total[e.id] ? ' · ' + money(V.total[e.id]) : ''}</span></button>`;
+  if (!q){ const top = live.slice().sort((a, b) => (V.total[b.id] || 0) - (V.total[a.id] || 0)).slice(0, 12); $('#ms-list').innerHTML = `<div class="grp">Most money on the map</div>${top.map(item).join('')}`; return; }
+  const hit = e => e.name.toLowerCase().startsWith(q) ? 0 : 1;
+  const hits = live.filter(e => e.name.toLowerCase().includes(q)).sort((a, b) => hit(a) - hit(b) || (V.total[b.id] || 0) - (V.total[a.id] || 0));
+  $('#ms-list').innerHTML = hits.length ? hits.map(item).join('') : `<p class="note">No player on the map matches “${esc(q)}”.</p>`;
+}
+function openMenu(){
+  const show = [['all', 'Everything'], ['nopress', 'Without press reports'], ['moved', 'Money moved only']];
+  $('#mmenu').innerHTML = `<div class="mm-h">Show</div>${show.map(([k, t]) => `<button data-mshow="${k}" aria-pressed="${showMode === k}">${t}</button>`).join('')}
+    <div class="mm-h">Map</div><button data-mm="labels" aria-pressed="${allLabels}">Amounts on every line</button>
+    <div class="mm-h">More</div><button data-mm="checks">Checks and corrections</button><button data-mm="tour">Guided tour</button>${$('#b-export').hidden ? '' : '<button data-mm="export">Save the map as an image</button>'}`;
+  $('#mmenu').hidden = false; $('#mscrim').hidden = false; $('#m-menu').setAttribute('aria-expanded', 'true');
+}
+function closeMenu(){ $('#mmenu').hidden = true; $('#mscrim').hidden = true; $('#m-menu').setAttribute('aria-expanded', 'false'); }
+function menuAct(b){
+  const a = b.dataset.mm;
+  if (b.dataset.mshow){ showMode = b.dataset.mshow; refresh(); }
+  if (a === 'labels') allLabels = !allLabels;
+  if (a === 'checks') setDrawer('checks');
+  if (a === 'export') $('#b-export').click();
+  closeMenu();
+  if (a === 'tour') tour(0);
+}
+function fromHash(h){
+  const parts = decodeURIComponent((h == null ? location.hash : h).slice(1)).split('/').filter(Boolean);
+  for (const id of parts){
+    if (id === 'layers') setMode('layers', true); else if (id === 'arranged') setMode(wide ? 'flow' : 'layers', true); else if (id === 'loops'){ loopTab = 'map'; setDrawer('loops'); }
+    else if (ents[id]) select({kind:'entity', id}); else if (V.flows.some(f => f.id === id)) select({kind:'flow', id});
+  }
+  return parts.length > 0;
+}
+/* ---------- guided start: three steps, shown once ---------- */
+const TOUR = [
+  () => { setDrawer(null); setMode('layers'); select({kind:'entity', id:'chatgpt'}); traceDir = 'down'; renderPanel(); const n = chain('chatgpt').ents.size - 1;
+    return ['1 of 3 · Follow one app to the end', `${wide ? 'Click' : 'Tap'} any player to trace everything it depends on. ChatGPT runs through OpenAI to ${n} players, down to the power deals at the bottom.`]; },
+  () => { if (wide) setMode('flow'); select({kind:'entity', id:'amazon'}); loopTab = 'map'; setDrawer('loops'); const a = loops().find(x => x.s === 'amazon');
+    return ['2 of 3 · The loops', `Some suppliers put money into their own customers, who commit orders straight back. Each star here is one customer, ringed by the suppliers in a loop with it.${a ? ` Amazon has put ${money(a.i)} into customers that have committed ${money(a.b)} back to it.` : ''}`]; },
+  () => { setDrawer(null); setMode('layers'); select(null); if (phone){ setSheet('half'); inert = null; cam.goal = {x: 0, y: 0, k: 1}; }
+    return ['3 of 3 · What is real', `Of ${money(HEAD.tot)} on record, ${money(HEAD.seg[0][2])} has actually moved. Another ${money(HEAD.seg[3][2])} rests on press reports alone and isn't counted. Hollow lines haven't been independently checked yet.`]; },
+];
+function tour(i){
+  const box = $('#tour');
+  if (i < 0 || i >= TOUR.length){ box.hidden = true; touring = false; TOURB = 0; if (phone) setSheet('peek'); try { localStorage.setItem('abl-tour', '1'); } catch (_) {} return; }
+  touring = true; const [k, t] = TOUR[i](); $('#tour-k').textContent = k; $('#tour-t').textContent = t; $('#tour-next').textContent = i === TOUR.length - 1 ? 'Done' : 'Next';
+  $('#tour-next').onclick = () => tour(i + 1); $('#tour-skip').onclick = () => tour(-1); box.hidden = false;
+  TOURB = !wide && !land ? box.getBoundingClientRect().bottom : 0;   // on a phone the card covers the top of the map: the map makes room below it
+  if (!wide && sel) focusOn(sel);
+}
+function zoomAt(x, y, k){
+  const v = view(), w = toWorld(x, y, v); cam.goal = null; cam.k = Math.max(wide ? 0.45 : 0.22, Math.min(wide ? 3.5 : 2.6, k));
+  const v2 = view(), w2 = toWorld(x, y, v2); cam.x += w.x - w2.x; cam.y += w.y - w2.y;
+}
+function bindPointer(){
+  const pts = new Map(); let pinch = 0;
+  cv.addEventListener('pointerdown', e => {
+    cv.setPointerCapture(e.pointerId); pts.set(e.pointerId, {x: e.clientX, y: e.clientY});
+    inert = null;
+    if (pts.size === 2){ const [a, b] = [...pts.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); drag = null; PINCH = true; return; }
+    const h = pick(e.clientX, e.clientY), w = toWorld(e.clientX, e.clientY, view()), touch = e.pointerType === 'touch' || !wide;
+    drag = h && h.kind === 'entity' && !touch ? {id: h.id, ox: nodes[h.id].x - w.x, oy: nodes[h.id].y - w.y, moved: 0, hit: h} : {id: null, moved: 0, hit: h, touch, vx: 0, vy: 0, t: performance.now()};
+    cv.classList.add('drag');
+  });
+  cv.addEventListener('pointermove', e => {
+    const p = pts.get(e.pointerId);
+    if (!p){ hover = pick(e.clientX, e.clientY); cv.style.cursor = hover ? (hover.kind === 'entity' ? 'grab' : 'pointer') : 'default'; return; }
+    const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY;
+    if (pts.size === 2){ const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y); if (pinch) zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, cam.k * d / pinch); pinch = d; return; }
+    if (!drag) return; drag.moved += Math.abs(dx) + Math.abs(dy);
+    const v = view();
+    if (drag.id){ const w = toWorld(e.clientX, e.clientY, v), n = nodes[drag.id]; n.x = w.x + drag.ox; n.y = w.y + drag.oy; n.vx = n.vy = 0; if (drag.moved > 5) n.held = {x: n.x, y: n.y}; }
+    else { cam.goal = null; cam.x -= dx / v.s; cam.y -= dy / v.s;
+      if (drag.touch){ const now = performance.now(), dt = Math.max(8, now - drag.t); drag.vx = 0.6 * drag.vx + 0.4 * dx / dt; drag.vy = 0.6 * drag.vy + 0.4 * dy / dt; drag.t = now; } }
+  });
+  const up = e => {
+    if (!pts.has(e.pointerId)) return; pts.delete(e.pointerId); pinch = 0; if (pts.size < 2) PINCH = false;
+    if (drag && !pts.size){
+      if (drag.moved < (drag.touch ? 10 : 6)) select(drag.hit);
+      else if (drag.touch && !reduce && performance.now() - drag.t < 90 && Math.hypot(drag.vx, drag.vy) > 0.08){ const s0 = view().s; inert = {x: -drag.vx * 16 / s0, y: -drag.vy * 16 / s0}; }
+      else if (drag.id){ const n = nodes[drag.id]; n.held = {x: n.x, y: n.y}; $('#b-reset').hidden = false; }
+      drag = null; cv.classList.remove('drag');
+    }
+  };
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+  cv.addEventListener('pointerleave', () => { if (!drag) hover = null; });
+  cv.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.clientX, e.clientY, cam.k * Math.exp(-e.deltaY * 0.0012)); }, {passive:false});
+  cv.addEventListener('dblclick', e => { const h = pick(e.clientX, e.clientY); if (h && h.kind === 'entity') nodes[h.id].held = null; });
+  $('#b-reset').onclick = () => { for (const id in nodes) nodes[id].held = null; cam.goal = {x: 0, y: 0, k: 1}; $('#b-reset').hidden = true; };
+}
+
+/* ---------- reading panel ---------- */
+const chip = g => `<span class="chip ${esc(g)}">${esc(g)}</span>`;
+const src = r => `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_title || 'Source')}</a>`;
+function flowRow(f, from){
+  const other = ents[from === f.payer ? f.payee : f.payer].name;
+  const verb = f.type === 'product' ? (from === f.payer ? 'makes' : 'made by') : f.type === 'uses' ? (from === f.payer ? 'uses' : 'used by') : (from === f.payer ? 'pays' : 'is paid by');
+  const head = from ? `${verb} <b>${esc(other)}</b>` : `<b>${esc(ents[f.payer].name)}</b> → <b>${esc(ents[f.payee].name)}</b>`;
+  const amt = isMoney(f) ? money(f.amount_usd) : '';
+  return `<button class="row" data-flow="${esc(f.id)}"><div class="t"><span><span class="sw" style="border-color:${COL[f.type]}"></span>${head}</span><span class="amt">${amt}</span></div>
+    <div class="m">${f.label ? esc(f.label) + ' · ' : ''}${esc(TYPE[f.type])}${isMoney(f) ? ' · ' + esc(STATUS[f.status]) : ''} ${chip(f.grade)}${PENDING.has(f.id) ? ' <span class="chip unchecked">unchecked</span>' : ''}</div></button>`;
+}
+const W_ = '(\\d+|two|three|four|five|six|seven|eight|nine|ten|fifteen|twenty)', WN = {two:2, three:3, four:4, five:5, six:6, seven:7, eight:8, nine:9, ten:10, fifteen:15, twenty:20};
+function termYears(f){                // a deal's length, when the source states one
+  const t = [f.amount_qualifier, f.label, f.title].filter(Boolean).join(' ');
+  for (const re of [new RegExp(W_ + '[- ](?:year|yr)', 'i'), new RegExp(W_ + ' yrs', 'i'), new RegExp('over (?:roughly |about )?' + W_ + ' years', 'i')]){
+    const m = t.match(re); if (m){ const n = +m[1] || WN[m[1].toLowerCase()]; if (n) return n; }
+  }
+  const m = t.match(/through (?:[A-Z][a-z]+ )?(20\d\d)/); return m && f.date ? Math.max(1, +m[1] - +f.date.slice(0, 4)) : null;
+}
+function eventRow(e){
+  const tag = e.flow ? `data-flow="${esc(e.flow)}"` : `data-ent="${esc(e.entities[0])}"`;
+  return `<button class="row" ${tag}><div class="t"><b>${esc(e.title)}</b></div><div class="m"><span class="num">${day(e.date)}</span> ${chip(e.grade)}</div></button>`;
+}
+function entityButtons(){
+  const groups = [...LAYERS.map(l => [l.label, e => e.layer === l.id]), ['Capital', e => !e.layer]];
+  return groups.map(([label, fn]) => { const list = L.entities.filter(e => fn(e) && V.live.has(e.id)); return list.length ? `<div class="grp">${label}</div><div class="ents">${list.map(e => `<button class="btn" data-ent="${esc(e.id)}">${esc(e.name)}</button>`).join('')}</div>` : ''; }).join('');
+}
+function renderPanel(){
+  if (!wide) $('#sheet-x').hidden = !sel;
+  const P = $('#panel');
+  if (!sel){
+    const ev = V.events.filter(e => e.level === 'map').slice().reverse();
+    P.innerHTML = `${homeHead()}<div class="kicker">What changed</div><h2>Structural shifts</h2>
+      <p class="note">Deals that change who can do what, or how capital moves. ${wide ? 'Select a body or a line for everything recorded about it. Drag a body to move it; double-click to send it home.' : 'Tap a player or a line for everything recorded about it and its whole chain down the stack. Drag to move around; pinch to zoom.'}${mGoal ? ' In the five-layer view, an empty layer means the ledger has no rows for it yet.' : fGoal ? ' In the arranged view, money runs left to right through the stack. Lines that loop over the top run the other way: a supplier putting money into one of its own customers.' : ''}</p>
+      <h3>Players</h3>${entityButtons()}
+      ${latestTable()}
+      <h3>${ev.length} shifts to ${day(iso())}</h3>${ev.map(eventRow).join('') || '<p class="note">Nothing on record yet at this date.</p>'}`;
+  } else if (sel.kind === 'entity'){
+    const e = ents[sel.id], all = V.flows.filter(f => f.payer === e.id || f.payee === e.id);
+    const out = all.filter(f => isMoney(f) && f.payer === e.id), inn = all.filter(f => isMoney(f) && f.payee === e.id), links = all.filter(f => !isMoney(f));
+    const hop = [...new Set(out.map(f => f.payee))].flatMap(id => V.flows.filter(f => isMoney(f) && f.payer === id && f.payee !== e.id).map(f => ({via: id, f})));
+    const back = hop.filter(h => inn.some(f => f.payer === h.f.payee));
+    const metrics = [...new Set(V.obs.filter(o => o.subject === e.id).map(o => o.metric))];
+    const evs = V.events.filter(x => x.entities.includes(e.id)).slice().reverse();
+    const ch = trace(e.id), down = [...LAYERS, {id: null, label: 'Capital'}].map(l => [l, [...ch.ents].filter(x => x !== e.id && (ents[x].layer || null) === l.id).sort((a, b) => (V.total[b] || 0) - (V.total[a] || 0))]).filter(([, xs]) => xs.length);
+    const lp = loops().find(x => x.s === e.id), sumA = fs => fs.reduce((t, f) => t + (f.amount_usd || 0), 0), si = sumA(inn), so = sumA(out);
+    P.innerHTML = `<button class="back" data-home>← All structural shifts</button><div class="kicker">${esc(KIND[e.kind] || e.kind)}${e.layer ? ' · ' + esc(LY[e.layer].label) : ' · Capital'}</div><h2>${esc(e.name)}</h2>
+      <p class="peekline">${si || so ? `In ${si ? money(si) : '–'} · Out ${so ? money(so) : '–'} · ` : ''}${all.length} row${all.length === 1 ? '' : 's'}</p>
+      <p class="note">${esc(e.note)}</p>${e.parent && ents[e.parent] ? `<p class="note">Made by <button class="btn" data-ent="${esc(e.parent)}">${esc(ents[e.parent].name)}</button></p>` : ''}
+      <h3>${traceDir === 'up' ? 'Who funds it' : 'Down the stack to the end'} (${ch.ents.size - 1})</h3><div class="seg"><button data-trace="down" aria-pressed="${traceDir === 'down'}">Down to energy</button><button data-trace="up" aria-pressed="${traceDir === 'up'}">Who funds it</button></div>
+      <p class="note">${traceDir === 'up' ? `Investors and lenders behind ${esc(e.name)}, and theirs, followed back through ${ch.flows.size} rows.` : `Everyone ${esc(e.name)} depends on, followed through ${ch.flows.size} rows: who it pays, who they pay, on down to energy.`}${e.kind === 'product' ? ' A product starts at the company that makes it.' : ''} Highlighted on the map.</p>${down.length ? down.map(([l, xs]) => `<div class="row"><div class="t"><b>${esc(l.label)}</b> <span class="num">${xs.length}</span></div><div class="m">${xs.map(x => `<button class="btn" data-ent="${esc(x)}">${esc(ents[x].name)}</button>`).join(' ')}</div></div>`).join('') : '<p class="note">Nobody on the ledger yet.</p>'}
+      ${lp ? `<h3>Loops (${lp.ls.length})</h3><p class="note">${esc(e.name)} has put money into ${lp.ls.length === 1 ? 'a customer that also buys' : lp.ls.length + ' customers that also buy'} from it.${lp.cents != null ? ` About <b>${lp.cents}¢</b> of its own money for every $1 they have committed back, where both sides are disclosed.` : ''}</p>${lp.ls.map(l => `<div class="row"><div class="t"><button data-ent="${esc(l.c)}"><b>${esc(ents[l.c].name)}</b></button><span class="amt">${money(l.i)} in · ${money(l.b)} back</span></div></div>`).join('')}` : ''}
+      ${metrics.map(m => series(e.id, m)).join('')}
+      ${statedMetrics(e.id)}
+      ${releasesFor(e.id)}
+      <h3>Money out (${out.length})</h3>${out.map(f => flowRow(f, e.id)).join('') || '<p class="note">No outgoing rows.</p>'}
+      <h3>Money in (${inn.length})</h3>${inn.map(f => flowRow(f, e.id)).join('') || '<p class="note">No incoming rows.</p>'}
+      ${links.length ? `<h3>Products and links (${links.length})</h3>${links.map(f => flowRow(f, e.id)).join('')}` : ''}
+      ${hop.length ? `<h3>One step further</h3><p class="note">Where the players ${esc(e.name)} pays send money next.${back.length ? ' ' + back.length + ' of these reach someone who also pays ' + esc(e.name) + '.' : ''}</p>${hop.map(h => flowRow(h.f)).join('')}` : ''}
+      <h3>Every recorded change (${evs.length})</h3>${evs.map(x => `<div class="row"><div class="t"><b>${esc(x.title)}</b></div><div class="m"><span class="num">${day(x.date)}</span> ${chip(x.grade)} ${src(x)}</div></div>`).join('') || '<p class="note">None yet.</p>'}`;
+  } else {
+    const f = V.flows.find(x => x.id === sel.id), full = L.flows.find(x => x.id === sel.id), hist = full.history.filter(h => h.available <= iso());
+    const evs = V.events.filter(e => e.flow === f.id).slice().reverse();
+    P.innerHTML = `<button class="back" data-home>← All structural shifts</button><div class="kicker">${esc(TYPE[f.type])}</div>
+      <h2>${esc(ents[f.payer].name)} → ${esc(ents[f.payee].name)}</h2>
+      ${isMoney(f) ? `<p style="margin:8px 0 0"><span class="num" style="font-size:22px;font-weight:600;color:${COL[f.type]}">${money(f.amount_usd)}</span> <span class="note">${esc(f.amount_qualifier || '')}</span></p>
+      <p class="m" style="margin:6px 0 0"><span class="sw" style="border-color:${COL[f.type]}"></span>${esc(STATUS[f.status])} ${chip(f.grade)} <span class="note">as of <span class="num">${day(f.as_of)}</span></span></p>` : `<p class="m" style="margin:6px 0 0">${chip(f.grade)}</p>`}
+      ${(() => { const ty = isMoney(f) && termYears(f); return ty ? `<p class="note">Over about ${ty} years${f.amount_usd ? `: roughly ${money(f.amount_usd / ty)} a year` : ''}. The headline counts it in full.</p>` : ''; })()}
+      ${PENDING.has(f.id) ? `<p class="note"><span class="chip unchecked">not yet checked</span> An independent check of this row against its source hasn't run yet.</p>` : ''}
+      <h3>What the source says</h3><p class="def">${esc(f.definition)}</p>
+      ${full.derivation ? `<h3>How the figure is built</h3><p class="def">${esc(full.derivation)}</p>` : ''}
+      <h3>Source</h3><p class="def">${src(f)}</p>
+      ${hist.length > 1 ? `<h3>How it changed</h3><table><tr><th>Public on</th><th class="r">Amount</th><th>Basis</th></tr>${hist.slice().reverse().map(h => `<tr><td class="num">${day(h.available)}</td><td class="r num">${money(h.amount_usd)}</td><td>${esc(h.amount_qualifier || '')}</td></tr>`).join('')}</table>` : ''}
+      ${evs.length ? `<h3>Related events</h3>${evs.map(x => `<div class="row"><div class="t"><b>${esc(x.title)}</b></div><div class="m"><span class="num">${day(x.date)}</span> ${chip(x.grade)} ${src(x)}</div></div>`).join('')}` : ''}
+      <h3>Ends</h3><div class="ents"><button class="btn" data-ent="${esc(f.payer)}">${esc(ents[f.payer].name)}</button><button class="btn" data-ent="${esc(f.payee)}">${esc(ents[f.payee].name)}</button></div>`;
+  }
+}
+function homeHead(){
+  if (!HEAD) return '';
+  const all_ = HEAD.tot + HEAD.seg[3][2] || 1;
+  return `<div class="hl ph-only"><div class="kicker">Committed and invested · ${day(iso())}</div>
+    <div class="hl-t"><b>${money(HEAD.tot)}</b><span>as filings and the companies state it</span></div>
+    <div class="split">${HEAD.seg.map(([k, , v]) => `<i class="${k}" style="flex:${v / all_}"></i>`).join('')}</div>
+    <div class="skey">${HEAD.seg.map(([k, label, v]) => `<span><i class="${k}"></i>${money(v)} ${label}</span>`).join('')}</div>
+    <p class="note">Gross: money is counted again at each layer it passes through, and multi-year deals count in full.${L.edition ? ` This is the frozen edition of ${day(L.edition.date)}; <a href="${esc(L.edition.live_url)}" target="_blank" rel="noopener">the live map</a> updates daily.` : ''}</p>
+    <h3>How to read the map</h3><div class="plegend">${LEGEND}</div></div>`;
+}
+function series(id, metric){
+  const o = V.obs.filter(x => x.subject === id && x.metric === metric).sort((a, b) => a.period_end < b.period_end ? -1 : 1);
+  if (!o.length) return '';
+  const max = Math.max(...o.map(x => x.value_usd)), last = o[o.length - 1];
+  const name = {capex:'Capital spending per quarter', revenue:'Revenue per quarter', rpo:'Contracted backlog at period end', debt_proceeds:'Senior debt raised per quarter'}[metric] || metric;
+  const rng = (L.ranges || []).find(r => r.subject === id && r.metric === metric && r.period_end === last.period_end);
+  return `<h3>${esc(name)}</h3><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="num" style="font-size:18px;font-weight:600">${money(last.value_usd)}</span><span class="note">period ending <span class="num">${day(last.period_end)}</span> ${chip('filed')}</span></div>
+    <div class="bars" role="img" aria-label="${esc(name)}: ${o.map(x => day(x.period_end) + ' ' + money(x.value_usd)).join(', ')}">${o.map((x, i) => `<i class="${x.derived ? 'd' : ''} ${i === o.length - 1 ? 'last' : ''}" style="height:${Math.max(3, x.value_usd / max * 100)}%" title="${day(x.period_end)}: ${money(x.value_usd)}${x.derived ? ' (derived from year-to-date)' : ''}"></i>`).join('')}</div>
+    <div class="axis"><span>${day(o[0].period_end)}</span><span>${day(last.period_end)}</span></div>
+    <p class="def">${esc(last.definition)} Hatched bars are derived by subtracting year-to-date figures.</p>
+    ${rng ? `<p class="def"><span class="warn">Trackers disagree.</span> ${rng.values.map(v => `${money(v.value_usd)} (${esc(v.basis)}) ${chip(v.grade)}`).join(' vs ')}</p>` : ''}`;
+}
+const MET = {revenue_quarter:'Revenue per quarter', run_rate:'Run-rate revenue', coding_run_rate:'Claude Code run-rate revenue', weekly_users:'Weekly active users', monthly_users:'Monthly active users', subscribers:'Paying subscribers', api_tokens_per_min:'API tokens per minute', purchase_commitments:'Purchase commitments'};
+const QUAL = {'more than':'>', 'about':'~', 'under':'<', 'nearly':'~', 'at least':'≥'};
+const count = v => v >= 1e9 ? (v / 1e9).toFixed(v % 1e9 ? 2 : 0).replace(/\.?0+$/, '') + 'B' : Math.round(v / 1e6) + 'M';
+const mval = m => (QUAL[m.qualifier] || '') + (m.unit === 'usd' ? money(m.value) : count(m.value));
+const price = r => r.price_in == null ? '' : `$${r.price_in} / $${r.price_out} per 1M tokens`;
+function latestTable(){
+  const rows = Object.values(V.latest).sort((a, b) => a.date < b.date ? 1 : -1);
+  if (!rows.length) return '';
+  return `<h3>Latest model on each product</h3><p class="note">As of ${day(iso())}. A ringed badge on the map marks a release in the last three weeks.</p>
+    <table class="latest">${rows.map(r => `<tr><td><button data-ent="${esc(r.entity)}">${esc(ents[r.entity].name)}</button></td><td>${esc(r.model)}${r.open_weights ? ' <span class="tag">open</span>' : ''}<div class="note num">${day(r.date)}${r.price_in != null ? ' · $' + r.price_in + ' / $' + r.price_out : ''}</div></td></tr>`).join('')}</table>`;
+}
+function releasesFor(id){
+  const list = V.rel.filter(r => r.entity === id || r.lab === id).slice().reverse();
+  if (!list.length) return '';
+  return `<h3>Model releases (${list.length})</h3><p class="note">From the lab's own release post. Prices are list prices for input / output tokens; blank means the post gave none.</p>` +
+    list.map(r => `<div class="row rel-row"><div class="t"><b>${esc(r.model)}</b><span class="num note">${day(r.date)}</span></div>
+      <div class="m">${r.material ? '<span class="tag">structural</span> ' : ''}${r.access !== 'general' ? `<span class="chip">${esc(r.access)}</span> ` : ''}${r.open_weights ? '<span class="tag">open weights</span> ' : ''}${price(r) ? `<b class="num">${esc(price(r))}</b> ` : ''}${chip(r.grade)}</div>
+      <div class="m">${esc(r.note)}${r.price_note ? ' ' + esc(r.price_note) : ''} ${src(r)}${r.price_source_url ? ` · <a href="${esc(r.price_source_url)}" target="_blank" rel="noopener">price source</a>` : ''}</div></div>`).join('');
+}
+function statedMetrics(id){
+  const kinds = [...new Set(V.met.filter(m => m.entity === id).map(m => m.metric))];
+  return kinds.map(k => {
+    const o = V.met.filter(m => m.entity === id && m.metric === k).sort((a, b) => a.as_of < b.as_of ? -1 : 1), last = o[o.length - 1];
+    const head = `<h3>${esc(MET[k] || k)}</h3><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="num" style="font-size:18px;font-weight:600">${esc(mval(last))}</span><span class="note">as of <span class="num">${day(last.as_of)}</span> ${chip(last.grade)}</span></div>`;
+    let chart = '';
+    if (k === 'revenue_quarter'){
+      const max = Math.max(...o.map(x => x.value));
+      chart = `<div class="bars" role="img" aria-label="${esc(MET[k])}: ${o.map(x => day(x.as_of) + ' ' + money(x.value)).join(', ')}">${o.map((x, i) => `<i class="${i === o.length - 1 ? 'last' : ''}" style="height:${Math.max(3, x.value / max * 100)}%" title="${day(x.as_of)}: ${money(x.value)}"></i>`).join('')}</div><div class="axis"><span>${day(o[0].as_of)}</span><span>${day(last.as_of)}</span></div>`;
+    } else if (o.length > 1){
+      const W2 = 320, H2 = 86, x0 = toN(o[0].as_of), x1 = toN(last.as_of), max = Math.max(...o.map(x => x.value)) * 1.15;
+      const pts = o.map(x => [8 + (toN(x.as_of) - x0) / Math.max(1, x1 - x0) * (W2 - 16), H2 - 14 - x.value / max * (H2 - 28)]);
+      chart = `<svg class="mchart" viewBox="0 0 ${W2} ${H2}" role="img" aria-label="${esc(MET[k])}: ${o.map(x => day(x.as_of) + ' ' + mval(x)).join(', ')}">
+        <line x1="0" x2="${W2}" y1="${H2 - 14}" y2="${H2 - 14}" stroke="${css('--line')}"/>
+        <polyline fill="none" stroke="${css('--ink-2')}" stroke-width="1.6" points="${pts.map(p => p.join(',')).join(' ')}"/>
+        ${(() => { let lastX = -99, flip = false; return pts.map((p, i) => { flip = p[0] - lastX < 46 ? !flip : false; lastX = p[0];
+          return `<circle cx="${p[0]}" cy="${p[1]}" r="3.2" fill="${o[i].grade === 'reported' ? '#fff' : css('--ink')}" stroke="${css('--ink')}" stroke-width="1.2"><title>${day(o[i].as_of)}: ${mval(o[i])} (${o[i].grade})</title></circle><text x="${p[0] + (flip ? 5 : 0)}" y="${flip ? p[1] + 14 : p[1] - 7}" text-anchor="${i === 0 ? 'start' : i === pts.length - 1 ? 'end' : flip ? 'start' : 'middle'}">${esc(mval(o[i]))}</text>`; }).join(''); })()}
+      </svg><div class="axis"><span>${day(o[0].as_of)}</span><span>${day(last.as_of)}</span></div>`;
+    }
+    return head + chart + `<p class="def">${esc(last.definition)} ${src(last)}</p>`;
+  }).join('');
+}
+$('#panel').addEventListener('click', e => {
+  const tb = e.target.closest('[data-trace]'); if (tb){ traceDir = tb.dataset.trace; renderPanel(); return; }
+  const b = e.target.closest('[data-ent],[data-flow],[data-home]'); if (!b) return;
+  if (b.dataset.home !== undefined) select(null);
+  else if (b.dataset.flow && V.flows.find(f => f.id === b.dataset.flow)) select({kind:'flow', id:b.dataset.flow});
+  else if (b.dataset.ent) select({kind:'entity', id:b.dataset.ent});
+});
+
+/* ---------- timeline and legend ---------- */
+function buildTicks(){
+  const pct = d => (toN(d) - T0) / (T1 - T0) * 100;
+  let h = L.events.filter(e => e.level === 'map' && toN(e.date) >= T0).map(e => `<i class="${e.release ? 'rel' : e.grade === 'reported' ? 'reported' : ''}" style="left:${pct(e.date)}%" title="${esc(day(e.date) + ': ' + e.title)}"></i>`).join('');
+  for (const d of ['2025-07-01','2026-01-01','2026-07-01']) h += `<span style="left:${pct(d)}%">${MON[+d.slice(5,7)-1]} ${d.slice(0,4)}</span>`;
+  $('#ticks').innerHTML = h;
+}
+function buildLegend(){
+  const line = (col, dash, w) => `<svg width="28" height="8"><line x1="1" y1="4" x2="27" y2="4" stroke="${col}" stroke-width="${w || 3}" stroke-dasharray="${dash}"/></svg>`;
+  const ink = css('--ink');
+  const shapes = [
+    ['Company', wide ? `<svg width="16" height="16"><circle cx="8" cy="8" r="6.5" fill="${css('--t-models')}" stroke="${ink}" stroke-width="1.4"/></svg>` : `<svg width="24" height="16"><rect x="1" y="2" width="22" height="12" rx="4" fill="${css('--t-models')}" stroke="${ink}" stroke-width="1.4"/></svg>`],
+    ['Product', `<svg width="22" height="14"><rect x="1" y="2" width="20" height="10" rx="5" fill="${css('--t-applications')}" stroke="${ink}" stroke-width="1.2"/></svg>`],
+    ['Capex sink', `<svg width="20" height="14"><rect x="1" y="1" width="18" height="12" rx="2" fill="${ink}"/></svg>`],
+    ['Bond', `<svg width="22" height="14"><path d="M5 1H21V13H5L1 7Z" fill="#fff" stroke="${ink}" stroke-width="1.2" stroke-dasharray="3 2"/></svg>`],
+    ['Investor', wide ? `<svg width="16" height="16"><circle cx="8" cy="8" r="6.5" fill="${css('--t-capital')}" stroke="${ink}" stroke-width="1.4"/><circle cx="8" cy="8" r="4" fill="none" stroke="${ink}" stroke-width="1"/></svg>` : `<svg width="24" height="16"><rect x="1" y="1" width="22" height="14" rx="4" fill="${css('--t-capital')}" stroke="${ink}" stroke-width="1.4"/><rect x="3.5" y="3.5" width="17" height="9" rx="2" fill="none" stroke="${ink}" stroke-width="1"/></svg>`],
+  ];
+  LEGEND = Object.keys(TYPE).filter(k => isMoney({type:k}) && L.flows.some(f => f.type === k)).map(k => `<span>${line(COL[k], '')}${TYPE[k]}</span>`).join('') +
+    `<span class="sep"></span>` + Object.keys(STATUS).map(k => `<span>${line(css('--ink-2'), DASH[k].join(' '), 2.5)}${STATUS[k]}</span>`).join('') +
+    `<span class="sep"></span>` + shapes.map(([n, s]) => `<span>${s}${n}</span>`).join('') + `<span class="sep"></span><span>${line(COL.product, '', 1.4)}Makes / owns</span>` +
+    `<span class="sep"></span><span><svg width="34" height="14"><rect x="1" y="1.5" width="32" height="11" rx="5.5" fill="#fff" stroke="${REL}"/><circle cx="6.5" cy="7" r="1.8" fill="${REL}"/></svg>Latest model (ringed if new)</span><span><svg width="6" height="14"><rect x="1.5" y="1" width="3" height="12" rx="1" fill="${REL}"/></svg>Frontier release on the timeline</span>` +
+    (PENDING.size ? `<span class="sep"></span><span><svg width="28" height="8"><line x1="1" y1="4" x2="27" y2="4" stroke="${ink}" stroke-width="4.5"/><line x1="1" y1="4" x2="27" y2="4" stroke="${PAPER}" stroke-width="1.8"/></svg>Hollow: not yet independently checked</span>` : '');
+  $('#legend').innerHTML = LEGEND;
+}
+function stopPlay(){ playing = false; $('#play').textContent = '▶'; $('#play').setAttribute('aria-label', 'Play timeline'); }
+$('#play').addEventListener('click', () => { if (playing) return stopPlay(); if (tNow >= T1) tNow = T0; playing = true; $('#play').textContent = '❚❚'; $('#play').setAttribute('aria-label', 'Pause timeline'); });
+
+/* ---------- tools: arrangement, labels, the ledger itself, the proof, export ---------- */
+function bindTools(){
+  const tog = name => setDrawer(drawer === name ? null : name);
+  $('#b-loops').onclick = () => tog('loops'); $('#b-tour').onclick = () => tour(0);
+  $('#stats').addEventListener('click', e => { const b = e.target.closest('[data-show]'); if (b){ showMode = b.dataset.show; refresh(); } });
+  const find = $('#find'); $('#find-list').innerHTML = L.entities.map(e => `<option value="${esc(e.name)}">`).join('');
+  const go = () => { const q = find.value.trim().toLowerCase(); if (!q) return; const e = L.entities.find(x => x.name.toLowerCase() === q) || L.entities.find(x => x.name.toLowerCase().startsWith(q)) || L.entities.find(x => x.name.toLowerCase().includes(q));
+    if (e){ select({kind:'entity', id:e.id}); find.value = ''; find.blur(); } };
+  find.addEventListener('change', go); find.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+  $('#b-layers').onclick = () => setMode(mGoal ? 'map' : 'layers');
+  $('#b-flow').onclick = () => setMode(fGoal ? 'map' : 'flow');
+  $('#b-labels').onclick = () => { allLabels = !allLabels; $('#b-labels').setAttribute('aria-pressed', allLabels); };
+  $('#b-rows').onclick = () => tog('rows'); $('#b-checks').onclick = () => tog('checks');
+  const ex = $('#b-export');
+  const save = async dl => { draw(ctx, true); const blob = await new Promise(r => cv.toBlob(r, 'image/png')); const name = 'ai-buildout-ledger-' + iso() + '.png';
+    if (dl){ try { await dl.save({filename: name, data: blob}); } catch (err) { if (!err || err.code !== 'declined') ex.textContent = 'Export unavailable here'; } return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+  if (window.claude && claude.use){ ex.hidden = true; claude.use('downloads').then(dl => { if (dl){ ex.hidden = false; ex.onclick = () => save(dl); } }); }
+  else ex.onclick = () => save(null);               // on a standalone site, a plain download works
+}
+function setDrawer(name){
+  drawer = name; for (const k of ['rows', 'checks', 'loops']) $('#b-' + k).setAttribute('aria-pressed', drawer === k);
+  const tab = drawer === 'loops' ? 'loops' : drawer === 'rows' ? 'deals' : 'map';
+  document.querySelectorAll('.mseg [data-mv]').forEach(b => b.setAttribute('aria-pressed', b.dataset.mv === tab));
+  $('#drawer').classList.toggle('open', !!drawer); if (drawer){ renderDrawer(); $('#drawer').scrollTop = 0; }
+  try { history.replaceState(null, '', modeHash()); } catch (_) {}
+}
+const CHECK = {quarter_vs_ytd:'Reported quarter equals change in year-to-date', four_quarters_vs_ttm:'Four quarters equal reported trailing twelve months', yoy_pct:'Growth recomputed from two quarters matches the filing:', rounds_to:'Quarter rounds to the figure in the filing:', sum_rounds_to:'Four quarters sum to the stated full year:'};
+$('#drawer').addEventListener('click', e => { if (e.target.closest('#d-close')) return setDrawer(null); const df = e.target.closest('[data-dealf]'); if (df){ dealF = df.dataset.dealf; renderDrawer(); return; } const t = e.target.closest('[data-ltab]'); if (t){ loopTab = t.dataset.ltab; renderDrawer(); return; }
+  const b = e.target.closest('[data-flowlink]'); if (b && V.all.find(f => f.id === b.dataset.flowlink)) select({kind:'flow', id:b.dataset.flowlink});
+  const n = e.target.closest('[data-entlink]'); if (n) select({kind:'entity', id:n.dataset.entlink}); });
+/* ---------- loops as a map: one star per customer, its suppliers around it; each spoke is a closed loop ---------- */
+function loopMap(lp){
+  const pairs = lp.flatMap(x => x.ls.map(l => ({s: x.s, c: l.c, inv: l.inv, back: l.back, i: l.i, b: l.b})));
+  if (!pairs.length) return '<p class="note">No loops on the ledger at this date.</p>';
+  const cus = [...new Set(pairs.map(p => p.c))], totC = id => pairs.filter(p => p.c === id).reduce((t, p) => t + p.i + p.b, 0);
+  cus.sort((a, b) => pairs.filter(p => p.c === b).length - pairs.filter(p => p.c === a).length || totC(b) - totC(a));
+  const wOf = a => a ? Math.max(1.8, Math.min(13, 1.4 + Math.sqrt(a / 1e9) * 0.85)) : 1.4;
+  const big = fs => fs.slice().sort((a, b) => (b.amount_usd || 0) - (a.amount_usd || 0))[0];
+  const colIn = fs => fs.some(f => f.type === 'debt') ? COL.debt : fs.every(f => f.type === 'owns') ? COL.owns : COL.equity;
+  const colBack = fs => fs.every(f => f.type === 'capex') ? COL.capex : COL.purchase_commitment;
+  const colors = [...new Set([COL.equity, COL.debt, COL.owns, COL.purchase_commitment, COL.capex])];
+  const ink = css('--ink'), muted = css('--muted');
+  const pt = (a, b, t) => ({x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t}), add = (a, v, k) => ({x: a.x + v.x * k, y: a.y + v.y * k});
+  const unit = (a, b) => { const dx = b.x - a.x, dy = b.y - a.y, l = Math.hypot(dx, dy) || 1; return {x: dx / l, y: dy / l}; };
+  const bez = (p0, p1, p2, p3, t) => { const u = 1 - t; return {x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x, y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y}; };
+  const f1 = v => v.toFixed(1);
+  const curve = (A, B, c1, c2, ra, rb) => { const s = add(A, unit(A, c1), ra + 1), e = add(B, unit(B, c2), rb + 4); return {s, c1, c2, e, d: `M${f1(s.x)},${f1(s.y)} C${f1(c1.x)},${f1(c1.y)} ${f1(c2.x)},${f1(c2.y)} ${f1(e.x)},${f1(e.y)}`}; };
+  const label = (p, off, txt, col) => { const an = off.x > .35 ? 'start' : off.x < -.35 ? 'end' : 'middle', dy = off.y > .35 ? 9 : off.y < -.35 ? -1 : 4;
+    return `<text class="lbl mono" x="${f1(p.x)}" y="${f1(p.y + dy)}" text-anchor="${an}" font-size="13.5" font-weight="600" fill="${col}">${esc(txt)}</text>`; };
+  const star = (cid, k) => {
+    const mine = pairs.filter(p => p.c === cid).sort((a, b) => b.b - a.b || b.i - a.i), n = mine.length, e = ents[cid];
+    const C = {x: 250, y: 250}, R = n === 1 ? 150 : 128, rc = Math.max(28, Math.min(50, 26 + Math.sqrt(totC(cid) / 1e9) * 1.15));
+    const ti = mine.reduce((t, p) => t + p.i, 0), tb = mine.reduce((t, p) => t + p.b, 0);
+    let g = '', nodes = '', bx = [C.x - rc - 4, C.y - rc - 4, C.x + rc + 4, C.y + rc + 4];
+    const grow = (x0, y0, x1, y1) => { bx = [Math.min(bx[0], x0), Math.min(bx[1], y0), Math.max(bx[2], x1), Math.max(bx[3], y1)]; };
+    mine.forEach((p, i) => {
+      const ang = (n === 1 ? 180 : -90 + (i + .5) * 360 / n) * Math.PI / 180, S = {x: C.x + R * Math.cos(ang), y: C.y + R * Math.sin(ang)};
+      const rs = Math.max(17, Math.min(32, 15 + Math.sqrt((p.i + p.b) / 1e9) * 1.05)), d = unit(S, C), nv = {x: d.y, y: -d.x};
+      const wi = wOf(p.i), wb = wOf(p.b), bow = 17 + (wi + wb) / 2, ci = colIn(p.inv), cb = colBack(p.back);
+      const up = curve(S, C, add(pt(S, C, .3), nv, bow), add(pt(S, C, .7), nv, bow), rs, rc);
+      const dn = curve(C, S, add(pt(S, C, .7), nv, -bow), add(pt(S, C, .3), nv, -bow), rc, rs);
+      const mu = bez(up.s, up.c1, up.c2, up.e, .5), md = bez(dn.s, dn.c1, dn.c2, dn.e, .5), mc = pt(add(S, d, rs), add(C, d, -rc), .5);
+      const tin = p.i ? money(p.i) + ' in' : p.inv.every(f => f.type === 'owns') ? 'stake, no new money' : 'in: not disclosed', tback = p.b ? money(p.b) + ' back' : 'back: not disclosed';
+      const cents = p.i && p.b ? Math.round(100 * p.i / p.b) + '¢' : '';
+      g += `<g class="lp" data-s="${esc(p.s)}" data-c="${esc(cid)}">
+        <path d="${up.d}" fill="none" stroke="${ci}" stroke-width="${f1(wi)}" ${p.i ? '' : 'stroke-dasharray="5 5"'} stroke-linecap="round" marker-end="url(#lm${k}-${colors.indexOf(ci)})" data-flowlink="${esc(big(p.inv).id)}"><title>${esc(ents[p.s].name)} → ${esc(e.name)}: ${esc(tin)}</title></path>
+        <path d="${dn.d}" fill="none" stroke="${cb}" stroke-width="${f1(wb)}" ${p.b ? '' : 'stroke-dasharray="5 5"'} stroke-linecap="round" marker-end="url(#lm${k}-${colors.indexOf(cb)})" data-flowlink="${esc(big(p.back).id)}"><title>${esc(e.name)} → ${esc(ents[p.s].name)}: ${esc(tback)}</title></path>
+        ${cents ? `<rect x="${f1(mc.x - 23)}" y="${f1(mc.y - 11)}" width="46" height="22" rx="11" fill="#fff" stroke="${ink}"/><text class="mono" x="${f1(mc.x)}" y="${f1(mc.y + 4.2)}" text-anchor="middle" font-size="12.5" font-weight="700" fill="${ink}">${cents}</text>` : ''}</g>`;
+      // caption outward from the star: name, then money in (supplier's colour of money) and orders back
+      const cx = Math.cos(ang), cy = Math.sin(ang), side = Math.abs(cx) > .6, lines = [[ents[p.s].name, ink, 16, 700, ''], [tin, ci, 14, 600, 'mono'], [tback, cb, 14, 600, 'mono']];
+      const wd = Math.max(...lines.map(([t, , fs, , m]) => t.length * (m ? fs * .6 : fs * .56))), hgt = 16 + 17 * 2;
+      const an = side ? (cx < 0 ? 'end' : 'start') : 'middle', tx = side ? S.x + (rs + 9) * Math.sign(cx) : S.x;
+      const ty0 = side ? S.y - hgt / 2 + 12 : cy < 0 ? S.y - rs - 10 - (hgt - 14) : S.y + rs + 18;
+      const lx0 = an === 'end' ? tx - wd : an === 'start' ? tx : tx - wd / 2;
+      grow(Math.min(S.x - rs, lx0), Math.min(S.y - rs, ty0 - 15), Math.max(S.x + rs, lx0 + wd), Math.max(S.y + rs, ty0 + hgt - 10));
+      nodes += `<g class="nd" data-node="${esc(p.s)}" data-entlink="${esc(p.s)}"><circle cx="${f1(S.x)}" cy="${f1(S.y)}" r="${f1(rs)}" fill="${tint(ents[p.s])}" stroke="${ink}" stroke-width="1.4"/>
+        ${lines.map(([t, col, fs, fw, m], j) => `<text class="lbl ${m}" x="${f1(tx)}" y="${f1(ty0 + (j ? 16 + (j - 1) * 17 + 2 : 0))}" text-anchor="${an}" font-size="${fs}" font-weight="${fw}" fill="${col}">${esc(t)}</text>`).join('')}</g>`;
+    });
+    const fsC = rc > 36 ? 15 : 13, inside = e.name.length * fsC * .56 < rc * 1.8, cyT = inside ? C.y + 5 : C.y + rc + 18;
+    if (!inside) grow(C.x - e.name.length * fsC * .3, C.y, C.x + e.name.length * fsC * .3, cyT + 4);
+    nodes += `<g class="nd" data-node="${esc(cid)}" data-entlink="${esc(cid)}"><circle cx="${C.x}" cy="${C.y}" r="${f1(rc)}" fill="${tint(e)}" stroke="${ink}" stroke-width="1.6"/>
+      <text class="lbl" x="${C.x}" y="${cyT}" text-anchor="middle" font-size="${fsC}" font-weight="700" fill="${ink}">${esc(e.name)}</text></g>`;
+    return `<figure class="lstar"><figcaption><b>${esc(e.name)}</b> · ${n} supplier${n > 1 ? 's' : ''} in a loop with it<span>${ti ? money(ti) : '–'} in from them · ${tb ? money(tb) : '–'} committed back</span></figcaption>
+      <svg class="lm" viewBox="${bx.map((v, j) => f1(j < 2 ? v - 8 : v - bx[j - 2] + 16)).join(' ')}" style="width:${Math.round((bx[2] - bx[0] + 16) * .8)}px" role="img" aria-label="${esc(e.name)} and the suppliers that fund it and sell to it">
+      <defs>${colors.map((c, j) => `<marker id="lm${k}-${j}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${c}"/></marker>`).join('')}</defs>
+      ${g}${nodes}</svg></figure>`;
+  };
+  const strip = lp.map(x => `<button class="lchip" data-node="${esc(x.s)}" data-entlink="${esc(x.s)}"><b>${esc(ents[x.s].name)}</b> ${x.cents != null ? `<span class="c">${x.cents}¢</span>` : ''}<span>${x.i ? money(x.i) : '–'} in · ${x.b ? money(x.b) : '–'} back</span></button>`).join('');
+  return `${wide ? `<div class="lstrip"><span class="k">Suppliers, by orders back</span>${strip}</div>` : `<div class="lstrip-k">Suppliers, by orders back</div><div class="lstrip">${strip}</div>`}<div class="lgrid">${cus.map(star).join('')}</div>`;
+}
+function hookLoopMap(){
+  const box = $('#drawer .lmbox'); if (!box) return;
+  const clear = () => { box.classList.remove('hot'); box.querySelectorAll('.on').forEach(x => x.classList.remove('on')); };
+  box.addEventListener('mouseover', e => { const nd = e.target.closest('[data-node]'), lp = e.target.closest('.lp'); clear(); if (!nd && !lp) return;
+    box.classList.add('hot');
+    if (lp){ lp.classList.add('on'); box.querySelectorAll(`[data-node="${lp.dataset.s}"], [data-node="${lp.dataset.c}"]`).forEach(x => x.classList.add('on')); return; }
+    const id = nd.dataset.node; box.querySelectorAll(`[data-node="${id}"]`).forEach(x => x.classList.add('on'));
+    box.querySelectorAll('.lp').forEach(l => { if (l.dataset.s === id || l.dataset.c === id){ l.classList.add('on'); box.querySelectorAll(`.lm [data-node="${l.dataset.c}"], .lm [data-node="${l.dataset.s}"]`).forEach(x => { if (x.closest('figure') === l.closest('figure')) x.classList.add('on'); }); } }); });
+  box.addEventListener('mouseleave', clear);
+}
+function renderDrawer(){
+  drawDrawer();
+  if (!wide) $('#drawer-body').querySelectorAll('table').forEach(t => { if (t.parentNode.classList.contains('tscroll')) return; const w = document.createElement('div'); w.className = 'tscroll'; t.replaceWith(w); w.appendChild(t); });
+}
+function dealsCards(D){
+  const money_ = V.flows.filter(isMoney), links = V.flows.filter(f => !isMoney(f));
+  const F = {all: () => true, moved: f => f.grade !== 'reported' && f.status === 'cash_moved', signed: f => f.grade !== 'reported' && f.status === 'contracted',
+             ann: f => f.grade !== 'reported' && f.status !== 'cash_moved' && f.status !== 'contracted', press: f => f.grade === 'reported'};
+  const NM = [['all', 'All'], ['moved', 'Money moved'], ['signed', 'Signed'], ['ann', 'Announced'], ['press', 'Press only']];
+  const list = money_.filter(F[dealF]).sort((a, b) => (b.amount_usd || 0) - (a.amount_usd || 0) || (a.date < b.date ? 1 : -1));
+  const card = f => `<button class="card" data-flowlink="${esc(f.id)}"><div class="c1"><span class="who"><b>${esc(ents[f.payer].name)}</b> → <b>${esc(ents[f.payee].name)}</b></span><span class="amt" style="color:${f.amount_usd ? COL[f.type] : css('--muted')}">${f.amount_usd ? money(f.amount_usd) : 'n/d'}</span></div>
+    <div class="c2">${esc(f.title || f.label || TYPE[f.type])}</div>
+    <div class="c3"><span><span class="ln" style="border-color:${COL[f.type]};border-top-style:${f.status === 'cash_moved' ? 'solid' : 'dashed'}"></span>${esc(TYPE[f.type])} · ${esc(STATUS[f.status])}</span>${chip(f.grade)}${PENDING.has(f.id) ? '<span class="chip unchecked">unchecked</span>' : ''}<span class="num">${day(f.date)}</span></div></button>`;
+  const sec = (title, n, body) => n ? `<details class="dsec"><summary>${title} (${n})</summary><div class="mlist">${body}</div></details>` : '';
+  D.innerHTML = `<h2>Every deal</h2><p class="note">${money_.length} money rows public by ${day(iso())}, largest first. Tap one for what its source says.</p>
+    <div class="dchips">${NM.map(([k, t]) => `<button data-dealf="${k}" aria-pressed="${dealF === k}">${t}<span>${money_.filter(F[k]).length}</span></button>`).join('')}</div>
+    <div class="cards">${list.map(card).join('') || '<p class="note">No rows in this group at this date.</p>'}</div>
+    ${sec('Product and usage links', links.length, links.map(f => `<div class="row"><div class="t"><span><b>${esc(ents[f.payer].name)}</b> → <b>${esc(ents[f.payee].name)}</b></span></div><div class="m">${esc(TYPE[f.type])} · ${src(f)}</div></div>`).join(''))}
+    ${sec('Model releases', V.rel.length, V.rel.slice().reverse().map(r => `<div class="row"><div class="t"><span><b>${esc(r.model)}</b></span><span class="num">${day(r.date)}</span></div><div class="m">${esc(ents[r.entity].name)} · ${esc(r.access)}${r.price_in != null ? ' · $' + r.price_in + ' / $' + r.price_out : ''} ${chip(r.grade)} ${src(r)}</div></div>`).join(''))}
+    ${sec('Stated revenue and usage', V.met.length, V.met.map(m => `<div class="row"><div class="t"><span><b>${esc(ents[m.entity].name)}</b> · ${esc(MET[m.metric] || m.metric)}</span><span class="num">${esc(mval(m))}</span></div><div class="m">as of <span class="num">${day(m.as_of)}</span> ${chip(m.grade)} ${src(m)}</div></div>`).join(''))}
+    ${sec('Filed observations', V.obs.length, V.obs.map(o => `<div class="row"><div class="t"><span><b>${esc(ents[o.subject].name)}</b> · ${esc(o.metric)}</span><span class="num">${money(o.value_usd)}</span></div><div class="m">period ending <span class="num">${day(o.period_end)}</span>${o.derived ? ' · derived' : ''} · <a href="${esc(o.source_url)}" target="_blank" rel="noopener">${esc(o.accn)}</a></div></div>`).join(''))}
+    ${sec('Events', V.events.length, V.events.slice().reverse().map(e => `<div class="row"><div class="t"><span><b>${esc(e.title)}</b></span></div><div class="m"><span class="num">${day(e.date)}</span> ${chip(e.grade)} ${src(e)}</div></div>`).join(''))}`;
+}
+function drawDrawer(){
+  const D = $('#drawer-body');
+  if (drawer === 'rows' && !wide) return dealsCards(D);
+  if (drawer === 'loops'){
+    const lp = loops(), name = id => esc(ents[id].name), link = f => `<button class="num" data-flowlink="${esc(f.id)}" style="color:inherit;text-decoration:underline">${isMoney(f) ? money(f.amount_usd) : 'stake'}</button>`;
+    const tabs = `<span class="seg" role="group" aria-label="Loops view"><button data-ltab="map" aria-pressed="${loopTab === 'map'}">Map</button><button data-ltab="table" aria-pressed="${loopTab === 'table'}">Table</button></span>`;
+    if (loopTab === 'map'){
+      D.innerHTML = `<h2 style="display:inline-block">Loops</h2>${tabs}<p class="note">${wide ? `One star per customer, with the suppliers that both fund it and sell to it around it, as of ${day(iso())}. On each spoke, one curve is the supplier's money in and the other is the customer's orders back, so every spoke is a closed loop. Thicker means more dollars; dashed means not disclosed. The badge is cents in per $1 back. Hover a supplier to see every customer it loops with; click a curve for its row.` : `Suppliers that fund a customer which commits money straight back to them, as of ${day(iso())}. On each spoke one curve is money in, the other is orders back; the badge is cents in per $1 back. Tap a supplier to light up its loops, or a curve for its row.`}</p><div class="lmbox">${loopMap(lp)}</div>
+      <h3>How to read it</h3><p class="def">Blue is equity, purple is loans or backstops, grey is an ownership stake with no new money in the window; orange is purchase commitments. Amounts are gross and summed per pair. A badge appears only where both sides are disclosed, so a missing badge is not a zero.</p>`;
+      hookLoopMap(); return;
+    }
+    D.innerHTML = `<h2 style="display:inline-block">Loops</h2>${tabs}<p class="note">A loop is a supplier putting its own money into a customer that has also committed money back to it: equity, loans or backstops one way, purchase commitments the other. Only rows on this ledger count, as of ${day(iso())}. Amounts are gross and undisclosed amounts are left out, so a blank is not a zero.</p>
+      <table><tr><th>Supplier</th><th>Customers it funds that also buy from it</th><th class="r">Its money in</th><th class="r">Orders back</th><th class="r">Cents in per $1 back*</th></tr>
+      ${lp.map(x => `<tr><td><button data-entlink="${esc(x.s)}"><b>${name(x.s)}</b></button></td><td>${x.ls.map(l => `<div><button data-entlink="${esc(l.c)}">${name(l.c)}</button>: ${l.inv.map(link).join(' + ')} in, ${l.back.map(link).join(' + ')} back</div>`).join('')}</td><td class="r num">${x.i ? money(x.i) : '–'}</td><td class="r num">${x.b ? money(x.b) : '–'}</td><td class="r num">${x.cents != null ? x.cents + '¢' : '–'}</td></tr>`).join('')}</table>
+      <p class="note">* Counted only over customers where both sides are disclosed. "Stake" is an ownership stake with no new money inside the ledger's window, such as Microsoft's holding in OpenAI, which it bought before July 2025.</p>
+      <h3>Precedent: telecom, 1999 to 2001</h3><p class="def">At the end of its 2000 fiscal year, Lucent had committed to lend up to about $6.7B to its own customers and to guarantee up to about $1.4B more of their debt, against $33.8B of revenue that year. <a href="https://www.sec.gov/Archives/edgar/data/1006240/000095012300011855/y43690e10-k405.txt" target="_blank" rel="noopener">Lucent 10-K, fiscal 2000</a>. That was credit to buy Lucent's own gear. Most of today's loops are equity stakes set against long compute contracts, so the two are not measured the same way: the table above compares a supplier's money in with the orders coming back, not with its revenue.</p>
+      <h3>What the table leaves out</h3><p class="def">Loops where only one side is on the ledger, such as Nvidia's stakes in CoreWeave and Nebius, whose GPU purchases from Nvidia are not disclosed as rows. They join the table as soon as both sides are sourced.</p>`;
+    return;
+  }
+  if (drawer === 'rows'){
+    const money_ = V.flows.filter(isMoney), links = V.flows.filter(f => !isMoney(f));
+    D.innerHTML = `<h2>The ledger</h2><p class="note">The map draws nothing that is not listed here. Rows public on or before ${day(iso())}.</p>
+      <h3>Money flows (${money_.length})</h3><table><tr><th>Payer</th><th>Payee</th><th>Type</th><th>Status</th><th class="r">Amount</th><th>Term</th><th>Grade</th><th>As of</th><th>Source</th></tr>
+      ${money_.map(f => `<tr><td>${esc(ents[f.payer].name)}</td><td>${esc(ents[f.payee].name)}</td><td>${esc(TYPE[f.type])}</td><td>${esc(STATUS[f.status])}</td><td class="r num">${money(f.amount_usd)}</td><td class="num">${termYears(f) ? termYears(f) + ' yrs' : ''}</td><td>${chip(f.grade)}${PENDING.has(f.id) ? ' <span class="chip unchecked">unchecked</span>' : ''}</td><td class="num">${day(f.as_of)}</td><td>${src(f)}</td></tr>`).join('')}</table>
+      <h3>Product and usage links (${links.length})</h3><table><tr><th>From</th><th>To</th><th>Link</th><th>Source</th></tr>
+      ${links.map(f => `<tr><td>${esc(ents[f.payer].name)}</td><td>${esc(ents[f.payee].name)}</td><td>${esc(TYPE[f.type])}</td><td>${src(f)}</td></tr>`).join('')}</table>
+      <h3>Filed observations (${V.obs.length})</h3><table><tr><th>Entity</th><th>Metric</th><th>Period end</th><th class="r">Value</th><th>Derived</th><th>Filed</th><th>Accession</th></tr>
+      ${V.obs.map(o => `<tr><td>${esc(ents[o.subject].name)}</td><td>${esc(o.metric)}</td><td class="num">${day(o.period_end)}</td><td class="r num">${money(o.value_usd)}</td><td>${o.derived ? 'yes' : ''}</td><td class="num">${day(o.available)}</td><td class="num"><a href="${esc(o.source_url)}" target="_blank" rel="noopener">${esc(o.accn)}</a></td></tr>`).join('')}</table>
+      <h3>Model releases (${V.rel.length})</h3><table><tr><th>Date</th><th>Product</th><th>Model</th><th>Access</th><th>Open</th><th class="r">Price in / out</th><th>Grade</th><th>Source</th></tr>
+      ${V.rel.slice().reverse().map(r => `<tr><td class="num">${day(r.date)}</td><td>${esc(ents[r.entity].name)}</td><td>${esc(r.model)}${r.material ? ' <span class="tag">structural</span>' : ''}</td><td>${esc(r.access)}</td><td>${r.open_weights ? 'yes' : ''}</td><td class="r num">${r.price_in != null ? '$' + r.price_in + ' / $' + r.price_out : ''}</td><td>${chip(r.grade)}</td><td>${src(r)}</td></tr>`).join('')}</table>
+      <h3>Stated revenue and usage (${V.met.length})</h3><table><tr><th>Entity</th><th>Metric</th><th>As of</th><th class="r">Value</th><th>Published</th><th>Grade</th><th>Source</th></tr>
+      ${V.met.map(m => `<tr><td>${esc(ents[m.entity].name)}</td><td>${esc(MET[m.metric] || m.metric)}</td><td class="num">${day(m.as_of)}</td><td class="r num">${esc(mval(m))}</td><td class="num">${day(m.available)}</td><td>${chip(m.grade)}</td><td>${src(m)}</td></tr>`).join('')}</table>
+      <h3>Events (${V.events.length})</h3><table><tr><th>Date</th><th>Level</th><th>Event</th><th>Grade</th><th>Source</th></tr>
+      ${V.events.slice().reverse().map(e => `<tr><td class="num">${day(e.date)}</td><td>${esc(e.level)}</td><td>${esc(e.title)}</td><td>${chip(e.grade)}</td><td>${src(e)}</td></tr>`).join('')}</table>`;
+  } else {
+    const bt = L.backtest, vf = L.verification, run = L.runs[L.runs.length - 1];
+    D.innerHTML = `<h2>Checks</h2><p class="note">Latest run ${esc(run.id)}, ledger as of ${day(L.as_of)}. These results come from the run, not from the page.</p>
+      <h3>Reconciliation against filings (${L.checks.filter(c => c.pass).length} of ${L.checks.length} pass)</h3>
+      <table><tr><th>Entity</th><th>Metric</th><th>Period end</th><th>Test</th><th class="r">Difference</th><th></th></tr>${L.checks.map(c => `<tr><td>${esc(ents[c.subject].name)}</td><td>${esc(c.metric)}</td><td class="num">${day(c.period_end)}</td><td>${CHECK[c.check] || c.check}${c.basis ? ` <a href="${esc(c.source_url)}" target="_blank" rel="noopener">${esc(c.basis)}</a>` : ''}</td><td class="r num">${c.check === 'yoy_pct' ? c.abs_diff.toFixed(2) + ' pts' : '$' + (c.abs_diff / 1e6).toFixed(0) + 'M'}</td><td class="${c.pass ? 'pass' : 'fail'}">${c.pass ? 'pass' : 'FAIL'}</td></tr>`).join('')}</table>
+      <h3>Where trackers disagree</h3>${(L.ranges || []).map(r => `<p class="def"><b>${esc(ents[r.subject].name)} ${esc(r.metric)}, period ending ${day(r.period_end)}:</b> ${r.values.map(v => `${money(v.value_usd)} ${chip(v.grade)} <a href="${esc(v.source_url)}" target="_blank" rel="noopener">${esc(v.basis)}</a>`).join(' vs ')}</p>`).join('')}
+      <h3>Backtest: ledger as of ${day(bt.from)}, then run to ${day(bt.to)}</h3><p class="note">${bt.rows_at_from} rows before, ${bt.rows_at_to} after. Known events come from independent press, listed before the run.</p>
+      <table><tr><th>Date</th><th>Known event</th><th>Result</th><th>Caught by</th></tr>${bt.known_events.map(k => `<tr><td class="num">${day(k.date)}</td><td><a href="${esc(k.independent_source)}" target="_blank" rel="noopener">${esc(k.what)}</a></td><td class="${k.caught ? (k.grade === 'filed' ? 'pass' : 'warn') : 'fail'}">${k.caught ? (k.grade === 'filed' ? 'caught from a filing' : 'caught from press only') : 'MISSED'}</td><td class="num">${esc(k.by_row || '')}</td></tr>`).join('')}</table>
+      <h3>Independent verification</h3>${vf && (vf.pending || []).length ? `<p class="def warn">${vf.pending.length} rows added in the latest pass are still being checked by the verifier. Treat them as unverified until this line goes away.</p>` : ''}${vf ? `<p class="def">${esc(vf.method)} ${vf.rows_checked} rows checked on ${esc(vf.verified_at)}; ${vf.confirmed.length} confirmed, ${vf.findings.length} findings.</p>${vf.findings.length ? `<table><tr><th>Row</th><th>Finding</th><th>Note</th><th>Now</th></tr>${vf.findings.map(f => { const done = (vf.addressed || []).includes(f.row); return `<tr><td class="num">${esc(f.row)}</td><td class="${f.severity === 'wrong' ? 'fail' : 'warn'}">${esc(f.severity)}</td><td>${esc(f.note)}</td><td class="${done ? 'pass' : 'warn'}">${done ? 'corrected' : 'open'}</td></tr>`; }).join('')}</table>` : ''}` : '<p class="def warn">Not yet attached to this run.</p>'}
+      <h3>Cross-check against other maps (${(L.coverage || []).filter(c => c.caught).length} of ${(L.coverage || []).length} edges on the ledger${(L.coverage || []).some(c => c.excluded) ? `, ${(L.coverage || []).filter(c => c.excluded).length} left off on purpose` : ''})</h3>
+      <p class="note">Connections that other published maps of AI deals draw. Each run checks whether this ledger has a sourced row for each one; a missing edge is a target for the next run, not a fact.</p>
+      <table><tr><th>Connection</th><th>Shown in</th><th>Ledger</th></tr>${(L.coverage || []).map(c => `<tr><td>${esc(ents[c.a] ? ents[c.a].name : c.a)} – ${esc(ents[c.b] ? ents[c.b].name : c.b)}<div class="note">${esc(c.what)}</div></td><td>${c.maps.map(m => `<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.name)}</a>`).join('<br>')}</td><td class="${c.caught || c.excluded ? 'pass' : 'warn'}">${c.caught ? c.rows.map(r => `<button class="num" data-flowlink="${esc(r)}" style="color:inherit;text-decoration:underline">${esc(r)}</button>`).join(' ') : c.excluded ? esc(c.reason) : 'missing: ' + esc(c.reason)}</td></tr>`).join('')}</table>
+      <h3>Not sourced from primary material</h3>${(L.gaps || []).map(g => `<p class="def"><b>${esc(g.topic)}.</b> ${esc(g.note)}</p>`).join('')}
+      <h3>Corrections (${L.corrections.length})</h3><p class="def">${L.corrections.length ? L.corrections.map(c => `<span class="num">${day(c.date)}</span> · ${esc(c.rows.join(', '))}: ${esc(c.note)}`).join('<br>') + '<br><br>' : 'None logged. '}To flag an error, name the row and the source that contradicts it. Each run checks flagged rows, and any change is logged here.</p>`;
+  }
+}
+})();
+</script>
+</body>
+</html>

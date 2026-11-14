@@ -1,0 +1,27 @@
+name: Correction
+description: A row on the map is wrong, out of date or missing.
+title: "Correction: "
+labels: ["correction"]
+body:
+  - type: input
+    id: row
+    attributes:
+      label: Row
+      description: The row id, or the payer, payee and amount as shown on the map.
+      placeholder: "f-openai-oracle, or OpenAI → Oracle $300B"
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What's wrong
+      description: What the map says and what it should say.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link to a filing, company statement or report that supports the correction.
+    validations:
+      required: true

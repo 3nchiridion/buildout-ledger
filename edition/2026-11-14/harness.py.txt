@@ -1,0 +1,482 @@
+#!/usr/bin/env python3
+"""AI Buildout Ledger harness.
+
+Stages:  collect (raw/xbrl_facts.csv + raw/declared.json, gathered by the agent)
+         -> extract to schema -> verify (validate) -> diff -> write ledger.json
+
+Usage:
+  harness.py build  --asof YYYY-MM-DD --out ledger.json [--run-id ID]
+  harness.py validate ledger.json
+  harness.py backtest --from YYYY-MM-DD --to YYYY-MM-DD
+
+Rules enforced:
+  * Nothing reaches the ledger unless it is a row with source_url, grade, date.
+  * A row is visible as of the day its source became public (filing date or
+    announcement date), which is what --asof filters on.
+  * Quarter values that a filing gives only as year-to-date are derived by
+    subtraction and marked derived, with the arithmetic kept.
+  * Where a filing gives both a quarter and a year-to-date figure, they must
+    reconcile within TOL.
+"""
+import argparse, csv, json, sys, datetime as dt, re, os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+RAW = os.path.join(HERE, "..", "raw")
+TOL = 2_000_000  # filings round to $1M; allow two units of rounding
+GRADES = ["filed", "announced", "reported", "estimate"]
+FLOW_TYPES = ["equity", "debt", "purchase_commitment", "capex", "product", "uses", "owns"]
+KINDS = ["company", "product", "sink", "instrument", "investor", "government"]
+NON_MONEY = ("product", "uses", "owns")
+ACCESS = ["general", "limited", "preview"]
+UNITS = ["usd", "users", "tokens"]
+STATUSES = ["cash_moved", "contracted", "announced", "reported"]
+CIK = {}  # filled from declared entities at load time
+
+
+def d(s):
+    return dt.date.fromisoformat(s)
+
+
+def xbrl_url(entity, concept):
+    return f"https://data.sec.gov/api/xbrl/companyconcept/CIK{CIK[entity]}/us-gaap/{concept}.json"
+
+
+def load_raw():
+    with open(os.path.join(RAW, "xbrl_facts.csv")) as f:
+        facts = list(csv.DictReader(f))
+    for r in facts:
+        r["val"] = int(r["val"])
+    with open(os.path.join(RAW, "declared.json")) as f:
+        declared = json.load(f)
+    for e in declared["entities"]:
+        if e.get("cik"):
+            CIK[e["id"]] = e["cik"]
+    return facts, declared
+
+
+def derive_observations(facts, concepts, asof):
+    """Turn raw XBRL facts into per-period observations plus reconciliation checks."""
+    obs, checks = [], []
+    groups = {}
+    for r in facts:
+        if d(r["filed"]) > asof:
+            continue
+        groups.setdefault((r["entity"], r["concept"]), []).append(r)
+    for (entity, concept), rows in sorted(groups.items()):
+        meta = concepts[f"{entity}|{concept}"]
+        src = xbrl_url(entity, concept)
+
+        def mk(start, end, val, row, derived=None):
+            return {
+                "id": f"o-{entity}-{meta['metric']}-{end}",
+                "subject": entity, "metric": meta["metric"], "concept": concept,
+                "period_start": start, "period_end": end, "value_usd": val,
+                "derived": bool(derived), "derivation": derived,
+                "grade": "filed", "form": row["form"], "accn": row["accn"],
+                "available": row["filed"], "as_of": row["filed"],
+                "definition": meta["definition"], "source_url": src,
+                "source_title": f"SEC XBRL, {row['form']} {row['accn']}",
+            }
+
+        instants = [r for r in rows if not r["start"]]
+        for r in instants:
+            obs.append(mk(None, r["end"], r["val"], r))
+        durs = [r for r in rows if r["start"]]
+        direct = {}
+        for r in durs:
+            days = (d(r["end"]) - d(r["start"])).days
+            if 75 <= days <= 100:
+                direct[r["end"]] = r
+        by_start = {}
+        for r in durs:
+            by_start.setdefault(r["start"], []).append(r)
+        quarters = {}
+        for end, r in direct.items():
+            quarters[end] = mk(r["start"], end, r["val"], r)
+        for start, cum in by_start.items():
+            cum.sort(key=lambda r: r["end"])
+            prev = None
+            for r in cum:
+                days = (d(r["end"]) - d(start)).days
+                if days > 380:  # trailing-twelve-month style fact, handled below
+                    continue
+                if prev is None:
+                    prev = r
+                    continue
+                gap = (d(r["end"]) - d(prev["end"])).days
+                if 75 <= gap <= 100:
+                    q = r["val"] - prev["val"]
+                    qstart = (d(prev["end"]) + dt.timedelta(days=1)).isoformat()
+                    how = f"{r['val']} (to {r['end']}, {r['accn']}) minus {prev['val']} (to {prev['end']}, {prev['accn']})"
+                    if r["end"] in direct:
+                        diff = abs(direct[r["end"]]["val"] - q)
+                        checks.append({
+                            "check": "quarter_vs_ytd", "subject": entity, "metric": meta["metric"],
+                            "period_end": r["end"], "reported_quarter": direct[r["end"]]["val"],
+                            "ytd_difference": q, "abs_diff": diff, "pass": diff <= TOL,
+                        })
+                    else:
+                        quarters[r["end"]] = mk(qstart, r["end"], q, r, derived=how)
+                prev = r
+        obs.extend(quarters[k] for k in sorted(quarters))
+        # trailing-twelve-month facts: check against the sum of the four quarters we hold
+        for r in durs:
+            days = (d(r["end"]) - d(r["start"])).days
+            starts_fy = any(x["start"] == r["start"] and x is not r for x in durs)
+            if 350 <= days <= 380 and not starts_fy:
+                ends = [e for e in sorted(quarters) if d(r["start"]) <= d(quarters[e]["period_start"]) and d(e) <= d(r["end"])]
+                if len(ends) == 4:
+                    s = sum(quarters[e]["value_usd"] for e in ends)
+                    checks.append({
+                        "check": "four_quarters_vs_ttm", "subject": entity, "metric": meta["metric"],
+                        "period_end": r["end"], "reported_ttm": r["val"], "sum_of_quarters": s,
+                        "abs_diff": abs(s - r["val"]), "pass": abs(s - r["val"]) <= TOL,
+                    })
+    return obs, checks
+
+
+def ttm(obs, entity, metric):
+    qs = sorted([o for o in obs if o["subject"] == entity and o["metric"] == metric and o["period_start"]],
+                key=lambda o: o["period_end"])
+    last = qs[-4:]
+    return (sum(o["value_usd"] for o in last) if last else None, last)
+
+
+def fmt(v):
+    return f"${v/1e9:,.1f}B"
+
+
+def names_of(dec):
+    return {e["id"]: e["name"] for e in dec["entities"]}
+
+
+def build(asof, run_id, with_history=True):
+    facts, dec = load_raw()
+    obs, checks = derive_observations(facts, dec["concepts"], asof)
+    flows, events = [], []
+    for f in dec["flows"]:
+        if d(f["date"]) <= asof:
+            g = {k: v for k, v in f.items() if k != "revisions"}
+            g["available"] = f["date"]
+            g["as_of"] = f["date"]
+            # a revision is a later primary disclosure of the same deal; the newest one public by asof wins
+            for r in sorted(f.get("revisions", []), key=lambda r: r["date"]):
+                if d(r["date"]) > asof:
+                    break
+                g.update({k: r[k] for k in ("amount_usd", "amount_qualifier", "grade", "source_title", "source_url") if k in r})
+                if r.get("status"): g["status"] = r["status"]
+                g["available"] = g["as_of"] = r["date"]
+                g["definition"] = f["definition"] + " Update " + r["date"] + ": " + r["note"]
+                g["revised_from"] = f["source_url"]
+                events.append({
+                    "id": f"e-{f['id']}-r{r['date']}", "date": r["date"], "entities": [f["payer"], f["payee"]],
+                    "flow": f["id"], "level": f["level"], "title": r["title"], "detail": r["note"],
+                    "grade": r["grade"], "source_title": r["source_title"], "source_url": r["source_url"],
+                })
+            flows.append(g)
+            if f["type"] in NON_MONEY:
+                continue
+            events.append({
+                "id": "e-" + f["id"], "date": f["date"], "entities": [f["payer"], f["payee"]],
+                "flow": f["id"], "level": f["level"], "title": f["title"], "detail": f["definition"],
+                "grade": f["grade"], "source_title": f["source_title"], "source_url": f["source_url"],
+            })
+    # model releases: events on the product (or the lab, for labs without a separate app on the map)
+    releases = [dict(r) for r in dec.get("releases", []) if d(r["date"]) <= asof]
+    for r in releases:
+        price = f" at ${r['price_in']:g} / ${r['price_out']:g} per 1M tokens" if r.get("price_in") is not None else ""
+        events.append({
+            "id": "e-" + r["id"], "date": r["date"], "entities": sorted({r["entity"], r["lab"]}), "flow": None, "release": r["id"],
+            "level": "map" if r["material"] else "entity",
+            "title": f"{r['model']} released{' (limited)' if r['access'] == 'limited' else ' (preview)' if r['access'] == 'preview' else ''}{', open weights' if r['open_weights'] else ''}{price}",
+            "detail": r["note"], "grade": r["grade"], "source_title": r["source_title"], "source_url": r["source_url"],
+        })
+    # stated metrics: revenue, run-rate, users. Company-stated figures are 'announced'; filings are 'filed'
+    mdef = dec.get("metric_defaults", {})
+    metrics = []
+    for m in dec.get("metrics", []):
+        if d(m["available"]) > asof:
+            continue
+        x = {**{k: v for k, v in mdef.get(m["metric"], {}).items()}, **m}
+        metrics.append(x)
+    mnames = {"revenue_quarter": "revenue", "run_rate": "run-rate revenue", "coding_run_rate": "Claude Code run-rate", "weekly_users": "weekly users",
+              "monthly_users": "monthly users", "subscribers": "subscribers", "api_tokens_per_min": "API tokens per minute", "purchase_commitments": "purchase commitments"}
+    def mval(m):
+        v = m["value"]
+        if m["unit"] == "usd": return fmt(v)
+        return f"{v/1e9:,.2f}B".replace(".00B", "B") if v >= 1e9 else f"{v/1e6:,.0f}M"
+    for m in metrics:
+        q = {"more than": "more than ", "about": "about ", "under": "under ", "nearly": "nearly ", "at least": "at least "}.get(m.get("qualifier") or "", "")
+        events.append({
+            "id": "e-" + m["id"], "date": m["available"], "entities": [m["entity"]], "flow": None, "metric": m["id"], "level": "entity",
+            "title": f"{names_of(dec)[m['entity']]} {mnames.get(m['metric'], m['metric'])}: {q}{mval(m)}" + (f" for quarter ending {m['as_of']}" if m["metric"] == "revenue_quarter" else f" as of {m['as_of']}"),
+            "detail": m.get("definition", ""), "grade": m["grade"], "source_title": m["source_title"], "source_url": m["source_url"],
+        })
+    mm = {m["id"]: m for m in metrics}
+    for c in dec.get("metric_checks", []):
+        need_ids = [c.get("a"), c.get("b")] + c.get("parts", [])
+        if not all(i in mm for i in need_ids if i):
+            continue
+        if c["test"] == "yoy_pct":
+            got = (mm[c["a"]]["value"] / mm[c["b"]]["value"] - 1) * 100
+            ok = abs(got - c["stated"]) <= c["tolerance"]
+        elif c["test"] == "rounds_to":
+            got = mm[c["a"]]["value"]; ok = round(got / c["round_to"]) * c["round_to"] == c["stated"]
+        else:
+            got = sum(mm[i]["value"] for i in c["parts"]); ok = round(got / c["round_to"]) * c["round_to"] == c["stated"]
+        checks.append({"check": c["test"], "id": c["id"], "subject": c["entity"], "metric": "revenue_quarter", "period_end": max(mm[i]["as_of"] for i in need_ids if i),
+                       "computed": got, "stated": c["stated"], "abs_diff": abs(got - c["stated"]), "pass": ok, "basis": c["basis"], "source_url": c["source_url"]})
+    # periodic cash flows built from filed observations
+    names = {e["id"]: e["name"] for e in dec["entities"]}
+    for ent in [e["id"] for e in dec["entities"]]:
+        total, last = ttm(obs, ent, "capex")
+        if not last:
+            continue
+        latest = last[-1]
+        flows.append({
+            "id": f"f-{ent}-capex", "payer": ent, "payee": "plant", "type": "capex", "status": "cash_moved",
+            "amount_usd": total,
+            "amount_qualifier": "trailing four quarters" if len(last) == 4 else f"{len(last)} quarter(s) on record",
+            "date": latest["available"], "available": latest["available"], "as_of": latest["period_end"],
+            "grade": "filed", "definition": latest["definition"], "source_title": latest["source_title"],
+            "source_url": latest["source_url"], "level": "map",
+            "derived": True,
+            "derivation": "sum of observations " + ", ".join(o["id"] for o in last),
+            "title": f"{names[ent]} capital spending", "label": "Capex, last 4 qtrs" if len(last) == 4 else "Capex to date",
+        })
+    debt = [r for r in facts if r["entity"] == "oracle" and r["concept"] == "ProceedsFromIssuanceOfSeniorLongTermDebt" and d(r["filed"]) <= asof]
+    if debt:
+        latest = {"definition": dec["concepts"]["oracle|ProceedsFromIssuanceOfSeniorLongTermDebt"]["definition"],
+                  "source_url": xbrl_url("oracle", "ProceedsFromIssuanceOfSeniorLongTermDebt")}
+        raw_cum = max((r for r in facts if r["entity"] == "oracle" and r["concept"] == "ProceedsFromIssuanceOfSeniorLongTermDebt" and d(r["filed"]) <= asof),
+                      key=lambda r: r["end"])
+        flows.append({
+            "id": "f-orcl-debt", "payer": "oracle-notes", "payee": "oracle", "type": "debt", "status": "cash_moved",
+            "amount_usd": raw_cum["val"], "amount_qualifier": f"fiscal year to {raw_cum['end']}",
+            "date": raw_cum["filed"], "available": raw_cum["filed"], "as_of": raw_cum["end"],
+            "grade": "filed", "definition": latest["definition"],
+            "source_title": f"SEC XBRL, {raw_cum['form']} {raw_cum['accn']}", "source_url": latest["source_url"],
+            "level": "map", "title": "Oracle borrows through senior notes", "label": "Senior notes",
+        })
+    for e in dec["events"]:
+        if d(e["date"]) <= asof:
+            events.append(dict(e))
+    # one event per filed observation: this is the entity-level "everything" stream
+    by_series = {}
+    for o in obs:
+        by_series.setdefault((o["subject"], o["metric"]), []).append(o)
+    label = {"capex": "capital spending", "revenue": "revenue", "rpo": "contracted backlog", "debt_proceeds": "senior debt raised"}
+    for (ent, metric), series in by_series.items():
+        series.sort(key=lambda o: o["period_end"])
+        for i, o in enumerate(series):
+            prev = series[i - 1] if i else None
+            chg = ""
+            if prev and prev["value_usd"]:
+                pct = (o["value_usd"] - prev["value_usd"]) / prev["value_usd"] * 100
+                chg = f" ({pct:+.0f}% vs prior period)"
+            structural = False
+            if metric == "rpo" and prev and o["value_usd"] - prev["value_usd"] > 100e9:
+                structural = True
+            events.append({
+                "id": "e-" + o["id"], "date": o["available"], "entities": [ent], "flow": None,
+                "observation": o["id"], "level": "map" if structural else "entity",
+                "title": f"{names[ent]} {label[metric]} {fmt(o['value_usd'])} for period ending {o['period_end']}{chg}",
+                "detail": o["definition"] + (" Derived: " + o["derivation"] if o["derived"] else ""),
+                "grade": "filed", "source_title": o["source_title"], "source_url": o["source_url"],
+            })
+    events.sort(key=lambda e: (e["date"], e["id"]))
+    ranges = [r for r in dec["ranges"] if d(r["period_end"]) <= asof and any(o["subject"] == r["subject"] and o["period_end"] == r["period_end"] for o in obs)]
+    ents = [e for e in dec["entities"] if any(e["id"] in (f["payer"], f["payee"]) for f in flows) or any(o["subject"] == e["id"] for o in obs) or any(e["id"] in ev["entities"] for ev in events)]
+    live = {e["id"] for e in ents}
+    for e in list(ents):   # a product on the map brings its maker
+        if e.get("parent") and e["parent"] not in live:
+            ents.append(next(x for x in dec["entities"] if x["id"] == e["parent"])); live.add(e["parent"])
+    # cross-check: edges that other public maps draw, and whether this ledger has a row for each
+    coverage = []
+    for r in dec.get("reference_edges", []):
+        rows = [f["id"] for f in flows if {f["payer"], f["payee"]} == {r["a"], r["b"]}]
+        missing_player = [x for x in (r["a"], r["b"]) if x not in {e["id"] for e in dec["entities"]}]
+        # an edge another map draws can be left off on purpose (talks only, outside the window); it says why
+        coverage.append({**r, "caught": bool(rows), "rows": rows, "excluded": bool(r.get("not_drawn")) and not rows,
+                         "reason": "" if rows else (r["not_drawn"] if r.get("not_drawn") else "player not on the map: " + ", ".join(missing_player) if missing_player else "no sourced row yet")})
+    ledger = {
+        "schema_version": 1,
+        "as_of": asof.isoformat(),
+        "schema": {
+            "grades": {"filed": "Regulatory filing (SEC XBRL)", "announced": "Company's own announcement", "reported": "Press report; no primary source", "estimate": "Third-party estimate"},
+            "flow_types": FLOW_TYPES, "statuses": STATUSES,
+            "levels": {"map": "Structural shift: changes who can do what or how capital moves", "entity": "Any recorded change at one entity"},
+        },
+        "entities": ents, "flows": flows, "observations": obs, "events": events, "ranges": ranges,
+        "releases": releases, "metrics": metrics, "coverage": coverage,
+        "checks": checks, "corrections": dec.get("corrections", []),
+        "runs": [{"id": run_id, "as_of": asof.isoformat(), "rows": len(flows) + len(obs) + len(events) + len(releases) + len(metrics)}],
+        "watchlist": [{"entity": k.split("|")[0], "concept": k.split("|")[1], "url": xbrl_url(*k.split("|"))} for k in dec["concepts"]],
+        "gaps": dec.get("gaps", []),
+    }
+    if with_history:
+        # amount history per flow, so a reader can scrub time without re-deriving anything
+        declared = {f["date"] for f in dec["flows"]} | {r["date"] for f in dec["flows"] for r in f.get("revisions", [])}
+        dates = sorted({r["filed"] for r in facts if d(r["filed"]) <= asof} | {f["available"] for f in flows} | {x for x in declared if d(x) <= asof})
+        hist = {f["id"]: [] for f in flows}
+        for ds in dates:
+            snap = build(d(ds), run_id, with_history=False)
+            for f in snap["flows"]:
+                h = hist.get(f["id"])
+                if h is None:
+                    continue
+                if not h or h[-1]["amount_usd"] != f["amount_usd"] or h[-1]["as_of"] != f["as_of"]:
+                    h.append({"available": ds, "amount_usd": f["amount_usd"], "as_of": f["as_of"],
+                              "amount_qualifier": f["amount_qualifier"], "source_title": f["source_title"]})
+        for f in flows:
+            f["history"] = hist[f["id"]]
+    return ledger
+
+
+def validate(ledger):
+    errs = []
+    ids = set()
+    ent_ids = {e["id"] for e in ledger["entities"]}
+
+    def need(row, kind, fields):
+        for f in fields:
+            if row.get(f) in (None, ""):
+                errs.append(f"{kind} {row.get('id')}: missing {f}")
+        if row.get("grade") not in GRADES:
+            errs.append(f"{kind} {row.get('id')}: bad grade {row.get('grade')}")
+        u = row.get("source_url") or ""
+        if not re.match(r"^https://[^\s]+\.[^\s]+$", u):
+            errs.append(f"{kind} {row.get('id')}: bad source_url")
+        if row.get("id") in ids:
+            errs.append(f"duplicate id {row.get('id')}")
+        ids.add(row.get("id"))
+
+    for e in ledger["entities"]:
+        if e.get("kind") not in KINDS: errs.append(f"entity {e['id']}: bad kind {e.get('kind')}")
+        if e.get("parent") and e["parent"] not in ent_ids: errs.append(f"entity {e['id']}: unknown parent")
+    for f in ledger["flows"]:
+        if f.get("type") in NON_MONEY and f.get("amount_usd") is not None: errs.append(f"flow {f['id']}: a {f['type']} link cannot carry an amount")
+        need(f, "flow", ["id", "payer", "payee", "type", "status", "date", "as_of", "definition", "source_url", "source_title"])
+        if f.get("type") not in FLOW_TYPES: errs.append(f"flow {f['id']}: bad type")
+        if f.get("status") not in STATUSES: errs.append(f"flow {f['id']}: bad status")
+        if f.get("payer") not in ent_ids or f.get("payee") not in ent_ids: errs.append(f"flow {f['id']}: unknown entity")
+        if f.get("amount_usd") is None and not f.get("amount_qualifier"): errs.append(f"flow {f['id']}: no amount and no qualifier")
+        if f.get("grade") == "filed" and "sec.gov" not in f.get("source_url", ""): errs.append(f"flow {f['id']}: graded filed without an SEC source")
+    for o in ledger["observations"]:
+        need(o, "observation", ["id", "subject", "metric", "period_end", "value_usd", "accn", "available", "definition", "source_url"])
+        if o["derived"] and not o.get("derivation"): errs.append(f"observation {o['id']}: derived without arithmetic")
+    for e in ledger["events"]:
+        need(e, "event", ["id", "date", "entities", "level", "title", "source_url"])
+        for x in e.get("entities", []):
+            if x not in ent_ids: errs.append(f"event {e['id']}: unknown entity {x}")
+    for r in ledger.get("releases", []):
+        need(r, "release", ["id", "entity", "lab", "model", "date", "access", "note", "source_url", "source_title"])
+        if r["entity"] not in ent_ids or r["lab"] not in ent_ids: errs.append(f"release {r['id']}: unknown entity")
+        if r["access"] not in ACCESS: errs.append(f"release {r['id']}: bad access")
+        if (r.get("price_in") is None) != (r.get("price_out") is None): errs.append(f"release {r['id']}: price needs both input and output")
+        if not isinstance(r.get("open_weights"), bool) or not isinstance(r.get("material"), bool): errs.append(f"release {r['id']}: open_weights and material must be true or false")
+        if r.get("price_source_url") and not r["price_source_url"].startswith("https://"): errs.append(f"release {r['id']}: bad price_source_url")
+    for m in ledger.get("metrics", []):
+        need(m, "metric", ["id", "entity", "metric", "value", "unit", "as_of", "available", "definition", "source_url", "source_title"])
+        if m["entity"] not in ent_ids: errs.append(f"metric {m['id']}: unknown entity")
+        if m["unit"] not in UNITS: errs.append(f"metric {m['id']}: bad unit")
+        if m["as_of"] > m["available"]: errs.append(f"metric {m['id']}: describes a date after it was published")
+        if m["grade"] == "filed" and "sec.gov" not in m["source_url"]: errs.append(f"metric {m['id']}: graded filed without an SEC source")
+    for c in ledger["checks"]:
+        if not c["pass"]:
+            errs.append(f"reconciliation failed: {c}")
+    # derived flows must recompute from the observations they cite
+    omap = {o["id"]: o for o in ledger["observations"]}
+    for f in ledger["flows"]:
+        if f.get("derivation") and f["derivation"].startswith("sum of observations "):
+            parts = f["derivation"][len("sum of observations "):].split(", ")
+            s = sum(omap[p]["value_usd"] for p in parts)
+            if s != f["amount_usd"]:
+                errs.append(f"flow {f['id']}: amount {f['amount_usd']} != recomputed {s}")
+    return errs
+
+
+def backtest(d0, d1):
+    a, b = build(d0, "backtest-from", False), build(d1, "backtest-to", False)
+    def rows(l):
+        return {r["id"]: r for k in ("flows", "observations", "events", "metrics") for r in l[k]}
+    ra, rb = rows(a), rows(b)
+    new = {k: v for k, v in rb.items() if k not in ra}
+    changed = {k: (ra[k], rb[k]) for k in ra if k in rb and ra[k].get("amount_usd") != rb[k].get("amount_usd")}
+    _, dec = load_raw()
+    results = []
+    for k in dec["known_events_since_backtest"]:
+        m, hit, how = k["match"], None, None
+        if m["kind"] == "observation":
+            for r in new.values():
+                if r.get("subject") == m["entity"] and r.get("metric") == m["metric"] and r.get("period_end") == m["period_end"]:
+                    hit, how = r["id"], r["grade"]
+        elif m["kind"] == "metric":
+            for r in new.values():
+                if r.get("entity") == m["entity"] and r.get("metric") == m["metric"] and r.get("as_of") == m["as_of"]:
+                    hit, how = r["id"], r["grade"]
+        elif m["kind"] == "event":
+            if m["id"] in new:
+                hit, how = m["id"], new[m["id"]]["grade"]
+        elif m["kind"] == "flow_after":
+            for r in new.values():
+                if r.get("type") == m["type"] and r.get("payee") in m["payee_any"] and d(r["date"]) >= d(k["date"]) - dt.timedelta(days=7):
+                    hit, how = r["id"], r["grade"]
+        results.append({"id": k["id"], "date": k["date"], "what": k["what"], "independent_source": k["independent_source"],
+                        "caught": bool(hit), "by_row": hit, "grade": how})
+    return {"from": d0.isoformat(), "to": d1.isoformat(), "rows_at_from": len(ra), "rows_at_to": len(rb),
+            "new_rows": sorted(new), "changed_amounts": {k: [x.get("amount_usd"), y.get("amount_usd")] for k, (x, y) in changed.items()},
+            "known_events": results}
+
+
+def headline(L):
+    """The page's headline: equity and purchase commitments, as filed or company-stated (press-only rows are shown, not counted)."""
+    return sum((f.get("amount_usd") or 0) for f in L["flows"] if f["type"] in ("equity", "purchase_commitment") and f.get("grade") != "reported")
+
+
+def gate(live, new, pct=0.05, big=50e9):
+    """Reasons to hold a run for review instead of publishing it: the headline moves more than pct, or one row moves by big or more."""
+    h0, h1, why = headline(live), headline(new), []
+    if h0 and abs(h1 - h0) / h0 > pct:
+        why.append(f"headline moves {100 * (h1 - h0) / h0:+.1f}% (${h0 / 1e9:,.1f}B to ${h1 / 1e9:,.1f}B)")
+    old = {f["id"]: f for f in live["flows"] if f["type"] not in NON_MONEY}
+    now = {f["id"]: f for f in new["flows"] if f["type"] not in NON_MONEY}
+    for i in sorted(set(old) | set(now)):
+        a0 = (old.get(i) or {}).get("amount_usd") or 0
+        a1 = (now.get(i) or {}).get("amount_usd") or 0
+        if abs(a1 - a0) >= big:
+            why.append(f"row {i} {'added' if i not in old else 'removed' if i not in now else 'changed'}: ${a0 / 1e9:,.1f}B to ${a1 / 1e9:,.1f}B")
+    return why
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    b = sub.add_parser("build"); b.add_argument("--asof", required=True); b.add_argument("--out", required=True); b.add_argument("--run-id", default="manual")
+    v = sub.add_parser("validate"); v.add_argument("ledger")
+    gt = sub.add_parser("gate"); gt.add_argument("--live", required=True); gt.add_argument("--new", required=True); gt.add_argument("--pct", type=float, default=0.05); gt.add_argument("--big", type=float, default=50e9)
+    t = sub.add_parser("backtest"); t.add_argument("--from", dest="d0", required=True); t.add_argument("--to", dest="d1", required=True); t.add_argument("--out")
+    a = ap.parse_args()
+    if a.cmd == "build":
+        L = build(d(a.asof), a.run_id)
+        errs = validate(L)
+        if errs:
+            print("VALIDATION FAILED"); [print(" -", e) for e in errs]; sys.exit(1)
+        L["backtest"] = backtest(d("2026-09-01"), d(a.asof))
+        vf = os.path.join(os.path.dirname(os.path.abspath(a.out)), "verification.json")
+        L["verification"] = json.load(open(vf)) if os.path.exists(vf) else None
+        if L["verification"]:
+            L["verification"]["addressed"] = load_raw()[1].get("verification_addressed", [])
+            L["verification"]["pending"] = load_raw()[1].get("verification_pending", [])
+        json.dump(L, open(a.out, "w"), indent=1)
+        print(f"wrote {a.out}: {len(L['entities'])} entities, {len(L['flows'])} flows, {len(L['observations'])} observations, {len(L['events'])} events, {len(L['checks'])} reconciliations passed")
+    elif a.cmd == "validate":
+        errs = validate(json.load(open(a.ledger)))
+        print("OK" if not errs else "FAILED"); [print(" -", e) for e in errs]; sys.exit(1 if errs else 0)
+    elif a.cmd == "gate":
+        why = gate(json.load(open(a.live)), json.load(open(a.new)), a.pct, a.big)
+        print("HOLD" if why else "PASS"); [print(" -", w) for w in why]; sys.exit(3 if why else 0)
+    else:
+        r = backtest(d(a.d0), d(a.d1))
+        if a.out: json.dump(r, open(a.out, "w"), indent=1)
+        print(json.dumps(r, indent=1))
