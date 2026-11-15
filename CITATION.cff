@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use these data, please cite the dataset and the date of the edition or reading you used."
+type: dataset
+title: "The Buildout Ledger: the AI Buildout Ledger and the Tokenization Buildout Ledger"
+abstract: >-
+  Two sourced, self-updating ledgers. The AI Buildout Ledger records who pays whom to build AI across
+  applications, models, infrastructure, chips and energy. The Tokenization Buildout Ledger records tokenized
+  money and assets: what is outstanding on chain, who issues it, where it settles and what backs it. Every row
+  carries its source, a grade, an as-of date and a definition; an independent check runs against each row's
+  source, and history is append-only. Frozen editions are kept unchanged for citation.
+authors:
+  - given-names: Derek
+url: "https://buildoutledger.com"
+repository-code: "https://github.com/3nchiridion/buildout-ledger"
+keywords:
+  - tokenization
+  - stablecoins
+  - real-world assets
+  - tokenized money market funds
+  - tokenized stocks
+  - AI infrastructure
+  - AI investment
+  - open data
