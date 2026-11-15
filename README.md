@@ -2,9 +2,10 @@
 
 Interactive maps of who is building what, where every line is a sourced row. Free, no ads.
 
-| Map | Address | Folder |
+| Page | Address | Folder |
 |---|---|---|
-| The AI Buildout Ledger | [buildoutledger.com](https://buildoutledger.com) | repo root |
+| Home: both maps and their latest structural shifts | [buildoutledger.com](https://buildoutledger.com) | `index.html` (reads both ledgers in the browser) |
+| The AI Buildout Ledger | [buildoutledger.com/ai](https://buildoutledger.com/ai/) | `ai/` (moved from the root on 15 Nov 2026; old links forward) |
 | The Tokenization Buildout Ledger | [buildoutledger.com/tokenization](https://buildoutledger.com/tokenization/) | `tokenization/` |
 
 ## The AI Buildout Ledger
@@ -24,19 +25,20 @@ Every line on the map is a sourced row in `ledger.json`. Each row carries its so
 
 ### How it updates
 
-A scheduled agent run collects new filings and announcements each day and rebuilds the ledger with `harness.py`. A separate agent that hasn't seen the work checks every new or changed row against its source (`verification.json`). A gate holds any update that moves the headline more than 5%, or any single row by $50B or more, for review before it goes live. History is append-only: revisions and corrections are logged on the row they change.
+A scheduled agent run collects new filings and announcements each day, rebuilds the ledger with `harness.py`, publishes it to its Claude artifact and, since 15 Nov 2026, to `ai/` on this site through a pull request. A separate agent that hasn't seen the work checks every new or changed row against its source (`verification.json`). A gate holds any update that moves the headline more than 5%, or any single row by $50B or more, for review before it goes live. History is append-only: revisions and corrections are logged on the row they change.
 
 ### Files
 
 | Path | What it is |
 |---|---|
-| `index.html` | The map (one self-contained page) |
-| `ledger.json` | The built ledger the map draws |
-| `raw/declared.json` | Every declared row with its source, revisions and corrections |
-| `raw/xbrl_facts.csv` | SEC XBRL facts behind the filed figures |
-| `verification.json` | Results of the independent source check |
-| `harness.py.txt` | The build, validation and gate code |
+| `ai/index.html` | The map (one self-contained page) |
+| `ai/ledger.json` | The built ledger the map draws |
+| `ai/raw/declared.json` | Every declared row with its source, revisions and corrections |
+| `ai/raw/xbrl_facts.csv` | SEC XBRL facts behind the filed figures |
+| `ai/verification.json` | Results of the independent source check |
+| `ai/harness.py.txt` | The build, validation and gate code |
 | `edition/2026-11-14/` | The frozen edition cited in the launch article; never updated |
+| `og.png`, `og-home.png` | Share cards for the AI map and the home page |
 
 ## The Tokenization Buildout Ledger
 
