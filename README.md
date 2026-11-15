@@ -54,7 +54,7 @@ What is outstanding on-chain, who issues it, where it settles and what backs it:
 
 ### How it updates
 
-Every reading comes from a keyless public source: an explorer API, an issuer's page or report, a regulator's site or an SEC filing index. The ledger is rebuilt with `harness.py`, the same harness as the AI map with a profile per ledger; the AI ledger rebuilds byte-identically from it. A separate agent that hasn't seen the work checks every new or changed row against its source (`verification.json`). A gate flags any update that moves either headline more than 5%, moves one token by $5B or 20%, brings in a token above $1B, changes a netting row or fails a reconciliation; flagged updates are published and the flags are logged in `raw/declared.json` (`gate_log`). History is append-only: corrections are logged on the rows they change.
+A scheduled agent run follows `RUNBOOK.md` each day. Every reading comes from a keyless public source: an explorer API, an issuer's page or report, a regulator's site or an SEC filing index. The ledger is rebuilt with `harness.py`, the same harness as the AI map with a profile per ledger; the AI ledger rebuilds byte-identically from it. A separate agent that hasn't seen the work checks every new or changed row against its source (`verification.json`). A gate flags any update that moves either headline more than 5%, moves one token by $5B or 20%, brings in a token above $1B, changes a netting row or fails a reconciliation; flagged updates are published and the flags are logged in `raw/declared.json` (`gate_log`). History is append-only: corrections are logged on the rows they change.
 
 ### Files
 
@@ -67,6 +67,8 @@ Every reading comes from a keyless public source: an explorer API, an issuer's p
 | `tokenization/verification.json` | Results of the independent source checks |
 | `tokenization/harness.py.txt` | The build, validation and gate code (shared with the AI map) |
 | `tokenization/page_patch.py.txt`, `tokenization/bs_view.js.txt` | How the page is derived from the AI map's page, and the balance sheet, role and time views |
+| `tokenization/RUNBOOK.md` | The daily run, step by step |
+| `tokenization/tools/` | The run's helpers: what is due, adding a reading, packing rows for the verifier, merging its results, logging the gate, and the share card |
 
 ## Corrections
 

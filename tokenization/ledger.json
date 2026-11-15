@@ -9178,7 +9178,7 @@
   },
   {
    "topic": "Kraken's purchase of Backed",
-   "note": "Kraken agreed to buy Backed Finance AG on 2 Dec 2025. Payward's July 2026 page says 8 of the 15 largest tokenized stocks are issued by Payward, which suggests the deal closed, but no closing notice has been read. The deal stays 'signed, not closed'."
+   "note": "Kraken agreed to buy Backed Finance AG on 2 Dec 2025. Payward's July 2026 page says 8 of the 15 largest tokenized stocks are issued by Payward, which suggests the deal closed, but no closing notice has been read. The deal stays 'signed, not closed' and is listed in pending_close."
   }
  ],
  "pending_close": [
@@ -9188,6 +9188,13 @@
    "expected": "2027",
    "conditions": "closing conditions in the share purchase agreement",
    "close_evidence": "Circle 8-K or 10-Q reporting completion"
+  },
+  {
+   "flow": "d-kraken-backed",
+   "signed": "2025-12-02",
+   "expected": "not stated",
+   "conditions": "not stated in Payward's release",
+   "close_evidence": "A Payward or Kraken release, or a Kraken SEC filing, reporting completion"
   }
  ],
  "backing": [
