@@ -348,14 +348,14 @@
    "value_rule": null
   },
   {
-   "id": "probe-robinhood-registry",
-   "token": "hoodst",
-   "chain": "robinhoodchain",
+   "id": "probe-prices",
+   "token": null,
+   "chain": null,
    "kind": "probe_get",
    "urls": [
-    "https://api.robinhood.com/rhj/assets",
-    "https://docs.robinhood.com/chain/contracts",
-    "https://docs.robinhood.com/chain/stock-tokens/"
+    "https://cdn.cboe.com/api/global/delayed_quotes/quotes/AAPL.json",
+    "https://cdn.cboe.com/api/global/delayed_quotes/quotes/CRM.json",
+    "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical/AAPL.json"
    ]
   },
   {
@@ -364,18 +364,20 @@
    "chain": "all",
    "kind": "probe_get",
    "urls": [
-    "https://docs.ondo.finance/addresses",
-    "https://docs.ondo.finance/llms.txt"
+    "https://docs.ondo.finance/ondo-stocks/technical.md",
+    "https://docs.ondo.finance/ondo-stocks/available-assets.md",
+    "https://docs.ondo.finance/ondo-stocks/token-and-quote-pricing.md",
+    "https://docs.ondo.finance/ondo-stocks/corporate-actions.md"
    ]
   },
   {
-   "id": "probe-prices",
-   "token": null,
-   "chain": null,
+   "id": "probe-robinhood-docs",
+   "token": "hoodst",
+   "chain": "robinhoodchain",
    "kind": "probe_get",
    "urls": [
-    "https://api.nasdaq.com/api/quote/AAPL/historical?assetclass=stocks&fromdate=2026-11-09&todate=2026-11-14&limit=5",
-    "https://stooq.com/q/d/l/?s=aapl.us&i=d"
+    "https://docs.robinhood.com/chain/oracles/",
+    "https://docs.robinhood.com/chain/stock-tokens/building/"
    ]
   }
  ]
