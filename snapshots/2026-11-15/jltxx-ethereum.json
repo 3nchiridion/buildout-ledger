@@ -4,7 +4,7 @@
  "chain": "ethereum",
  "kind": "evm_rpc",
  "address": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
- "fetched_at": "2026-11-15T05:51:26+00:00",
+ "fetched_at": "2026-11-15T05:56:50+00:00",
  "explorer_url": "https://eth.blockscout.com/token/0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
  "address_source": {
   "title": "J.P. Morgan Asset Management release, Launches Second Tokenized Money Market Fund on Ethereum, 13 May 2026",
@@ -26,10 +26,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:26 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:50 GMT",
      "Content-Type": "application/json"
     },
-    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x1931cf7\",\"id\":1}\n"
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x1931d12\",\"id\":1}\n"
    }
   },
   {
@@ -45,14 +45,14 @@
        "to": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
        "data": "0x18160ddd"
       },
-      "0x1931cf7"
+      "0x1931d12"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:26 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:50 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x00000000000000000000000000000000000000000000000000000000afc7b94b\"}\n"
@@ -71,14 +71,14 @@
        "to": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
        "data": "0x313ce567"
       },
-      "0x1931cf7"
+      "0x1931d12"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:26 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:50 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000002\"}\n"
@@ -90,7 +90,7 @@
   "raw_supply": "2949101899",
   "decimals": 2,
   "at": {
-   "block": 26418423
+   "block": 26418450
   },
   "supply_text": "29491018.99",
   "supply": 29491018.99

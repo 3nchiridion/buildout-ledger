@@ -4,7 +4,7 @@
  "chain": "aptos",
  "kind": "aptos_fa",
  "address": "0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a",
- "fetched_at": "2026-11-15T05:51:23+00:00",
+ "fetched_at": "2026-11-15T05:56:48+00:00",
  "explorer_url": "https://explorer.aptoslabs.com/fungible_asset/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a?network=mainnet",
  "address_source": {
   "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
@@ -28,10 +28,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:23 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:48 GMT",
      "Content-Type": "application/json; charset=utf-8",
-     "X-Aptos-Ledger-Version": "8059258243",
-     "X-Aptos-Block-Height": "1185061300"
+     "X-Aptos-Ledger-Version": "8059306479",
+     "X-Aptos-Block-Height": "1185070036"
     },
     "text": "[{\"inner\":\"0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89\"}]"
    }
@@ -53,10 +53,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:23 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:47 GMT",
      "Content-Type": "application/json; charset=utf-8",
-     "X-Aptos-Ledger-Version": "8059258251",
-     "X-Aptos-Block-Height": "1185061302"
+     "X-Aptos-Ledger-Version": "8059306494",
+     "X-Aptos-Block-Height": "1185070039"
     },
     "text": "[{\"vec\":[\"59457399800000\"]}]"
    }
@@ -78,10 +78,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:23 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:48 GMT",
      "Content-Type": "application/json; charset=utf-8",
-     "X-Aptos-Ledger-Version": "8059258251",
-     "X-Aptos-Block-Height": "1185061302"
+     "X-Aptos-Ledger-Version": "8059306509",
+     "X-Aptos-Block-Height": "1185070042"
     },
     "text": "[6]"
    }
@@ -92,7 +92,7 @@
   "raw_supply": "59457399800000",
   "decimals": 6,
   "at": {
-   "ledger_version": "8059258251"
+   "ledger_version": "8059306494"
   },
   "supply_text": "59457399.800000",
   "supply": 59457399.8

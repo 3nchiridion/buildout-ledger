@@ -4,7 +4,7 @@
  "chain": "xrpl",
  "kind": "xrpscan_obligations",
  "address": "rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
- "fetched_at": "2026-11-15T05:51:18+00:00",
+ "fetched_at": "2026-11-15T05:56:44+00:00",
  "explorer_url": "https://xrpscan.com/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
  "address_source": {
   "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
@@ -24,16 +24,16 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:51:18 GMT",
+     "Date": "Sun, 15 Nov 2026 05:56:44 GMT",
      "Content-Type": "application/json; charset=utf-8"
     },
-    "text": "[{\"currency\":\"524C555344000000000000000000000000000000\",\"value\":\"762824103.2914852\"}]"
+    "text": "[{\"currency\":\"524C555344000000000000000000000000000000\",\"value\":\"762824103.2914854\"}]"
    }
   }
  ],
  "parsed": {
-  "supply_text": "762824103.2914852",
-  "supply": 762824103.2914852
+  "supply_text": "762824103.2914854",
+  "supply": 762824103.2914854
  },
  "ok": true,
  "value_usd": 762824103.29
