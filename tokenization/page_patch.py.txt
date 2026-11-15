@@ -1,0 +1,278 @@
+#!/usr/bin/env python3
+"""Derives the tokenization page from the AI Buildout Ledger page. Same design system, views and code; only what
+tokenization forces is changed. Every replacement must match, or the script stops."""
+import re, sys
+src = open(sys.argv[1]).read()
+def rep(old, new, n=1):
+    global src
+    c = src.count(old)
+    if c != n: sys.exit(f"expected {n} of {old[:70]!r}, found {c}")
+    src = src.replace(old, new)
+def block(start, end, new, keep_end=True):
+    global src
+    L = src.split("\n")
+    i = next(k for k, l in enumerate(L) if start in l); j = next(k for k in range(i, len(L)) if (L[k].strip() == end if end == "];" else end in L[k]))
+    L[i:(j if keep_end else j + 1)] = new.split("\n"); src = "\n".join(L)
+
+# --- words ---
+rep("<title>The AI Buildout Ledger</title>", "<title>The Tokenization Buildout Ledger</title>")
+rep('aria-label="Map of money flows in the AI buildout. Use', 'aria-label="Map of tokenized money and assets: who issues them, where they settle and what backs them. Use')
+rep("<h1>The AI Buildout Ledger</h1>", "<h1>The Tokenization Buildout Ledger</h1>")
+rep('<p class="sub">Who pays whom to build AI, read from filings and company announcements. Every line on the map is a sourced row.</p>',
+    '<p class="sub">What is outstanding on-chain, who issues it, where it settles and what backs it, read from chains, attestations and filings. Every line on the map is a sourced row.</p>')
+rep("<b>The AI Buildout Ledger</b>", "<b>The Tokenization Buildout Ledger</b>")
+rep("document.title = `The AI Buildout Ledger ·", "document.title = `The Tokenization Buildout Ledger ·")
+rep("c.fillText('The AI Buildout Ledger',", "c.fillText('The Tokenization Buildout Ledger',")
+rep("'ai-buildout-ledger-'", "'tokenization-buildout-ledger-'")
+rep("'abl-tour'", "'tbl-tour'", 2)
+rep('title="Money runs left to right; deals that run backwards loop over the top"', 'title="Lines run left to right down the stack; ties that run back up loop over the top"')
+rep('<button class="btn" id="b-loops" aria-pressed="false"', '<button class="btn" id="b-loops" hidden aria-pressed="false"')
+rep('<button class="btn" id="b-tower" aria-pressed="false"', '<button class="btn" id="b-tower" hidden aria-pressed="false"')
+rep('<button data-mv="loops" aria-pressed="false">Loops</button>', '<button data-mv="loops" aria-pressed="false" style="display:none">Loops</button>')
+rep('<button data-mv="deals" aria-pressed="false">Deals</button>', '<button data-mv="deals" aria-pressed="false">Rows</button>')
+src, n = re.subn(r'<button data-mv="tower" aria-pressed="false">', '<button data-mv="tower" aria-pressed="false" style="display:none">', src); assert n == 1
+# --- design tokens: same values, layer names changed; two more grade chips ---
+rep("--t-applications:#FBE7EE; --t-models:#E6EDFB; --t-infrastructure:#E2F2E9; --t-chips:#FCEEDC; --t-energy:#F7F0D3;", "--t-distribution:#FBE7EE; --t-instruments:#E6EDFB; --t-issuance:#E2F2E9; --t-ledgers:#FCEEDC; --t-reserves:#F7F0D3;")
+rep(".chip.filed{background:var(--ink);color:var(--paper);border-color:var(--ink)}", ".chip.filed{background:var(--ink);color:var(--paper);border-color:var(--ink)}\n.chip.onchain{background:var(--capex);color:#fff;border-color:var(--capex)}\n.chip.attested{background:var(--ink-2);color:var(--paper);border-color:var(--ink-2)}")
+# --- vocabulary ---
+rep("const COL = {equity:css('--equity'), purchase_commitment:css('--commit'), capex:css('--capex'), debt:css('--debt'), product:css('--link'), uses:css('--link'), owns:css('--link')};",
+    "const LINK = css('--link');\nconst COL = {equity:css('--equity'), holding:css('--commit'), issued:css('--capex'), settles:css('--capex'), debt:css('--debt'), issues:LINK, tokenizes:LINK, custody:LINK, manages:LINK, distributes:LINK, partner:LINK, licensed:LINK, owns:LINK, product:LINK};")
+rep("const TYPE = {equity:'Equity investment', purchase_commitment:'Purchase commitment', capex:'Capital spending', debt:'Debt', product:'Makes (product)', uses:'Uses (no money shown)', owns:'Owns'};",
+    "const TYPE = {issued:'Balance outstanding', settles:'Balance on a chain', holding:'Reserves and holdings', equity:'Equity and acquisitions', debt:'Debt', issues:'Issues', tokenizes:'Tokenizes', custody:'Custody', manages:'Manages reserves', distributes:'Distributes', partner:'Partner', licensed:'Licence or charter', owns:'Owns'};")
+rep("const STATUS = {cash_moved:'Cash moved', contracted:'Contracted', announced:'Announced', reported:'Reported'};", "const STATUS = {cash_moved:'Live or closed', contracted:'Signed, not closed', announced:'Announced or conditional', reported:'Press report'};")
+rep("const KIND = {company:'Company', product:'Product', sink:'Spending sink', instrument:'Financial instrument', investor:'Investor', government:'Government buyer'};", "const KIND = {company:'Company', product:'Token', ledger:'Settlement ledger', instrument:'Reserve fund', investor:'Investor', government:'Regulator'};")
+rep("const LAYERS = [{id:'applications',label:'Applications',y:-370},{id:'models',label:'Models',y:-185},{id:'infrastructure',label:'Infrastructure',y:0},{id:'chips',label:'Chips',y:185},{id:'energy',label:'Energy',y:370}];",
+    "const LAYERS = [{id:'distribution',label:'Distribution',y:-370},{id:'instruments',label:'Instruments and issuers',y:-185},{id:'issuance',label:'Issuance platforms',y:0},{id:'ledgers',label:'Settlement ledgers',y:185},{id:'reserves',label:'Reserves and custody',y:370}];")
+rep("const BANDS = [{id:'capital', label:'Capital'}, {id:'applications', label:'Applications'}, {id:'models', label:'Models'}, {id:'infrastructure', label:'Infrastructure'}, {id:'chips', label:'Chips'}, {id:'energy', label:'Energy'}];",
+    "const BANDS = [{id:'capital', label:'Regulators and capital'}, {id:'distribution', label:'Distribution'}, {id:'instruments', label:'Instruments and issuers'}, {id:'issuance', label:'Issuance platforms'}, {id:'ledgers', label:'Settlement ledgers'}, {id:'reserves', label:'Reserves and custody'}];")
+rep("const LIDX = {applications: 0, models: 1, infrastructure: 2, chips: 3, energy: 4};", "const LIDX = {distribution: 0, instruments: 1, issuance: 2, ledgers: 3, reserves: 4};")
+rep("const isMoney = f => f.type !== 'product' && f.type !== 'uses' && f.type !== 'owns';", "const MONEYT = new Set(['issued', 'settles', 'holding', 'equity', 'debt']);\nconst isMoney = f => MONEYT.has(f.type);")
+rep("const money = v => v == null ? 'undisclosed' : v >= 1e12", "const money = v => v == null ? 'undisclosed' : v < 1e6 ? '$' + Math.round(v/1e3) + 'K' : v < 1e9 ? '$' + Math.round(v/1e6) + 'M' : v < 1e10 ? '$' + (v/1e9).toFixed(2) + 'B' : v >= 1e12")
+rep("T0 = toN('2025-07-01');", "T0 = toN(L.window_start || '2025-01-01');")
+rep("for (const d of ['2025-07-01','2026-01-01','2026-07-01'])", "for (const d of ['2025-01-01','2025-07-01','2026-01-01','2026-07-01'])")
+rep("f.type === 'capex' ? 420 : 310", "f.type === 'settles' ? 380 : 300")
+rep("{id: 'capital', label: 'Capital'}", "{id: 'capital', label: 'Regulators and capital'}")
+rep("['Capital', e => !e.layer]", "['Regulators and capital', e => !e.layer]")
+rep("{id: null, label: 'Capital'}", "{id: null, label: 'Regulators and capital'}")
+rep("esc(LY[e.layer].label) : 'Capital'}", "esc(LY[e.layer].label) : 'Regulators and capital'}")
+rep("' · Capital'}</div>", "' · Regulators and capital'}</div>")
+rep("if (f.type === 'purchase_commitment' || f.type === 'capex') (back[", "if (f.type === 'issued' || f.type === 'settles') (back[")
+rep("const colBack = fs => fs.every(f => f.type === 'capex') ? COL.capex : COL.purchase_commitment;", "const colBack = fs => COL.issued;")
+rep("[COL.equity, COL.debt, COL.owns, COL.purchase_commitment, COL.capex]", "[COL.equity, COL.debt, COL.owns, COL.holding, COL.issued]")
+rep("LOOPS OVER THE TOP · money running back up the stack: a supplier investing in its own customer", "OVER THE TOP · lines running back up the stack: an issuer below the token it issues")
+src, n = re.subn(r"function setDrawer\(([a-z]+)\)\{", lambda m: f"function setDrawer({m.group(1)}){{ if ({m.group(1)} === 'loops' || {m.group(1)} === 'tower') {m.group(1)} = null;", src); assert n == 1, n
+rep("['all', 'Everything'], ['nopress', 'Without press reports'], ['moved', 'Money moved only']", "['all', 'Everything'], ['nopress', 'Without press reports'], ['moved', 'Live only']", 2)
+rep("['moved', 'Money moved'], ['signed', 'Signed']", "['moved', 'Live'], ['signed', 'Signed']")
+# --- the headline: two numbers, never summed, recomputed at the chosen date by the harness's rule ---
+block("// the headline counts only what filings", "<span>sourced rows</span></div>", r"""  // the headline: two numbers, never summed, by the same rule as the harness (t_headline); each token counted once, where its issuer mints it
+  const HL = headline(), tk = Object.entries(HL.by).filter(([, x]) => x.cls === 'money' && x.ok).sort((a, b) => b[1].amount - a[1].amount);
+  const seg = [...tk.slice(0, 2).map(([i, x], k) => [k ? 's-signed' : 's-moved', ents[i].name, x.amount]), ['s-ann', 'other dollar tokens', tk.slice(2).reduce((s, [, x]) => s + x.amount, 0)], ['s-press', 'crypto-collateralised, shown and not counted', HL.shown.money]];
+  while (seg.length < 4) seg.unshift(['s-moved', '', 0]);
+  const all_ = seg.reduce((s, x) => s + x[2], 0) || 1; HEAD = {tot: HL.money, seg, HL};
+  const rowsN = V.all.length + V.obs.length + V.events.length + V.met.length, dr = HL.range ? `Readings dated ${day(HL.range[0])} to ${day(HL.range[1])}.` : '';
+  $('#stats').innerHTML =
+    `<div class="hm"><div class="hn"><b>${money(HL.money)}</b><span>tokenized money outstanding: dollar tokens read from chain, attested or filed</span></div>
+      <div class="split">${seg.map(([k, , v]) => `<i class="${k}" style="flex:${v / all_}"></i>`).join('')}</div>
+      <div class="skey">${seg.filter(s => s[1]).map(([k, label, v]) => v || k !== 's-press' ? `<span><i class="${k}"></i>${money(v)} ${label}</span>` : '').join('')}</div></div>` +
+    `<div class="ha"><div class="hn"><b>${money(HL.assets)}</b><span>tokenized assets, ${money(HL.assetsStated)} of it issuer-stated</span></div>
+      <div class="anote">Never added to money. ${money(HL.netting)} netted where counted tokens hold each other.</div>
+      <div class="anote"><b>${V.live.size}</b> players · <b>${rowsN}</b> sourced rows${HL.range ? ` · readings ${day(HL.range[0])} to ${day(HL.range[1])}` : ''}</div></div>` +""", keep_end=False)
+rep("let V = {flows:[], events:[], obs:[], rel:[], met:[], latest:{}, total:{}, live:new Set()};", r"""let V = {flows:[], events:[], obs:[], rel:[], met:[], latest:{}, total:{}, live:new Set()};
+function headline(){
+  // same rule as the harness (t_headline): a token's counted total, else its counted chain reads, else its stated total shown and not counted
+  const CG = new Set((L.schema && L.schema.counted_grades) || ['onchain', 'attested', 'filed']), CGA = new Set((L.schema && L.schema.counted_grades_assets) || [...CG, 'announced']);
+  const cls = i => ents[i].asset_class === 'money' ? 'money' : 'assets', okg = c => c === 'money' ? CG : CGA, tot = {}, ch = {}, by = {};
+  for (const f of V.all){
+    if (f.type === 'issued' && ents[f.payee].kind === 'product') tot[f.payee] = {amount: f.amount_usd || 0, grade: f.grade, as_of: f.as_of, partial: false};
+    if (f.type === 'settles' && f.amount_usd != null && CG.has(f.grade) && ents[f.payer].kind === 'product') (ch[f.payer] = ch[f.payer] || []).push(f);
+  }
+  for (const i of new Set([...Object.keys(tot), ...Object.keys(ch)])){
+    const t = tot[i], fs = ch[i];
+    if (t && okg(cls(i)).has(t.grade)) by[i] = t;
+    else if (fs){ const gs = new Set(fs.map(f => f.grade)); by[i] = {amount: fs.reduce((s, f) => s + f.amount_usd, 0), grade: gs.size === 1 ? [...gs][0] : 'onchain', as_of: fs.map(f => f.as_of).sort().pop(), partial: true, stated: t || null}; }
+    else by[i] = t;
+  }
+  const o = {money: 0, gross: 0, assetsStated: 0, netting: 0, overlap: 0, stated: {money: 0, assets: 0}, shown: {money: 0, assets: 0}, by, range: null}, ds = [];
+  for (const [i, x] of Object.entries(by)){ x.cls = cls(i); x.ok = !!ents[i].counted && okg(x.cls).has(x.grade);
+    if (x.ok){ o[x.cls === 'money' ? 'money' : 'gross'] += x.amount; ds.push(x.as_of); if (x.cls === 'assets' && x.grade === 'announced') o.assetsStated += x.amount; }
+    else if (!ents[i].counted) o.shown[x.cls] += x.amount; else if (x.grade === 'announced') o.stated[x.cls] += x.amount; }
+  for (const f of V.all){ if (f.type !== 'holding' || f.amount_usd == null) continue; const a = by[f.payer], b = by[f.payee]; if (!(a && b && b.cls === 'assets')) continue;
+    if (a.ok && b.ok && !b.partial) o.netting += Math.min(f.amount_usd, b.amount); else o.overlap += f.amount_usd; }
+  o.assets = o.gross - o.netting; ds.sort(); if (ds.length) o.range = [ds[0], ds[ds.length - 1]];
+  return o;
+}""")
+block("function homeHead(){", "function series(", r"""function homeHead(){
+  if (!HEAD) return '';
+  const all_ = HEAD.seg.reduce((s, x) => s + x[2], 0) || 1, HL = HEAD.HL;
+  return `<div class="hl ph-only"><div class="kicker">Tokenized money outstanding · ${day(iso())}</div>
+    <div class="hl-t"><b>${money(HEAD.tot)}</b><span>read from chain, attested or filed</span></div>
+    <div class="split">${HEAD.seg.map(([k, , v]) => `<i class="${k}" style="flex:${v / all_}"></i>`).join('')}</div>
+    <div class="skey">${HEAD.seg.filter(s => s[1]).map(([k, label, v]) => `<span><i class="${k}"></i>${money(v)} ${label}</span>`).join('')}</div>
+    <p class="note"><b>${money(HL.assets)}</b> of tokenized assets is counted, <b>${money(HL.assetsStated)}</b> of it on issuers' own word. The two numbers are never added: tokens that hold other tokens would be counted twice.${L.edition ? ` This is the frozen edition of ${day(L.edition.date)}; <a href="${esc(L.edition.live_url)}" target="_blank" rel="noopener">the live map</a> updates daily.` : ''}</p>
+    <h3>How to read the map</h3><div class="plegend">${LEGEND}</div></div>`;
+}""")
+block("function series(", "const MET = ", r"""function series(id, metric){
+  const o = V.obs.filter(x => x.subject === id && x.metric === metric).sort((a, b) => a.period_end < b.period_end ? -1 : a.period_end > b.period_end ? 1 : a.available < b.available ? -1 : 1);
+  if (!o.length) return '';
+  const max = Math.max(...o.map(x => x.value_usd)), last = o[o.length - 1];
+  const name = metric === 'outstanding' ? 'Outstanding, all chains' : 'On ' + (ents[last.chain] ? ents[last.chain].name : last.chain);
+  return `<h3>${esc(name)}</h3><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="num" style="font-size:18px;font-weight:600">${money(last.value_usd)}</span><span class="note">as of <span class="num">${day(last.period_end)}</span> ${chip(last.grade)}</span></div>
+    ${o.length > 1 ? `<div class="bars" role="img" aria-label="${esc(name)}: ${o.map(x => day(x.period_end) + ' ' + money(x.value_usd)).join(', ')}">${o.map((x, i) => `<i class="${i === o.length - 1 ? 'last' : ''}" style="height:${Math.max(3, x.value_usd / max * 100)}%" title="${day(x.period_end)}: ${money(x.value_usd)} (${esc(x.grade)})"></i>`).join('')}</div>
+    <div class="axis"><span>${day(o[0].period_end)}</span><span>${day(last.period_end)}</span></div>` : ''}
+    <p class="def">${esc(last.definition)} ${src(last)}</p>`;
+}""")
+rep("const MET = {", "const MET = {reserve_assets:'Reserve assets', excess_reserves:'Excess of reserves over liabilities', usdc_on_platform:'USDC on platform', distribution_costs_quarter:'Distribution costs, quarter', ")
+
+# --- panel wording ---
+rep("Deals that change who can do what, or how capital moves.", "Changes in who can issue, hold or settle what: charters, rules, launches, acquisitions and large moves in a balance.")
+rep("`<p class=\"note\">Made by <button", "`<p class=\"note\">Issued or run by <button")
+rep(">Down to energy</button>", ">Down the stack</button>")
+rep(">Who funds it</button>", ">What points to it</button>")
+rep("traceDir === 'up' ? 'Who funds it' : 'Down the stack to the end'", "traceDir === 'up' ? 'What points to it' : 'Down the stack to the end'")
+rep("`Investors and lenders behind ${esc(e.name)}, and theirs, followed back through ${ch.flows.size} rows.`", "`Issuers, holders, distributors and regulators that point to ${esc(e.name)}, and theirs, followed back through ${ch.flows.size} rows.`")
+rep("`Everyone ${esc(e.name)} depends on, followed through ${ch.flows.size} rows: who it pays, who they pay, on down to energy.`", "`Everything ${esc(e.name)} rests on, followed through ${ch.flows.size} rows: the chains it settles on, the reserves behind it, and what they rest on in turn.`")
+rep("' A product starts at the company that makes it.'", "' A token starts at its issuer.'")
+rep("<h3>Money out (${out.length})</h3>", "<h3>Amounts out (${out.length})</h3>")
+rep("<h3>Money in (${inn.length})</h3>", "<h3>Amounts in (${inn.length})</h3>")
+rep("`<h3>Products and links (${links.length})</h3>", "`<h3>Ties (${links.length})</h3>")
+rep("Where the players ${esc(e.name)} pays send money next.", "Where the players ${esc(e.name)} points to lead next.")
+rep("' of these reach someone who also pays ' + esc(e.name) + '.'", "' of these reach someone who also points to ' + esc(e.name) + '.'")
+# --- legend ---
+block("  const shapes = [", "  $('#legend').innerHTML", r"""  const shapes = [
+    ['Company', wide ? `<svg width="16" height="16"><circle cx="8" cy="8" r="6.5" fill="${css('--t-instruments')}" stroke="${ink}" stroke-width="1.4"/></svg>` : `<svg width="24" height="16"><rect x="1" y="2" width="22" height="12" rx="4" fill="${css('--t-instruments')}" stroke="${ink}" stroke-width="1.4"/></svg>`],
+    ['Token', `<svg width="22" height="14"><rect x="1" y="2" width="20" height="10" rx="5" fill="${css('--t-instruments')}" stroke="${ink}" stroke-width="1.2"/></svg>`],
+    ['Reserve fund', `<svg width="22" height="14"><path d="M5 1H21V13H5L1 7Z" fill="#fff" stroke="${ink}" stroke-width="1.2" stroke-dasharray="3 2"/></svg>`],
+    ['Regulator', wide ? `<svg width="16" height="16"><circle cx="8" cy="8" r="6.5" fill="${css('--t-capital')}" stroke="${ink}" stroke-width="1.4"/><circle cx="8" cy="8" r="4" fill="none" stroke="${ink}" stroke-width="1"/></svg>` : `<svg width="24" height="16"><rect x="1" y="1" width="22" height="14" rx="4" fill="${css('--t-capital')}" stroke="${ink}" stroke-width="1.4"/><rect x="3.5" y="3.5" width="17" height="9" rx="2" fill="none" stroke="${ink}" stroke-width="1"/></svg>`],
+  ];
+  const seen = new Set();
+  LEGEND = Object.keys(TYPE).filter(k => isMoney({type:k}) && L.flows.some(f => f.type === k) && !seen.has(COL[k]) && seen.add(COL[k])).map(k => `<span>${line(COL[k], '')}${k === 'issued' ? 'Balance outstanding' : TYPE[k]}</span>`).join('') +
+    `<span class="sep"></span>` + Object.keys(STATUS).map(k => `<span>${line(css('--ink-2'), DASH[k].join(' '), 2.5)}${STATUS[k]}</span>`).join('') +
+    `<span class="sep"></span>` + shapes.map(([n, s]) => `<span>${s}${n}</span>`).join('') + `<span class="sep"></span><span>${line(LINK, '', 1.4)}Tie with no amount</span>` +
+    (PENDING.size ? `<span class="sep"></span><span><svg width="28" height="8"><line x1="1" y1="4" x2="27" y2="4" stroke="${ink}" stroke-width="4.5"/><line x1="1" y1="4" x2="27" y2="4" stroke="${PAPER}" stroke-width="1.8"/></svg>Hollow: not yet independently checked</span>` : '');""")
+# --- checks drawer ---
+rep("const CHECK = {", "const CHECK = {chains_sum_to_total:'Per-chain amounts in the report sum to its total', reserves_cover_tokens:'Reserves in the report cover the tokens outstanding', attested_rounds_to_filed:'Attested figure rounds to the filed one:', ")
+rep("<h3>Reconciliation against filings (", "<h3>Reconciliations (")
+rep("<th>Entity</th><th>Metric</th><th>Period end</th><th>Test</th>", "<th>Token</th><th>Metric</th><th>As of</th><th>Test</th>")
+L = src.split("\n"); i = next(k for k, l in enumerate(L) if l.lstrip().startswith("<h3>Backtest: ledger as of"))
+L[i] = "      ${bt ? `" + L[i].strip(); L[i + 1] = L[i + 1] + "` : '<h3>Backtest</h3><p class=\"note\">Not run yet. A backtest replays the collector from an earlier date against a list of known events; this ledger is one day old.</p>'}"
+src = "\n".join(L)
+rep("Connections that other published maps of AI deals draw.", "Connections that other published maps of tokenization draw. None is loaded yet.")
+rep("<h3>Not sourced from primary material</h3>", """<h3>How the headline is built</h3><table><tr><th>Token</th><th>Class</th><th class="r">Amount</th><th>Grade</th><th>As of</th><th>Counted</th></tr>${Object.entries(L.headline.by_instrument).sort((a, b) => b[1].amount - a[1].amount).map(([i, x]) => `<tr><td><button data-entlink="${esc(i)}"><b>${esc(ents[i].name)}</b></button></td><td>${x.class === 'money' ? 'money' : 'assets'}</td><td class="r num">${money(x.amount)}</td><td>${chip(x.grade)}</td><td class="num">${day(x.as_of)}</td><td class="${x.counted ? 'pass' : 'warn'}">${x.counted ? (x.partial ? 'yes, chains read only' : 'yes') : 'no'}</td></tr>`).join('')}</table>
+      <p class="def">Tokenized money ${money(L.headline.money)}; tokenized assets ${money(L.headline.assets)} after netting ${money(L.headline.netting)}. Holdings of one token by another that fall outside the counted balances: ${money(L.headline.overlap_outside_count)} (${esc(L.headline.overlap_rows.join(', '))}).</p>
+      ${L.stress && L.stress.omitted ? `<h3>Stress test</h3><p class="def">${esc(L.stress.omitted)}</p>` : ''}
+      <h3>Not sourced from primary material</h3>""")
+rep("<h3>Not sourced from primary material</h3>", "<h3>Gaps and what is not yet sourced</h3>")
+rep("<th>Payer</th><th>Payee</th>", "<th>From</th><th>To</th>")
+
+# --- canvas labels, layout spacing, small wording ---
+rep("{investor:'INVESTOR', government:'GOVERNMENT', instrument:'BOND', sink:'CAPEX SINK'}", "{investor:'INVESTOR', government:'REGULATOR', instrument:'RESERVE FUND'}")
+rep("c.fillText('CAPITAL', p.x + 18 * v.s", "c.fillText('REGULATORS', p.x + 18 * v.s")
+rep("const f = 70000 / (d * d) +", "const f = 520000 / (d * d) +")
+rep("!isMoney(f) ? 130 :", "!isMoney(f) ? 250 :")
+rep("f.type === 'settles' ? 380 : 300", "f.type === 'settles' ? 520 : 400")
+rep("${si || so ? `In ${si ? money(si) : '–'} · Out ${so ? money(so) : '–'} · ` : ''}", "")
+rep("<h3>Where trackers disagree</h3>", "<h3>Where trackers disagree</h3>${(L.ranges || []).length ? '' : '<p class=\"note\">Nothing recorded yet. Trackers are used to find rows, never as a source for one.</p>'}")
+# (zero-hiding of the crypto segment now lives in the header template above)
+
+rep("f = (d - len) * 0.025;", "f = (d - len) * 0.006;")
+rep("(d < min ? (min - d) * 0.6 : 0)", "(d < min ? (min - d) * 4 : 0)")
+rep("F[id].x -= p.x * 0.004; F[id].y -= p.y * 0.002;", "F[id].x -= p.x * 0.007; F[id].y -= p.y * 0.006;")
+rep("In the arranged view, money runs left to right through the stack. Lines that loop over the top run the other way: a supplier putting money into one of its own customers.", "In the arranged view, lines run left to right down the stack. Lines that loop over the top run the other way, such as a platform issuing a token that sits above it.")
+
+# --- the tokenization views replace the network: split balance sheet, role grid, time ---
+rep('<div id="msg">Loading the ledger…</div>', '<div id="bsv"></div>\n<div id="msg">Loading the ledger…</div>')
+rep("</style>", """#bsv{position:fixed;left:0;overflow:auto;background:var(--paper);padding:0 6px 0 10px;-webkit-overflow-scrolling:touch}
+#bsv svg{display:block}
+.bs-empty{margin:40px 24px;color:var(--muted);max-width:46ch}
+</style>""")
+rep('aria-pressed="false">Five layers</button>', 'aria-pressed="true" title="Where reserves are held, what backs each token, and the chains it is on">Balance sheet</button>')
+rep('title="Lines run left to right down the stack; ties that run back up loop over the top">Arranged</button>', 'title="Which player issues, distributes, tokenizes, runs a ledger, holds reserves and is chartered">Roles</button>')
+rep('aria-pressed="false">All labels</button>', 'aria-pressed="false" title="Counted dollar tokens over time, with rules, charters and deals marked">Time</button>')
+rep('<button data-mv="map" aria-pressed="true">Map</button>', '<button data-mv="map" aria-pressed="true">Balance</button><button data-bv="roles" aria-pressed="false">Roles</button><button data-bv="time" aria-pressed="false">Time</button>')
+rep("[mGoal ? 'layers' : fGoal ? 'arranged' : '',", "[BSV === 'balance' ? '' : BSV,")
+rep("$('#b-layers').setAttribute('aria-pressed', mode === 'layers'); $('#b-flow').setAttribute('aria-pressed', mode === 'flow'); renderPanel();", "renderPanel();")
+rep("Select a body or a line for everything recorded about it. Drag a body to move it; double-click to send it home.", "Select a token, a ribbon or a player for everything recorded about it.")
+rep("Tap a player or a line for everything recorded about it and its whole chain down the stack. Drag to move around; pinch to zoom.", "Tap a token or a player for everything recorded about it.")
+rep("' In the five-layer view, an empty layer means the ledger has no rows for it yet.'", "''")
+rep("' In the arranged view, lines run left to right down the stack. Lines that loop over the top run the other way, such as a platform issuing a token that sits above it.'", "''")
+rep(" Highlighted on the map.</p>", "</p>")
+block("const TOUR = [", "];", r"""const TOUR = [
+  () => { setDrawer(null); bsSet('balance'); select({kind:'entity', id:'usdc'}); traceDir = 'down'; renderPanel();
+    return ['1 of 3 · Read one token across', `${wide ? 'Click' : 'Tap'} any token. Left of it is what backs it and where that is held; right of it, the chains it sits on. USDC's reserves sit mostly in one fund; its report names no bank for the rest.`]; },
+  () => { setDrawer(null); bsSet('balance'); select({kind:'entity', id:'buidl'}); renderPanel();
+    return ['2 of 3 · Tokens inside tokens', `BUIDL appears twice: as a token, and as the backing of other tokens, which hold ${money(HEAD.HL.overlap + HEAD.HL.netting)} of it. Where both sides are counted the overlap is netted out: ${money(HEAD.HL.netting)} so far.`]; },
+  () => { setDrawer(null); select(null); bsSet('roles'); if (phone){ setSheet('peek'); inert = null; }
+    return ['3 of 3 · Who is collecting roles', `Each row is a player; each column a role. The contest is over holding more of them at once: issuing, distributing, running a ledger, keeping reserves, and a charter. Grey blocks on the balance sheet are reserves whose holder is not named.`]; },
+];""", keep_end=False)
+# --- room for the views: one header band, the key behind a button, a panel that folds away ---
+i = src.index('<div class="tools">'); j = src.index('\n</div>\n', i) + 7; tools = src[i:j]; src = src[:i] + src[j:]
+TL = tools.split('\n'); tabs = [l.strip() for l in TL if any(f'id="{b}"' in l for b in ('b-layers', 'b-flow', 'b-labels', 'b-rows'))]
+tools = '\n'.join(l for l in TL if l.strip() not in tabs); assert len(tabs) == 4, tabs
+rep("""  <h1>The Tokenization Buildout Ledger</h1>
+  <p class="sub">What is outstanding on-chain, who issues it, where it settles and what backs it, read from chains, attestations and filings. Every line on the map is a sourced row.</p>
+  <div class="stats" id="stats"></div>""",
+    """  <div class="hrow"><h1>The Tokenization Buildout Ledger</h1>
+  """ + tools.replace('\n', '\n  ') + """</div>
+  <p class="sub">What is outstanding on-chain, who issues it, where it settles and what backs it, read from chains, attestations and filings. Every line is a sourced row.</p>
+  <div class="stats" id="stats"></div>
+  <div class="vbar"><div class="vtabs" role="group" aria-label="View">""" + ''.join(tabs) + """</div></div>""")
+rep('<div class="legend" id="legend"></div>\n</div>', '<div class="legend" id="legend"></div>\n</div>\n<button id="p-tog" class="desk-only" aria-label="Hide the panel" title="Hide the panel">Hide ›</button>')
+rep("""      <input id="scrub" type="range" min="0" max="100" step="1" value="100" aria-label="Show the ledger as of this date">
+    </div>
+  </div>""", """      <input id="scrub" type="range" min="0" max="100" step="1" value="100" aria-label="Show the ledger as of this date">
+    </div>
+    <button id="b-key" class="desk-only" aria-pressed="false" title="What the colours and outlines mean">Key</button>
+  </div>""")
+rep("</style>", """:root{--pw:376px}
+header{left:24px;right:calc(var(--pw) + 24px);top:30px;max-width:none;min-width:0}
+.hrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 28px}
+header h1{font-size:28px;margin:0;white-space:nowrap}
+header .sub{margin:7px 0 0;max-width:none;font-size:13px}
+header .tools{position:static;max-width:none;flex:0 1 auto;pointer-events:auto}
+.stats{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px 26px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.hm{flex:1 1 400px;min-width:0;max-width:640px}
+.ha{flex:1 1 300px;min-width:0;max-width:460px;padding-left:24px;border-left:1px solid var(--line)}
+.hn{display:flex;align-items:baseline;gap:2px 10px;flex-wrap:wrap}
+.hn b{font:600 22px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em;color:var(--ink)}
+.hn span{color:var(--muted);font-size:11.5px}
+.hm .split{max-width:none;margin:7px 0 5px}
+.hm .skey{max-width:none}
+.anote{color:var(--muted);font-size:11.5px;margin-top:4px;line-height:1.4}
+.anote b{font:600 12px var(--mono);color:var(--ink)}
+.vbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:14px}
+.vtabs{display:flex;gap:5px;pointer-events:auto}
+.vbar .show{margin-left:auto;align-self:center}
+#time{right:calc(var(--pw) + 24px)}
+#time .legend{display:none;padding-top:6px;margin-top:6px;border-top:1px solid var(--line)}
+body.key #time .legend{display:flex}
+#b-key{flex:none;border:1px solid var(--line-2);border-radius:999px;padding:3px 12px;background:#fff;font:500 12px var(--sans);color:var(--ink-2);cursor:pointer}
+#b-key[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#drawer{right:calc(var(--pw) + 24px)}
+#p-tog{position:fixed;top:16px;right:16px;height:26px;padding:0 11px;border:1px solid var(--line-2);border-radius:999px;background:var(--card);color:var(--ink-2);font:500 12px var(--sans);cursor:pointer;z-index:5}
+#p-tog:hover{color:var(--ink);border-color:var(--ink-2)}
+body.nopanel #p-tog{top:30px;right:0;width:24px;height:52px;padding:0;border-right:0;border-radius:9px 0 0 9px;font:600 16px/1 var(--sans)}
+body:not(.phone):not(.land) #panel .kicker,body:not(.phone):not(.land) #panel .back{padding-right:72px}
+body.nopanel:not(.phone):not(.land) #sheet{display:none}
+</style>""")
+
+# --- the page's place on buildoutledger.com: description, canonical address, icon and share card ---
+D_ = "What is outstanding on-chain, who issues it, where it settles and what backs it, read from chains, attestations and filings. Every line is a sourced row."
+rep('<meta name="description" content="An interactive map of who pays whom to build AI, from filings and company announcements. Every line is a sourced row.">',
+    f"""<meta name="description" content="{D_}">
+<link rel="canonical" href="https://buildoutledger.com/tokenization/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Buildout Ledger">
+<meta property="og:title" content="The Tokenization Buildout Ledger">
+<meta property="og:description" content="{D_}">
+<meta property="og:url" content="https://buildoutledger.com/tokenization/">
+<meta property="og:image" content="https://buildoutledger.com/tokenization/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Tokenization Buildout Ledger: tokenized money and tokenized assets, who issues them, where they settle and what backs them.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F5F1">""")
+
+i = src.rindex("})();"); src = src[:i] + open(next(p for p in (__import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)), n) for n in ("bs_view.js", "bs_view.js.txt")) if __import__("os").path.exists(p))).read() + src[i:]
+open(sys.argv[2], "w").write(src)
+print("patched", len(src))
