@@ -4,7 +4,7 @@
  "chain": "ethereum",
  "kind": "evm_rpc",
  "address": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
- "fetched_at": "2026-11-15T05:56:45+00:00",
+ "fetched_at": "2026-11-15T06:09:53+00:00",
  "explorer_url": "https://eth.blockscout.com/token/0x7712c34205737192402172409a8F7ccef8aA2AEc",
  "address_source": {
   "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
@@ -29,10 +29,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:56:45 GMT",
+     "Date": "Sun, 15 Nov 2026 06:09:53 GMT",
      "Content-Type": "application/json"
     },
-    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x1931d11\",\"id\":1}\n"
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x1931d53\",\"id\":1}\n"
    }
   },
   {
@@ -48,14 +48,14 @@
        "to": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
        "data": "0x18160ddd"
       },
-      "0x1931d11"
+      "0x1931d53"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:56:45 GMT",
+     "Date": "Sun, 15 Nov 2026 06:09:53 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x00000000000000000000000000000000000000000000000000009add547ab40d\"}\n"
@@ -74,14 +74,14 @@
        "to": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
        "data": "0x313ce567"
       },
-      "0x1931d11"
+      "0x1931d53"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:56:45 GMT",
+     "Date": "Sun, 15 Nov 2026 06:09:53 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}\n"
@@ -93,7 +93,7 @@
   "raw_supply": "170275395777549",
   "decimals": 6,
   "at": {
-   "block": 26418449
+   "block": 26418515
   },
   "supply_text": "170275395.777549",
   "supply": 170275395.777549

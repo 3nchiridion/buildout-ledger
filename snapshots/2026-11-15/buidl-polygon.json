@@ -4,7 +4,7 @@
  "chain": "polygon",
  "kind": "evm_rpc",
  "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
- "fetched_at": "2026-11-15T05:56:47+00:00",
+ "fetched_at": "2026-11-15T06:09:55+00:00",
  "explorer_url": "https://polygonscan.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
  "address_source": {
   "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
@@ -29,10 +29,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:56:47 GMT",
+     "Date": "Sun, 15 Nov 2026 06:09:55 GMT",
      "Content-Type": "application/json"
     },
-    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x5cd5bec\",\"id\":1}\n"
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x5cd5dfa\",\"id\":1}\n"
    }
   },
   {
@@ -48,14 +48,14 @@
        "to": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
        "data": "0x18160ddd"
       },
-      "0x5cd5bec"
+      "0x5cd5dfa"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:56:47 GMT",
+     "Date": "Sun, 15 Nov 2026 06:09:55 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x000000000000000000000000000000000000000000000000000009887fd75260\"}\n"
@@ -74,14 +74,14 @@
        "to": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
        "data": "0x313ce567"
       },
-      "0x5cd5bec"
+      "0x5cd5dfa"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:56:47 GMT",
+     "Date": "Sun, 15 Nov 2026 06:09:55 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}\n"
@@ -93,7 +93,7 @@
   "raw_supply": "10481865020000",
   "decimals": 6,
   "at": {
-   "block": 97344492
+   "block": 97345018
   },
   "supply_text": "10481865.020000",
   "supply": 10481865.02
