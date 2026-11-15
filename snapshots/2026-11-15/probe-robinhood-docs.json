@@ -1,0 +1,45 @@
+{
+ "id": "probe-robinhood-docs",
+ "token": "hoodst",
+ "chain": "robinhoodchain",
+ "kind": "probe_get",
+ "address": null,
+ "fetched_at": "2026-11-15T05:49:02+00:00",
+ "explorer_url": null,
+ "address_source": null,
+ "value_rule": null,
+ "calls": [
+  {
+   "request": {
+    "url": "https://docs.robinhood.com/chain/oracles/",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:49:03 GMT",
+     "Content-Type": "text/html; charset=utf-8"
+    },
+    "text": "<!doctype html>\n<html lang=\"en\" data-vocs>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <!--head-->\n    <script type=\"module\" crossorigin src=\"https://cdn.robinhood.com/assets/generated_assets/hoodchain_docsite/assets/index-B2w6nBhX.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"https://cdn.robinhood.com/assets/generated_assets/hoodchain_docsite/assets/style-DIQDqWCy.css\">\n  </head>\n  <body>\n    <div id=\"app\"><!--body--></div>\n  </body>\n</html>\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://docs.robinhood.com/chain/stock-tokens/building/",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:49:03 GMT",
+     "Content-Type": "text/html; charset=utf-8"
+    },
+    "text": "<!doctype html>\n<html lang=\"en\" data-vocs>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <!--head-->\n    <script type=\"module\" crossorigin src=\"https://cdn.robinhood.com/assets/generated_assets/hoodchain_docsite/assets/index-B2w6nBhX.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"https://cdn.robinhood.com/assets/generated_assets/hoodchain_docsite/assets/style-DIQDqWCy.css\">\n  </head>\n  <body>\n    <div id=\"app\"><!--body--></div>\n  </body>\n</html>\n"
+   }
+  }
+ ],
+ "parsed": {},
+ "ok": true
+}

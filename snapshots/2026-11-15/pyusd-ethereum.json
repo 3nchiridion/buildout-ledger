@@ -4,7 +4,7 @@
  "chain": "ethereum",
  "kind": "blockscout_v2",
  "address": "0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
- "fetched_at": "2026-11-15T05:45:06+00:00",
+ "fetched_at": "2026-11-15T05:48:46+00:00",
  "explorer_url": "https://eth.blockscout.com/token/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
  "address_source": {
   "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
@@ -24,17 +24,17 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:45:07 GMT",
+     "Date": "Sun, 15 Nov 2026 05:48:47 GMT",
      "Content-Type": "application/json; charset=utf-8"
     },
-    "text": "{\"address_hash\":\"0x6c3ea9036406852006290770BEdFcAbA0e23A0e8\",\"circulating_market_cap\":\"2640128839.644906\",\"circulating_supply\":null,\"decimals\":\"6\",\"exchange_rate\":\"0.99993\",\"holders_count\":\"114973\",\"icon_url\":\"https://assets.coingecko.com/coins/images/31212/small/PYUSD_Token_Logo_2x.png?1765987788\",\"name\":\"PayPal USD\",\"reputation\":\"ok\",\"symbol\":\"PYUSD\",\"total_supply\":\"1589765037854893\",\"type\":\"ERC-20\",\"volume_24h\":\"67201119.26872489\"}"
+    "text": "{\"address_hash\":\"0x6c3ea9036406852006290770BEdFcAbA0e23A0e8\",\"circulating_market_cap\":\"2640128839.644906\",\"circulating_supply\":null,\"decimals\":\"6\",\"exchange_rate\":\"0.99993\",\"holders_count\":\"114977\",\"icon_url\":\"https://assets.coingecko.com/coins/images/31212/small/PYUSD_Token_Logo_2x.png?1765987788\",\"name\":\"PayPal USD\",\"reputation\":\"ok\",\"symbol\":\"PYUSD\",\"total_supply\":\"1589765037854893\",\"type\":\"ERC-20\",\"volume_24h\":\"67201119.26872489\"}"
    }
   }
  ],
  "parsed": {
   "raw_supply": "1589765037854893",
   "decimals": "6",
-  "holders": "114973",
+  "holders": "114977",
   "supply_text": "1589765037.854893",
   "supply": 1589765037.854893
  },
