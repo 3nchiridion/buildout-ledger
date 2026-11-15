@@ -185,12 +185,14 @@ body.phone,body.land{-webkit-text-size-adjust:100%}
 body.phone button,body.land button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 body.phone #mbar,body.land #mbar{display:grid;position:fixed;left:0;right:0;top:0;z-index:5;background:#F6F5F1EB;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 8px) max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));gap:8px 6px;align-items:center;-webkit-user-select:none;user-select:none}
 body.phone #mbar{grid-template-columns:1fr auto auto;grid-template-areas:"t f m" "s s s"}
-body.land #mbar{grid-template-columns:auto minmax(240px,360px) 1fr auto auto;grid-template-areas:"t s . f m";padding-top:6px;padding-bottom:6px}
+body.land #mbar{grid-template-columns:auto minmax(220px,300px) 1fr auto auto auto;grid-template-areas:"t s . i f m";padding-top:5px;padding-bottom:5px}
 .mt{grid-area:t;min-width:0}
 .mt b{display:block;font:700 17px/1.15 var(--sans);letter-spacing:-.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mt span{display:block;font:600 9.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin-top:2px}
 .mic{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:#fff;display:grid;place-items:center;color:var(--ink)}
 #m-find{grid-area:f} #m-menu{grid-area:m}
+#m-info{grid-area:i;display:none} body.land #m-info{display:grid} #m-info[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+body.land .mic{width:36px;height:36px} body.land .mseg button{height:30px}
 .mseg{grid-area:s;display:flex;gap:3px;padding:3px;border-radius:11px;background:var(--paper-2);border:1px solid var(--line)}
 .mseg button{flex:1;height:34px;border-radius:8px;font:600 13px var(--sans);color:var(--ink-2);padding:0 2px}
 .mseg button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #00000024}
@@ -206,17 +208,26 @@ body.phone #panel{padding:0 16px calc(28px + env(safe-area-inset-bottom));oversc
 body.phone .back{display:none}
 body.phone aside h2{font-size:22px;padding-right:44px}
 body.phone aside .kicker{padding-right:44px}
-body.land #sheet{top:var(--mtop);width:320px}
+/* landscape phones: the whole map has the screen; the details panel slides over its right edge when something is picked */
+body.land #sheet{top:var(--mtop);width:300px;z-index:4;box-shadow:-10px 0 30px #0000001f;transform:translateX(100%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.85,.25,1),visibility 0s .28s}
+body.land.lopen #sheet{transform:none;visibility:visible;transition:transform .28s cubic-bezier(.2,.85,.25,1)}
+@media (prefers-reduced-motion:reduce){body.land #sheet,body.land.lopen #sheet{transition:none}}
+body.land #sheet.drag{transition:none}
+body.land #grab{display:block;height:0;flex:none;position:relative;z-index:2}
+body.land #grab-btn{display:none}
 body.land #panel{padding:12px 14px calc(24px + env(safe-area-inset-bottom))}
+body.land aside h2,body.land aside .kicker{padding-right:40px}
 body.phone #time,body.land #time{left:0;right:0;bottom:var(--peek);border-radius:0;border-width:1px 0 0;padding:3px max(12px,env(safe-area-inset-right)) 1px max(12px,env(safe-area-inset-left));background:#FFFFFFF0;z-index:3}
-body.land #time{right:320px;bottom:0}
+body.land #time{right:0;bottom:0}
+body.land.lopen #time{right:300px}
 body.phone .legend,body.land .legend{display:none}
 body.phone #play,body.land #play{width:30px;height:30px}
 body.phone #asof,body.land #asof{min-width:0;font-size:12px;white-space:nowrap}
 body.phone .trow,body.land .trow{gap:10px}
 body.phone .ticks span,body.land .ticks span{font-size:9.5px}
 body.phone #drawer,body.land #drawer{left:0;right:0;top:var(--mtop);bottom:calc(var(--peek) + var(--timeh));border:0;border-radius:0;box-shadow:none;padding:14px 14px 28px;z-index:4;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-body.land #drawer{right:320px;bottom:var(--timeh)}
+body.land #drawer{right:0;bottom:var(--timeh)}
+body.land.lopen #drawer{right:300px}
 body.phone #d-close,body.land #d-close{display:none}
 body.phone #drawer h2,body.land #drawer h2{font-size:20px}
 body.phone .lstrip,body.land .lstrip{flex-wrap:nowrap;overflow-x:auto;margin:4px -14px 6px;padding:0 14px 2px;scrollbar-width:none}
@@ -244,6 +255,7 @@ body.phone #msearch:not([hidden]),body.land #msearch:not([hidden]){display:flex}
 #ms-list button span{font:12px var(--mono);color:var(--muted);white-space:nowrap}
 #m-fit{position:fixed;right:12px;top:calc(var(--mtop) + 10px);z-index:3;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:#fff;font:600 13px var(--sans);box-shadow:0 2px 10px #0000001f}
 body.phone #m-fit:not([hidden]),body.land #m-fit:not([hidden]){display:block}
+body.land.lopen #m-fit{right:312px}
 .hl-t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:1px}
 .hl-t b{font:700 27px/1.15 var(--mono);letter-spacing:-.02em}
 .hl-t span{color:var(--muted);font-size:12.5px}
@@ -305,6 +317,7 @@ details.dsec summary{font:600 11px var(--mono);letter-spacing:.06em;text-transfo
 <div id="mbar">
   <div class="mt"><b>The AI Buildout Ledger</b><span id="m-ed" hidden></span></div>
   <div class="mseg" role="tablist" aria-label="View"><button data-mv="map" aria-pressed="true">Map</button><button data-mv="loops" aria-pressed="false">Loops</button><button data-mv="deals" aria-pressed="false">Deals</button><button data-mv="tower" aria-pressed="false">Tower</button></div>
+  <button class="mic" id="m-info" aria-label="Summary and details" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="3" width="14" height="12" rx="2"/><path d="M11 3v12"/></svg></button>
   <button class="mic" id="m-find" aria-label="Find a player"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M11.8 11.8 16 16"/></svg></button>
   <button class="mic" id="m-menu" aria-label="More options" aria-haspopup="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><circle cx="3.5" cy="9" r="1.8"/><circle cx="9" cy="9" r="1.8"/><circle cx="14.5" cy="9" r="1.8"/></svg></button>
 </div>
@@ -360,15 +373,28 @@ const PAPER = css('--paper');
 const cam = {x:0, y:0, k:1, goal:null};
 const cv = $('#stage'), ctx = cv.getContext('2d');
 let W = 0, H = 0, DPR = 1, panelW = 376, wide = true;
-let phone = false, land = false, RECT = null, MTOP = 0, SAB = 0, TIMEH = 0, homeStack = {}, SB = null, ORDER = null, lastStackW = 0, lastCls = '';
+let phone = false, land = false, RECT = null, MTOP = 0, SAB = 0, TIMEH = 0, homeStack = {}, SB = null, ORDER = null, lastStackW = 0, lastStackH = 0, lastCls = '', lopen = false;
+const LANDW = 300;   // the landscape panel's width, as in the stylesheet
 let touring = false, TOURB = 0, sheetState = 'peek', VIEW = null, inert = null, PINCH = false, fitShown = false, dealF = 'all', LEGEND = '';
-// phones get their own arrangement: portrait phones a bottom sheet, landscape phones a narrow side panel
+// phones get their own arrangement: portrait phones a bottom sheet; landscape phones the whole map, with a side panel that slides over it
 function classify(){
   W = innerWidth; H = innerHeight;
-  const small = W <= 820 || (H <= 500 && W > H);
-  land = small && W > H && H <= 500; phone = small && !land; wide = !small; panelW = wide ? 376 : land ? 320 : 0;
-  document.body.classList.toggle('phone', phone); document.body.classList.toggle('land', land);
+  const small = W <= 820 || (H <= 500 && W > H), was = land;
+  land = small && W > H && H <= 500; phone = small && !land; wide = !small;
+  if (land && !was) lopen = !!sel;   // turning to landscape keeps the panel open only for something picked
+  panelW = wide ? 376 : land && lopen ? LANDW : 0;
+  const S = $('#sheet'); if (land !== was){ S.classList.add('drag'); requestAnimationFrame(() => requestAnimationFrame(() => S.classList.remove('drag'))); }   // no slide when the page loads or the phone turns
+  document.body.classList.toggle('phone', phone); document.body.classList.toggle('land', land); document.body.classList.toggle('lopen', land && lopen);
+  if (land !== was) void S.offsetWidth;
+  $('#m-info').setAttribute('aria-pressed', land && lopen); $('#m-fit').textContent = land ? 'Show all' : 'Fit to width';
   return phone ? 'phone' : land ? 'land' : 'wide';
+}
+// landscape phones: open or close the panel. The map keeps its size; what the panel covers can be panned into view
+function landPanel(open){
+  if (!land) return;
+  lopen = open; panelW = open ? LANDW : 0;
+  document.body.classList.toggle('lopen', open); $('#m-info').setAttribute('aria-pressed', open); $('#sheet-x').hidden = !open;
+  measure();
 }
 classify();
 
@@ -546,6 +572,7 @@ function stackLayout(rank){
   }
   const old = SB ? Object.fromEntries(SB.bands.map(b => [b.id, b])) : {};
   const bands = [...LAYERS.map(l => ({id: l.id, label: l.label})), {id: 'capital', label: 'Capital'}].map(b => ({...b, ids: ORDER.rank[b.id].filter(id => V.live.has(id))}));
+  if (land) return stackCols(bands, old);
   const pos = {}; let y = 0;
   for (const b of bands){
     const lines = []; let cur = [], cw = 0;
@@ -563,6 +590,44 @@ function stackLayout(rank){
   }
   for (const id of Object.keys(homeStack)) if (!pos[id]) pos[id] = homeStack[id];   // players not live yet keep a spot to grow from
   SB = {bands, BW, height: y - 12}; homeStack = pos;
+}
+// landscape phones: the stack turned on its side, capital first so money runs left to right as in the arranged view.
+// Each layer is a column as narrow as it can be at a shared height, and that height is picked so the whole map fills the screen
+function stackCols(bands, old){
+  const aw = W - 12, ah = Math.max(140, (RECT ? RECT.bottom - RECT.top : H - 110) - 12), gx = 10, gy = 10, gap = 12; lastStackW = aw; lastStackH = ah;
+  const under = id => (V.latest[id] ? 23 : 0) + (V.total[id] && !size(id).am && ents[id].kind !== 'product' ? 17 : 0);
+  const bs = [bands[bands.length - 1], ...bands.slice(0, -1)].map(b => ({...b, ws: b.ids.map(slotW), hs: b.ids.map(id => size(id).h), us: b.ids.map(under)}));
+  const rows = (b, iw) => { const out = []; let cur = [], cw = 0; b.ids.forEach((id, i) => { const w = b.ws[i]; if (cur.length && cw + gx + w > iw){ out.push(cur); cur = []; cw = 0; } cw += (cur.length ? gx : 0) + w; cur.push(i); }); if (cur.length) out.push(cur); return out; };
+  const tall = (b, iw) => rows(b, iw).reduce((t, ln) => t + Math.max(...ln.map(i => b.hs[i])) + Math.max(0, ...ln.map(i => b.us[i])) + gy, 0);
+  for (const b of bs){   // every width worth trying for a column, and how tall its rows stand at that width
+    const lo = b.ids.length ? Math.max(...b.ws) : 120, hi = b.ws.reduce((t, w) => t + w + gx, 0); b.opts = [];
+    for (let iw = lo; ; iw += 12){ const h = b.ids.length ? tall(b, iw) : 0; if (!b.opts.length || h < b.opts[b.opts.length - 1].h) b.opts.push({w: iw + 24, h}); if (iw >= hi) break; }
+  }
+  const fit = hdr => {
+    let best = null;
+    for (const hc of new Set(bs.flatMap(b => b.opts.map(o => o.h)))){
+      let tw = gap * (bs.length - 1), ok = true; const ws = bs.map(b => { const o = b.opts.find(o => o.h <= hc); if (!o){ ok = false; return 0; } tw += o.w; return o.w; });
+      if (!ok) continue;
+      const hh = Math.max(84, hdr + hc + 2), s = Math.min(aw / tw, ah / hh);
+      if (!best || s > best.s) best = {s, ws, tw, hh};
+    }
+    return best;
+  };
+  const hdr = Math.max(40, 30 / fit(40).s), F = fit(hdr);   // room above each column for its name, which is drawn at a fixed screen size
+  const pos = {}; let x = -F.tw / 2;
+  bs.forEach((b, k) => {
+    const cw = F.ws[k], mid = x + cw / 2; let ry = hdr;
+    for (const ln of rows(b, cw - 24)){
+      const hh = Math.max(...ln.map(i => b.hs[i])), uu = Math.max(0, ...ln.map(i => b.us[i])), tw = ln.reduce((t, i) => t + b.ws[i], 0) + gx * (ln.length - 1); let lx = mid - tw / 2;
+      for (const i of ln){ pos[b.ids[i]] = {x: lx + b.ws[i] / 2, y: ry + hh / 2}; lx += b.ws[i] + gx; }
+      ry += hh + uu + gy;
+    }
+    b.top = 0; b.h = F.hh; b.x0 = x; b.w = cw; x += cw + gap;
+    const o = old[b.id]; b.dt = o ? o.dt : 0; b.dh = o ? o.dh : b.h; b.dx = o && o.dx != null ? o.dx : b.x0; b.dw = o && o.dw != null ? o.dw : b.w;   // drawn edges ease toward the new ones
+    delete b.ws; delete b.hs; delete b.us; delete b.opts;
+  });
+  for (const id of Object.keys(homeStack)) if (!pos[id]) pos[id] = homeStack[id];
+  SB = {bands: bs, BW: F.tw, height: F.hh, ew: SB && SB.ew != null ? SB.ew : F.tw, eh: SB && SB.eh != null ? SB.eh : F.hh}; homeStack = pos;
 }
 function home(id){
   const n = nodes[id]; if (n.held) return n.held;
@@ -787,8 +852,12 @@ function resize(){
   cv.width = W * DPR; cv.height = H * DPR;
   measure();
   if (L){
-    if (lastCls && cls !== lastCls){ layout(); buildLegend(); if (!wide && !mGoal) setMode('layers', true); renderPanel(); }   // crossing between phone and wide screens: arrange again; phones keep to the stack
-    else if (!wide && Math.abs(W - panelW - 12 - lastStackW) > 24) stackLayout();
+    if (lastCls && cls !== lastCls){   // crossing between phone and wide screens, or turning a phone: arrange again; phones keep to the stack
+      if (!wide) SB = null;   // a turned phone starts its new arrangement in place rather than morphing from the old one
+      layout(); buildLegend(); if (!wide && !mGoal) setMode('layers', true); renderPanel();
+      if (!wide){ cam.goal = null; inert = null; cam.x = 0; cam.y = 0; cam.k = 1; for (const id in nodes){ const h = home(id); Object.assign(nodes[id], {x: h.x, y: h.y, vx: 0, vy: 0}); } if (sel) focusOn(sel); }
+    }
+    else if (land ? Math.abs(W - 12 - lastStackW) > 4 || Math.abs(Math.max(140, RECT.bottom - RECT.top - 12) - lastStackH) > 4 : !wide && Math.abs(W - panelW - 12 - lastStackW) > 24) stackLayout();   // landscape lays out for the whole screen, so opening the panel never reflows it
   }
   lastCls = cls;
   if (phone) setSheet(sheetState, true);
@@ -806,12 +875,16 @@ function measure(){
 function bbox(){
   const ids = L.entities.filter(e => V.live.has(e.id)).map(e => e.id);
   const box = homes => { let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; for (const id of ids){ const h = homes[id], sz = size(id); x0 = Math.min(x0, h.x - sz.w / 2); x1 = Math.max(x1, h.x + sz.w / 2); y0 = Math.min(y0, h.y - sz.h / 2); y1 = Math.max(y1, h.y + sz.h / 2 + 22); } return {x0, x1, y0, y1}; };
-  const a = box(homeMap), b = !wide && SB ? {x0: -SB.BW / 2, x1: SB.BW / 2, y0: 0, y1: SB.height} : {x0: -BOX.w / 2, x1: CAP.x + CAP.w, y0: LAYERS[0].y - LAYERS[0].h / 2, y1: LAYERS[4].y + LAYERS[4].h / 2}, t = ease(mBlend);
+  const a = box(homeMap), b = land && SB && SB.ew != null ? {x0: -SB.ew / 2, x1: SB.ew / 2, y0: 0, y1: SB.eh} : !wide && SB ? {x0: -SB.BW / 2, x1: SB.BW / 2, y0: 0, y1: SB.height} : {x0: -BOX.w / 2, x1: CAP.x + CAP.w, y0: LAYERS[0].y - LAYERS[0].h / 2, y1: LAYERS[4].y + LAYERS[4].h / 2}, t = ease(mBlend);
   const u = ease(fBlend), f = FL ? {x0: FL.x0 - 40, x1: FL.x1 + 40, y0: FL.laneTop - 44, y1: FL.bottom + 44} : a;
   const m = k => { const p = a[k] + (b[k] - a[k]) * t; return p + (f[k] - p) * u; };
   return {x0: m('x0'), x1: m('x1'), y0: m('y0'), y1: m('y1')};
 }
 function view(){
+  if (land && RECT){   // landscape phones: the whole map fits between the bars at once; pinch to read closer
+    const b = bbox(), fit = Math.max(0.05, Math.min((W - 12) / (b.x1 - b.x0), (RECT.bottom - RECT.top - 12) / (b.y1 - b.y0)));
+    return {cx: W / 2, cy: (RECT.top + RECT.bottom) / 2, s: fit * cam.k, ox: (b.x0 + b.x1) / 2 + cam.x, oy: (b.y0 + b.y1) / 2 + cam.y};
+  }
   if (!wide && RECT){   // phones: fit the width, keep the top under the bars, and let the rest pan
     const b = bbox(), fit = Math.max(0.1, (RECT.right - RECT.left) / (b.x1 - b.x0 + 12));
     return {cx: (RECT.left + RECT.right) / 2, cy: RECT.top + 6 + (b.y1 - b.y0) * fit / 2, s: fit * cam.k, ox: (b.x0 + b.x1) / 2 + cam.x, oy: (b.y0 + b.y1) / 2 + cam.y};
@@ -833,7 +906,7 @@ function step(){
   if (fBlend !== fGoal){ fBlend += (fGoal - fBlend) * 0.065; if (Math.abs(fGoal - fBlend) < 0.002) fBlend = fGoal; }
   if (cam.goal){ const g = cam.goal; cam.x += (g.x - cam.x) * 0.1; cam.y += (g.y - cam.y) * 0.1; cam.k += (g.k - cam.k) * 0.1; if (Math.abs(g.k - cam.k) < 0.002 && Math.hypot(g.x - cam.x, g.y - cam.y) < 0.5) cam.goal = null; }
   if (inert){ cam.x += inert.x; cam.y += inert.y; inert.x *= 0.93; inert.y *= 0.93; if (Math.hypot(inert.x, inert.y) * (VIEW ? VIEW.s : 1) < 0.12) inert = null; }
-  if (!wide){ softClamp(); if (SB) for (const b of SB.bands){ b.dt += (b.top - b.dt) * 0.12; b.dh += (b.h - b.dh) * 0.12; } }
+  if (!wide){ softClamp(); if (SB){ for (const b of SB.bands){ b.dt += (b.top - b.dt) * 0.12; b.dh += (b.h - b.dh) * 0.12; if (b.dx != null){ b.dx += (b.x0 - b.dx) * 0.12; b.dw += (b.w - b.dw) * 0.12; } } if (SB.ew != null){ SB.ew += (SB.BW - SB.ew) * 0.12; SB.eh += (SB.height - SB.eh) * 0.12; } } }
   const ids = Object.keys(nodes).filter(id => V.live.has(id)), grabbed = drag && drag.id;
   for (const id of ids){
     const n = nodes[id]; if (id === grabbed) continue;
@@ -852,7 +925,7 @@ function softClamp(){
   const v = view(), b = bbox(), top = toScreen({x: 0, y: b.y0}, v).y, bot = toScreen({x: 0, y: b.y1}, v).y, lx = toScreen({x: b.x0, y: 0}, v).x, rx = toScreen({x: b.x1, y: 0}, v).x;
   const vt = Math.max(RECT.top, TOURB) + 6, vb = (phone ? Math.min(RECT.bottom, H - sheetVis(sheetState)) : RECT.bottom) - 6;
   let dy = 0, dx = 0;
-  if (bot - top <= vb - vt || top > vt) dy = top - vt; else if (bot < vb) dy = bot - vb;
+  if (land && bot - top <= vb - vt) dy = (top + bot - vt - vb) / 2; else if (bot - top <= vb - vt || top > vt) dy = top - vt; else if (bot < vb) dy = bot - vb;
   if (rx - lx <= RECT.right - RECT.left) dx = (lx + rx) / 2 - (RECT.left + RECT.right) / 2; else if (lx > RECT.left) dx = lx - RECT.left; else if (rx < RECT.right) dx = rx - RECT.right;
   if (Math.abs(dx) > 0.4 || Math.abs(dy) > 0.4){ cam.x += dx / v.s * 0.2; cam.y += dy / v.s * 0.2; if (inert && ((dy > 0 && inert.y < 0) || (dy < 0 && inert.y > 0))) inert.y *= 0.5; }
 }
@@ -975,13 +1048,14 @@ function drawStack(c, v, a){
   c.globalAlpha = a;
   for (const b of SB.bands){
     const n = b.ids.length, cap = b.id === 'capital';
-    const p = toScreen({x: -SB.BW / 2, y: b.dt}, v), w = SB.BW * v.s, h = b.dh * v.s;
+    const col = land && b.dx != null, p = toScreen({x: col ? b.dx : -SB.BW / 2, y: b.dt}, v), w = (col ? b.dw : SB.BW) * v.s, h = b.dh * v.s;
     roundRect(c, p.x, p.y, w, h, 16 * v.s); c.fillStyle = n && !cap ? '#ffffff99' : '#ffffff55'; c.fill();
     if (cap) c.setLineDash([6, 5]); c.strokeStyle = n && !cap ? css('--ink') : css('--line-2'); c.lineWidth = 1.3; c.stroke(); c.setLineDash([]);
   }
   c.globalAlpha = 1;
 }
 function drawStackLabels(c, v, a){
+  if (land) return drawColLabels(c, v, a);
   const P = css('--paper'), f1 = `600 ${Math.min(14, Math.max(10.5, 13 * v.s))}px ${MONO}`, f2 = `400 ${Math.min(12, Math.max(9.5, 11 * v.s))}px ${MONO}`;
   c.globalAlpha = a; c.textAlign = 'left'; c.textBaseline = 'middle';
   for (const b of SB.bands){
@@ -995,6 +1069,31 @@ function drawStackLabels(c, v, a){
     c.fillStyle = stuck ? '#ffffff' : P; roundRect(c, lx - 8, ly - 11, w1 + w2 + 24, 22, 11); c.fill();
     if (stuck){ c.strokeStyle = css('--line-2'); c.lineWidth = 1; c.stroke(); }
     c.font = f1; c.fillStyle = css('--ink'); c.fillText(lab, lx, ly + 0.5); c.font = f2; c.fillStyle = css('--muted'); c.fillText(sub, lx + w1 + 8, ly + 0.5);
+  }
+  c.textBaseline = 'alphabetic'; c.globalAlpha = 1;
+}
+// landscape: each column's name sits at its top, shrunk to fit the column, and stays in view while a zoomed map is panned
+function drawColLabels(c, v, a){
+  const P = css('--paper'), vl = RECT ? RECT.left : 0, vr = RECT ? RECT.right : W;
+  c.globalAlpha = a; c.textAlign = 'left'; c.textBaseline = 'middle';
+  for (const b of SB.bands){
+    if (b.dx == null) continue;
+    const n = b.ids.length, lab = b.label.toUpperCase(), sub = n ? String(n) : 'no rows yet', tl = toScreen({x: b.dx, y: b.dt}, v), br = toScreen({x: b.dx + b.dw, y: b.dt + b.dh}, v);
+    const cl = Math.max(tl.x, vl), cr = Math.min(br.x, vr), room = cr - cl - 16; if (room < 28) continue;
+    let fs = 10.5; c.font = `600 ${fs}px ${MONO}`; let w1 = c.measureText(lab).width;
+    if (w1 > room){ fs = Math.max(7, fs * room / w1); c.font = `600 ${fs}px ${MONO}`; w1 = c.measureText(lab).width; }
+    const f2 = `400 ${Math.min(9.5, fs)}px ${MONO}`; c.font = f2; const w2 = c.measureText(sub).width, both = w1 + 6 + w2 <= room, wt = both ? w1 + 6 + w2 : w1;
+    let ly = tl.y + 13; const pin = RECT ? RECT.top + 14 : -1e9, stuck = ly < pin;
+    if (stuck) ly = Math.min(pin, br.y - 14);
+    if (ly > H) continue;
+    const lx = Math.max(tl.x + 9, Math.min(vl + 12, br.x - 9 - wt));
+    if (stuck){ c.fillStyle = '#16171b14'; roundRect(c, lx - 7, ly - 11, wt + 14, 23, 11.5); c.fill(); }
+    c.fillStyle = stuck ? '#ffffff' : P; roundRect(c, lx - 6, ly - 10, wt + 12, 20, 10); c.fill();
+    if (stuck){ c.strokeStyle = css('--line-2'); c.lineWidth = 1; c.stroke(); }
+    c.save(); c.beginPath(); c.rect(cl, ly - 12, cr - cl, 24); c.clip();
+    c.font = `600 ${fs}px ${MONO}`; c.fillStyle = css('--ink'); c.fillText(lab, lx, ly + 0.5);
+    if (both){ c.font = f2; c.fillStyle = css('--muted'); c.fillText(sub, lx + w1 + 6, ly + 0.5); }
+    c.restore();
   }
   c.textBaseline = 'alphabetic'; c.globalAlpha = 1;
 }
@@ -1076,20 +1175,20 @@ function drawNode(c, n, rel, v){
   }
   if (hot && !picked){ c.globalAlpha = on ? 0.5 : 0.2; c.lineWidth = 1; c.strokeStyle = ink; if (s.shape === 'circle' || s.shape === 'investor'){ c.beginPath(); c.arc(p.x, p.y, r + 5, 0, 7); c.stroke(); } else { roundRect(c, p.x - w / 2 - 5, p.y - h / 2 - 5, w + 10, h + 10, 10); c.stroke(); } c.globalAlpha = on ? 1 : 0.22; }
   // name inside the body
-  const fs = Math.max(6, BASE * k);
+  const fs = land ? BASE * k : Math.max(6, BASE * k), fl = (m, x) => land ? x : Math.max(m, x);   // landscape shows the whole map, so text keeps to the room laid out for it
   c.textAlign = 'center'; c.textBaseline = 'middle';
   const eyebrow = {investor:'INVESTOR', government:'GOVERNMENT', instrument:'BOND', sink:'CAPEX SINK'}[e.kind];
   const lines = s.lines || [e.name], lh = fs * 1.12, off = eyebrow ? fs * 0.45 : 0, chipAm = s.am ? s.am * k : 0;
   const nx = p.x + (e.kind === 'instrument' ? 6 * k : 0) - chipAm / 2;
-  if (eyebrow){ c.font = `600 ${Math.max(7, fs * 0.62)}px ${MONO}`; c.fillStyle = e.kind === 'sink' ? '#ffffffb3' : css('--muted'); c.fillText(eyebrow, nx, p.y - (lines.length * lh) / 2 - fs * 0.15 + off - fs * 0.35); }
+  if (eyebrow){ c.font = `600 ${fl(7, fs * 0.62)}px ${MONO}`; c.fillStyle = e.kind === 'sink' ? '#ffffffb3' : css('--muted'); c.fillText(eyebrow, nx, p.y - (lines.length * lh) / 2 - fs * 0.15 + off - fs * 0.35); }
   c.font = bodyFont(fs); c.fillStyle = e.kind === 'sink' ? '#ffffff' : ink;
   lines.forEach((l, i) => c.fillText(l, nx, p.y - (lines.length - 1) * lh / 2 + i * lh + off));
   if (chipAm){ const nw = Math.max(...lines.map(l => c.measureText(l).width)); c.font = `500 ${fs * 0.8}px ${MONO}`; c.fillStyle = css('--ink-2'); c.textAlign = 'left'; c.fillText(money(V.total[e.id]), nx + nw / 2 + 7 * k, p.y + (lines.length - 1) * lh / 2 + off); c.textAlign = 'center'; }
   let below = h / 2;
-  if (V.total[e.id] && e.kind !== 'product' && !chipAm){ c.font = `500 ${Math.max(9, fs * 0.74)}px ${MONO}`; c.fillStyle = css('--muted'); c.fillText(money(V.total[e.id]), p.x, p.y + h / 2 + fs * 0.95); below += fs * 1.55; }
+  if (V.total[e.id] && e.kind !== 'product' && !chipAm){ c.font = `500 ${fl(9, fs * 0.74)}px ${MONO}`; c.fillStyle = css('--muted'); c.fillText(money(V.total[e.id]), p.x, p.y + h / 2 + fs * 0.95); below += fs * 1.55; }
   const r0 = V.latest[e.id];
   if (r0){   // latest model badge: what this product runs on at the chosen date
-    const bf = Math.max(7.5, fs * 0.66), label = shortModel(r0), fresh = tNow - toN(r0.date) <= 21;
+    const bf = fl(7.5, fs * 0.66), label = shortModel(r0), fresh = tNow - toN(r0.date) <= 21;
     c.font = `600 ${bf}px ${MONO}`; const tw = c.measureText(label).width, bw = tw + bf * 1.3 + (fresh ? bf * 0.9 : 0), bh = bf * 1.75, by = p.y + below + bf * 0.55;
     c.fillStyle = '#ffffff'; roundRect(c, p.x - bw / 2, by, bw, bh, bh / 2); c.fill(); c.lineWidth = 1; c.strokeStyle = fresh ? REL : css('--line-2'); c.stroke();
     if (fresh){ c.fillStyle = REL; c.beginPath(); c.arc(p.x - bw / 2 + bf * 0.75, by + bh / 2, bf * 0.27, 0, 7); c.fill(); }
@@ -1119,9 +1218,9 @@ function pick(x, y){
   for (const g of G) for (const p of g.pts){ const d = Math.hypot(x - p.x, y - p.y) - g.w / 2; if (d < bd){ bd = d; best = {kind:'flow', id:g.f.id}; } }
   return best;
 }
-function select(s){
+function select(s, keep){
   sel = s; renderPanel(); $('#panel').scrollTop = 0;
-  if (!wide){ $('#sheet-x').hidden = !s; if (phone){ if (s && sheetState === 'peek' && !touring) setSheet('half'); else if (!s) setSheet('peek'); } if (s) focusOn(s); }
+  if (!wide){ $('#sheet-x').hidden = !s; if (phone){ if (s && sheetState === 'peek' && !touring) setSheet('half'); else if (!s) setSheet('peek'); } if (land) landPanel(!!s || !!keep); if (s) focusOn(s); }
   try { history.replaceState(null, '', modeHash()); } catch (_) {}
 }
 function focusOn(s){
@@ -1129,6 +1228,13 @@ function focusOn(s){
   const f = s.kind === 'flow' && V.flows.find(x => x.id === s.id), ids = s.kind === 'entity' ? [s.id] : f ? [f.payer, f.payee] : [];
   if (!ids.length || !ids.every(id => nodes[id])) return;
   const v = view(), pts = ids.map(id => toScreen(home(id), v)), p = {x: pts.reduce((t, q) => t + q.x, 0) / pts.length, y: pts.reduce((t, q) => t + q.y, 0) / pts.length};
+  if (land){   // landscape: bring the pick toward the middle of what the panel leaves uncovered, never pulling the map off its edges
+    const b = bbox(), lx = toScreen({x: b.x0, y: 0}, v).x, rx = toScreen({x: b.x1, y: 0}, v).x, ty0 = toScreen({x: 0, y: b.y0}, v).y, by0 = toScreen({x: 0, y: b.y1}, v).y;
+    const vt = RECT.top + 6, vb = RECT.bottom - 6, cl = (d, lo, hi) => Math.max(lo, Math.min(hi, d));
+    const dx = rx - lx <= RECT.right - RECT.left ? (lx + rx - RECT.left - RECT.right) / 2 : cl(p.x - (RECT.left + RECT.right) / 2, lx - RECT.left, rx - RECT.right);
+    const dy = by0 - ty0 <= vb - vt ? (ty0 + by0 - vt - vb) / 2 : cl(p.y - (vt + vb) / 2, ty0 - vt, by0 - vb);
+    inert = null; cam.goal = {x: cam.x + dx / v.s, y: cam.y + dy / v.s, k: cam.k}; return;
+  }
   const tb = Math.max(RECT.top, TOURB + 4);
   const vb = phone ? Math.min(RECT.bottom, H - sheetVis(sheetState === 'peek' && !touring ? 'half' : sheetState)) : RECT.bottom, ty = (tb + vb) / 2;
   inert = null; cam.goal = {x: cam.k > 1.05 ? cam.x + (p.x - (RECT.left + RECT.right) / 2) / v.s : cam.x, y: cam.y + (p.y - ty) / v.s, k: cam.k};
@@ -1185,7 +1291,8 @@ function bindPhone(){
   $('#m-menu').onclick = () => $('#mmenu').hidden ? openMenu() : closeMenu();
   $('#mscrim').onclick = closeMenu;
   $('#mmenu').addEventListener('click', e => { const b = e.target.closest('button'); if (b) menuAct(b); });
-  $('#m-fit').onclick = () => { inert = null; const v = view(), yc = (RECT.top + Math.min(RECT.bottom, H - sheetVis(sheetState))) / 2, s1 = v.s, s2 = v.s / cam.k; cam.goal = {x: 0, y: cam.y + (yc - v.cy) * (1 / s1 - 1 / s2), k: 1}; };
+  $('#m-info').onclick = () => lopen ? select(null) : landPanel(true);
+  $('#m-fit').onclick = () => { inert = null; if (land){ cam.goal = {x: 0, y: 0, k: 1}; return; } const v = view(), yc = (RECT.top + Math.min(RECT.bottom, H - sheetVis(sheetState))) / 2, s1 = v.s, s2 = v.s / cam.k; cam.goal = {x: 0, y: cam.y + (yc - v.cy) * (1 / s1 - 1 / s2), k: 1}; };
   bindSheet();
 }
 function openSearch(){ closeMenu(); $('#msearch').hidden = false; $('#ms-in').value = ''; renderSearch(''); $('#ms-in').focus(); }
@@ -1230,19 +1337,19 @@ const TOUR = [
     return ['1 of 3 · Follow one app to the end', `${wide ? 'Click' : 'Tap'} any player to trace everything it depends on. ChatGPT runs through OpenAI to ${n} players, down to the power deals at the bottom.`]; },
   () => { if (wide) setMode('flow'); select({kind:'entity', id:'amazon'}); loopTab = 'map'; setDrawer('loops'); const a = loops().find(x => x.s === 'amazon');
     return ['2 of 3 · The loops', `Some suppliers put money into their own customers, who commit orders straight back. Each star here is one customer, ringed by the suppliers in a loop with it.${a ? ` Amazon has put ${money(a.i)} into customers that have committed ${money(a.b)} back to it.` : ''}`]; },
-  () => { setDrawer(null); setMode('layers'); select(null); if (phone){ setSheet('half'); inert = null; cam.goal = {x: 0, y: 0, k: 1}; }
+  () => { setDrawer(null); setMode('layers'); select(null, true); if (phone){ setSheet('half'); inert = null; cam.goal = {x: 0, y: 0, k: 1}; } if (land){ inert = null; cam.goal = {x: 0, y: 0, k: 1}; }
     return ['3 of 3 · What is real', `Of ${money(HEAD.tot)} on record, ${money(HEAD.seg[0][2])} has actually moved. Another ${money(HEAD.seg[3][2])} rests on press reports alone and isn't counted. Hollow lines haven't been independently checked yet.`]; },
 ];
 function tour(i){
   const box = $('#tour');
-  if (i < 0 || i >= TOUR.length){ box.hidden = true; touring = false; TOURB = 0; if (phone) setSheet('peek'); try { localStorage.setItem('abl-tour', '1'); } catch (_) {} return; }
+  if (i < 0 || i >= TOUR.length){ box.hidden = true; touring = false; TOURB = 0; if (phone) setSheet('peek'); if (land) landPanel(!!sel); try { localStorage.setItem('abl-tour', '1'); } catch (_) {} return; }
   touring = true; const [k, t] = TOUR[i](); $('#tour-k').textContent = k; $('#tour-t').textContent = t; $('#tour-next').textContent = i === TOUR.length - 1 ? 'Done' : 'Next';
   $('#tour-next').onclick = () => tour(i + 1); $('#tour-skip').onclick = () => tour(-1); box.hidden = false;
   TOURB = !wide && !land ? box.getBoundingClientRect().bottom : 0;   // on a phone the card covers the top of the map: the map makes room below it
   if (!wide && sel) focusOn(sel);
 }
 function zoomAt(x, y, k){
-  const v = view(), w = toWorld(x, y, v); cam.goal = null; cam.k = Math.max(wide ? 0.45 : 0.22, Math.min(wide ? 3.5 : 2.6, k));
+  const v = view(), w = toWorld(x, y, v); cam.goal = null; cam.k = Math.max(wide ? 0.45 : land ? 1 : 0.22, Math.min(wide ? 3.5 : land ? 4 : 2.6, k));
   const v2 = view(), w2 = toWorld(x, y, v2); cam.x += w.x - w2.x; cam.y += w.y - w2.y;
 }
 function bindPointer(){
@@ -1310,7 +1417,7 @@ function entityButtons(){
   return groups.map(([label, fn]) => { const list = L.entities.filter(e => fn(e) && V.live.has(e.id)); return list.length ? `<div class="grp">${label}</div><div class="ents">${list.map(e => `<button class="btn" data-ent="${esc(e.id)}">${esc(e.name)}</button>`).join('')}</div>` : ''; }).join('');
 }
 function renderPanel(){
-  if (!wide) $('#sheet-x').hidden = !sel;
+  if (!wide) $('#sheet-x').hidden = land ? !lopen : !sel;
   const P = $('#panel');
   if (!sel){
     const ev = V.events.filter(e => e.level === 'map').slice().reverse();
@@ -1425,7 +1532,7 @@ function statedMetrics(id){
 $('#panel').addEventListener('click', e => {
   const tb = e.target.closest('[data-trace]'); if (tb){ traceDir = tb.dataset.trace; renderPanel(); return; }
   const b = e.target.closest('[data-ent],[data-flow],[data-home]'); if (!b) return;
-  if (b.dataset.home !== undefined) select(null);
+  if (b.dataset.home !== undefined) select(null, true);   // back to the list: on a landscape phone the panel stays open
   else if (b.dataset.flow && V.flows.find(f => f.id === b.dataset.flow)) select({kind:'flow', id:b.dataset.flow});
   else if (b.dataset.ent) select({kind:'entity', id:b.dataset.ent});
 });
