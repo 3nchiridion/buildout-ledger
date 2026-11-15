@@ -161,7 +161,7 @@
   },
   {
    "id": "jpmorgan",
-   "name": "J.P. Morgan (Kinexys)",
+   "name": "J.P. Morgan",
    "type": "company",
    "tier": "instruments",
    "cik": null,
@@ -311,7 +311,7 @@
    "type": "company",
    "tier": "issuance",
    "cik": null,
-   "note": "Tokenization provider for BUIDL.",
+   "note": "Tokenization company: provider for BUIDL, tokenizes ACRED, and offers Securitize Stocks through Securitize Markets. A public company since July 2026; its common stock trades on the NYSE and, in tokenized form, on Solana.",
    "layer": "issuance",
    "kind": "company",
    "parent": null
@@ -1175,6 +1175,190 @@
    "layer": null,
    "kind": "government",
    "parent": null
+  },
+  {
+   "id": "figure",
+   "name": "Figure",
+   "type": "company",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Figure Technology Solutions, Inc. Its wholly owned subsidiary Figure Certificate Company issues YLDS.",
+   "layer": "instruments",
+   "kind": "company",
+   "parent": null
+  },
+  {
+   "id": "ylds",
+   "name": "YLDS",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Figure calls YLDS an SEC-registered yield-bearing stablecoin; the release calls it a registered public debt security. Counted with tokenized assets, not money, because it is a security that pays a yield. Already used in Figure's Democratized Prime product on the Provenance Blockchain.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "figure",
+   "asset_class": "fund",
+   "counted": true,
+   "wrapper": {
+    "regime": "fund_registered",
+    "label": "Unsecured face-amount certificates of Figure Certificate Company, solely backed by its assets; a registered public debt security"
+   }
+  },
+  {
+   "id": "provenance",
+   "name": "Provenance",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "Provenance Blockchain. Figure describes itself as Provenance Blockchain-native; who runs the chain is not sourced here.",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "avalanche",
+   "name": "Avalanche",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "securitizestocks",
+   "name": "Securitize Stocks",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Tokenized US stocks: each token is backed one for one by an underlying share and is a security entitlement under UCC Article 8. Holders are not registered shareholders of the underlying issuer unless they convert; the issuers have not sponsored or endorsed them. Launched on Solana with twelve stocks, settling in USDC. No total is published.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "securitize",
+   "asset_class": "equity",
+   "counted": true,
+   "wrapper": {
+    "regime": "other_regulator",
+    "label": "Security entitlements held through Securitize Markets, LLC, traded on Securitize's registered broker-dealer platform; convertible entitlement tokens"
+   }
+  },
+  {
+   "id": "secz",
+   "name": "Tokenized SECZ",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Securitize's own common stock in tokenized form, issuer-sponsored. The listing-day release says it will launch first on Avalanche and Solana and be available to eligible US investors through Securitize's regulated platform. No value or share count is published.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "securitize",
+   "asset_class": "equity",
+   "counted": true,
+   "wrapper": {
+    "regime": "other_regulator",
+    "label": "Issuer-sponsored tokenization of Securitize's common stock, the same stock that trades on the NYSE"
+   }
+  },
+  {
+   "id": "apollo",
+   "name": "Apollo",
+   "type": "company",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Its Apollo Diversified Credit Fund is a non-traded, closed-end interval fund; ACRED gives tokenized access to it.",
+   "layer": "instruments",
+   "kind": "company",
+   "parent": null
+  },
+  {
+   "id": "acred",
+   "name": "ACRED",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Apollo Diversified Credit Securitize Fund, a feeder fund. The release relates to Securitize Tokenized Apollo Diversified Credit Fund, Ltd., which will invest substantially all of its assets in Apollo Diversified Credit Fund; redemptions at a daily net asset value. No total has been read, so it has no balance.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "apollo",
+   "asset_class": "fund",
+   "counted": true,
+   "wrapper": {
+    "regime": "fund_private",
+    "label": "Feeder fund giving tokenized access to Apollo Diversified Credit Fund; qualifying investors only, through Securitize Markets"
+   }
+  },
+  {
+   "id": "fidelity",
+   "name": "Fidelity",
+   "type": "company",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Fidelity Investments, sponsor of Fidelity Treasury Digital Fund.",
+   "layer": "instruments",
+   "kind": "company",
+   "parent": null
+  },
+  {
+   "id": "fyoxx",
+   "name": "FYOXX",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Fidelity Treasury Digital Fund - OnChain Class. Normally invests at least 99.5% of total assets in cash and US Treasury securities, in compliance with industry-standard regulatory requirements for money market funds. Counted at the class's net assets as the fact sheet gives them; the fund's portfolio assets cover all its classes.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "fidelity",
+   "asset_class": "fund",
+   "counted": true,
+   "wrapper": {
+    "regime": "fund_registered",
+    "label": "OnChain Class of Fidelity Treasury Digital Fund, a money market fund"
+   }
+  },
+  {
+   "id": "ecb",
+   "name": "ECB (Eurosystem)",
+   "type": "government",
+   "tier": null,
+   "cik": null,
+   "note": "European Central Bank; with the euro area's national central banks it forms the Eurosystem.",
+   "layer": null,
+   "kind": "government",
+   "parent": null
+  },
+  {
+   "id": "pontes",
+   "name": "Pontes",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "The Eurosystem's DLT solution: wholesale transactions in tokenised assets settle in central bank money, on the Eurosystem DLT platform with cash tokens or in T2. On the map; outside the headline.",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": "ecb"
+  },
+  {
+   "id": "bis",
+   "name": "BIS",
+   "type": "government",
+   "tier": null,
+   "cik": null,
+   "note": "Bank for International Settlements.",
+   "layer": null,
+   "kind": "government",
+   "parent": null
+  },
+  {
+   "id": "agora",
+   "name": "Project Agorá",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "A multi-currency shared programmable platform for wholesale cross-border payments using tokenised central bank reserves and tokenised commercial bank deposits, convened by the BIS and the Institute of International Finance. A tested prototype; outside the headline.",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": "bis"
   }
  ],
  "flows": [
@@ -2313,6 +2497,194 @@
    "level": "entity",
    "title": "SEC approves Nasdaq's rule to trade tokenized securities",
    "label": "Rule approved (conditional)"
+  },
+  {
+   "id": "t-figure-ylds",
+   "payer": "figure",
+   "payee": "ylds",
+   "type": "issues",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2025-11-12",
+   "grade": "announced",
+   "definition": "Figure Certificate Company, a wholly owned subsidiary of Figure Technology Solutions, Inc., issues YLDS, which the release calls a registered public debt security and, in its disclaimer, unsecured face-amount certificates.",
+   "source_title": "Figure press release, Figure Brings $YLDS to Solana, 12 Nov 2025",
+   "source_url": "https://investors.figure.com/news-releases/news-release-details/figure-brings-ylds-solana-unlocking-real-rwa-utility-defi",
+   "level": "entity",
+   "title": "Figure's subsidiary issues YLDS",
+   "label": "Issuer (Figure Certificate Company)"
+  },
+  {
+   "id": "t-securitize-securitizestocks",
+   "payer": "securitize",
+   "payee": "securitizestocks",
+   "type": "distributes",
+   "status": "announced",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-10-08",
+   "grade": "announced",
+   "definition": "The release names Securitize Markets, LLC and Securitize Europe Brokerage and Markets, S.A. as offering Securitize Stocks; the entitlements are held through Securitize Markets, LLC and will trade on Securitize's registered broker-dealer platform, and the backing shares will not be lent out. No issuer is named.",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+   "level": "entity",
+   "title": "Securitize Markets offers Securitize Stocks",
+   "label": "Offered by Securitize Markets, LLC"
+  },
+  {
+   "id": "t-securitize-secz",
+   "payer": "securitize",
+   "payee": "secz",
+   "type": "issues",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-07-02",
+   "grade": "announced",
+   "definition": "Securitize is bringing its own common stock onchain at the start of its life as a public company; its CEO calls it issuer-sponsored tokenization of the same common stock trading on the NYSE.",
+   "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+   "source_url": "https://www.webull.com.au/news-detail/15158204236620800",
+   "level": "entity",
+   "title": "Securitize tokenizes its own stock",
+   "label": "Issuer (its own stock)"
+  },
+  {
+   "id": "t-securitize-acred",
+   "payer": "securitize",
+   "payee": "acred",
+   "type": "tokenizes",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2025-01-30",
+   "grade": "announced",
+   "definition": "Securitize launched ACRED in partnership with Apollo and serves as its digital transfer agent and fund administrator; qualifying investors participate only through Securitize Markets, Securitize's broker-dealer subsidiary.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "Securitize tokenizes ACRED",
+   "label": "Tokenizes; transfer agent and administrator"
+  },
+  {
+   "id": "t-apollo-acred",
+   "payer": "apollo",
+   "payee": "acred",
+   "type": "partner",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2025-01-30",
+   "grade": "announced",
+   "definition": "ACRED offers tokenized access to Apollo Diversified Credit Fund, a non-traded, closed-end interval fund, through an all-digital process with native redemptions at a daily net asset value.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "ACRED feeds into Apollo's credit fund",
+   "label": "Master fund (Apollo Diversified Credit Fund)"
+  },
+  {
+   "id": "t-fidelity-fyoxx",
+   "payer": "fidelity",
+   "payee": "fyoxx",
+   "type": "issues",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-11-13",
+   "grade": "announced",
+   "definition": "The fact sheet names the fund as Fidelity Treasury Digital Fund - OnChain Class (fund 9053, CUSIP 31617H813), with Fidelity Investments and its affiliates as the fund's sponsor. Drawn as the issuer tie because the ledger has no separate sponsor tie, as for BUIDL.",
+   "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026",
+   "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+   "level": "entity",
+   "title": "Fidelity sponsors FYOXX",
+   "label": "Sponsor"
+  },
+  {
+   "id": "h-ousg-fyoxx",
+   "payer": "ousg",
+   "payee": "fyoxx",
+   "type": "holding",
+   "status": "cash_moved",
+   "amount_usd": 23640401,
+   "amount_qualifier": "as listed in OUSG's portfolio",
+   "date": "2026-11-13",
+   "grade": "announced",
+   "definition": "$23,640,401 of OUSG's portfolio on 13 Nov 2026, listed as Fidelity Treasury Digital Fund (FYOXX).",
+   "source_title": "Ondo Finance, OUSG page",
+   "source_url": "https://ondo.finance/ousg",
+   "level": "entity",
+   "title": "OUSG holds FYOXX",
+   "label": "Holds",
+   "as_of": "2026-11-13"
+  },
+  {
+   "id": "t-fed-agora",
+   "payer": "fed",
+   "payee": "agora",
+   "type": "partner",
+   "status": "announced",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-05-27",
+   "grade": "filed",
+   "definition": "One of the seven central banks in Project Agorá, with the Bank of England, the Bank of France for the Eurosystem, the Bank of Japan, the Bank of Korea, the Bank of Mexico and the Swiss National Bank.",
+   "source_title": "BIS press release, Project Agorá shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+   "source_url": "https://www.bis.org/press/p260527.htm",
+   "level": "entity",
+   "title": "The New York Fed takes part in Project Agorá",
+   "label": "Central bank participant (Federal Reserve Bank of New York)"
+  },
+  {
+   "id": "t-ecb-agora",
+   "payer": "ecb",
+   "payee": "agora",
+   "type": "partner",
+   "status": "announced",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-05-27",
+   "grade": "filed",
+   "definition": "The Bank of France takes part in Project Agorá representing the Eurosystem, one of seven central banks.",
+   "source_title": "BIS press release, Project Agorá shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+   "source_url": "https://www.bis.org/press/p260527.htm",
+   "level": "entity",
+   "title": "The Eurosystem takes part in Project Agorá",
+   "label": "Central bank participant (Bank of France for the Eurosystem)"
+  },
+  {
+   "id": "t-jpmorgan-agora",
+   "payer": "jpmorgan",
+   "payee": "agora",
+   "type": "partner",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-07-31",
+   "grade": "filed",
+   "definition": "Listed among the financial institutions in Project Agorá's real-value testing, which the BIS page says took place in July 2026. The page gives no day; the row is dated at the end of July.",
+   "source_title": "BIS, Project Agorá project page",
+   "source_url": "https://www.bis.org/project/agora",
+   "level": "entity",
+   "title": "J.P. Morgan in Project Agorá's real-value testing",
+   "label": "Real-value test participant (JPMorgan Chase Bank, N.A.)"
+  },
+  {
+   "id": "t-bny-agora",
+   "payer": "bny",
+   "payee": "agora",
+   "type": "partner",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-07-31",
+   "grade": "filed",
+   "definition": "Listed among the financial institutions in Project Agorá's real-value testing, which the BIS page says took place in July 2026. The page gives no day; the row is dated at the end of July.",
+   "source_title": "BIS, Project Agorá project page",
+   "source_url": "https://www.bis.org/project/agora",
+   "level": "entity",
+   "title": "BNY in Project Agorá's real-value testing",
+   "label": "Real-value test participant"
   }
  ],
  "events": [
@@ -2578,6 +2950,102 @@
    "grade": "announced",
    "source_title": "DTCC press release, DTCC Tokenization Service Goes Live, 28 Oct 2026",
    "source_url": "https://www.dtcc.com/press-releases/2026/dtcc-tokenization-service-goes-live"
+  },
+  {
+   "id": "e-sec-nyse",
+   "date": "2026-04-09",
+   "entities": [
+    "sec",
+    "nyse",
+    "dtcc"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "NYSE files an immediately effective rule for trading securities in tokenized form",
+   "detail": "Release 34-105260. NYSE filed SR-NYSE-2026-17 on 9 Apr 2026, adding Rule 7.50 (Tokenized Securities) for trading during DTC's pilot program, as immediately effective under Section 19(b)(3)(A) rather than approved by an SEC order. The Exchange says it becomes effective once DTC has the infrastructure and post-trade settlement services in place, and it will alert members at least 30 calendar days before trading in tokenized form begins. See the release for the other conditions.",
+   "grade": "filed",
+   "source_title": "SEC Release 34-105260, SR-NYSE-2026-17: Notice of Filing and Immediate Effectiveness of a Proposed Rule Change to Enable the Trading of Securities on the Exchange in Tokenized Form",
+   "source_url": "https://www.sec.gov/files/rules/sro/nyse/2026/34-105260.pdf"
+  },
+  {
+   "id": "e-secz",
+   "date": "2026-07-02",
+   "entities": [
+    "securitize",
+    "avalanche",
+    "solana"
+   ],
+   "flow": "t-securitize-secz",
+   "level": "map",
+   "title": "Securitize brings its own listed stock on chain at listing",
+   "detail": "Issuer-sponsored tokenized SECZ, to launch first on Avalanche and Solana for eligible US investors. No value or share count was given.",
+   "grade": "announced",
+   "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+   "source_url": "https://www.webull.com.au/news-detail/15158204236620800"
+  },
+  {
+   "id": "e-securitize-stocks",
+   "date": "2026-10-08",
+   "entities": [
+    "securitize",
+    "solana"
+   ],
+   "flow": "t-securitize-securitizestocks",
+   "level": "map",
+   "title": "Securitize launches tokenized US stocks as security entitlements",
+   "detail": "Twelve US stocks at launch (AAPL, MSFT, NVDA, GOOG, TSLA, META, AMZN, NFLX, CRCL, SPCX, MSTR and PLTR), each token backed one for one by an underlying share, trading on Solana against USDC. The issuers of the underlying stocks have not sponsored or endorsed them.",
+   "grade": "announced",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements"
+  },
+  {
+   "id": "e-bis-agora",
+   "date": "2026-05-27",
+   "entities": [
+    "bis",
+    "agora",
+    "fed",
+    "ecb"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "Project Agorá's prototype report finds multi-currency settlement with tokenised reserves and deposits achievable; real-value testing next",
+   "detail": "An experimental BIS Innovation Hub project, convened by the BIS and the Institute of International Finance with seven central banks and more than 40 private sector financial institutions. The Bank of Canada has joined.",
+   "grade": "filed",
+   "source_title": "BIS press release, Project Agorá shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+   "source_url": "https://www.bis.org/press/p260527.htm"
+  },
+  {
+   "id": "e-bis-agora-rvt",
+   "date": "2026-07-31",
+   "entities": [
+    "bis",
+    "agora",
+    "jpmorgan",
+    "bny"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "Project Agorá completes real-value testing",
+   "detail": "In July 2026, 28 financial institutions and central banks completed transactions totalling about CHF 800,000 in CHF, EUR, GBP, JPY, KRW and USD, using tokenised central bank reserves and tokenised commercial bank deposits; SIX coordinated them. The page gives no day, so the event is dated at the end of July.",
+   "grade": "filed",
+   "source_title": "BIS, Project Agorá project page",
+   "source_url": "https://www.bis.org/project/agora"
+  },
+  {
+   "id": "e-ecb-pontes",
+   "date": "2026-09-21",
+   "entities": [
+    "ecb",
+    "pontes"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "Eurosystem launches Pontes: wholesale tokenised transactions settle in central bank money",
+   "detail": "The first initiative under the Eurosystem's strategic programme. Thirteen named market participants and four DLT operators (Axiology, Cashlink, Clearstream and SWIAT) have onboarded, with the Deutsche Bundesbank as a market participant; banks and market infrastructures join gradually.",
+   "grade": "filed",
+   "source_title": "ECB press release, Eurosystem brings central bank money to tokenised finance, 21 Sep 2026",
+   "source_url": "https://ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921~e754847a7b.en.html"
   }
  ],
  "metrics": [
@@ -2896,7 +3364,7 @@
   },
   {
    "topic": "Regimes not yet on the ledger",
-   "note": "United Kingdom and United Arab Emirates. Singapore appears only through Paxos; the EU only through MiCA's timetable."
+   "note": "United Kingdom: only the FCA's final rules are on the map. Singapore appears only through Paxos. The EU appears through MiCA's timetable and the Eurosystem's Pontes; the UAE through ADGM's FSRA and the DFSA."
   },
   {
    "topic": "GENIUS Act introduction",
@@ -2920,7 +3388,7 @@
   },
   {
    "topic": "Chains listed but not drawn",
-   "note": "Ondo also lists USDY on Mantle, Sui, Arbitrum, Stellar, Sei and BNB Chain, and OUSG on Polygon and XRPL. USDGO has a Morph contract with a nil balance."
+   "note": "Ondo also lists USDY on Mantle, Sui, Arbitrum, Stellar, Sei and BNB Chain, and OUSG on Polygon and XRPL. USDGO has a Morph contract with a nil balance. ACRED is also listed on Aptos, Ink and Polygon."
   },
   {
    "topic": "What backs BUIDL, MONY, BENJI and JPMD",
@@ -2936,7 +3404,7 @@
   },
   {
    "topic": "Fund filings not yet wired",
-   "note": "Fidelity's Treasury Digital Fund (FYOXX) files Form N-MFP3 and is not read yet. Franklin's and WisdomTree's later monthly filings were not found in the listings read; the rows use July and August 2026."
+   "note": "FYOXX is counted at the class net assets on Fidelity's fact sheet (grade announced). Its trust's N-MFP3 filings would give a filed figure; the filing index is on the watchlist (the CIK came from a tracker and is to be confirmed on the first read). Franklin's and WisdomTree's later monthly filings were not found in the listings read; the rows use July and August 2026."
   },
   {
    "topic": "What Franklin's and WisdomTree's funds hold",
@@ -2968,11 +3436,11 @@
   },
   {
    "topic": "Figure and Provenance",
-   "note": "Figure's loans recorded on its Provenance chain are records, not tokens that trade on public chains, so they will sit outside the headline like bank ledgers. Its 10-Q has not been read yet."
+   "note": "YLDS is counted at Figure's own weekly figure (grade announced); Figure's 10-Q, which would give a filed figure, has not been read. Figure's loans recorded on Provenance are records, not tokens that trade on public chains, and sit outside the headline. In November 2025 Figure said it intended to mint YLDS natively on Solana; no page read here confirms it is live there, so only Provenance is drawn."
   },
   {
    "topic": "Not yet on the ledger, above the bar",
-   "note": "Fidelity's Treasury Digital Fund (FYOXX); BUIDL on chains other than Ethereum; Apollo's ACRED; Securitize's tokenized stocks; NYSE's rule change for tokenized securities."
+   "note": "BUIDL on chains other than Ethereum. Reading it needs each chain's contract address from BlackRock or Securitize and a keyless explorer read per chain; neither was read in batch four."
   },
   {
    "topic": "xStocks' size",
@@ -2993,6 +3461,22 @@
   {
    "topic": "Kraken's purchase of Backed",
    "note": "Kraken agreed to buy Backed Finance AG on 2 Dec 2025. Payward's July 2026 page says 8 of the 15 largest tokenized stocks are issued by Payward, which suggests the deal closed, but no closing notice has been read. The deal stays 'signed, not closed' and is listed in pending_close."
+  },
+  {
+   "topic": "Securitize's tokenized stocks' size",
+   "note": "Securitize publishes no total for Securitize Stocks or for tokenized SECZ, so both are shown without a balance. Press put tokenized SECZ at about $295M at launch (CryptoBriefing, carried by KuCoin): press, never counted."
+  },
+  {
+   "topic": "ACRED and FYOXX are below the bar",
+   "note": "Both are under the $250M bar for assets and are on the map because Derek asked for them. FYOXX is counted at $25.71M of class net assets (Fidelity's fact sheet, 31 Oct 2026). ACRED has no primary total; trackers (pointers only, never a source) put it at roughly $95M (rwa.xyz), so it is shown without a balance."
+  },
+  {
+   "topic": "Wholesale central bank money",
+   "note": "Pontes (the Eurosystem) and Project Agorá (the BIS with the IIF) settle tokenised wholesale transactions in central bank money and tokenised deposits. Neither publishes balances, so both sit on the map as ledgers outside the headline. Agorá's July 2026 test totalled about CHF 800,000; Pontes' participants are not on the map unless they already were."
+  },
+  {
+   "topic": "FYOXX's chain",
+   "note": "Fidelity's fact sheet names no blockchain. Press (The Block, March 2025) reported from the registration filing that the OnChain class records ownership on Ethereum; press, so no chain is drawn until a Fidelity page or filing is read."
   }
  ],
  "chains_listed": [
@@ -3228,6 +3712,68 @@
    "date": "2026-11-14",
    "source_title": "Robinhood RHJ disclosures, Product",
    "source_url": "https://docs.robinhood.com/rhj/product"
+  },
+  {
+   "instrument": "ylds",
+   "chain": "provenance",
+   "grade": "announced",
+   "date": "2025-11-12",
+   "source_title": "Figure press release, Figure Brings $YLDS to Solana, 12 Nov 2025",
+   "source_url": "https://investors.figure.com/news-releases/news-release-details/figure-brings-ylds-solana-unlocking-real-rwa-utility-defi",
+   "qualifier": "already used in Figure's Democratized Prime on Provenance; no amount per chain"
+  },
+  {
+   "instrument": "securitizestocks",
+   "chain": "solana",
+   "grade": "announced",
+   "date": "2026-10-08",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements"
+  },
+  {
+   "instrument": "secz",
+   "chain": "avalanche",
+   "grade": "announced",
+   "date": "2026-07-02",
+   "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+   "source_url": "https://www.webull.com.au/news-detail/15158204236620800",
+   "qualifier": "named as a first launch chain in the listing-day release; no amount"
+  },
+  {
+   "instrument": "secz",
+   "chain": "solana",
+   "grade": "announced",
+   "date": "2026-10-08",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+   "qualifier": "Securitize's own tokenized common stock has traded there since its NYSE listing in July, per this release; no amount"
+  },
+  {
+   "instrument": "acred",
+   "chain": "ethereum",
+   "grade": "announced",
+   "date": "2025-01-30",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "qualifier": "initially available on this chain, per the launch release; no amount per chain"
+  },
+  {
+   "instrument": "acred",
+   "chain": "solana",
+   "grade": "announced",
+   "date": "2025-01-30",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "qualifier": "initially available on this chain, per the launch release; no amount per chain"
+  },
+  {
+   "instrument": "acred",
+   "chain": "avalanche",
+   "grade": "announced",
+   "date": "2025-01-30",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "qualifier": "initially available on this chain, per the launch release; no amount per chain"
   }
  ],
  "pending_close": [
@@ -3369,6 +3915,20 @@
     "b-usdgo-4"
    ],
    "note": "Verifier pass 5: a fund named only by its CUSIP is not a holder. The three rows that gave 'named by CUSIP/code only' as where the reserve is held now say the report names no holder, and the CUSIP moves into the component. The JLTXX identification of CUSIP 46655R119 rests on J.P. Morgan's product page, not on the USDGO report, and now says so. Amounts unchanged."
+  },
+  {
+   "date": "2026-11-14",
+   "rows": [
+    "b-ousg-4"
+   ],
+   "note": "Batch four: FYOXX is now on the map, so OUSG's FYOXX line names it as counterpart. Amount unchanged."
+  },
+  {
+   "date": "2026-11-14",
+   "rows": [
+    "entity jpmorgan"
+   ],
+   "note": "The player's name is now 'J.P. Morgan' (was 'J.P. Morgan (Kinexys)'). Kinexys, its blockchain unit, stays in the note; the bank appears in Project Agorá's testing as JPMorgan Chase Bank, N.A."
   }
  ],
  "reference_edges": [],
@@ -3444,9 +4004,40 @@
     "o-bstocks-all-2026-07-29"
    ],
    "note": "Verifier pass 10: both readings checked with their amounts ($1.01B, $500M), which pass 5's check file had left out. bStocks confirmed. Ondo's note cited its Global Markets page, which is not the row's source; that clause moved to the gap note."
+  },
+  {
+   "date": "2026-11-14",
+   "rows": [
+    "e-bis-agora",
+    "t-ecb-agora",
+    "t-fed-agora",
+    "t-jpmorgan-agora",
+    "e-sec-nyse",
+    "l-sec-nyse",
+    "t-securitize-securitizestocks",
+    "ent-fyoxx",
+    "t-fidelity-fyoxx",
+    "o-ylds-all-2026-11-08",
+    "e-secz",
+    "ent-secz"
+   ],
+   "note": "Verifier pass 12 (batch four). Agorá: 'works' became 'the BIS finds achievable', and the two central-bank ties are 'announced', since the release covers a prototype. J.P. Morgan's player name drops '(Kinexys)', which the BIS page does not use; Kinexys stays in the note. NYSE: the 'licensed' tie is removed; the filing is immediately effective, not approved, and the event now carries the DTC condition and points to the release. Securitize Stocks: 'offered by Securitize Markets', no issuer. FYOXX: the distributor clause is cut; the sponsor is drawn as the issuer tie, as for BUIDL, and the definition says so. YLDS: the reading is marked preliminary and unaudited, and the 'end-of-period' wording is cut; its as-of is the 8 Nov column, published 10 Nov (the harness shows an observation's as_of as the date it became available). SECZ: launch wording follows the release's tense; its Solana listing now cites Securitize's October release, which says the stock has traded there since July. h-ousg-fyoxx could not be opened by the verifier and stays unchecked."
+  },
+  {
+   "date": "2026-11-14",
+   "rows": [
+    "e-bis-agora",
+    "t-jpmorgan-agora",
+    "t-bny-agora",
+    "t-securitize-securitizestocks",
+    "ent-fyoxx"
+   ],
+   "note": "Verifier pass 13 (batch four). Agorá's findings are credited to the project's report, not the BIS. The two real-value-test ties now say the page gives no day and the row is dated at month end. Securitize Stocks: status 'announced' (the release says the product will launch), and the EU offeror is named. FYOXX: the fact sheet does give class net assets ($25.71M at 31 Oct 2026; pass 12 had read the label as blank), so FYOXX now has a reading and is counted, and OUSG's $23.6M holding of it is netted."
   }
  ],
- "verification_pending": [],
+ "verification_pending": [
+  "h-ousg-fyoxx"
+ ],
  "stress": {
   "omitted": "No tower in this pass. An honest rule needs each token's reserves split by custodian or bank. Of seven attested dollar tokens, only USDC, USDtb and USDGO name where a share of reserves sits; Tether, PYUSD, USDG and USD1 name no custodian. A tower built on that would show the tokens that disclose most as the most exposed."
  },
@@ -3492,6 +4083,13 @@
    "chain": "all",
    "method": "SEC filing index, keyless",
    "url": "https://data.sec.gov/submissions/CIK0001859001.json"
+  },
+  {
+   "entity": "fyoxx",
+   "chain": "all",
+   "method": "SEC filing index, keyless",
+   "url": "https://data.sec.gov/submissions/CIK0000877212.json",
+   "note": "CIK taken from a tracker (a pointer only). On the first read, confirm the filer is the trust that holds Fidelity Treasury Digital Fund and that the N-MFP3 covers the OnChain class."
   }
  ],
  "backing": [
@@ -4111,7 +4709,7 @@
    "amount_usd": 23640401,
    "held_at": null,
    "held_label": "Not named in the report",
-   "counterpart": null,
+   "counterpart": "fyoxx",
    "as_of": "2026-11-13",
    "available": "2026-11-13",
    "grade": "announced",
@@ -4369,6 +4967,15 @@
    ],
    "published": true,
    "note": "Published; from this run on the gate flags and does not hold."
+  },
+  {
+   "run": "run-2026-11-14-batch-4",
+   "date": "2026-11-14",
+   "flags": [
+    "netting row h-ousg-fyoxx added"
+   ],
+   "published": true,
+   "note": "Flagged by the gate and published, per the gate rule."
   }
  ]
 }

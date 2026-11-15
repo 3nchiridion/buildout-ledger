@@ -469,7 +469,7 @@ T_COUNTED_ASSETS = T_COUNTED + ("announced",)          # tokenized assets also c
 T_MONEY = ("equity", "debt", "issued", "settles", "holding")
 T_TIES = ("issues", "tokenizes", "custody", "manages", "distributes", "partner", "licensed", "owns")
 T_KINDS = ["company", "product", "ledger", "instrument", "investor", "government"]
-T_OFFICIAL = ("fca.org.uk", "sec.gov", "govinfo.gov", "federalregister.gov", "occ.gov", "hkma.gov.hk", "europa.eu", "fdic.gov", "federalreserve.gov")
+T_OFFICIAL = ("fca.org.uk", "sec.gov", "govinfo.gov", "federalregister.gov", "occ.gov", "hkma.gov.hk", "europa.eu", "fdic.gov", "federalreserve.gov", "bis.org")
 T_EXPLORERS = ("blockscout.com", "tronscanapi.com", "xrpscan.com")
 T_ASSET_TYPES = {"tbills": "US Treasury bills and notes", "repo": "Treasury repo", "mmf": "Money market funds", "deposits": "Bank deposits and cash", "token": "Other tokens",
                  "gold": "Precious metals", "btc": "Bitcoin", "loans": "Secured loans", "govt": "Government securities, not split", "other": "Other"}

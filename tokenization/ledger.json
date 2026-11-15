@@ -236,7 +236,7 @@
   },
   {
    "id": "jpmorgan",
-   "name": "J.P. Morgan (Kinexys)",
+   "name": "J.P. Morgan",
    "type": "company",
    "tier": "instruments",
    "cik": null,
@@ -386,7 +386,7 @@
    "type": "company",
    "tier": "issuance",
    "cik": null,
-   "note": "Tokenization provider for BUIDL.",
+   "note": "Tokenization company: provider for BUIDL, tokenizes ACRED, and offers Securitize Stocks through Securitize Markets. A public company since July 2026; its common stock trades on the NYSE and, in tokenized form, on Solana.",
    "layer": "issuance",
    "kind": "company",
    "parent": null
@@ -1250,6 +1250,190 @@
    "layer": null,
    "kind": "government",
    "parent": null
+  },
+  {
+   "id": "figure",
+   "name": "Figure",
+   "type": "company",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Figure Technology Solutions, Inc. Its wholly owned subsidiary Figure Certificate Company issues YLDS.",
+   "layer": "instruments",
+   "kind": "company",
+   "parent": null
+  },
+  {
+   "id": "ylds",
+   "name": "YLDS",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Figure calls YLDS an SEC-registered yield-bearing stablecoin; the release calls it a registered public debt security. Counted with tokenized assets, not money, because it is a security that pays a yield. Already used in Figure's Democratized Prime product on the Provenance Blockchain.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "figure",
+   "asset_class": "fund",
+   "counted": true,
+   "wrapper": {
+    "regime": "fund_registered",
+    "label": "Unsecured face-amount certificates of Figure Certificate Company, solely backed by its assets; a registered public debt security"
+   }
+  },
+  {
+   "id": "provenance",
+   "name": "Provenance",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "Provenance Blockchain. Figure describes itself as Provenance Blockchain-native; who runs the chain is not sourced here.",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "avalanche",
+   "name": "Avalanche",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "securitizestocks",
+   "name": "Securitize Stocks",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Tokenized US stocks: each token is backed one for one by an underlying share and is a security entitlement under UCC Article 8. Holders are not registered shareholders of the underlying issuer unless they convert; the issuers have not sponsored or endorsed them. Launched on Solana with twelve stocks, settling in USDC. No total is published.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "securitize",
+   "asset_class": "equity",
+   "counted": true,
+   "wrapper": {
+    "regime": "other_regulator",
+    "label": "Security entitlements held through Securitize Markets, LLC, traded on Securitize's registered broker-dealer platform; convertible entitlement tokens"
+   }
+  },
+  {
+   "id": "secz",
+   "name": "Tokenized SECZ",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Securitize's own common stock in tokenized form, issuer-sponsored. The listing-day release says it will launch first on Avalanche and Solana and be available to eligible US investors through Securitize's regulated platform. No value or share count is published.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "securitize",
+   "asset_class": "equity",
+   "counted": true,
+   "wrapper": {
+    "regime": "other_regulator",
+    "label": "Issuer-sponsored tokenization of Securitize's common stock, the same stock that trades on the NYSE"
+   }
+  },
+  {
+   "id": "apollo",
+   "name": "Apollo",
+   "type": "company",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Its Apollo Diversified Credit Fund is a non-traded, closed-end interval fund; ACRED gives tokenized access to it.",
+   "layer": "instruments",
+   "kind": "company",
+   "parent": null
+  },
+  {
+   "id": "acred",
+   "name": "ACRED",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Apollo Diversified Credit Securitize Fund, a feeder fund. The release relates to Securitize Tokenized Apollo Diversified Credit Fund, Ltd., which will invest substantially all of its assets in Apollo Diversified Credit Fund; redemptions at a daily net asset value. No total has been read, so it has no balance.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "apollo",
+   "asset_class": "fund",
+   "counted": true,
+   "wrapper": {
+    "regime": "fund_private",
+    "label": "Feeder fund giving tokenized access to Apollo Diversified Credit Fund; qualifying investors only, through Securitize Markets"
+   }
+  },
+  {
+   "id": "fidelity",
+   "name": "Fidelity",
+   "type": "company",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Fidelity Investments, sponsor of Fidelity Treasury Digital Fund.",
+   "layer": "instruments",
+   "kind": "company",
+   "parent": null
+  },
+  {
+   "id": "fyoxx",
+   "name": "FYOXX",
+   "type": "product",
+   "tier": "instruments",
+   "cik": null,
+   "note": "Fidelity Treasury Digital Fund - OnChain Class. Normally invests at least 99.5% of total assets in cash and US Treasury securities, in compliance with industry-standard regulatory requirements for money market funds. Counted at the class's net assets as the fact sheet gives them; the fund's portfolio assets cover all its classes.",
+   "layer": "instruments",
+   "kind": "product",
+   "parent": "fidelity",
+   "asset_class": "fund",
+   "counted": true,
+   "wrapper": {
+    "regime": "fund_registered",
+    "label": "OnChain Class of Fidelity Treasury Digital Fund, a money market fund"
+   }
+  },
+  {
+   "id": "ecb",
+   "name": "ECB (Eurosystem)",
+   "type": "government",
+   "tier": null,
+   "cik": null,
+   "note": "European Central Bank; with the euro area's national central banks it forms the Eurosystem.",
+   "layer": null,
+   "kind": "government",
+   "parent": null
+  },
+  {
+   "id": "pontes",
+   "name": "Pontes",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "The Eurosystem's DLT solution: wholesale transactions in tokenised assets settle in central bank money, on the Eurosystem DLT platform with cash tokens or in T2. On the map; outside the headline.",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": "ecb"
+  },
+  {
+   "id": "bis",
+   "name": "BIS",
+   "type": "government",
+   "tier": null,
+   "cik": null,
+   "note": "Bank for International Settlements.",
+   "layer": null,
+   "kind": "government",
+   "parent": null
+  },
+  {
+   "id": "agora",
+   "name": "Project Agor\u00e1",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "A multi-currency shared programmable platform for wholesale cross-border payments using tokenised central bank reserves and tokenised commercial bank deposits, convened by the BIS and the Institute of International Finance. A tested prototype; outside the headline.",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": "bis"
   }
  ],
  "flows": [
@@ -3176,6 +3360,325 @@
    ]
   },
   {
+   "id": "t-figure-ylds",
+   "payer": "figure",
+   "payee": "ylds",
+   "type": "issues",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2025-11-12",
+   "grade": "announced",
+   "definition": "Figure Certificate Company, a wholly owned subsidiary of Figure Technology Solutions, Inc., issues YLDS, which the release calls a registered public debt security and, in its disclaimer, unsecured face-amount certificates.",
+   "source_title": "Figure press release, Figure Brings $YLDS to Solana, 12 Nov 2025",
+   "source_url": "https://investors.figure.com/news-releases/news-release-details/figure-brings-ylds-solana-unlocking-real-rwa-utility-defi",
+   "level": "entity",
+   "title": "Figure's subsidiary issues YLDS",
+   "label": "Issuer (Figure Certificate Company)",
+   "available": "2025-11-12",
+   "as_of": "2025-11-12",
+   "history": [
+    {
+     "available": "2025-11-12",
+     "amount_usd": null,
+     "as_of": "2025-11-12",
+     "amount_qualifier": null,
+     "source_title": "Figure press release, Figure Brings $YLDS to Solana, 12 Nov 2025",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "t-securitize-securitizestocks",
+   "payer": "securitize",
+   "payee": "securitizestocks",
+   "type": "distributes",
+   "status": "announced",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-10-08",
+   "grade": "announced",
+   "definition": "The release names Securitize Markets, LLC and Securitize Europe Brokerage and Markets, S.A. as offering Securitize Stocks; the entitlements are held through Securitize Markets, LLC and will trade on Securitize's registered broker-dealer platform, and the backing shares will not be lent out. No issuer is named.",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+   "level": "entity",
+   "title": "Securitize Markets offers Securitize Stocks",
+   "label": "Offered by Securitize Markets, LLC",
+   "available": "2026-10-08",
+   "as_of": "2026-10-08",
+   "history": [
+    {
+     "available": "2026-10-08",
+     "amount_usd": null,
+     "as_of": "2026-10-08",
+     "amount_qualifier": null,
+     "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "t-securitize-secz",
+   "payer": "securitize",
+   "payee": "secz",
+   "type": "issues",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-07-02",
+   "grade": "announced",
+   "definition": "Securitize is bringing its own common stock onchain at the start of its life as a public company; its CEO calls it issuer-sponsored tokenization of the same common stock trading on the NYSE.",
+   "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+   "source_url": "https://www.webull.com.au/news-detail/15158204236620800",
+   "level": "entity",
+   "title": "Securitize tokenizes its own stock",
+   "label": "Issuer (its own stock)",
+   "available": "2026-07-02",
+   "as_of": "2026-07-02",
+   "history": [
+    {
+     "available": "2026-07-02",
+     "amount_usd": null,
+     "as_of": "2026-07-02",
+     "amount_qualifier": null,
+     "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "t-securitize-acred",
+   "payer": "securitize",
+   "payee": "acred",
+   "type": "tokenizes",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2025-01-30",
+   "grade": "announced",
+   "definition": "Securitize launched ACRED in partnership with Apollo and serves as its digital transfer agent and fund administrator; qualifying investors participate only through Securitize Markets, Securitize's broker-dealer subsidiary.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "Securitize tokenizes ACRED",
+   "label": "Tokenizes; transfer agent and administrator",
+   "available": "2025-01-30",
+   "as_of": "2025-01-30",
+   "history": [
+    {
+     "available": "2025-01-30",
+     "amount_usd": null,
+     "as_of": "2025-01-30",
+     "amount_qualifier": null,
+     "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "t-apollo-acred",
+   "payer": "apollo",
+   "payee": "acred",
+   "type": "partner",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2025-01-30",
+   "grade": "announced",
+   "definition": "ACRED offers tokenized access to Apollo Diversified Credit Fund, a non-traded, closed-end interval fund, through an all-digital process with native redemptions at a daily net asset value.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "ACRED feeds into Apollo's credit fund",
+   "label": "Master fund (Apollo Diversified Credit Fund)",
+   "available": "2025-01-30",
+   "as_of": "2025-01-30",
+   "history": [
+    {
+     "available": "2025-01-30",
+     "amount_usd": null,
+     "as_of": "2025-01-30",
+     "amount_qualifier": null,
+     "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "t-fidelity-fyoxx",
+   "payer": "fidelity",
+   "payee": "fyoxx",
+   "type": "issues",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-11-13",
+   "grade": "announced",
+   "definition": "The fact sheet names the fund as Fidelity Treasury Digital Fund - OnChain Class (fund 9053, CUSIP 31617H813), with Fidelity Investments and its affiliates as the fund's sponsor. Drawn as the issuer tie because the ledger has no separate sponsor tie, as for BUIDL.",
+   "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026",
+   "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+   "level": "entity",
+   "title": "Fidelity sponsors FYOXX",
+   "label": "Sponsor",
+   "available": "2026-11-13",
+   "as_of": "2026-11-13",
+   "history": [
+    {
+     "available": "2026-11-13",
+     "amount_usd": null,
+     "as_of": "2026-11-13",
+     "amount_qualifier": null,
+     "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "h-ousg-fyoxx",
+   "payer": "ousg",
+   "payee": "fyoxx",
+   "type": "holding",
+   "status": "cash_moved",
+   "amount_usd": 23640401,
+   "amount_qualifier": "as listed in OUSG's portfolio",
+   "date": "2026-11-13",
+   "grade": "announced",
+   "definition": "$23,640,401 of OUSG's portfolio on 13 Nov 2026, listed as Fidelity Treasury Digital Fund (FYOXX).",
+   "source_title": "Ondo Finance, OUSG page",
+   "source_url": "https://ondo.finance/ousg",
+   "level": "entity",
+   "title": "OUSG holds FYOXX",
+   "label": "Holds",
+   "as_of": "2026-11-13",
+   "available": "2026-11-13",
+   "history": [
+    {
+     "available": "2026-11-13",
+     "amount_usd": 23640401,
+     "as_of": "2026-11-13",
+     "amount_qualifier": "as listed in OUSG's portfolio",
+     "source_title": "Ondo Finance, OUSG page",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "t-fed-agora",
+   "payer": "fed",
+   "payee": "agora",
+   "type": "partner",
+   "status": "announced",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-05-27",
+   "grade": "filed",
+   "definition": "One of the seven central banks in Project Agor\u00e1, with the Bank of England, the Bank of France for the Eurosystem, the Bank of Japan, the Bank of Korea, the Bank of Mexico and the Swiss National Bank.",
+   "source_title": "BIS press release, Project Agor\u00e1 shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+   "source_url": "https://www.bis.org/press/p260527.htm",
+   "level": "entity",
+   "title": "The New York Fed takes part in Project Agor\u00e1",
+   "label": "Central bank participant (Federal Reserve Bank of New York)",
+   "available": "2026-05-27",
+   "as_of": "2026-05-27",
+   "history": [
+    {
+     "available": "2026-05-27",
+     "amount_usd": null,
+     "as_of": "2026-05-27",
+     "amount_qualifier": null,
+     "source_title": "BIS press release, Project Agor\u00e1 shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+     "grade": "filed"
+    }
+   ]
+  },
+  {
+   "id": "t-ecb-agora",
+   "payer": "ecb",
+   "payee": "agora",
+   "type": "partner",
+   "status": "announced",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-05-27",
+   "grade": "filed",
+   "definition": "The Bank of France takes part in Project Agor\u00e1 representing the Eurosystem, one of seven central banks.",
+   "source_title": "BIS press release, Project Agor\u00e1 shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+   "source_url": "https://www.bis.org/press/p260527.htm",
+   "level": "entity",
+   "title": "The Eurosystem takes part in Project Agor\u00e1",
+   "label": "Central bank participant (Bank of France for the Eurosystem)",
+   "available": "2026-05-27",
+   "as_of": "2026-05-27",
+   "history": [
+    {
+     "available": "2026-05-27",
+     "amount_usd": null,
+     "as_of": "2026-05-27",
+     "amount_qualifier": null,
+     "source_title": "BIS press release, Project Agor\u00e1 shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+     "grade": "filed"
+    }
+   ]
+  },
+  {
+   "id": "t-jpmorgan-agora",
+   "payer": "jpmorgan",
+   "payee": "agora",
+   "type": "partner",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-07-31",
+   "grade": "filed",
+   "definition": "Listed among the financial institutions in Project Agor\u00e1's real-value testing, which the BIS page says took place in July 2026. The page gives no day; the row is dated at the end of July.",
+   "source_title": "BIS, Project Agor\u00e1 project page",
+   "source_url": "https://www.bis.org/project/agora",
+   "level": "entity",
+   "title": "J.P. Morgan in Project Agor\u00e1's real-value testing",
+   "label": "Real-value test participant (JPMorgan Chase Bank, N.A.)",
+   "available": "2026-07-31",
+   "as_of": "2026-07-31",
+   "history": [
+    {
+     "available": "2026-07-31",
+     "amount_usd": null,
+     "as_of": "2026-07-31",
+     "amount_qualifier": null,
+     "source_title": "BIS, Project Agor\u00e1 project page",
+     "grade": "filed"
+    }
+   ]
+  },
+  {
+   "id": "t-bny-agora",
+   "payer": "bny",
+   "payee": "agora",
+   "type": "partner",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": null,
+   "date": "2026-07-31",
+   "grade": "filed",
+   "definition": "Listed among the financial institutions in Project Agor\u00e1's real-value testing, which the BIS page says took place in July 2026. The page gives no day; the row is dated at the end of July.",
+   "source_title": "BIS, Project Agor\u00e1 project page",
+   "source_url": "https://www.bis.org/project/agora",
+   "level": "entity",
+   "title": "BNY in Project Agor\u00e1's real-value testing",
+   "label": "Real-value test participant",
+   "available": "2026-07-31",
+   "as_of": "2026-07-31",
+   "history": [
+    {
+     "available": "2026-07-31",
+     "amount_usd": null,
+     "as_of": "2026-07-31",
+     "amount_qualifier": null,
+     "source_title": "BIS, Project Agor\u00e1 project page",
+     "grade": "filed"
+    }
+   ]
+  },
+  {
    "id": "f-benji-issued",
    "payer": "franklin",
    "payee": "benji",
@@ -3265,6 +3768,37 @@
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: BUIDL contract",
      "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-fyoxx-issued",
+   "payer": "fidelity",
+   "payee": "fyoxx",
+   "type": "issued",
+   "status": "cash_moved",
+   "amount_usd": 25710000,
+   "amount_qualifier": "net assets of the OnChain class, as the sponsor states it",
+   "date": "2026-11-13",
+   "available": "2026-11-13",
+   "as_of": "2026-10-31",
+   "grade": "announced",
+   "definition": "Net assets of the OnChain class, as the sponsor states it. Fact sheet Details: Net Assets ($M) $25.71 as of 10/31/2026; the footnote says net assets reflect the class shown, and portfolio assets ($63.88M) all classes of the fund. The extracted text lists labels and values separately; the pairing follows their order.",
+   "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026",
+   "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+   "level": "map",
+   "derived": true,
+   "derivation": "latest observation o-fyoxx-all-2026-10-31",
+   "title": "FYOXX outstanding",
+   "label": "Outstanding",
+   "history": [
+    {
+     "available": "2026-11-13",
+     "amount_usd": 25710000,
+     "as_of": "2026-10-31",
+     "amount_qualifier": "net assets of the OnChain class, as the sponsor states it",
+     "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026",
+     "grade": "announced"
     }
    ]
   },
@@ -4641,6 +5175,37 @@
    ]
   },
   {
+   "id": "f-ylds-issued",
+   "payer": "figure",
+   "payee": "ylds",
+   "type": "issued",
+   "status": "cash_moved",
+   "amount_usd": 466000000,
+   "amount_qualifier": "YLDS in circulation, preliminary and unaudited, as the issuer states it",
+   "date": "2026-11-10",
+   "available": "2026-11-10",
+   "as_of": "2026-11-08",
+   "grade": "announced",
+   "definition": "YLDS in circulation, preliminary and unaudited, as the issuer states it. Weekly table, column 8 Nov 2026: $466m. The page marks the current week's data point as preliminary and its operating data as unaudited; it was last updated 10 Nov 2026.",
+   "source_title": "Figure, Preliminary Operating Data (weekly dashboard), last updated 10 Nov 2026",
+   "source_url": "https://figure.com/investors/metrics",
+   "level": "map",
+   "derived": true,
+   "derivation": "latest observation o-ylds-all-2026-11-08",
+   "title": "YLDS outstanding",
+   "label": "Outstanding",
+   "history": [
+    {
+     "available": "2026-11-10",
+     "amount_usd": 466000000,
+     "as_of": "2026-11-08",
+     "amount_qualifier": "YLDS in circulation, preliminary and unaudited, as the issuer states it",
+     "source_title": "Figure, Preliminary Operating Data (weekly dashboard), last updated 10 Nov 2026",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
    "id": "f-usdc-on-solana",
    "payer": "usdc",
    "payee": "solana",
@@ -5451,6 +6016,209 @@
      "grade": "announced"
     }
    ]
+  },
+  {
+   "id": "f-ylds-on-provenance",
+   "payer": "ylds",
+   "payee": "provenance",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "already used in Figure's Democratized Prime on Provenance; no amount per chain",
+   "date": "2025-11-12",
+   "available": "2025-11-12",
+   "as_of": "2025-11-12",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Figure press release, Figure Brings $YLDS to Solana, 12 Nov 2025",
+   "source_url": "https://investors.figure.com/news-releases/news-release-details/figure-brings-ylds-solana-unlocking-real-rwa-utility-defi",
+   "level": "entity",
+   "title": "YLDS on Provenance",
+   "label": "On Provenance",
+   "history": [
+    {
+     "available": "2025-11-12",
+     "amount_usd": null,
+     "as_of": "2025-11-12",
+     "amount_qualifier": "already used in Figure's Democratized Prime on Provenance; no amount per chain",
+     "source_title": "Figure press release, Figure Brings $YLDS to Solana, 12 Nov 2025",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "f-securitizestocks-on-solana",
+   "payer": "securitizestocks",
+   "payee": "solana",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "listed by the issuer; no amount per chain",
+   "date": "2026-10-08",
+   "available": "2026-10-08",
+   "as_of": "2026-10-08",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+   "level": "entity",
+   "title": "Securitize Stocks on Solana",
+   "label": "On Solana",
+   "history": [
+    {
+     "available": "2026-10-08",
+     "amount_usd": null,
+     "as_of": "2026-10-08",
+     "amount_qualifier": "listed by the issuer; no amount per chain",
+     "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "f-secz-on-avalanche",
+   "payer": "secz",
+   "payee": "avalanche",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "named as a first launch chain in the listing-day release; no amount",
+   "date": "2026-07-02",
+   "available": "2026-07-02",
+   "as_of": "2026-07-02",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+   "source_url": "https://www.webull.com.au/news-detail/15158204236620800",
+   "level": "entity",
+   "title": "Tokenized SECZ on Avalanche",
+   "label": "On Avalanche",
+   "history": [
+    {
+     "available": "2026-07-02",
+     "amount_usd": null,
+     "as_of": "2026-07-02",
+     "amount_qualifier": "named as a first launch chain in the listing-day release; no amount",
+     "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "f-secz-on-solana",
+   "payer": "secz",
+   "payee": "solana",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "Securitize's own tokenized common stock has traded there since its NYSE listing in July, per this release; no amount",
+   "date": "2026-10-08",
+   "available": "2026-10-08",
+   "as_of": "2026-10-08",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+   "level": "entity",
+   "title": "Tokenized SECZ on Solana",
+   "label": "On Solana",
+   "history": [
+    {
+     "available": "2026-10-08",
+     "amount_usd": null,
+     "as_of": "2026-10-08",
+     "amount_qualifier": "Securitize's own tokenized common stock has traded there since its NYSE listing in July, per this release; no amount",
+     "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "f-acred-on-ethereum",
+   "payer": "acred",
+   "payee": "ethereum",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "initially available on this chain, per the launch release; no amount per chain",
+   "date": "2025-01-30",
+   "available": "2025-01-30",
+   "as_of": "2025-01-30",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "ACRED on Ethereum",
+   "label": "On Ethereum",
+   "history": [
+    {
+     "available": "2025-01-30",
+     "amount_usd": null,
+     "as_of": "2025-01-30",
+     "amount_qualifier": "initially available on this chain, per the launch release; no amount per chain",
+     "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "f-acred-on-solana",
+   "payer": "acred",
+   "payee": "solana",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "initially available on this chain, per the launch release; no amount per chain",
+   "date": "2025-01-30",
+   "available": "2025-01-30",
+   "as_of": "2025-01-30",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "ACRED on Solana",
+   "label": "On Solana",
+   "history": [
+    {
+     "available": "2025-01-30",
+     "amount_usd": null,
+     "as_of": "2025-01-30",
+     "amount_qualifier": "initially available on this chain, per the launch release; no amount per chain",
+     "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+     "grade": "announced"
+    }
+   ]
+  },
+  {
+   "id": "f-acred-on-avalanche",
+   "payer": "acred",
+   "payee": "avalanche",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": null,
+   "amount_qualifier": "initially available on this chain, per the launch release; no amount per chain",
+   "date": "2025-01-30",
+   "available": "2025-01-30",
+   "as_of": "2025-01-30",
+   "grade": "announced",
+   "definition": "The issuer lists this chain and publishes no separate amount for it.",
+   "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+   "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
+   "level": "entity",
+   "title": "ACRED on Avalanche",
+   "label": "On Avalanche",
+   "history": [
+    {
+     "available": "2025-01-30",
+     "amount_usd": null,
+     "as_of": "2025-01-30",
+     "amount_qualifier": "initially available on this chain, per the launch release; no amount per chain",
+     "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
+     "grade": "announced"
+    }
+   ]
   }
  ],
  "observations": [
@@ -5516,6 +6284,27 @@
    "definition": "Total supply. Ethereum only. BUIDL also runs on other chains that were not read.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc",
    "source_title": "Blockscout, Ethereum: BUIDL contract"
+  },
+  {
+   "id": "o-fyoxx-all-2026-10-31",
+   "subject": "fyoxx",
+   "metric": "outstanding",
+   "chain": "all",
+   "period_start": null,
+   "period_end": "2026-10-31",
+   "value_usd": 25710000,
+   "basis": "net assets of the OnChain class, as the sponsor states it",
+   "method": "issuer fact sheet",
+   "derived": false,
+   "derivation": null,
+   "grade": "announced",
+   "accn": "issuer fact sheet",
+   "form": null,
+   "available": "2026-11-13",
+   "as_of": "2026-11-13",
+   "definition": "Net assets of the OnChain class, as the sponsor states it. Fact sheet Details: Net Assets ($M) $25.71 as of 10/31/2026; the footnote says net assets reflect the class shown, and portfolio assets ($63.88M) all classes of the fund. The extracted text lists labels and values separately; the pairing follows their order.",
+   "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+   "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026"
   },
   {
    "id": "o-jltxx-all-2026-08-31",
@@ -6671,6 +7460,27 @@
    "definition": "Fair market value of tokens sold to customers. 709,323.66 XAUT sold, at US$4,157.41 per ounce. The 118,093.97 held for sale by the issuer's related entity are left out.",
    "source_url": "https://gold.tether.to/docs/reports/attestations/ISAE_3000R_-_Opinion_TGRR_30.09.2026_RC187322026DV0235.pdf",
    "source_title": "BDO assurance report on the Tether Gold Reserves Report, 30 Sep 2026"
+  },
+  {
+   "id": "o-ylds-all-2026-11-08",
+   "subject": "ylds",
+   "metric": "outstanding",
+   "chain": "all",
+   "period_start": null,
+   "period_end": "2026-11-08",
+   "value_usd": 466000000,
+   "basis": "YLDS in circulation, preliminary and unaudited, as the issuer states it",
+   "method": "issuer page",
+   "derived": false,
+   "derivation": null,
+   "grade": "announced",
+   "accn": "issuer page",
+   "form": null,
+   "available": "2026-11-10",
+   "as_of": "2026-11-10",
+   "definition": "YLDS in circulation, preliminary and unaudited, as the issuer states it. Weekly table, column 8 Nov 2026: $466m. The page marks the current week's data point as preliminary and its operating data as unaudited; it was last updated 10 Nov 2026.",
+   "source_url": "https://figure.com/investors/metrics",
+   "source_title": "Figure, Preliminary Operating Data (weekly dashboard), last updated 10 Nov 2026"
   }
  ],
  "events": [
@@ -6930,6 +7740,22 @@
    "source_url": "https://www.govinfo.gov/content/pkg/FR-2026-03-23/html/2026-05563.htm"
   },
   {
+   "id": "e-sec-nyse",
+   "date": "2026-04-09",
+   "entities": [
+    "sec",
+    "nyse",
+    "dtcc"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "NYSE files an immediately effective rule for trading securities in tokenized form",
+   "detail": "Release 34-105260. NYSE filed SR-NYSE-2026-17 on 9 Apr 2026, adding Rule 7.50 (Tokenized Securities) for trading during DTC's pilot program, as immediately effective under Section 19(b)(3)(A) rather than approved by an SEC order. The Exchange says it becomes effective once DTC has the infrastructure and post-trade settlement services in place, and it will alert members at least 30 calendar days before trading in tokenized form begins. See the release for the other conditions.",
+   "grade": "filed",
+   "source_title": "SEC Release 34-105260, SR-NYSE-2026-17: Notice of Filing and Immediate Effectiveness of a Proposed Rule Change to Enable the Trading of Securities on the Exchange in Tokenized Form",
+   "source_url": "https://www.sec.gov/files/rules/sro/nyse/2026/34-105260.pdf"
+  },
+  {
    "id": "e-fdic-prop",
    "date": "2026-04-10",
    "entities": [
@@ -6956,6 +7782,23 @@
    "grade": "filed",
    "source_title": "HKMA, Regulatory regime for stablecoin issuers",
    "source_url": "https://www.hkma.gov.hk/eng/key-functions/international-financial-centre/stablecoin-issuers/"
+  },
+  {
+   "id": "e-bis-agora",
+   "date": "2026-05-27",
+   "entities": [
+    "bis",
+    "agora",
+    "fed",
+    "ecb"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "Project Agor\u00e1's prototype report finds multi-currency settlement with tokenised reserves and deposits achievable; real-value testing next",
+   "detail": "An experimental BIS Innovation Hub project, convened by the BIS and the Institute of International Finance with seven central banks and more than 40 private sector financial institutions. The Bank of Canada has joined.",
+   "grade": "filed",
+   "source_title": "BIS press release, Project Agor\u00e1 shows how tokenisation can improve wholesale cross-border payments; work will advance to real-value testing, 27 May 2026",
+   "source_url": "https://www.bis.org/press/p260527.htm"
   },
   {
    "id": "e-binance-bstocks",
@@ -7016,6 +7859,22 @@
    "source_url": "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica"
   },
   {
+   "id": "e-secz",
+   "date": "2026-07-02",
+   "entities": [
+    "securitize",
+    "avalanche",
+    "solana"
+   ],
+   "flow": "t-securitize-secz",
+   "level": "map",
+   "title": "Securitize brings its own listed stock on chain at listing",
+   "detail": "Issuer-sponsored tokenized SECZ, to launch first on Avalanche and Solana for eligible US investors. No value or share count was given.",
+   "grade": "announced",
+   "source_title": "Securitize release, Tokenizing SECZ: Securitize Brings Its Own Public Stock Onchain at Listing Day, 2 Jul 2026 (PR Newswire, as carried by Webull)",
+   "source_url": "https://www.webull.com.au/news-detail/15158204236620800"
+  },
+  {
    "id": "e-l-occ-circle",
    "date": "2026-07-09",
    "entities": [
@@ -7044,6 +7903,23 @@
    "grade": "announced",
    "source_title": "Binance release, bStocks Reaches $500 Million in AUM, 29 Jul 2026",
    "source_url": "https://www.prnewswire.com/apac/news-releases/binance-bstocks-reaches-500-million-in-aum-as-a-new-generation-of-investors-turns-to-tokenized-stocks-302837760.html"
+  },
+  {
+   "id": "e-bis-agora-rvt",
+   "date": "2026-07-31",
+   "entities": [
+    "bis",
+    "agora",
+    "jpmorgan",
+    "bny"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "Project Agor\u00e1 completes real-value testing",
+   "detail": "In July 2026, 28 financial institutions and central banks completed transactions totalling about CHF 800,000 in CHF, EUR, GBP, JPY, KRW and USD, using tokenised central bank reserves and tokenised commercial bank deposits; SIX coordinated them. The page gives no day, so the event is dated at the end of July.",
+   "grade": "filed",
+   "source_title": "BIS, Project Agor\u00e1 project page",
+   "source_url": "https://www.bis.org/project/agora"
   },
   {
    "id": "e-l-nydfs-circle",
@@ -7435,6 +8311,21 @@
    "source_url": "https://www.sec.gov/newsroom/press-releases/2026-90-sec-issues-innovation-exemption-facilitate-trading-tokenized-nms-stock-request-comment"
   },
   {
+   "id": "e-ecb-pontes",
+   "date": "2026-09-21",
+   "entities": [
+    "ecb",
+    "pontes"
+   ],
+   "flow": null,
+   "level": "map",
+   "title": "Eurosystem launches Pontes: wholesale tokenised transactions settle in central bank money",
+   "detail": "The first initiative under the Eurosystem's strategic programme. Thirteen named market participants and four DLT operators (Axiology, Cashlink, Clearstream and SWIAT) have onboarded, with the Deutsche Bundesbank as a market participant; banks and market infrastructures join gradually.",
+   "grade": "filed",
+   "source_title": "ECB press release, Eurosystem brings central bank money to tokenised finance, 21 Sep 2026",
+   "source_url": "https://ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921~e754847a7b.en.html"
+  },
+  {
    "id": "e-fed-prop",
    "date": "2026-09-29",
    "entities": [
@@ -7447,6 +8338,21 @@
    "grade": "filed",
    "source_title": "Federal Reserve proposed rule, 91 FR 61580, 29 Sep 2026",
    "source_url": "https://govinfo.gov/content/pkg/FR-2026-09-29/html/2026-19860.htm"
+  },
+  {
+   "id": "e-securitize-stocks",
+   "date": "2026-10-08",
+   "entities": [
+    "securitize",
+    "solana"
+   ],
+   "flow": "t-securitize-securitizestocks",
+   "level": "map",
+   "title": "Securitize launches tokenized US stocks as security entitlements",
+   "detail": "Twelve US stocks at launch (AAPL, MSFT, NVDA, GOOG, TSLA, META, AMZN, NFLX, CRCL, SPCX, MSTR and PLTR), each token backed one for one by an underlying share, trading on Solana against USDC. The issuers of the underlying stocks have not sponsored or endorsed them.",
+   "grade": "announced",
+   "source_title": "Securitize release, Securitize Launches Global Onchain Trading of US Stocks with Security Entitlements, 8 Oct 2026 (PR Newswire, as carried by Finviz)",
+   "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements"
   },
   {
    "id": "e-m-paxg-res",
@@ -8063,6 +8969,21 @@
    "source_url": "https://www.sec.gov/Archives/edgar/data/1876042/000187604226000311/crcl-20260930.htm"
   },
   {
+   "id": "e-o-ylds-all-2026-11-08",
+   "date": "2026-11-10",
+   "entities": [
+    "ylds"
+   ],
+   "flow": null,
+   "observation": "o-ylds-all-2026-11-08",
+   "level": "entity",
+   "title": "YLDS: $466.0M YLDS in circulation, preliminary and unaudited, as the issuer states it at 2026-11-08",
+   "detail": "YLDS in circulation, preliminary and unaudited, as the issuer states it. Weekly table, column 8 Nov 2026: $466m. The page marks the current week's data point as preliminary and its operating data as unaudited; it was last updated 10 Nov 2026.",
+   "grade": "announced",
+   "source_title": "Figure, Preliminary Operating Data (weekly dashboard), last updated 10 Nov 2026",
+   "source_url": "https://figure.com/investors/metrics"
+  },
+  {
    "id": "e-m-usdy-port",
    "date": "2026-11-11",
    "entities": [
@@ -8168,6 +9089,21 @@
    "source_url": "https://ondo.finance/ousg"
   },
   {
+   "id": "e-h-ousg-fyoxx",
+   "date": "2026-11-13",
+   "entities": [
+    "ousg",
+    "fyoxx"
+   ],
+   "flow": "h-ousg-fyoxx",
+   "level": "entity",
+   "title": "OUSG holds FYOXX",
+   "detail": "$23,640,401 of OUSG's portfolio on 13 Nov 2026, listed as Fidelity Treasury Digital Fund (FYOXX).",
+   "grade": "announced",
+   "source_title": "Ondo Finance, OUSG page",
+   "source_url": "https://ondo.finance/ousg"
+  },
+  {
    "id": "e-m-ousg-port",
    "date": "2026-11-13",
    "entities": [
@@ -8181,6 +9117,21 @@
    "grade": "announced",
    "source_title": "Ondo Finance, OUSG page",
    "source_url": "https://ondo.finance/ousg"
+  },
+  {
+   "id": "e-o-fyoxx-all-2026-10-31",
+   "date": "2026-11-13",
+   "entities": [
+    "fyoxx"
+   ],
+   "flow": null,
+   "observation": "o-fyoxx-all-2026-10-31",
+   "level": "entity",
+   "title": "FYOXX: $25.7M net assets of the OnChain class, as the sponsor states it at 2026-10-31",
+   "detail": "Net assets of the OnChain class, as the sponsor states it. Fact sheet Details: Net Assets ($M) $25.71 as of 10/31/2026; the footnote says net assets reflect the class shown, and portfolio assets ($63.88M) all classes of the fund. The extracted text lists labels and values separately; the pairing follows their order.",
+   "grade": "announced",
+   "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026",
+   "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf"
   },
   {
    "id": "e-o-ousg-all-2026-11-13",
@@ -9006,13 +9957,27 @@
     "b-usdgo-4"
    ],
    "note": "Verifier pass 5: a fund named only by its CUSIP is not a holder. The three rows that gave 'named by CUSIP/code only' as where the reserve is held now say the report names no holder, and the CUSIP moves into the component. The JLTXX identification of CUSIP 46655R119 rests on J.P. Morgan's product page, not on the USDGO report, and now says so. Amounts unchanged."
+  },
+  {
+   "date": "2026-11-14",
+   "rows": [
+    "b-ousg-4"
+   ],
+   "note": "Batch four: FYOXX is now on the map, so OUSG's FYOXX line names it as counterpart. Amount unchanged."
+  },
+  {
+   "date": "2026-11-14",
+   "rows": [
+    "entity jpmorgan"
+   ],
+   "note": "The player's name is now 'J.P. Morgan' (was 'J.P. Morgan (Kinexys)'). Kinexys, its blockchain unit, stays in the note; the bank appears in Project Agor\u00e1's testing as JPMorgan Chase Bank, N.A."
   }
  ],
  "runs": [
   {
-   "id": "run-2026-11-14-batch-3",
+   "id": "run-2026-11-14-batch-4",
    "as_of": "2026-11-14",
-   "rows": 382
+   "rows": 413
   }
  ],
  "watchlist": [
@@ -9057,6 +10022,13 @@
    "chain": "all",
    "method": "SEC filing index, keyless",
    "url": "https://data.sec.gov/submissions/CIK0001859001.json"
+  },
+  {
+   "entity": "fyoxx",
+   "chain": "all",
+   "method": "SEC filing index, keyless",
+   "url": "https://data.sec.gov/submissions/CIK0000877212.json",
+   "note": "CIK taken from a tracker (a pointer only). On the first read, confirm the filer is the trust that holds Fidelity Treasury Digital Fund and that the N-MFP3 covers the OnChain class."
   }
  ],
  "gaps": [
@@ -9082,7 +10054,7 @@
   },
   {
    "topic": "Regimes not yet on the ledger",
-   "note": "United Kingdom and United Arab Emirates. Singapore appears only through Paxos; the EU only through MiCA's timetable."
+   "note": "United Kingdom: only the FCA's final rules are on the map. Singapore appears only through Paxos. The EU appears through MiCA's timetable and the Eurosystem's Pontes; the UAE through ADGM's FSRA and the DFSA."
   },
   {
    "topic": "GENIUS Act introduction",
@@ -9106,7 +10078,7 @@
   },
   {
    "topic": "Chains listed but not drawn",
-   "note": "Ondo also lists USDY on Mantle, Sui, Arbitrum, Stellar, Sei and BNB Chain, and OUSG on Polygon and XRPL. USDGO has a Morph contract with a nil balance."
+   "note": "Ondo also lists USDY on Mantle, Sui, Arbitrum, Stellar, Sei and BNB Chain, and OUSG on Polygon and XRPL. USDGO has a Morph contract with a nil balance. ACRED is also listed on Aptos, Ink and Polygon."
   },
   {
    "topic": "What backs BUIDL, MONY, BENJI and JPMD",
@@ -9122,7 +10094,7 @@
   },
   {
    "topic": "Fund filings not yet wired",
-   "note": "Fidelity's Treasury Digital Fund (FYOXX) files Form N-MFP3 and is not read yet. Franklin's and WisdomTree's later monthly filings were not found in the listings read; the rows use July and August 2026."
+   "note": "FYOXX is counted at the class net assets on Fidelity's fact sheet (grade announced). Its trust's N-MFP3 filings would give a filed figure; the filing index is on the watchlist (the CIK came from a tracker and is to be confirmed on the first read). Franklin's and WisdomTree's later monthly filings were not found in the listings read; the rows use July and August 2026."
   },
   {
    "topic": "What Franklin's and WisdomTree's funds hold",
@@ -9154,11 +10126,11 @@
   },
   {
    "topic": "Figure and Provenance",
-   "note": "Figure's loans recorded on its Provenance chain are records, not tokens that trade on public chains, so they will sit outside the headline like bank ledgers. Its 10-Q has not been read yet."
+   "note": "YLDS is counted at Figure's own weekly figure (grade announced); Figure's 10-Q, which would give a filed figure, has not been read. Figure's loans recorded on Provenance are records, not tokens that trade on public chains, and sit outside the headline. In November 2025 Figure said it intended to mint YLDS natively on Solana; no page read here confirms it is live there, so only Provenance is drawn."
   },
   {
    "topic": "Not yet on the ledger, above the bar",
-   "note": "Fidelity's Treasury Digital Fund (FYOXX); BUIDL on chains other than Ethereum; Apollo's ACRED; Securitize's tokenized stocks; NYSE's rule change for tokenized securities."
+   "note": "BUIDL on chains other than Ethereum. Reading it needs each chain's contract address from BlackRock or Securitize and a keyless explorer read per chain; neither was read in batch four."
   },
   {
    "topic": "xStocks' size",
@@ -9179,6 +10151,22 @@
   {
    "topic": "Kraken's purchase of Backed",
    "note": "Kraken agreed to buy Backed Finance AG on 2 Dec 2025. Payward's July 2026 page says 8 of the 15 largest tokenized stocks are issued by Payward, which suggests the deal closed, but no closing notice has been read. The deal stays 'signed, not closed' and is listed in pending_close."
+  },
+  {
+   "topic": "Securitize's tokenized stocks' size",
+   "note": "Securitize publishes no total for Securitize Stocks or for tokenized SECZ, so both are shown without a balance. Press put tokenized SECZ at about $295M at launch (CryptoBriefing, carried by KuCoin): press, never counted."
+  },
+  {
+   "topic": "ACRED and FYOXX are below the bar",
+   "note": "Both are under the $250M bar for assets and are on the map because Derek asked for them. FYOXX is counted at $25.71M of class net assets (Fidelity's fact sheet, 31 Oct 2026). ACRED has no primary total; trackers (pointers only, never a source) put it at roughly $95M (rwa.xyz), so it is shown without a balance."
+  },
+  {
+   "topic": "Wholesale central bank money",
+   "note": "Pontes (the Eurosystem) and Project Agor\u00e1 (the BIS with the IIF) settle tokenised wholesale transactions in central bank money and tokenised deposits. Neither publishes balances, so both sit on the map as ledgers outside the headline. Agor\u00e1's July 2026 test totalled about CHF 800,000; Pontes' participants are not on the map unless they already were."
+  },
+  {
+   "topic": "FYOXX's chain",
+   "note": "Fidelity's fact sheet names no blockchain. Press (The Block, March 2025) reported from the registration filing that the OnChain class records ownership on Ethereum; press, so no chain is drawn until a Fidelity page or filing is read."
   }
  ],
  "pending_close": [
@@ -9852,7 +10840,7 @@
    "amount_usd": 23640401,
    "held_at": null,
    "held_label": "Not named in the report",
-   "counterpart": null,
+   "counterpart": "fyoxx",
    "as_of": "2026-11-13",
    "available": "2026-11-13",
    "grade": "announced",
@@ -10102,9 +11090,9 @@
  ],
  "headline": {
   "money": 271554120630,
-  "assets_gross": 12057025427,
-  "assets_stated": 4555935750,
-  "netting": 725107266,
+  "assets_gross": 12548735427,
+  "assets_stated": 5047645750,
+  "netting": 748747667,
   "stated_not_counted": {
    "money": 0,
    "assets": 0
@@ -10142,6 +11130,15 @@
     "chains": [
      "ethereum"
     ],
+    "class": "assets",
+    "counted": true
+   },
+   "fyoxx": {
+    "amount": 25710000,
+    "grade": "announced",
+    "as_of": "2026-10-31",
+    "row": "f-fyoxx-issued",
+    "partial": false,
     "class": "assets",
     "counted": true
    },
@@ -10340,18 +11337,28 @@
     "partial": false,
     "class": "assets",
     "counted": true
+   },
+   "ylds": {
+    "amount": 466000000,
+    "grade": "announced",
+    "as_of": "2026-11-08",
+    "row": "f-ylds-issued",
+    "partial": false,
+    "class": "assets",
+    "counted": true
    }
   },
   "netted_rows": [
    "h-ousg-benji",
-   "h-usdgo-jltxx"
+   "h-usdgo-jltxx",
+   "h-ousg-fyoxx"
   ],
   "overlap_rows": [
    "h-usdtb-buidl",
    "h-usdgo-buidl",
    "h-ousg-buidl"
   ],
-  "assets": 11331918161,
+  "assets": 11799987760,
   "as_of_range": [
    "2026-07-29",
    "2026-11-14"
@@ -10360,19 +11367,19 @@
  "verification": {
   "verified_at": "2026-11-14",
   "method": "Each of the 30 cited sources was fetched with WebFetch on 14 Nov 2026 (long filings and Federal Register documents in several offset windows) and every number, date, name and definition sentence in the 104 rows was compared with what the source prints; the five explorer supplies and the two Ondo pages were compared with the live values, which matched the rows to the unit. Where a row states a fact that is not in its own cited source it is a finding even if another source on this ledger supports it, unless the row itself names that other source and I verified it there. Not checked: the full text of the Federal Reserve and FDIC proposals beyond their headers, the on-chain data behind any attestation, and the Business Wire release date, which appears only in the URL id (20260805) and not in the fetched text. Second pass, 14 Nov 2026 (60 new rows: reserve components, legal wrappers and five new players): Each of the 15 cited sources was fetched with WebFetch and every figure, name, date and held-at statement in the 60 rows was compared with the text as printed; PDF tables were re-added to their printed totals, and reports were fetched a second time to search for named custodians, banks and fund managers. Live sources matched the rows exactly on the day (Blockscout total_supply 533063044200 at 4 decimals = 53,306,304.42 MONY; Ondo OUSG as of 13 Nov 2026 and USDY as of 11 Nov 2026). Limits: PDFs were read as extracted text through a summarising fetcher, not as page images; the Business Wire copy of the ICE/OKX release carries its date only in the URL (20260305), which ICE's own copy on ir.theice.com confirms as 'Mar 05, 2026'; the BDO report covers one pooled reserve for all fiat-denominated Tether tokens with no per-token split, so the USDT rows are that pool; and status labels inside claims could be checked only against what the release says. Third pass, 14 Nov 2026 (14 rows from two SEC Form N-MFP3 filings): Fetched both cited N-MFP3 XML documents from sec.gov with WebFetch (the Franklin document in two parts, characters 0-100000 and 100000-167751, through its closing tag; the WisdomTree document whole) and compared every number, date and name in each row with the printed element values, then re-summed the four components of each fund. Filing dates and the presence of later N-MFP3 filings were checked against the two data.sec.gov submissions indexes. Values were read out by the fetch tool's extraction model over two differently worded passes per document, not from a raw byte copy. Fourth pass, 14 Nov 2026 (52 rows: RLUSD, USDe, USDS, PAXG, XAUT, USYC, JLTXX, USTB, SWEEP, DTCC, Mastercard and the FCA): Each of the 19 cited sources was fetched with WebFetch (plus the J.P. Morgan AM CUSIP snapshot cited inside h-usdgo-jltxx and the EDGAR filing index), and every figure, date, name and definition sentence in the 52 rows was compared with the text as printed; the 1,068,017-character N-CSRS was read in eleven 100,000-character windows plus targeted passes on the OnChain fund's statements and notes. Gold values (ounces x US$4,157.41) and the USTB value (on-chain shares x $676,987,663 / 60,015,423.56 = $11.2802280) were recomputed and match to the dollar, and live sources read on 14 Nov 2026 matched exactly (Blockscout XAUT 827,417.63, RLUSD 2,019,899,967.19, USDe 4,909,359,615.97, USDS 5,318,034,118.92, USTB 39,660,945.507784; XRPScan RLUSD 762,824,103.291486; Ripple $2,689.9M and $2,826.5M as of 11/12/2026; Circle $312,976,695.16; Superstate $676,987,663). Limits: text was read through a summarising fetcher, not page images; the Business Wire page prints no date (URL 20251210, matched by a MarketScreener/S&P Capital IQ copy dated 12/10/2025); Circle lists 'BNB', read as BNB Smart Chain; o-ustb-ethereum matches only with the unrounded NAV (at exactly $11.2802 it would be $447,383,398); two 'missing' findings name rows that do not exist and are not counted in rows_with_findings. Passes 5 to 9 (14 Nov 2026) checked batch three, tokenized equities, plus four rows left unchecked after pass 4: 33 rows, then the 14 rows changed after pass 5, the 4 changed after pass 6 and the Nasdaq order row after passes 7 and 8, each by a fresh agent that had not seen the work, against the cited page or its mirror of the company's own release. Two pass-5 findings (Ondo and bStocks amounts shown as None) came from the check file leaving out amounts; the pages state the counted figures. Passes 10 and 11 rechecked the Ondo Stocks and bStocks readings with their amounts included; one clause in the Ondo note that rested on another page was moved to a gap note.",
-  "rows_checked": 286,
+  "rows_checked": 336,
   "counts": {
    "flows": 70,
    "observations": 55,
    "metrics": 17,
    "events": 12,
-   "confirmed": 243,
-   "rows_with_findings": 35,
-   "findings": 41,
+   "confirmed": 273,
+   "rows_with_findings": 46,
+   "findings": 56,
    "backing": 52,
    "wrappers": 17,
    "chains_listed": 7,
-   "passes": 11
+   "passes": 14
   },
   "confirmed": [
    "b-benji-1",
@@ -10433,7 +11440,10 @@
    "d-kraken-backed",
    "d-ma-bvnk",
    "e-binance-bstocks",
+   "e-bis-agora",
+   "e-bis-agora-rvt",
    "e-dtcc-dts",
+   "e-ecb-pontes",
    "e-fca-final",
    "e-fdic-prop",
    "e-fed-prop",
@@ -10447,11 +11457,22 @@
    "e-sec-dtc",
    "e-sec-innovation",
    "e-sec-nasdaq",
+   "e-sec-nyse",
    "e-sec-tokstatement",
+   "e-securitize-stocks",
+   "e-secz",
+   "ent-acred",
    "ent-bstocks",
+   "ent-fyoxx",
    "ent-hoodst",
    "ent-ondostocks",
+   "ent-securitizestocks",
+   "ent-secz",
    "ent-xstocks",
+   "ent-ylds",
+   "f-acred-on-avalanche",
+   "f-acred-on-ethereum",
+   "f-acred-on-solana",
    "f-bstocks-on-bnb",
    "f-hoodst-on-robinhoodchain",
    "f-jpmd-on-base",
@@ -10460,6 +11481,9 @@
    "f-ondostocks-on-solana",
    "f-ousg-on-ethereum",
    "f-ousg-on-solana",
+   "f-securitizestocks-on-solana",
+   "f-secz-on-avalanche",
+   "f-secz-on-solana",
    "f-usd1-on-solana",
    "f-usd1-on-tempo",
    "f-usd1-on-tron",
@@ -10479,6 +11503,7 @@
    "f-usyc-on-solana",
    "f-xaut-on-ethereum",
    "f-xstocks-on-solana",
+   "f-ylds-on-provenance",
    "h-ousg-benji",
    "h-ousg-buidl",
    "h-usdgo-buidl",
@@ -10512,6 +11537,7 @@
    "m-xaut-res",
    "o-bstocks-all-2026-07-29",
    "o-buidl-ethereum-2026-11-14",
+   "o-fyoxx-all-2026-10-31",
    "o-jltxx-all-2026-08-31",
    "o-mony-ethereum-2026-11-14",
    "o-ondostocks-all-2026-08-15",
@@ -10565,23 +11591,31 @@
    "o-ustb-ethereum-2026-11-14",
    "o-usyc-all-2026-10-27",
    "o-xaut-all-2026-09-30",
+   "o-ylds-all-2026-11-08",
    "t-anch-usdgo",
    "t-anch-usdtb",
+   "t-apollo-acred",
    "t-backed-xstocks",
    "t-binance-bstocks",
    "t-binance-ondostocks",
    "t-bitgo-usd1",
    "t-blk-buidl",
+   "t-bny-agora",
    "t-buidl-bny",
    "t-circle-usdc",
    "t-circle-usyc",
    "t-coin-usdc",
    "t-crf-blk",
    "t-dtcc-canton",
+   "t-ecb-agora",
+   "t-fed-agora",
+   "t-fidelity-fyoxx",
+   "t-figure-ylds",
    "t-galaxy-sweep",
    "t-invesco-ustb",
    "t-jpm-jpmd",
    "t-jpmam-jltxx",
+   "t-jpmorgan-agora",
    "t-kraken-xstocks",
    "t-nyse-bny",
    "t-okx-nyse",
@@ -10595,6 +11629,9 @@
    "t-ripple-rlusd",
    "t-robinhood-hoodst",
    "t-sec-buidl",
+   "t-securitize-acred",
+   "t-securitize-securitizestocks",
+   "t-securitize-secz",
    "t-ss-sweep",
    "t-superstate-ustb",
    "t-sweep-ss",
@@ -10906,6 +11943,126 @@
     "pass": 10,
     "source_url": "https://chainwire.org/2026/08/15/ondo-stocks-surpasses-1-billion-in-value-as-ecosystem-surges/",
     "note": "The cited page supports the amount ('Ondo Stocks now holds $1.01 billion in total value locked (TVL)'), the 440 figure ('with more than 440 assets available'), the date (dateline 'NEW YORK, Aug. 15, 2026 /PRNewswire/', no other as-of), and the title. Grade: Chainwire mirror carrying Ondo's own release text ('Ondo Finance today shared a set of ecosystem milestones', About Ondo section), so 'announced' holds. Unsupported: the clause 'Ondo's Global Markets page still says more than $1 billion, undated' has no support on the cited page. The page mentions Ondo Global Markets only in the disclaimer: 'Ondo Stocks are offered and sold by Ondo Global Markets (BVI) Limited'. That clause rests on a source the row does not cite."
+   },
+   {
+    "row": "e-bis-agora",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.bis.org/press/p260527.htm",
+    "note": "Overstated: claim says settlement 'works'; release says only 'The findings indicate this is achievable securely and with finality across currencies and jurisdictions' and 'BIS Innovation Hub projects are experimental in nature'. Supported: 27 May 2026; 'convened by the Bank for International Settlements (BIS) and the Institute of International Finance (IIF)'; seven central banks; 'more than 40 private sector financial institutions'; 'The Bank of Canada has also joined the project'; real-value testing as next step. Official BIS publication, so grade filed is right."
+   },
+   {
+    "row": "t-ecb-agora",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.bis.org/press/p260527.htm",
+    "note": "Status cash_moved is contradicted: the 27 May release covers an experimental prototype and its headline says 'work will advance to real-value testing', so no real-value transactions had taken place. Supported: label and definition ('the Bank of France (representing the Eurosystem)', one of seven central banks). The page names the Bank of France, not the ECB; the label says so."
+   },
+   {
+    "row": "t-fed-agora",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.bis.org/press/p260527.htm",
+    "note": "Status cash_moved is contradicted: the release covers an experimental prototype, and 'work will advance to real-value testing' places real-value transactions in the future. Supported: the Federal Reserve Bank of New York is one of seven central banks, and the definition's list of the other six (BoE, Bank of France for the Eurosystem, BoJ, BoK, Bank of Mexico, SNB) matches the release."
+   },
+   {
+    "row": "t-jpmorgan-agora",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.bis.org/project/agora",
+    "note": "Misattributed in part: the page lists 'JPMorgan Chase Bank N.A.' under 'Testing financial institutions' and never mentions Kinexys, so the '(Kinexys)' tag in the claim is unsupported. Supported: the label (JPMorgan Chase Bank, N.A.), the definition, July 2026 and real-value status."
+   },
+   {
+    "row": "e-sec-nyse",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.sec.gov/files/rules/sro/nyse/2026/34-105260.pdf",
+    "note": "Missing qualifiers: the Exchange text says the proposal 'will become effective once the requisite infrastructure and post-trade settlement services have been established by DTC', and under Rule 19b-4(f)(6) it does not become 'operative for 30 days' after filing, with no waiver stated. The row mentions neither. Supported: Release 34-105260; filed April 9, 2026; 'it has become effective pursuant to Section 19(b)(3)(A)'; the DTC pilot tie; the Trader Update 'at least 30 calendar days' before trading begins."
+   },
+   {
+    "row": "l-sec-nyse",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.sec.gov/files/rules/sro/nyse/2026/34-105260.pdf",
+    "note": "Relationship 'licensed' is unsupported: the document is a 'Notice of Filing and Immediate Effectiveness of Proposed Rule Change' and does not say the SEC approved, licensed or authorized NYSE. Status cash_moved is unsupported: trading in tokenized form has not begun, and members get a Trader Update 'at least 30 calendar days' before it does. 'Takes effect on filing' leaves out the page's DTC condition ('will become effective once the requisite infrastructure') and the 30-day operative delay. 'ICE' does not appear on the page. Supported: SR-NYSE-2026-17, 9 Apr 2026, Rule 7.50 'Tokenized Securities', Section 19(b)(3)(A), the DTC pilot, not an approval order."
+   },
+   {
+    "row": "t-securitize-securitizestocks",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+    "note": "Relationship 'issues' is unsupported: the release never names an issuer. It says 'Securitize Stocks are offered by Securitize Markets, LLC' and calls them entitlements 'held through' it, which matches the row's own 'Intermediary' label. Supported: the launch, Securitize Markets, the registered broker-dealer platform, and 'Shares backing Securitize Stocks will not be lent out'."
+   },
+   {
+    "row": "ent-fyoxx",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+    "note": "'Distributed by Fidelity Distributors Company LLC' is unsupported: the name appears only in the footer address block ('900 Salem Street, Smithfield, RI') and the fact sheet never calls it the distributor. Supported: 'Fidelity Treasury Digital Fund - OnChain Class'; the money market category; 'Normally investing at least 99.5% of total assets in cash and U.S. Treasury securities'; 'in compliance with industry-standard regulatory requirements for money market funds'. 'Net Assets ($M)' shows no figure, so 'no balance' is not contradicted."
+   },
+   {
+    "row": "t-fidelity-fyoxx",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+    "note": "'Fidelity Distributors Company LLC as distributor' is unsupported: the name appears only in the footer address and no role is given. The relationship 'issues' is not stated either: the page calls Fidelity 'the fund's sponsor', not the issuer. Supported: fund name; 'Fund # 9053'; 'CUSIP 31617H813'; 'Fidelity Investments and its affiliates, the fund's sponsor'; data as of 11/13/2026. The issuer's own fact sheet, so grade announced is right."
+   },
+   {
+    "row": "h-ousg-fyoxx",
+    "severity": "unreadable",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://ondo.finance/ousg",
+    "note": "WebFetch returned a permission error (PROVENANCE_REQUIRED: the permission request for this URL was not answered in time). Not retried. The holding, the $23,640,401 amount and the 13 Nov 2026 date are unchecked."
+   },
+   {
+    "row": "o-ylds-all-2026-11-08",
+    "severity": "finding",
+    "pass": 12,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://figure.com/investors/metrics",
+    "note": "Supported: '$YLDS in Circulation' is $466m in the weekly 'Nov 8, 2026' column; 'Last updated: Nov 10, 2026'. Unsupported: 'end-of-period outstanding balance' (none of 'end of period', 'outstanding' or 'balance' appears on the page). Missing qualifier: 'The data point for the current Week is preliminary' and 'preliminary and unaudited operating data'. as_of 2026-11-10 is the page's update date, not the figure's Nov 8, 2026 column."
+   },
+   {
+    "row": "e-bis-agora",
+    "severity": "finding",
+    "pass": 13,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.bis.org/press/p260527.htm",
+    "note": "Misattribution: the claim says 'the BIS finds', but the page credits the findings to the project, not the BIS: 'The project, involving the Bank of England, ...' 'today published a report detailing the findings of its exploratory work'. The project is a public-private collaboration convened by the BIS and the IIF. Everything else checks out against the 27 May 2026 page: 'achievable securely across currencies and jurisdictions'; 'work will advance to real-value testing'; seven central banks listed; 'more than 40 private sector financial institutions'; 'The Bank of Canada has also joined the project'; 'BIS Innovation Hub projects are experimental in nature'."
+   },
+   {
+    "row": "t-jpmorgan-agora",
+    "severity": "finding",
+    "pass": 13,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://www.bis.org/project/agora",
+    "note": "Date not supported: the row gives 2026-07-31, but the page names no day, only 'Project Agor\u00e1 conducted RVT in July 2026.' Everything else is supported: 'JPMorgan Chase Bank N.A.' appears under 'Testing financial institutions' in Table 1 'Real value testing overview', and the testing was done with real value (about CHF 800,000 across about 30 transactions), so 'cash_moved' fits. The page's 'Last updated' reads 27 May 2026, which is earlier than the July testing it describes."
+   },
+   {
+    "row": "t-securitize-securitizestocks",
+    "severity": "finding",
+    "pass": 13,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://finviz.com/news/400423/securitize-launches-global-onchain-trading-of-us-stocks-with-security-entitlements",
+    "note": "Status cash_moved (live) is not supported. The release says the product will launch, not that trading has started: 'Securitize Stocks will initially launch on Solana and trade on Securitize's registered broker-dealer platform'; 'At launch, Securitize Stocks will be available...'. It gives no live date. It also names a second offeror that the definition and label leave out: '...and in the European Union by Securitize Europe Brokerage and Markets, S.A.' (Securitize Markets, LLC is the U.S. offeror). Supported: the 8 Oct 2026 PR Newswire release from Securitize; 'security entitlements held through Securitize Markets, LLC'; 'Shares backing Securitize Stocks will not be lent out'; no issuer of the tokens is named."
+   },
+   {
+    "row": "ent-fyoxx",
+    "severity": "finding",
+    "pass": 13,
+    "run": "run-2026-11-14-batch-4",
+    "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
+    "note": "The page appears to contradict 'The fact sheet gives no net assets'. The Details section lists 'Net Assets ($M)', and the values block, read in the same order as the labels, shows '$25.71' as of 10/31/2026. The footnote reads: 'Net Assets reflect assets of the class shown'. The extracted text separates labels from values, so this pairing should be checked on the page layout. The rest is supported: header 'FYOXX Fidelity Treasury Digital Fund - OnChain Class'; 'Normally investing at least 99.5% of total assets in cash and U.S. Treasury securities.'; 'Investing in compliance with industry-standard regulatory requirements for money market funds' (the page goes on: 'for the quality, maturity, liquidity, and diversification...'); Morningstar category Money Market-Taxable."
    }
   ],
   "addressed": [
@@ -10979,8 +12136,39 @@
      "o-bstocks-all-2026-07-29"
     ],
     "note": "Verifier pass 10: both readings checked with their amounts ($1.01B, $500M), which pass 5's check file had left out. bStocks confirmed. Ondo's note cited its Global Markets page, which is not the row's source; that clause moved to the gap note."
+   },
+   {
+    "date": "2026-11-14",
+    "rows": [
+     "e-bis-agora",
+     "t-ecb-agora",
+     "t-fed-agora",
+     "t-jpmorgan-agora",
+     "e-sec-nyse",
+     "l-sec-nyse",
+     "t-securitize-securitizestocks",
+     "ent-fyoxx",
+     "t-fidelity-fyoxx",
+     "o-ylds-all-2026-11-08",
+     "e-secz",
+     "ent-secz"
+    ],
+    "note": "Verifier pass 12 (batch four). Agor\u00e1: 'works' became 'the BIS finds achievable', and the two central-bank ties are 'announced', since the release covers a prototype. J.P. Morgan's player name drops '(Kinexys)', which the BIS page does not use; Kinexys stays in the note. NYSE: the 'licensed' tie is removed; the filing is immediately effective, not approved, and the event now carries the DTC condition and points to the release. Securitize Stocks: 'offered by Securitize Markets', no issuer. FYOXX: the distributor clause is cut; the sponsor is drawn as the issuer tie, as for BUIDL, and the definition says so. YLDS: the reading is marked preliminary and unaudited, and the 'end-of-period' wording is cut; its as-of is the 8 Nov column, published 10 Nov (the harness shows an observation's as_of as the date it became available). SECZ: launch wording follows the release's tense; its Solana listing now cites Securitize's October release, which says the stock has traded there since July. h-ousg-fyoxx could not be opened by the verifier and stays unchecked."
+   },
+   {
+    "date": "2026-11-14",
+    "rows": [
+     "e-bis-agora",
+     "t-jpmorgan-agora",
+     "t-bny-agora",
+     "t-securitize-securitizestocks",
+     "ent-fyoxx"
+    ],
+    "note": "Verifier pass 13 (batch four). Agor\u00e1's findings are credited to the project's report, not the BIS. The two real-value-test ties now say the page gives no day and the row is dated at month end. Securitize Stocks: status 'announced' (the release says the product will launch), and the EU offeror is named. FYOXX: the fact sheet does give class net assets ($25.71M at 31 Oct 2026; pass 12 had read the label as blank), so FYOXX now has a reading and is counted, and OUSG's $23.6M holding of it is netted."
    }
   ],
-  "pending": []
+  "pending": [
+   "h-ousg-fyoxx"
+  ]
  }
 }
