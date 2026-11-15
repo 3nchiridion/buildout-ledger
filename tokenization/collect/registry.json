@@ -1,0 +1,386 @@
+{
+ "about": "Every address here comes from the issuer's own release or page (address_source), or is one the ledger already reads. Public, keyless endpoints only. value_rule usd_per_token is used only for dollar tokens and $1 funds; other tokens are valued by the daily run from their own sources.",
+ "reads": [
+  {
+   "id": "usdt-ethereum",
+   "token": "usdt",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+   "explorer_url": "https://eth.blockscout.com/token/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "usdc-ethereum",
+   "token": "usdc",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+   "explorer_url": "https://eth.blockscout.com/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "pyusd-ethereum",
+   "token": "pyusd",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+   "explorer_url": "https://eth.blockscout.com/token/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-ethereum",
+   "token": "buidl",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc",
+   "explorer_url": "https://eth.blockscout.com/token/0x7712c34205737192402172409a8F7ccef8aA2AEc",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "mony-ethereum",
+   "token": "mony",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+   "explorer_url": "https://eth.blockscout.com/token/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": null
+  },
+  {
+   "id": "rlusd-ethereum",
+   "token": "rlusd",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
+   "explorer_url": "https://eth.blockscout.com/token/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "usde-ethereum",
+   "token": "usde",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+   "explorer_url": "https://eth.blockscout.com/token/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "usds-ethereum",
+   "token": "usds",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+   "explorer_url": "https://eth.blockscout.com/token/0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "ustb-ethereum",
+   "token": "ustb",
+   "chain": "ethereum",
+   "kind": "blockscout_v2",
+   "address": "0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e",
+   "url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e",
+   "explorer_url": "https://eth.blockscout.com/token/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": null
+  },
+  {
+   "id": "usdt-tron",
+   "token": "usdt",
+   "chain": "tron",
+   "kind": "tronscan_trc20",
+   "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+   "url": "https://apilist.tronscanapi.com/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1",
+   "explorer_url": "https://tronscan.org/#/token20/TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "rlusd-xrpl",
+   "token": "rlusd",
+   "chain": "xrpl",
+   "kind": "xrpscan_obligations",
+   "address": "rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
+   "currency": "RLUSD",
+   "currency_hex": "524C555344000000000000000000000000000000",
+   "url": "https://api.xrpscan.com/api/v1/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De/obligations",
+   "explorer_url": "https://xrpscan.com/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
+   "address_source": {
+    "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+    "url": "https://buildoutledger.com/tokenization/"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-ethereum-rpc",
+   "token": "buidl",
+   "chain": "ethereum",
+   "kind": "evm_rpc",
+   "address": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+   "rpc": "https://ethereum-rpc.publicnode.com",
+   "explorer_url": "https://eth.blockscout.com/token/0x7712c34205737192402172409a8F7ccef8aA2AEc",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-arbitrum",
+   "token": "buidl",
+   "chain": "arbitrum",
+   "kind": "blockscout_v2",
+   "address": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "url": "https://arbitrum.blockscout.com/api/v2/tokens/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "explorer_url": "https://arbitrum.blockscout.com/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-arbitrum-rpc",
+   "token": "buidl",
+   "chain": "arbitrum",
+   "kind": "evm_rpc",
+   "address": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "rpc": "https://arb1.arbitrum.io/rpc",
+   "explorer_url": "https://arbitrum.blockscout.com/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-optimism",
+   "token": "buidl",
+   "chain": "optimism",
+   "kind": "blockscout_v2",
+   "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "url": "https://optimism.blockscout.com/api/v2/tokens/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "explorer_url": "https://optimism.blockscout.com/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-optimism-rpc",
+   "token": "buidl",
+   "chain": "optimism",
+   "kind": "evm_rpc",
+   "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "rpc": "https://mainnet.optimism.io",
+   "explorer_url": "https://optimism.blockscout.com/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-polygon",
+   "token": "buidl",
+   "chain": "polygon",
+   "kind": "blockscout_v2",
+   "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "url": "https://polygon.blockscout.com/api/v2/tokens/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "explorer_url": "https://polygon.blockscout.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-polygon-rpc",
+   "token": "buidl",
+   "chain": "polygon",
+   "kind": "evm_rpc",
+   "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "rpc": "https://polygon-rpc.com",
+   "explorer_url": "https://polygon.blockscout.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-avalanche",
+   "token": "buidl",
+   "chain": "avalanche",
+   "kind": "evm_rpc",
+   "address": "0x53FC82f14F009009b440a706e31c9021E1196A2F",
+   "rpc": "https://api.avax.network/ext/bc/C/rpc",
+   "explorer_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-aptos",
+   "token": "buidl",
+   "chain": "aptos",
+   "kind": "aptos_fa",
+   "address": "0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a",
+   "rpc": "https://fullnode.mainnet.aptoslabs.com/v1",
+   "explorer_url": "https://explorer.aptoslabs.com/fungible_asset/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a?network=mainnet",
+   "address_source": {
+    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "buidl-solana",
+   "token": "buidl",
+   "chain": "solana",
+   "kind": "solana_spl",
+   "address": "GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+   "rpc": "https://api.mainnet-beta.solana.com",
+   "explorer_url": "https://solscan.io/token/GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+   "address_source": {
+    "title": "Securitize release, BlackRock and Securitize Debut New BUIDL Share Class on Solana Network, 25 Mar 2025 (PR Newswire)",
+    "url": "https://www.prnewswire.com/news-releases/blackrock-and-securitize-debut-new-buidl-share-class-on-solana-network-302410160.html"
+   },
+   "value_rule": {
+    "type": "usd_per_token",
+    "usd": 1
+   }
+  },
+  {
+   "id": "mony-solana",
+   "token": "mony",
+   "chain": "solana",
+   "kind": "solana_spl",
+   "address": "EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY",
+   "rpc": "https://api.mainnet-beta.solana.com",
+   "explorer_url": "https://solscan.io/token/EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY",
+   "address_source": {
+    "title": "J.P. Morgan Asset Management release, Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+    "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/"
+   },
+   "value_rule": null
+  },
+  {
+   "id": "jltxx-solana",
+   "token": "jltxx",
+   "chain": "solana",
+   "kind": "solana_spl",
+   "address": "J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+   "rpc": "https://api.mainnet-beta.solana.com",
+   "explorer_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+   "address_source": {
+    "title": "J.P. Morgan Asset Management release, Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+    "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/"
+   },
+   "value_rule": null
+  }
+ ]
+}
