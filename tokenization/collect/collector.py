@@ -13,7 +13,7 @@ UA = "buildoutledger-collector/1.0 (+https://buildoutledger.com/tokenization)"
 TIMEOUT = 40
 
 
-def http(url, body=None, headers=None, tries=3):
+def http(url, body=None, headers=None, tries=3, backoff=2):
     h = {"User-Agent": UA, "Accept": "application/json"}
     if body is not None:
         h["Content-Type"] = "application/json"
@@ -32,7 +32,7 @@ def http(url, body=None, headers=None, tries=3):
                 return last
         except Exception as e:  # network error: retry
             last = {"status": None, "headers": {}, "text": f"{type(e).__name__}: {e}"}
-        time.sleep(2 * (k + 1))
+        time.sleep(backoff * (k + 1))
     return last
 
 
@@ -125,7 +125,7 @@ def read(e, calls):
                                      "decimals": dec, "multiplier": a.get("currentMultiplier")}
             if raw is not None:
                 row["supply_text"], row["supply"] = units(raw, dec)
-                q = http(e["price_url"].format(sym=sym.replace(".", "/")) )
+                q = http(e["price_url"].format(sym=sym.replace(".", "/")), tries=6, backoff=10)
                 row["price_request"] = e["price_url"].format(sym=sym.replace(".", "/")); row["price_status"] = q["status"]
                 try:
                     h = json.loads(q["text"]); last = h["data"][-1]
@@ -134,7 +134,7 @@ def read(e, calls):
                     row["value_usd"] = round(row["supply"] * m * row["close"], 2); total += row["value_usd"]; priced += 1
                 except Exception as ex:
                     row["price_error"] = f"{type(ex).__name__}: {str(q['text'])[:200]}"; unpriced.append(sym)
-                time.sleep(0.25)
+                time.sleep(1.0)
             rows.append(row)
         p.update({"at": {"block": int(block, 16)}, "rpc_used": u, "tokens": rows, "tokens_listed": len(toks), "priced": priced, "unpriced": unpriced,
                   "value_usd_priced": round(total, 2)})
