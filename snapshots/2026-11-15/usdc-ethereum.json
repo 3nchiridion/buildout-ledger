@@ -4,7 +4,7 @@
  "chain": "ethereum",
  "kind": "blockscout_v2",
  "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
- "fetched_at": "2026-11-15T05:41:03+00:00",
+ "fetched_at": "2026-11-15T05:43:09+00:00",
  "explorer_url": "https://eth.blockscout.com/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
  "address_source": {
   "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
@@ -24,20 +24,20 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:41:04 GMT",
+     "Date": "Sun, 15 Nov 2026 05:43:10 GMT",
      "Content-Type": "application/json; charset=utf-8"
     },
-    "text": "{\"address_hash\":\"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\"circulating_market_cap\":\"69072189085.16296\",\"circulating_supply\":null,\"decimals\":\"6\",\"exchange_rate\":\"0.999699\",\"holders_count\":\"9589292\",\"icon_url\":\"https://raw.githubusercontent.com/ulyanas/frontend-configs/add-usdc-eurc-latest-token-icons/configs/token-icons/USDC_latest.svg\",\"name\":\"USDC\",\"reputation\":\"ok\",\"symbol\":\"USDC\",\"total_supply\":\"44472967504236475\",\"type\":\"ERC-20\",\"volume_24h\":\"18173658745.09805\"}"
+    "text": "{\"address_hash\":\"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\"circulating_market_cap\":\"69072189085.16296\",\"circulating_supply\":null,\"decimals\":\"6\",\"exchange_rate\":\"0.999699\",\"holders_count\":\"9589281\",\"icon_url\":\"https://raw.githubusercontent.com/ulyanas/frontend-configs/add-usdc-eurc-latest-token-icons/configs/token-icons/USDC_latest.svg\",\"name\":\"USDC\",\"reputation\":\"ok\",\"symbol\":\"USDC\",\"total_supply\":\"44472869355089935\",\"type\":\"ERC-20\",\"volume_24h\":\"18173658745.09805\"}"
    }
   }
  ],
  "parsed": {
-  "raw_supply": "44472967504236475",
+  "raw_supply": "44472869355089935",
   "decimals": "6",
-  "holders": "9589292",
-  "supply_text": "44472967504.236475",
-  "supply": 44472967504.23647
+  "holders": "9589281",
+  "supply_text": "44472869355.089935",
+  "supply": 44472869355.089935
  },
  "ok": true,
- "value_usd": 44472967504.24
+ "value_usd": 44472869355.09
 }

@@ -4,7 +4,7 @@
  "chain": "solana",
  "kind": "solana_spl",
  "address": "J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
- "fetched_at": "2026-11-15T05:41:17+00:00",
+ "fetched_at": "2026-11-15T05:43:22+00:00",
  "explorer_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
  "address_source": {
   "title": "J.P. Morgan Asset Management release, Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
@@ -31,10 +31,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:41:16 GMT",
+     "Date": "Sun, 15 Nov 2026 05:43:21 GMT",
      "Content-Type": "application/json; charset=utf-8"
     },
-    "text": "{\"jsonrpc\":\"2.0\",\"result\":{\"context\":{\"apiVersion\":\"4.4.0\",\"slot\":469615863},\"value\":{\"amount\":\"73796504384\",\"decimals\":2,\"uiAmount\":737965043.84,\"uiAmountString\":\"737965043.84\"}},\"id\":1}\n"
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":{\"context\":{\"apiVersion\":\"4.4.0\",\"slot\":469616449},\"value\":{\"amount\":\"73796504384\",\"decimals\":2,\"uiAmount\":737965043.84,\"uiAmountString\":\"737965043.84\"}},\"id\":1}\n"
    }
   }
  ],
@@ -42,7 +42,7 @@
   "raw_supply": "73796504384",
   "decimals": 2,
   "at": {
-   "slot": 469615863
+   "slot": 469616449
   },
   "supply_text": "737965043.84",
   "supply": 737965043.84
