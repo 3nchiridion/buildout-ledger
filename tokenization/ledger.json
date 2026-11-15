@@ -1,11 +1,11 @@
 {
  "schema_version": 1,
  "profile": "tokenization",
- "as_of": "2026-11-14",
+ "as_of": "2026-11-15",
  "window_start": "2025-01-01",
  "schema": {
   "grades": {
-   "onchain": "Read from the token contract through a public explorer; anyone can repeat it",
+   "onchain": "Read from the token contract through a public explorer or public RPC; anyone can repeat it",
    "attested": "Accountant-signed reserve or examination report",
    "filed": "Regulator filing, register entry or official publication",
    "announced": "The issuer's or company's own page or announcement",
@@ -195,7 +195,7 @@
    "type": "product",
    "tier": "instruments",
    "cik": null,
-   "note": "BlackRock USD Institutional Digital Liquidity Fund. No machine-readable total was found; only the Ethereum supply is read from chain.",
+   "note": "BlackRock USD Institutional Digital Liquidity Fund. Counted at the supply read on seven chains (Ethereum, Arbitrum, OP Mainnet, Polygon, Avalanche, Aptos, Solana) at $1 a token. Its BNB Chain share class is listed, but no release read gives its address, so that chain is not read and the total is partial.",
    "layer": "instruments",
    "kind": "product",
    "parent": "blackrock",
@@ -918,7 +918,7 @@
    "type": "product",
    "tier": "instruments",
    "cik": null,
-   "note": "JPMorgan OnChain Liquidity-Token Money Market Fund, Token Class. Counted at net assets in its semi-annual SEC report.",
+   "note": "JPMorgan OnChain Liquidity-Token Money Market Fund, Token Class. Counted at net assets in its semi-annual SEC report. Its token counts on Ethereum and Solana are read from chain and drawn per chain.",
    "layer": "instruments",
    "kind": "product",
    "parent": "jpmam",
@@ -1207,7 +1207,7 @@
    "type": "product",
    "tier": "instruments",
    "cik": null,
-   "note": "Tokenised debt securities giving economic exposure to underlying securities, with transaction records kept on Robinhood Chain. They give no legal or beneficial rights in, or against the issuer of, the underlying securities. No total is published yet.",
+   "note": "Tokenised debt securities giving economic exposure to underlying securities, with transaction records kept on Robinhood Chain. They give no legal or beneficial rights in, or against the issuer of, the underlying securities. Counted at each token's supply read on Robinhood Chain, times the multiplier in Robinhood's own token registry, times the underlying's last daily close published by Cboe.",
    "layer": "instruments",
    "kind": "product",
    "parent": "robinhood",
@@ -1434,6 +1434,39 @@
    "layer": "ledgers",
    "kind": "ledger",
    "parent": "bis"
+  },
+  {
+   "id": "optimism",
+   "name": "OP Mainnet",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "polygon",
+   "name": "Polygon PoS",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "aptos",
+   "name": "Aptos",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
   }
  ],
  "flows": [
@@ -3741,6 +3774,99 @@
    ]
   },
   {
+   "id": "f-buidl-on-aptos",
+   "payer": "buidl",
+   "payee": "aptos",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 59457400,
+   "amount_qualifier": "total supply",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply. 59457399.800000 tokens at ledger version 8059306494, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-aptos.json, fetched 2026-11-15T05:56:48+00:00.",
+   "source_title": "Explorer page, Aptos: BUIDL contract",
+   "source_url": "https://explorer.aptoslabs.com/fungible_asset/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a?network=mainnet",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-buidl-aptos-2026-11-15",
+   "title": "BUIDL on Aptos",
+   "label": "On Aptos",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 59457400,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply",
+     "source_title": "Explorer page, Aptos: BUIDL contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-buidl-on-arbitrum",
+   "payer": "buidl",
+   "payee": "arbitrum",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 12633916,
+   "amount_qualifier": "total supply",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply. 12633916.130000 tokens at block 524379084, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-arbitrum.json, fetched 2026-11-15T05:56:45+00:00.",
+   "source_title": "Explorer page, Arbitrum: BUIDL contract",
+   "source_url": "https://arbiscan.io/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-buidl-arbitrum-2026-11-15",
+   "title": "BUIDL on Arbitrum One",
+   "label": "On Arbitrum One",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 12633916,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply",
+     "source_title": "Explorer page, Arbitrum: BUIDL contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-buidl-on-avalanche",
+   "payer": "buidl",
+   "payee": "avalanche",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 356469874,
+   "amount_qualifier": "total supply",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply. 356469873.610000 tokens at block 100366749, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-avalanche.json, fetched 2026-11-15T05:56:47+00:00.",
+   "source_title": "Explorer page, Avalanche C-Chain: BUIDL contract",
+   "source_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-buidl-avalanche-2026-11-15",
+   "title": "BUIDL on Avalanche",
+   "label": "On Avalanche",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 356469874,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply",
+     "source_title": "Explorer page, Avalanche C-Chain: BUIDL contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
    "id": "f-buidl-on-ethereum",
    "payer": "buidl",
    "payee": "ethereum",
@@ -3767,6 +3893,99 @@
      "as_of": "2026-11-14",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: BUIDL contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-buidl-on-optimism",
+   "payer": "buidl",
+   "payee": "optimism",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 26582754,
+   "amount_qualifier": "total supply",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply. 26582754.330000 tokens at block 159561714, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-optimism.json, fetched 2026-11-15T05:56:46+00:00.",
+   "source_title": "Explorer page, OP Mainnet: BUIDL contract",
+   "source_url": "https://optimistic.etherscan.io/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-buidl-optimism-2026-11-15",
+   "title": "BUIDL on OP Mainnet",
+   "label": "On OP Mainnet",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 26582754,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply",
+     "source_title": "Explorer page, OP Mainnet: BUIDL contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-buidl-on-polygon",
+   "payer": "buidl",
+   "payee": "polygon",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 10481865,
+   "amount_qualifier": "total supply",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply. 10481865.020000 tokens at block 97344492, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-polygon.json, fetched 2026-11-15T05:56:47+00:00.",
+   "source_title": "Explorer page, Polygon PoS: BUIDL contract",
+   "source_url": "https://polygonscan.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-buidl-polygon-2026-11-15",
+   "title": "BUIDL on Polygon PoS",
+   "label": "On Polygon PoS",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 10481865,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply",
+     "source_title": "Explorer page, Polygon PoS: BUIDL contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-buidl-on-solana",
+   "payer": "buidl",
+   "payee": "solana",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 467301908,
+   "amount_qualifier": "total supply",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply. 467301907.660000 tokens at slot 469620213, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-solana.json, fetched 2026-11-15T05:56:49+00:00.",
+   "source_title": "Explorer page, Solana: BUIDL contract",
+   "source_url": "https://solscan.io/token/GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-buidl-solana-2026-11-15",
+   "title": "BUIDL on Solana",
+   "label": "On Solana",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 467301908,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply",
+     "source_title": "Explorer page, Solana: BUIDL contract",
      "grade": "onchain"
     }
    ]
@@ -3803,6 +4022,76 @@
    ]
   },
   {
+   "id": "f-hoodst-issued",
+   "payer": "robinhood",
+   "payee": "hoodst",
+   "type": "issued",
+   "status": "cash_moved",
+   "amount_usd": 162252792,
+   "amount_qualifier": "supply x issuer multiplier x last close",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Supply x issuer multiplier x last close. 203 of 203 active tokens in the issuer's registry priced: supply read at block 114746057, times the multiplier in the issuer's registry, times the underlying's last daily close published by Cboe's delayed-quote service (close dates 2026-11-12 to 2026-11-12). Not priced (no Cboe close found): none. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/hoodst-robinhoodchain.json, fetched 2026-11-15T05:56:51+00:00.",
+   "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract",
+   "source_url": "https://robinhoodchain.blockscout.com/tokens",
+   "level": "map",
+   "derived": true,
+   "derivation": "latest observation o-hoodst-all-2026-11-15",
+   "title": "Robinhood Stock Tokens outstanding",
+   "label": "Outstanding",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 162252792,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "supply x issuer multiplier x last close",
+     "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-hoodst-on-robinhoodchain",
+   "payer": "hoodst",
+   "payee": "robinhoodchain",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 162252792,
+   "amount_qualifier": "supply x issuer multiplier x last close",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Supply x issuer multiplier x last close. 203 of 203 active tokens in the issuer's registry priced: supply read at block 114746057, times the multiplier in the issuer's registry, times the underlying's last daily close published by Cboe's delayed-quote service (close dates 2026-11-12 to 2026-11-12). Not priced (no Cboe close found): none. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/hoodst-robinhoodchain.json, fetched 2026-11-15T05:56:51+00:00.",
+   "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract",
+   "source_url": "https://robinhoodchain.blockscout.com/tokens",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-hoodst-robinhoodchain-2026-11-15",
+   "title": "Robinhood Stock Tokens on Robinhood Chain",
+   "label": "On Robinhood Chain",
+   "history": [
+    {
+     "available": "2026-11-14",
+     "amount_usd": null,
+     "as_of": "2026-11-14",
+     "amount_qualifier": "listed by the issuer; no amount per chain",
+     "source_title": "Robinhood RHJ disclosures, Product",
+     "grade": "announced"
+    },
+    {
+     "available": "2026-11-15",
+     "amount_usd": 162252792,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "supply x issuer multiplier x last close",
+     "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
    "id": "f-jltxx-issued",
    "payer": "jpmam",
    "payee": "jltxx",
@@ -3834,6 +4123,76 @@
    ]
   },
   {
+   "id": "f-jltxx-on-ethereum",
+   "payer": "jltxx",
+   "payee": "ethereum",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 29491019,
+   "amount_qualifier": "total supply (token count)",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply (token count). 29491018.99 tokens at block 26418450. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/jltxx-ethereum.json, fetched 2026-11-15T05:56:50+00:00.",
+   "source_title": "Explorer page, Ethereum: JLTXX contract",
+   "source_url": "https://eth.blockscout.com/token/0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-jltxx-ethereum-2026-11-15",
+   "title": "JLTXX on Ethereum",
+   "label": "On Ethereum",
+   "history": [
+    {
+     "available": "2026-11-15",
+     "amount_usd": 29491019,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply (token count)",
+     "source_title": "Explorer page, Ethereum: JLTXX contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-jltxx-on-solana",
+   "payer": "jltxx",
+   "payee": "solana",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 737965044,
+   "amount_qualifier": "total supply (token count)",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply (token count). 737965043.84 tokens at slot 469620217. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/jltxx-solana.json, fetched 2026-11-15T05:56:50+00:00.",
+   "source_title": "Explorer page, Solana: JLTXX contract",
+   "source_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-jltxx-solana-2026-11-15",
+   "title": "JLTXX on Solana",
+   "label": "On Solana",
+   "history": [
+    {
+     "available": "2026-10-23",
+     "amount_usd": null,
+     "as_of": "2026-10-22",
+     "amount_qualifier": "available on Solana to qualified US investors; token address J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz; no amount given",
+     "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+     "grade": "announced"
+    },
+    {
+     "available": "2026-11-15",
+     "amount_usd": 737965044,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply (token count)",
+     "source_title": "Explorer page, Solana: JLTXX contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
    "id": "f-mony-on-ethereum",
    "payer": "mony",
    "payee": "ethereum",
@@ -3860,6 +4219,45 @@
      "as_of": "2026-11-14",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: MONY contract",
+     "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-mony-on-solana",
+   "payer": "mony",
+   "payee": "solana",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 6,
+   "amount_qualifier": "total supply (token count)",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "grade": "onchain",
+   "definition": "Total supply (token count). 6.0000 tokens at slot 469620215. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/mony-solana.json, fetched 2026-11-15T05:56:49+00:00.",
+   "source_title": "Explorer page, Solana: MONY contract",
+   "source_url": "https://solscan.io/token/EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-mony-solana-2026-11-15",
+   "title": "MONY on Solana",
+   "label": "On Solana",
+   "history": [
+    {
+     "available": "2026-10-23",
+     "amount_usd": null,
+     "as_of": "2026-10-22",
+     "amount_qualifier": "available on Solana to qualified US investors; token address EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY; no amount given",
+     "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+     "grade": "announced"
+    },
+    {
+     "available": "2026-11-15",
+     "amount_usd": 6,
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply (token count)",
+     "source_title": "Explorer page, Solana: MONY contract",
      "grade": "onchain"
     }
    ]
@@ -4179,6 +4577,37 @@
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: PYUSD contract",
      "grade": "onchain"
+    }
+   ]
+  },
+  {
+   "id": "f-pyusd-on-polygon",
+   "payer": "pyusd",
+   "payee": "polygon",
+   "type": "settles",
+   "status": "cash_moved",
+   "amount_usd": 10384234,
+   "amount_qualifier": "tokens outstanding",
+   "date": "2026-10-23",
+   "available": "2026-10-23",
+   "as_of": "2026-09-30",
+   "grade": "attested",
+   "definition": "Tokens outstanding.",
+   "source_title": "KPMG examination report on PYUSD, September 2026",
+   "source_url": "https://framerusercontent.com/assets/UZ8Eke3FvB5npXyceLEmiLRV6k.pdf",
+   "level": "entity",
+   "derived": true,
+   "derivation": "latest observation o-pyusd-polygon-2026-09-30",
+   "title": "PYUSD on Polygon PoS",
+   "label": "On Polygon PoS",
+   "history": [
+    {
+     "available": "2026-10-23",
+     "amount_usd": 10384234,
+     "as_of": "2026-09-30",
+     "amount_qualifier": "tokens outstanding",
+     "source_title": "KPMG examination report on PYUSD, September 2026",
+     "grade": "attested"
     }
    ]
   },
@@ -5989,35 +6418,6 @@
    ]
   },
   {
-   "id": "f-hoodst-on-robinhoodchain",
-   "payer": "hoodst",
-   "payee": "robinhoodchain",
-   "type": "settles",
-   "status": "cash_moved",
-   "amount_usd": null,
-   "amount_qualifier": "listed by the issuer; no amount per chain",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "grade": "announced",
-   "definition": "The issuer lists this chain and publishes no separate amount for it.",
-   "source_title": "Robinhood RHJ disclosures, Product",
-   "source_url": "https://docs.robinhood.com/rhj/product",
-   "level": "entity",
-   "title": "Robinhood Stock Tokens on Robinhood Chain",
-   "label": "On Robinhood Chain",
-   "history": [
-    {
-     "available": "2026-11-14",
-     "amount_usd": null,
-     "as_of": "2026-11-14",
-     "amount_qualifier": "listed by the issuer; no amount per chain",
-     "source_title": "Robinhood RHJ disclosures, Product",
-     "grade": "announced"
-    }
-   ]
-  },
-  {
    "id": "f-ylds-on-provenance",
    "payer": "ylds",
    "payee": "provenance",
@@ -6221,59 +6621,30 @@
    ]
   },
   {
-   "id": "f-mony-on-solana",
-   "payer": "mony",
-   "payee": "solana",
+   "id": "f-buidl-on-bnb",
+   "payer": "buidl",
+   "payee": "bnb",
    "type": "settles",
    "status": "cash_moved",
    "amount_usd": null,
-   "amount_qualifier": "available on Solana to qualified US investors; token address EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY; no amount given",
-   "date": "2026-10-22",
-   "available": "2026-10-22",
-   "as_of": "2026-10-22",
+   "amount_qualifier": "a BNB Chain share class launched; the release gives no token address, so no amount is read",
+   "date": "2025-11-14",
+   "available": "2025-11-14",
+   "as_of": "2025-11-14",
    "grade": "announced",
-   "definition": "The issuer lists this chain and publishes no separate amount for it.",
-   "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
-   "source_url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/",
+   "definition": "Securitize and Binance's joint release says BUIDL is launching a new share class on BNB Chain. It gives no token address, so no amount is read.",
+   "source_title": "Securitize and Binance release, BlackRock's BUIDL, Tokenized by Securitize, Now Accepted as Collateral for Trading on Binance and Launches on BNB Chain, 14 Nov 2025 (PR Newswire, as carried by AAP)",
+   "source_url": "https://www.aap.com.au/aapreleases/cision20251114ae21339",
    "level": "entity",
-   "title": "MONY on Solana",
-   "label": "On Solana",
+   "title": "BUIDL on BNB Smart Chain",
+   "label": "On BNB Smart Chain",
    "history": [
     {
-     "available": "2026-10-22",
+     "available": "2025-11-14",
      "amount_usd": null,
-     "as_of": "2026-10-22",
-     "amount_qualifier": "available on Solana to qualified US investors; token address EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY; no amount given",
-     "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
-     "grade": "announced"
-    }
-   ]
-  },
-  {
-   "id": "f-jltxx-on-solana",
-   "payer": "jltxx",
-   "payee": "solana",
-   "type": "settles",
-   "status": "cash_moved",
-   "amount_usd": null,
-   "amount_qualifier": "available on Solana to qualified US investors; token address J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz; no amount given",
-   "date": "2026-10-22",
-   "available": "2026-10-22",
-   "as_of": "2026-10-22",
-   "grade": "announced",
-   "definition": "The issuer lists this chain and publishes no separate amount for it.",
-   "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
-   "source_url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/",
-   "level": "entity",
-   "title": "JLTXX on Solana",
-   "label": "On Solana",
-   "history": [
-    {
-     "available": "2026-10-22",
-     "amount_usd": null,
-     "as_of": "2026-10-22",
-     "amount_qualifier": "available on Solana to qualified US investors; token address J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz; no amount given",
-     "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+     "as_of": "2025-11-14",
+     "amount_qualifier": "a BNB Chain share class launched; the release gives no token address, so no amount is read",
+     "source_title": "Securitize and Binance release, BlackRock's BUIDL, Tokenized by Securitize, Now Accepted as Collateral for Trading on Binance and Launches on BNB Chain, 14 Nov 2025 (PR Newswire, as carried by AAP)",
      "grade": "announced"
     }
    ]
@@ -6323,6 +6694,69 @@
    "source_title": "Binance release, bStocks Reaches $500 Million in AUM, 29 Jul 2026"
   },
   {
+   "id": "o-buidl-aptos-2026-11-15",
+   "subject": "buidl",
+   "metric": "supply_aptos",
+   "chain": "aptos",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 59457400,
+   "basis": "total supply",
+   "method": "Public RPC (fullnode.mainnet.aptoslabs.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (fullnode.mainnet.aptoslabs.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 59457399.800000 tokens at ledger version 8059306494, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-aptos.json, fetched 2026-11-15T05:56:48+00:00.",
+   "source_url": "https://explorer.aptoslabs.com/fungible_asset/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a?network=mainnet",
+   "source_title": "Explorer page, Aptos: BUIDL contract"
+  },
+  {
+   "id": "o-buidl-arbitrum-2026-11-15",
+   "subject": "buidl",
+   "metric": "supply_arbitrum",
+   "chain": "arbitrum",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 12633916,
+   "basis": "total supply",
+   "method": "Public RPC (arb1.arbitrum.io), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (arb1.arbitrum.io), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 12633916.130000 tokens at block 524379084, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-arbitrum.json, fetched 2026-11-15T05:56:45+00:00.",
+   "source_url": "https://arbiscan.io/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "source_title": "Explorer page, Arbitrum: BUIDL contract"
+  },
+  {
+   "id": "o-buidl-avalanche-2026-11-15",
+   "subject": "buidl",
+   "metric": "supply_avalanche",
+   "chain": "avalanche",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 356469874,
+   "basis": "total supply",
+   "method": "Public RPC (api.avax.network), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (api.avax.network), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 356469873.610000 tokens at block 100366749, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-avalanche.json, fetched 2026-11-15T05:56:47+00:00.",
+   "source_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F",
+   "source_title": "Explorer page, Avalanche C-Chain: BUIDL contract"
+  },
+  {
    "id": "o-buidl-ethereum-2026-11-14",
    "subject": "buidl",
    "metric": "supply_ethereum",
@@ -6342,6 +6776,69 @@
    "definition": "Total supply. Ethereum only. BUIDL also runs on other chains that were not read.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc",
    "source_title": "Blockscout, Ethereum: BUIDL contract"
+  },
+  {
+   "id": "o-buidl-optimism-2026-11-15",
+   "subject": "buidl",
+   "metric": "supply_optimism",
+   "chain": "optimism",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 26582754,
+   "basis": "total supply",
+   "method": "Public RPC (mainnet.optimism.io), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (mainnet.optimism.io), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 26582754.330000 tokens at block 159561714, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-optimism.json, fetched 2026-11-15T05:56:46+00:00.",
+   "source_url": "https://optimistic.etherscan.io/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "source_title": "Explorer page, OP Mainnet: BUIDL contract"
+  },
+  {
+   "id": "o-buidl-polygon-2026-11-15",
+   "subject": "buidl",
+   "metric": "supply_polygon",
+   "chain": "polygon",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 10481865,
+   "basis": "total supply",
+   "method": "Public RPC (polygon-bor-rpc.publicnode.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (polygon-bor-rpc.publicnode.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 10481865.020000 tokens at block 97344492, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-polygon.json, fetched 2026-11-15T05:56:47+00:00.",
+   "source_url": "https://polygonscan.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "source_title": "Explorer page, Polygon PoS: BUIDL contract"
+  },
+  {
+   "id": "o-buidl-solana-2026-11-15",
+   "subject": "buidl",
+   "metric": "supply_solana",
+   "chain": "solana",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 467301908,
+   "basis": "total supply",
+   "method": "Public RPC (api.mainnet-beta.solana.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (api.mainnet-beta.solana.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 467301907.660000 tokens at slot 469620213, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-solana.json, fetched 2026-11-15T05:56:49+00:00.",
+   "source_url": "https://solscan.io/token/GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+   "source_title": "Explorer page, Solana: BUIDL contract"
   },
   {
    "id": "o-fyoxx-all-2026-10-31",
@@ -6365,6 +6862,48 @@
    "source_title": "Fidelity, fact sheet: Fidelity Treasury Digital Fund - OnChain Class (FYOXX), as of 13 Nov 2026"
   },
   {
+   "id": "o-hoodst-all-2026-11-15",
+   "subject": "hoodst",
+   "metric": "outstanding",
+   "chain": "all",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 162252792,
+   "basis": "supply x issuer multiplier x last close",
+   "method": "Public RPC (rpc.mainnet.chain.robinhood.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (rpc.mainnet.chain.robinhood.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Supply x issuer multiplier x last close. 203 of 203 active tokens in the issuer's registry priced: supply read at block 114746057, times the multiplier in the issuer's registry, times the underlying's last daily close published by Cboe's delayed-quote service (close dates 2026-11-12 to 2026-11-12). Not priced (no Cboe close found): none. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/hoodst-robinhoodchain.json, fetched 2026-11-15T05:56:51+00:00.",
+   "source_url": "https://robinhoodchain.blockscout.com/tokens",
+   "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract"
+  },
+  {
+   "id": "o-hoodst-robinhoodchain-2026-11-15",
+   "subject": "hoodst",
+   "metric": "supply_robinhoodchain",
+   "chain": "robinhoodchain",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 162252792,
+   "basis": "supply x issuer multiplier x last close",
+   "method": "Public RPC (rpc.mainnet.chain.robinhood.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (rpc.mainnet.chain.robinhood.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Supply x issuer multiplier x last close. 203 of 203 active tokens in the issuer's registry priced: supply read at block 114746057, times the multiplier in the issuer's registry, times the underlying's last daily close published by Cboe's delayed-quote service (close dates 2026-11-12 to 2026-11-12). Not priced (no Cboe close found): none. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/hoodst-robinhoodchain.json, fetched 2026-11-15T05:56:51+00:00.",
+   "source_url": "https://robinhoodchain.blockscout.com/tokens",
+   "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract"
+  },
+  {
    "id": "o-jltxx-all-2026-08-31",
    "subject": "jltxx",
    "metric": "outstanding",
@@ -6386,6 +6925,48 @@
    "source_title": "JPMorgan Trust IV, Form N-CSRS for the period ended 31 Aug 2026"
   },
   {
+   "id": "o-jltxx-ethereum-2026-11-15",
+   "subject": "jltxx",
+   "metric": "supply_ethereum",
+   "chain": "ethereum",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 29491019,
+   "basis": "total supply (token count)",
+   "method": "Public RPC (ethereum-rpc.publicnode.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (ethereum-rpc.publicnode.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply (token count). 29491018.99 tokens at block 26418450. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/jltxx-ethereum.json, fetched 2026-11-15T05:56:50+00:00.",
+   "source_url": "https://eth.blockscout.com/token/0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+   "source_title": "Explorer page, Ethereum: JLTXX contract"
+  },
+  {
+   "id": "o-jltxx-solana-2026-11-15",
+   "subject": "jltxx",
+   "metric": "supply_solana",
+   "chain": "solana",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 737965044,
+   "basis": "total supply (token count)",
+   "method": "Public RPC (api.mainnet-beta.solana.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (api.mainnet-beta.solana.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply (token count). 737965043.84 tokens at slot 469620217. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/jltxx-solana.json, fetched 2026-11-15T05:56:50+00:00.",
+   "source_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+   "source_title": "Explorer page, Solana: JLTXX contract"
+  },
+  {
    "id": "o-mony-ethereum-2026-11-14",
    "subject": "mony",
    "metric": "supply_ethereum",
@@ -6405,6 +6986,27 @@
    "definition": "Total supply. Token contract total supply (533063044200 with 4 decimals) read from a public explorer API. A token count; the value per token was not read.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
    "source_title": "Blockscout, Ethereum: MONY contract"
+  },
+  {
+   "id": "o-mony-solana-2026-11-15",
+   "subject": "mony",
+   "metric": "supply_solana",
+   "chain": "solana",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 6,
+   "basis": "total supply (token count)",
+   "method": "Public RPC (api.mainnet-beta.solana.com), read by the collector",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Public RPC (api.mainnet-beta.solana.com), read by the collector",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply (token count). 6.0000 tokens at slot 469620215. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/mony-solana.json, fetched 2026-11-15T05:56:49+00:00.",
+   "source_url": "https://solscan.io/token/EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY",
+   "source_title": "Explorer page, Solana: MONY contract"
   },
   {
    "id": "o-ondostocks-all-2026-08-15",
@@ -8633,7 +9235,7 @@
    "flow": null,
    "observation": "o-pyusd-polygon-2026-09-30",
    "level": "entity",
-   "title": "PYUSD on polygon: $10.4M tokens outstanding at 2026-09-30",
+   "title": "PYUSD on Polygon PoS: $10.4M tokens outstanding at 2026-09-30",
    "detail": "Tokens outstanding.",
    "grade": "attested",
    "source_title": "KPMG examination report on PYUSD, September 2026",
@@ -9387,6 +9989,171 @@
    "grade": "onchain",
    "source_title": "Blockscout, Ethereum: USTB contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e"
+  },
+  {
+   "id": "e-o-buidl-aptos-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-aptos-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on Aptos: $59.5M total supply at 2026-11-15",
+   "detail": "Total supply. 59457399.800000 tokens at ledger version 8059306494, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-aptos.json, fetched 2026-11-15T05:56:48+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Aptos: BUIDL contract",
+   "source_url": "https://explorer.aptoslabs.com/fungible_asset/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a?network=mainnet"
+  },
+  {
+   "id": "e-o-buidl-arbitrum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-arbitrum-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on Arbitrum One: $12.6M total supply at 2026-11-15",
+   "detail": "Total supply. 12633916.130000 tokens at block 524379084, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-arbitrum.json, fetched 2026-11-15T05:56:45+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Arbitrum: BUIDL contract",
+   "source_url": "https://arbiscan.io/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872"
+  },
+  {
+   "id": "e-o-buidl-avalanche-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-avalanche-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on Avalanche: $356.5M total supply at 2026-11-15",
+   "detail": "Total supply. 356469873.610000 tokens at block 100366749, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-avalanche.json, fetched 2026-11-15T05:56:47+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Avalanche C-Chain: BUIDL contract",
+   "source_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F"
+  },
+  {
+   "id": "e-o-buidl-optimism-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-optimism-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on OP Mainnet: $26.6M total supply at 2026-11-15",
+   "detail": "Total supply. 26582754.330000 tokens at block 159561714, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-optimism.json, fetched 2026-11-15T05:56:46+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, OP Mainnet: BUIDL contract",
+   "source_url": "https://optimistic.etherscan.io/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5"
+  },
+  {
+   "id": "e-o-buidl-polygon-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-polygon-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on Polygon PoS: $10.5M total supply at 2026-11-15",
+   "detail": "Total supply. 10481865.020000 tokens at block 97344492, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-polygon.json, fetched 2026-11-15T05:56:47+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Polygon PoS: BUIDL contract",
+   "source_url": "https://polygonscan.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99"
+  },
+  {
+   "id": "e-o-buidl-solana-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-solana-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on Solana: $467.3M total supply at 2026-11-15",
+   "detail": "Total supply. 467301907.660000 tokens at slot 469620213, valued at $1 a token. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/buidl-solana.json, fetched 2026-11-15T05:56:49+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Solana: BUIDL contract",
+   "source_url": "https://solscan.io/token/GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr"
+  },
+  {
+   "id": "e-o-hoodst-all-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "hoodst"
+   ],
+   "flow": null,
+   "observation": "o-hoodst-all-2026-11-15",
+   "level": "entity",
+   "title": "Robinhood Stock Tokens: $162.3M supply x issuer multiplier x last close at 2026-11-15",
+   "detail": "Supply x issuer multiplier x last close. 203 of 203 active tokens in the issuer's registry priced: supply read at block 114746057, times the multiplier in the issuer's registry, times the underlying's last daily close published by Cboe's delayed-quote service (close dates 2026-11-12 to 2026-11-12). Not priced (no Cboe close found): none. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/hoodst-robinhoodchain.json, fetched 2026-11-15T05:56:51+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract",
+   "source_url": "https://robinhoodchain.blockscout.com/tokens"
+  },
+  {
+   "id": "e-o-hoodst-robinhoodchain-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "hoodst"
+   ],
+   "flow": null,
+   "observation": "o-hoodst-robinhoodchain-2026-11-15",
+   "level": "entity",
+   "title": "Robinhood Stock Tokens on Robinhood Chain: $162.3M supply x issuer multiplier x last close at 2026-11-15",
+   "detail": "Supply x issuer multiplier x last close. 203 of 203 active tokens in the issuer's registry priced: supply read at block 114746057, times the multiplier in the issuer's registry, times the underlying's last daily close published by Cboe's delayed-quote service (close dates 2026-11-12 to 2026-11-12). Not priced (no Cboe close found): none. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/hoodst-robinhoodchain.json, fetched 2026-11-15T05:56:51+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Robinhood Chain: Robinhood Stock Tokens contract",
+   "source_url": "https://robinhoodchain.blockscout.com/tokens"
+  },
+  {
+   "id": "e-o-jltxx-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "jltxx"
+   ],
+   "flow": null,
+   "observation": "o-jltxx-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "JLTXX on Ethereum: $29.5M total supply (token count) at 2026-11-15",
+   "detail": "Total supply (token count). 29491018.99 tokens at block 26418450. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/jltxx-ethereum.json, fetched 2026-11-15T05:56:50+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Ethereum: JLTXX contract",
+   "source_url": "https://eth.blockscout.com/token/0x09864f52B035AE22eE739dFa5c748fA080D07bD8"
+  },
+  {
+   "id": "e-o-jltxx-solana-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "jltxx"
+   ],
+   "flow": null,
+   "observation": "o-jltxx-solana-2026-11-15",
+   "level": "entity",
+   "title": "JLTXX on Solana: $738.0M total supply (token count) at 2026-11-15",
+   "detail": "Total supply (token count). 737965043.84 tokens at slot 469620217. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/jltxx-solana.json, fetched 2026-11-15T05:56:50+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Solana: JLTXX contract",
+   "source_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz"
+  },
+  {
+   "id": "e-o-mony-solana-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "mony"
+   ],
+   "flow": null,
+   "observation": "o-mony-solana-2026-11-15",
+   "level": "entity",
+   "title": "MONY on Solana: $0.0M total supply (token count) at 2026-11-15",
+   "detail": "Total supply (token count). 6.0000 tokens at slot 469620215. A token count; the value per token was not read. Raw response kept in the collect branch (commit e2887ab), snapshots/2026-11-15/mony-solana.json, fetched 2026-11-15T05:56:49+00:00.",
+   "grade": "onchain",
+   "source_title": "Explorer page, Solana: MONY contract",
+   "source_url": "https://solscan.io/token/EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY"
   }
  ],
  "ranges": [],
@@ -9636,6 +10403,16 @@
   "omitted": "No tower in this pass. An honest rule needs each token's reserves split by custodian or bank. Of seven attested dollar tokens, only USDC, USDtb and USDGO name where a share of reserves sits; Tether, PYUSD, USDG and USD1 name no custodian. A tower built on that would show the tokens that disclose most as the most exposed."
  },
  "checks": [
+  {
+   "check": "chains_sum_to_total",
+   "subject": "hoodst",
+   "metric": "outstanding",
+   "period_end": "2026-11-15",
+   "computed": 162252792,
+   "stated": 162252792,
+   "abs_diff": 0,
+   "pass": true
+  },
   {
    "check": "chains_sum_to_total",
    "subject": "paxg",
@@ -10050,9 +10827,9 @@
  ],
  "runs": [
   {
-   "id": "run-2026-11-14-jpm-solana",
-   "as_of": "2026-11-14",
-   "rows": 416
+   "id": "run-2026-11-15-collector-1",
+   "as_of": "2026-11-15",
+   "rows": 448
   }
  ],
  "watchlist": [
@@ -10127,19 +10904,21 @@
   },
   {
    "topic": "Tether's custodians and banks",
-   "note": "The BDO report names none. Press has named Cantor Fitzgerald; no primary source was reached."
+   "note": "The BDO report names none. Press has named Cantor Fitzgerald; no primary source was reached.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Custodians behind PYUSD, USDG and USD1",
-   "note": "The reports say 'Bank 1', 'Bank 2' or 'US commercial banks'. No name is published."
+   "note": "The reports say 'Bank 1', 'Bank 2' or 'US commercial banks'. No name is published.",
+   "status": "not_disclosed"
   },
   {
    "topic": "BUIDL total",
-   "note": "Securitize's page needs a browser and gave no figure. A tracker (rwa.xyz) shows about $1.65B; a tracker is not a source for a row."
+   "note": "BUIDL is now counted at the supply read on seven chains (about $1.10B on 15 Nov 2026). Its BNB Chain share class launched in November 2025, but no release read gives its address, so the total is partial. A tracker (rwa.xyz, a pointer only) shows a larger total; the difference is at least the BNB Chain class."
   },
   {
    "topic": "Overlap between tokens",
-   "note": "USDtb and USDGO hold $710M of BUIDL as reserves. Nothing is netted yet because the BUIDL they hold sits on chains the ledger does not read."
+   "note": "USDtb and USDGO hold $710M of BUIDL as reserves. BUIDL is now read on seven of its eight chains, but its total is still partial (BNB Chain is not read), so the overlap is shown and not netted."
   },
   {
    "topic": "Regimes not yet on the ledger",
@@ -10159,11 +10938,12 @@
   },
   {
    "topic": "History before the latest reading",
-   "note": "Each token has one or two attested dates. Month-end history back to January 2025 has not been collected."
+   "note": "Each token has one or two attested dates. From 15 Nov 2026 the collector keeps a raw snapshot of every on-chain read each day, so history builds forward. Month-end history back to January 2025 has not been collected."
   },
   {
    "topic": "Price of Stripe's Bridge acquisition",
-   "note": "Stripe gave none. Press figures are not on the ledger."
+   "note": "Stripe gave none. Press figures are not on the ledger.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Chains listed but not drawn",
@@ -10179,7 +10959,8 @@
   },
   {
    "topic": "zerohash funding",
-   "note": "Press reports a $104M round in September 2025 and later talks. Only its charter application is sourced."
+   "note": "Press reports a $104M round in September 2025 and later talks. Only its charter application is sourced.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Fund filings not yet wired",
@@ -10199,7 +10980,8 @@
   },
   {
    "topic": "RLUSD's reserve custodian",
-   "note": "Press reports BNY as primary custodian since July 2025. Ripple's transparency page names none, so there is no tie."
+   "note": "Press reports BNY as primary custodian since July 2025. Ripple's transparency page names none, so there is no tie.",
+   "status": "not_disclosed"
   },
   {
    "topic": "USYC's size",
@@ -10219,7 +11001,7 @@
   },
   {
    "topic": "Not yet on the ledger, above the bar",
-   "note": "BUIDL on chains other than Ethereum. Reading it needs each chain's contract address from BlackRock or Securitize and a keyless explorer read per chain; neither was read in batch four."
+   "note": "BUIDL's BNB Chain class: no release read gives its token address."
   },
   {
    "topic": "xStocks' size",
@@ -10231,11 +11013,12 @@
   },
   {
    "topic": "Robinhood Stock Tokens' size",
-   "note": "Robinhood publishes no total for Stock Tokens. They are ERC-20 contracts on Robinhood Chain; counting them needs a keyless explorer read and a keyless price. Robinhood's earlier product, now called Classic Stock Tokens, remains in the Robinhood Europe app and is not on this ledger."
+   "note": "Counted from 15 Nov 2026 through the collector: 203 active tokens in Robinhood's own registry (api.robinhood.com/rhj/assets), supply read on Robinhood Chain, times the issuer's multiplier, times Cboe's last daily close. Total supply can include tokens the issuer holds; Robinhood publishes no outstanding figure to compare. Classic Stock Tokens (Arbitrum One) are derivatives and left off."
   },
   {
    "topic": "What backs tokenized stocks",
-   "note": "All four issuers say each token is backed 1:1 by the underlying share; none of the custodians is named in a document read here, and no reserve report has been read. The balance sheet shows their backing as not published or not read."
+   "note": "All four issuers say each token is backed 1:1 by the underlying share; none of the custodians is named in a document read here, and no reserve report has been read. The balance sheet shows their backing as not published or not read.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Kraken's purchase of Backed",
@@ -10251,11 +11034,16 @@
   },
   {
    "topic": "Wholesale central bank money",
-   "note": "Pontes (the Eurosystem) and Project Agor\u00e1 (the BIS with the IIF) settle tokenised wholesale transactions in central bank money and tokenised deposits. Neither publishes balances, so both sit on the map as ledgers outside the headline. Agor\u00e1's July 2026 test totalled about CHF 800,000; Pontes' participants are not on the map unless they already were."
+   "note": "Pontes (the Eurosystem) and Project Agor\u00e1 (the BIS with the IIF) settle tokenised wholesale transactions in central bank money and tokenised deposits. Neither publishes balances, so both sit on the map as ledgers outside the headline. Agor\u00e1's July 2026 test totalled about CHF 800,000; Pontes' participants are not on the map unless they already were.",
+   "status": "not_disclosed"
   },
   {
    "topic": "FYOXX's chain",
    "note": "Fidelity's fact sheet names no blockchain. Press (The Block, March 2025) reported from the registration filing that the OnChain class records ownership on Ethereum; press, so no chain is drawn until a Fidelity page or filing is read."
+  },
+  {
+   "topic": "How the collector reads chains",
+   "note": "Since 15 Nov 2026 a GitHub Actions job (.github/workflows/tokenization-collect.yml) reads every address in tokenization/collect/registry.json over public, keyless explorers and RPCs and commits the raw responses to the repo's collect branch. Every address comes from the issuer's own release or registry. Readings cite the commit and file; explorers that block automated reading (some Blockscout instances) are not used."
   }
  ],
  "pending_close": [
@@ -11179,7 +11967,7 @@
  ],
  "headline": {
   "money": 271554120630,
-  "assets_gross": 12548735427,
+  "assets_gross": 13643915942,
   "assets_stated": 5047645750,
   "netting": 748747667,
   "stated_not_counted": {
@@ -11211,13 +11999,19 @@
     "counted": true
    },
    "buidl": {
-    "amount": 170275396,
+    "amount": 1103203113,
     "grade": "onchain",
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-15",
     "row": null,
     "partial": true,
     "chains": [
-     "ethereum"
+     "aptos",
+     "arbitrum",
+     "avalanche",
+     "ethereum",
+     "optimism",
+     "polygon",
+     "solana"
     ],
     "class": "assets",
     "counted": true
@@ -11227,6 +12021,15 @@
     "grade": "announced",
     "as_of": "2026-10-31",
     "row": "f-fyoxx-issued",
+    "partial": false,
+    "class": "assets",
+    "counted": true
+   },
+   "hoodst": {
+    "amount": 162252792,
+    "grade": "onchain",
+    "as_of": "2026-11-15",
+    "row": "f-hoodst-issued",
     "partial": false,
     "class": "assets",
     "counted": true
@@ -11241,13 +12044,14 @@
     "counted": true
    },
    "mony": {
-    "amount": 53306304,
+    "amount": 53306310,
     "grade": "onchain",
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-15",
     "row": null,
     "partial": true,
     "chains": [
-     "ethereum"
+     "ethereum",
+     "solana"
     ],
     "class": "assets",
     "counted": true
@@ -11447,28 +12251,28 @@
    "h-usdgo-buidl",
    "h-ousg-buidl"
   ],
-  "assets": 11799987760,
+  "assets": 12895168275,
   "as_of_range": [
    "2026-07-29",
-   "2026-11-14"
+   "2026-11-15"
   ]
  },
  "verification": {
-  "verified_at": "2026-11-14",
+  "verified_at": "2026-11-15",
   "method": "Each of the 30 cited sources was fetched with WebFetch on 14 Nov 2026 (long filings and Federal Register documents in several offset windows) and every number, date, name and definition sentence in the 104 rows was compared with what the source prints; the five explorer supplies and the two Ondo pages were compared with the live values, which matched the rows to the unit. Where a row states a fact that is not in its own cited source it is a finding even if another source on this ledger supports it, unless the row itself names that other source and I verified it there. Not checked: the full text of the Federal Reserve and FDIC proposals beyond their headers, the on-chain data behind any attestation, and the Business Wire release date, which appears only in the URL id (20260805) and not in the fetched text. Second pass, 14 Nov 2026 (60 new rows: reserve components, legal wrappers and five new players): Each of the 15 cited sources was fetched with WebFetch and every figure, name, date and held-at statement in the 60 rows was compared with the text as printed; PDF tables were re-added to their printed totals, and reports were fetched a second time to search for named custodians, banks and fund managers. Live sources matched the rows exactly on the day (Blockscout total_supply 533063044200 at 4 decimals = 53,306,304.42 MONY; Ondo OUSG as of 13 Nov 2026 and USDY as of 11 Nov 2026). Limits: PDFs were read as extracted text through a summarising fetcher, not as page images; the Business Wire copy of the ICE/OKX release carries its date only in the URL (20260305), which ICE's own copy on ir.theice.com confirms as 'Mar 05, 2026'; the BDO report covers one pooled reserve for all fiat-denominated Tether tokens with no per-token split, so the USDT rows are that pool; and status labels inside claims could be checked only against what the release says. Third pass, 14 Nov 2026 (14 rows from two SEC Form N-MFP3 filings): Fetched both cited N-MFP3 XML documents from sec.gov with WebFetch (the Franklin document in two parts, characters 0-100000 and 100000-167751, through its closing tag; the WisdomTree document whole) and compared every number, date and name in each row with the printed element values, then re-summed the four components of each fund. Filing dates and the presence of later N-MFP3 filings were checked against the two data.sec.gov submissions indexes. Values were read out by the fetch tool's extraction model over two differently worded passes per document, not from a raw byte copy. Fourth pass, 14 Nov 2026 (52 rows: RLUSD, USDe, USDS, PAXG, XAUT, USYC, JLTXX, USTB, SWEEP, DTCC, Mastercard and the FCA): Each of the 19 cited sources was fetched with WebFetch (plus the J.P. Morgan AM CUSIP snapshot cited inside h-usdgo-jltxx and the EDGAR filing index), and every figure, date, name and definition sentence in the 52 rows was compared with the text as printed; the 1,068,017-character N-CSRS was read in eleven 100,000-character windows plus targeted passes on the OnChain fund's statements and notes. Gold values (ounces x US$4,157.41) and the USTB value (on-chain shares x $676,987,663 / 60,015,423.56 = $11.2802280) were recomputed and match to the dollar, and live sources read on 14 Nov 2026 matched exactly (Blockscout XAUT 827,417.63, RLUSD 2,019,899,967.19, USDe 4,909,359,615.97, USDS 5,318,034,118.92, USTB 39,660,945.507784; XRPScan RLUSD 762,824,103.291486; Ripple $2,689.9M and $2,826.5M as of 11/12/2026; Circle $312,976,695.16; Superstate $676,987,663). Limits: text was read through a summarising fetcher, not page images; the Business Wire page prints no date (URL 20251210, matched by a MarketScreener/S&P Capital IQ copy dated 12/10/2025); Circle lists 'BNB', read as BNB Smart Chain; o-ustb-ethereum matches only with the unrounded NAV (at exactly $11.2802 it would be $447,383,398); two 'missing' findings name rows that do not exist and are not counted in rows_with_findings. Passes 5 to 9 (14 Nov 2026) checked batch three, tokenized equities, plus four rows left unchecked after pass 4: 33 rows, then the 14 rows changed after pass 5, the 4 changed after pass 6 and the Nasdaq order row after passes 7 and 8, each by a fresh agent that had not seen the work, against the cited page or its mirror of the company's own release. Two pass-5 findings (Ondo and bStocks amounts shown as None) came from the check file leaving out amounts; the pages state the counted figures. Passes 10 and 11 rechecked the Ondo Stocks and bStocks readings with their amounts included; one clause in the Ondo note that rested on another page was moved to a gap note.",
-  "rows_checked": 339,
+  "rows_checked": 355,
   "counts": {
    "flows": 70,
    "observations": 55,
    "metrics": 17,
    "events": 12,
-   "confirmed": 276,
-   "rows_with_findings": 46,
-   "findings": 56,
+   "confirmed": 289,
+   "rows_with_findings": 47,
+   "findings": 58,
    "backing": 52,
    "wrappers": 17,
    "chains_listed": 7,
-   "passes": 15
+   "passes": 17
   },
   "confirmed": [
    "b-benji-1",
@@ -11553,6 +12357,7 @@
    "e-secz",
    "ent-acred",
    "ent-bstocks",
+   "ent-buidl",
    "ent-fyoxx",
    "ent-hoodst",
    "ent-ondostocks",
@@ -11564,6 +12369,7 @@
    "f-acred-on-ethereum",
    "f-acred-on-solana",
    "f-bstocks-on-bnb",
+   "f-buidl-on-bnb",
    "f-hoodst-on-robinhoodchain",
    "f-jltxx-on-solana",
    "f-jpmd-on-base",
@@ -11628,10 +12434,21 @@
    "m-wtgxx-net",
    "m-xaut-res",
    "o-bstocks-all-2026-07-29",
+   "o-buidl-aptos-2026-11-15",
+   "o-buidl-arbitrum-2026-11-15",
+   "o-buidl-avalanche-2026-11-15",
    "o-buidl-ethereum-2026-11-14",
+   "o-buidl-optimism-2026-11-15",
+   "o-buidl-polygon-2026-11-15",
+   "o-buidl-solana-2026-11-15",
    "o-fyoxx-all-2026-10-31",
+   "o-hoodst-all-2026-11-15",
+   "o-hoodst-robinhoodchain-2026-11-15",
    "o-jltxx-all-2026-08-31",
+   "o-jltxx-ethereum-2026-11-15",
+   "o-jltxx-solana-2026-11-15",
    "o-mony-ethereum-2026-11-14",
+   "o-mony-solana-2026-11-15",
    "o-ondostocks-all-2026-08-15",
    "o-ousg-all-2026-11-13",
    "o-paxg-all-2026-09-30",
@@ -12155,6 +12972,22 @@
     "run": "run-2026-11-14-batch-4",
     "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
     "note": "The page appears to contradict 'The fact sheet gives no net assets'. The Details section lists 'Net Assets ($M)', and the values block, read in the same order as the labels, shows '$25.71' as of 10/31/2026. The footnote reads: 'Net Assets reflect assets of the class shown'. The extracted text separates labels from values, so this pairing should be checked on the page layout. The rest is supported: header 'FYOXX Fidelity Treasury Digital Fund - OnChain Class'; 'Normally investing at least 99.5% of total assets in cash and U.S. Treasury securities.'; 'Investing in compliance with industry-standard regulatory requirements for money market funds' (the page goes on: 'for the quality, maturity, liquidity, and diversification...'); Morningstar category Money Market-Taxable."
+   },
+   {
+    "row": "f-buidl-on-bnb",
+    "severity": "finding",
+    "pass": 16,
+    "run": "run-2026-11-15-collector-1",
+    "source_url": "https://www.aap.com.au/aapreleases/cision20251114ae21339",
+    "note": "Row names 'BNB Smart Chain'; the page never uses 'Smart Chain' or 'BSC', only 'the BNB Chain network'. Supported: headline 'Launches on BNB Chain', dateline Nov. 14, 2025 (= date), no amount, no 0x address. Also: page SOURCE line is 'SOURCE Binance', while definition says 'The issuer lists this chain'; body says BUIDL 'is launching a new share class'."
+   },
+   {
+    "row": "ent-hoodst",
+    "severity": "finding",
+    "pass": 16,
+    "run": "run-2026-11-15-collector-1",
+    "source_url": "https://docs.robinhood.com/rhj/product",
+    "note": "Page has no 'ETF', 'Arbitrum', 'Classic', 'Robinhood Europe' or 'derivative', and no US stocks; it says only 'economic exposure to underlying securities'. So 'tracking US stocks and ETFs' and the Classic Stock Tokens sentence are unsupported here. Supported: 'tokenised debt securities issued by Robinhood Assets (Jersey) Limited', records 'maintained on Robinhood Chain', no 'legal or beneficial rights'. Counting clause matches the o-hoodst-all snapshot."
    }
   ],
   "addressed": [
@@ -12257,6 +13090,14 @@
      "ent-fyoxx"
     ],
     "note": "Verifier pass 13 (batch four). Agor\u00e1's findings are credited to the project's report, not the BIS. The two real-value-test ties now say the page gives no day and the row is dated at month end. Securitize Stocks: status 'announced' (the release says the product will launch), and the EU offeror is named. FYOXX: the fact sheet does give class net assets ($25.71M at 31 Oct 2026; pass 12 had read the label as blank), so FYOXX now has a reading and is counted, and OUSG's $23.6M holding of it is netted."
+   },
+   {
+    "date": "2026-11-15",
+    "rows": [
+     "ent-hoodst",
+     "f-buidl-on-bnb"
+    ],
+    "note": "Collector pass 1: Robinhood Stock Tokens' note had been rewritten with clauses from other pages; it is restored to the wording verified in batch three, with only the counting sentence added. BUIDL on BNB Chain now carries its own definition naming the joint Securitize and Binance release instead of the default 'the issuer lists this chain'."
    }
   ],
   "pending": [

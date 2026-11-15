@@ -458,7 +458,7 @@ def gate(live, new, pct=0.05, big=50e9):
 # ====================== tokenization profile ======================
 # Rows here are balances and ties, not deals: an amount outstanding at a date, who issues it, where it settles,
 # what its reserves are held in. Same stages as the AI profile: raw -> schema -> validate -> gate -> ledger.json.
-T_GRADES = {"onchain": "Read from the token contract through a public explorer; anyone can repeat it",
+T_GRADES = {"onchain": "Read from the token contract through a public explorer or public RPC; anyone can repeat it",
             "attested": "Accountant-signed reserve or examination report",
             "filed": "Regulator filing, register entry or official publication",
             "announced": "The issuer's or company's own page or announcement",
@@ -470,7 +470,7 @@ T_MONEY = ("equity", "debt", "issued", "settles", "holding")
 T_TIES = ("issues", "tokenizes", "custody", "manages", "distributes", "partner", "licensed", "owns")
 T_KINDS = ["company", "product", "ledger", "instrument", "investor", "government"]
 T_OFFICIAL = ("fca.org.uk", "sec.gov", "govinfo.gov", "federalregister.gov", "occ.gov", "hkma.gov.hk", "europa.eu", "fdic.gov", "federalreserve.gov", "bis.org")
-T_EXPLORERS = ("blockscout.com", "tronscanapi.com", "xrpscan.com")
+T_EXPLORERS = ("blockscout.com", "tronscanapi.com", "xrpscan.com", "solscan.io", "snowtrace.io", "arbiscan.io", "optimistic.etherscan.io", "polygonscan.com", "explorer.aptoslabs.com")   # explorer pages for reads the collector makes over public RPC
 T_ASSET_TYPES = {"tbills": "US Treasury bills and notes", "repo": "Treasury repo", "mmf": "Money market funds", "deposits": "Bank deposits and cash", "token": "Other tokens",
                  "gold": "Precious metals", "btc": "Bitcoin", "loans": "Secured loans", "govt": "Government securities, not split", "other": "Other"}
 T_WRAPPERS = {"us_federal": "US national trust bank", "other_regulator": "Other regulator", "fund_registered": "Registered fund", "fund_private": "Private fund or note", "bank": "Bank deposit", "crypto_backed": "Crypto-collateralised, not counted", "none": "No charter on this ledger"}

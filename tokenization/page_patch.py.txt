@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Derives the tokenization page from the AI Buildout Ledger page. Same design system, views and code; only what
+"""Derives the tokenization page from the AI Buildout Ledger page (the artifact's index.html, without the site's head tags). Same design system, views and code; only what
 tokenization forces is changed. Every replacement must match, or the script stops."""
 import re, sys
 src = open(sys.argv[1]).read()
@@ -162,6 +162,8 @@ rep("<h3>Not sourced from primary material</h3>", """<h3>How the headline is bui
       ${L.stress && L.stress.omitted ? `<h3>Stress test</h3><p class="def">${esc(L.stress.omitted)}</p>` : ''}
       <h3>Not sourced from primary material</h3>""")
 rep("<h3>Not sourced from primary material</h3>", "<h3>Gaps and what is not yet sourced</h3>")
+rep("<h3>Gaps and what is not yet sourced</h3>${(L.gaps || []).map(g =>", """<h3>Not disclosed</h3><p class="def">Nothing read so far discloses these: no issuer page, report, filing or regulator. They close only when someone publishes them, and each daily run checks.</p>${(L.gaps || []).filter(g => g.status === 'not_disclosed').map(g => `<p class="def"><b>${esc(g.topic)}.</b> ${esc(g.note)}</p>`).join('')}
+      <h3>Gaps and what is not yet sourced</h3>${(L.gaps || []).filter(g => g.status !== 'not_disclosed').map(g =>""")
 rep("<th>Payer</th><th>Payee</th>", "<th>From</th><th>To</th>")
 
 # --- canvas labels, layout spacing, small wording ---

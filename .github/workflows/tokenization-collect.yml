@@ -1,0 +1,47 @@
+# The Tokenization Buildout Ledger's collector (approved by Derek, 15 Nov 2026).
+# Reads public, keyless chain and explorer endpoints listed in tokenization/collect/registry.json and commits the raw
+# responses to the `collect` branch only. It never touches main, the site, or the AI Buildout Ledger.
+name: Tokenization collector
+on:
+  schedule:
+    - cron: "30 1 * * *"   # 01:30 UTC, before the 21:54 ET daily run
+  workflow_dispatch:
+  push:
+    branches: [collect-run]   # test runs from a branch; the schedule runs from main
+permissions:
+  contents: write
+concurrency:
+  group: tokenization-collect
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect
+        run: python3 tokenization/collect/collector.py tokenization/collect/registry.json "$RUNNER_TEMP/snap"
+      - name: Commit snapshots to the collect branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          [ -d "$RUNNER_TEMP/snap" ] || { echo "no snapshots"; exit 0; }
+          URL="https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          cd "$RUNNER_TEMP"
+          if git ls-remote --exit-code --heads "$URL" collect >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch collect "$URL" c
+          else
+            mkdir c && cd c && git init -q && git checkout -q --orphan collect && git remote add origin "$URL" && cd ..
+            printf '%s\n' "# Collector snapshots" "" "Raw responses from public, keyless endpoints, one folder per day, written by .github/workflows/tokenization-collect.yml on main." "Each file keeps the request, the response text and the time; the ledger's readings cite the commit and path." > c/README.md
+          fi
+          cd c && mkdir -p snapshots && cp -r "$RUNNER_TEMP/snap/." snapshots/
+          git add -A
+          git -c user.name="buildoutledger-collector" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Snapshots $(date -u +%Y-%m-%dT%H:%MZ) (${GITHUB_EVENT_NAME}, ${GITHUB_SHA::7})" || { echo "nothing new"; exit 0; }
+          git push -q origin HEAD:collect

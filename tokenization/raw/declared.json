@@ -120,7 +120,7 @@
    "type": "product",
    "tier": "instruments",
    "cik": null,
-   "note": "BlackRock USD Institutional Digital Liquidity Fund. No machine-readable total was found; only the Ethereum supply is read from chain.",
+   "note": "BlackRock USD Institutional Digital Liquidity Fund. Counted at the supply read on seven chains (Ethereum, Arbitrum, OP Mainnet, Polygon, Avalanche, Aptos, Solana) at $1 a token. Its BNB Chain share class is listed, but no release read gives its address, so that chain is not read and the total is partial.",
    "layer": "instruments",
    "kind": "product",
    "parent": "blackrock",
@@ -843,7 +843,7 @@
    "type": "product",
    "tier": "instruments",
    "cik": null,
-   "note": "JPMorgan OnChain Liquidity-Token Money Market Fund, Token Class. Counted at net assets in its semi-annual SEC report.",
+   "note": "JPMorgan OnChain Liquidity-Token Money Market Fund, Token Class. Counted at net assets in its semi-annual SEC report. Its token counts on Ethereum and Solana are read from chain and drawn per chain.",
    "layer": "instruments",
    "kind": "product",
    "parent": "jpmam",
@@ -1132,7 +1132,7 @@
    "type": "product",
    "tier": "instruments",
    "cik": null,
-   "note": "Tokenised debt securities giving economic exposure to underlying securities, with transaction records kept on Robinhood Chain. They give no legal or beneficial rights in, or against the issuer of, the underlying securities. No total is published yet.",
+   "note": "Tokenised debt securities giving economic exposure to underlying securities, with transaction records kept on Robinhood Chain. They give no legal or beneficial rights in, or against the issuer of, the underlying securities. Counted at each token's supply read on Robinhood Chain, times the multiplier in Robinhood's own token registry, times the underlying's last daily close published by Cboe.",
    "layer": "instruments",
    "kind": "product",
    "parent": "robinhood",
@@ -1359,6 +1359,39 @@
    "layer": "ledgers",
    "kind": "ledger",
    "parent": "bis"
+  },
+  {
+   "id": "optimism",
+   "name": "OP Mainnet",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "polygon",
+   "name": "Polygon PoS",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
+  },
+  {
+   "id": "aptos",
+   "name": "Aptos",
+   "type": "ledger",
+   "tier": "ledgers",
+   "cik": null,
+   "note": "",
+   "layer": "ledgers",
+   "kind": "ledger",
+   "parent": null
   }
  ],
  "flows": [
@@ -3365,19 +3398,21 @@
   },
   {
    "topic": "Tether's custodians and banks",
-   "note": "The BDO report names none. Press has named Cantor Fitzgerald; no primary source was reached."
+   "note": "The BDO report names none. Press has named Cantor Fitzgerald; no primary source was reached.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Custodians behind PYUSD, USDG and USD1",
-   "note": "The reports say 'Bank 1', 'Bank 2' or 'US commercial banks'. No name is published."
+   "note": "The reports say 'Bank 1', 'Bank 2' or 'US commercial banks'. No name is published.",
+   "status": "not_disclosed"
   },
   {
    "topic": "BUIDL total",
-   "note": "Securitize's page needs a browser and gave no figure. A tracker (rwa.xyz) shows about $1.65B; a tracker is not a source for a row."
+   "note": "BUIDL is now counted at the supply read on seven chains (about $1.10B on 15 Nov 2026). Its BNB Chain share class launched in November 2025, but no release read gives its address, so the total is partial. A tracker (rwa.xyz, a pointer only) shows a larger total; the difference is at least the BNB Chain class."
   },
   {
    "topic": "Overlap between tokens",
-   "note": "USDtb and USDGO hold $710M of BUIDL as reserves. Nothing is netted yet because the BUIDL they hold sits on chains the ledger does not read."
+   "note": "USDtb and USDGO hold $710M of BUIDL as reserves. BUIDL is now read on seven of its eight chains, but its total is still partial (BNB Chain is not read), so the overlap is shown and not netted."
   },
   {
    "topic": "Regimes not yet on the ledger",
@@ -3397,11 +3432,12 @@
   },
   {
    "topic": "History before the latest reading",
-   "note": "Each token has one or two attested dates. Month-end history back to January 2025 has not been collected."
+   "note": "Each token has one or two attested dates. From 15 Nov 2026 the collector keeps a raw snapshot of every on-chain read each day, so history builds forward. Month-end history back to January 2025 has not been collected."
   },
   {
    "topic": "Price of Stripe's Bridge acquisition",
-   "note": "Stripe gave none. Press figures are not on the ledger."
+   "note": "Stripe gave none. Press figures are not on the ledger.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Chains listed but not drawn",
@@ -3417,7 +3453,8 @@
   },
   {
    "topic": "zerohash funding",
-   "note": "Press reports a $104M round in September 2025 and later talks. Only its charter application is sourced."
+   "note": "Press reports a $104M round in September 2025 and later talks. Only its charter application is sourced.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Fund filings not yet wired",
@@ -3437,7 +3474,8 @@
   },
   {
    "topic": "RLUSD's reserve custodian",
-   "note": "Press reports BNY as primary custodian since July 2025. Ripple's transparency page names none, so there is no tie."
+   "note": "Press reports BNY as primary custodian since July 2025. Ripple's transparency page names none, so there is no tie.",
+   "status": "not_disclosed"
   },
   {
    "topic": "USYC's size",
@@ -3457,7 +3495,7 @@
   },
   {
    "topic": "Not yet on the ledger, above the bar",
-   "note": "BUIDL on chains other than Ethereum. Reading it needs each chain's contract address from BlackRock or Securitize and a keyless explorer read per chain; neither was read in batch four."
+   "note": "BUIDL's BNB Chain class: no release read gives its token address."
   },
   {
    "topic": "xStocks' size",
@@ -3469,11 +3507,12 @@
   },
   {
    "topic": "Robinhood Stock Tokens' size",
-   "note": "Robinhood publishes no total for Stock Tokens. They are ERC-20 contracts on Robinhood Chain; counting them needs a keyless explorer read and a keyless price. Robinhood's earlier product, now called Classic Stock Tokens, remains in the Robinhood Europe app and is not on this ledger."
+   "note": "Counted from 15 Nov 2026 through the collector: 203 active tokens in Robinhood's own registry (api.robinhood.com/rhj/assets), supply read on Robinhood Chain, times the issuer's multiplier, times Cboe's last daily close. Total supply can include tokens the issuer holds; Robinhood publishes no outstanding figure to compare. Classic Stock Tokens (Arbitrum One) are derivatives and left off."
   },
   {
    "topic": "What backs tokenized stocks",
-   "note": "All four issuers say each token is backed 1:1 by the underlying share; none of the custodians is named in a document read here, and no reserve report has been read. The balance sheet shows their backing as not published or not read."
+   "note": "All four issuers say each token is backed 1:1 by the underlying share; none of the custodians is named in a document read here, and no reserve report has been read. The balance sheet shows their backing as not published or not read.",
+   "status": "not_disclosed"
   },
   {
    "topic": "Kraken's purchase of Backed",
@@ -3489,11 +3528,16 @@
   },
   {
    "topic": "Wholesale central bank money",
-   "note": "Pontes (the Eurosystem) and Project Agorá (the BIS with the IIF) settle tokenised wholesale transactions in central bank money and tokenised deposits. Neither publishes balances, so both sit on the map as ledgers outside the headline. Agorá's July 2026 test totalled about CHF 800,000; Pontes' participants are not on the map unless they already were."
+   "note": "Pontes (the Eurosystem) and Project Agorá (the BIS with the IIF) settle tokenised wholesale transactions in central bank money and tokenised deposits. Neither publishes balances, so both sit on the map as ledgers outside the headline. Agorá's July 2026 test totalled about CHF 800,000; Pontes' participants are not on the map unless they already were.",
+   "status": "not_disclosed"
   },
   {
    "topic": "FYOXX's chain",
    "note": "Fidelity's fact sheet names no blockchain. Press (The Block, March 2025) reported from the registration filing that the OnChain class records ownership on Ethereum; press, so no chain is drawn until a Fidelity page or filing is read."
+  },
+  {
+   "topic": "How the collector reads chains",
+   "note": "Since 15 Nov 2026 a GitHub Actions job (.github/workflows/tokenization-collect.yml) reads every address in tokenization/collect/registry.json over public, keyless explorers and RPCs and commits the raw responses to the repo's collect branch. Every address comes from the issuer's own release or registry. Readings cite the commit and file; explorers that block automated reading (some Blockscout instances) are not used."
   }
  ],
  "chains_listed": [
@@ -3809,6 +3853,16 @@
    "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
    "source_url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/",
    "qualifier": "available on Solana to qualified US investors; token address J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz; no amount given"
+  },
+  {
+   "instrument": "buidl",
+   "chain": "bnb",
+   "grade": "announced",
+   "date": "2025-11-14",
+   "source_title": "Securitize and Binance release, BlackRock's BUIDL, Tokenized by Securitize, Now Accepted as Collateral for Trading on Binance and Launches on BNB Chain, 14 Nov 2025 (PR Newswire, as carried by AAP)",
+   "source_url": "https://www.aap.com.au/aapreleases/cision20251114ae21339",
+   "qualifier": "a BNB Chain share class launched; the release gives no token address, so no amount is read",
+   "definition": "Securitize and Binance's joint release says BUIDL is launching a new share class on BNB Chain. It gives no token address, so no amount is read."
   }
  ],
  "pending_close": [
@@ -4068,6 +4122,14 @@
     "ent-fyoxx"
    ],
    "note": "Verifier pass 13 (batch four). Agorá's findings are credited to the project's report, not the BIS. The two real-value-test ties now say the page gives no day and the row is dated at month end. Securitize Stocks: status 'announced' (the release says the product will launch), and the EU offeror is named. FYOXX: the fact sheet does give class net assets ($25.71M at 31 Oct 2026; pass 12 had read the label as blank), so FYOXX now has a reading and is counted, and OUSG's $23.6M holding of it is netted."
+  },
+  {
+   "date": "2026-11-15",
+   "rows": [
+    "ent-hoodst",
+    "f-buidl-on-bnb"
+   ],
+   "note": "Collector pass 1: Robinhood Stock Tokens' note had been rewritten with clauses from other pages; it is restored to the wording verified in batch three, with only the counting sentence added. BUIDL on BNB Chain now carries its own definition naming the joint Securitize and Binance release instead of the default 'the issuer lists this chain'."
   }
  ],
  "verification_pending": [
@@ -5022,6 +5084,16 @@
    "date": "2026-11-14",
    "flags": [
     "netting row h-ousg-fyoxx added"
+   ],
+   "published": true,
+   "note": "Flagged by the gate and published, per the gate rule."
+  },
+  {
+   "run": "run-2026-11-15-collector-1",
+   "date": "2026-11-15",
+   "flags": [
+    "tokenized assets moves +9.3% ($11.80B to $12.90B)",
+    "buidl moves $170.3M to $1.10B"
    ],
    "published": true,
    "note": "Flagged by the gate and published, per the gate rule."
