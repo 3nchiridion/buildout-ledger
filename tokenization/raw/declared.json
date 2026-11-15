@@ -619,7 +619,7 @@
    "type": "company",
    "tier": "instruments",
    "cik": null,
-   "note": "Launched its first tokenized money market fund, MONY, on 15 Dec 2025.",
+   "note": "Launched its first tokenized money market fund, MONY, on 15 Dec 2025. MONY and JLTXX have been available on Solana since 22 Oct 2026, through Morgan Money.",
    "layer": "instruments",
    "kind": "company",
    "parent": null
@@ -3046,6 +3046,23 @@
    "grade": "filed",
    "source_title": "ECB press release, Eurosystem brings central bank money to tokenised finance, 21 Sep 2026",
    "source_url": "https://ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921~e754847a7b.en.html"
+  },
+  {
+   "id": "e-jpmam-solana",
+   "date": "2026-10-22",
+   "entities": [
+    "jpmam",
+    "mony",
+    "jltxx",
+    "solana"
+   ],
+   "flow": null,
+   "level": "entity",
+   "title": "J.P. Morgan Asset Management puts MONY and JLTXX on Solana",
+   "detail": "Both tokenized money market funds are now available on Solana to qualified US investors through Morgan Money. MONY is a 506(c) private placement fund; JLTXX is a US registered government money market fund. The release gives the two Solana token addresses and no amount held on Solana.",
+   "grade": "announced",
+   "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+   "source_url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/"
   }
  ],
  "metrics": [
@@ -3774,6 +3791,24 @@
    "source_title": "Securitize release, Apollo and Securitize Announce Partnership and Launch Tokenized Access to Credit Fund, 30 Jan 2025 (PR Newswire, as carried by Nasdaq)",
    "source_url": "https://www.nasdaq.com/press-release/apollo-and-securitize-announce-partnership-and-launch-tokenized-access-credit-fund",
    "qualifier": "initially available on this chain, per the launch release; no amount per chain"
+  },
+  {
+   "instrument": "mony",
+   "chain": "solana",
+   "grade": "announced",
+   "date": "2026-10-22",
+   "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+   "source_url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/",
+   "qualifier": "available on Solana to qualified US investors; token address EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY; no amount given"
+  },
+  {
+   "instrument": "jltxx",
+   "chain": "solana",
+   "grade": "announced",
+   "date": "2026-10-22",
+   "source_title": "J.P. Morgan Asset Management press release, J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+   "source_url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/",
+   "qualifier": "available on Solana to qualified US investors; token address J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz; no amount given"
   }
  ],
  "pending_close": [
@@ -4090,6 +4125,20 @@
    "method": "SEC filing index, keyless",
    "url": "https://data.sec.gov/submissions/CIK0000877212.json",
    "note": "CIK taken from a tracker (a pointer only). On the first read, confirm the filer is the trust that holds Fidelity Treasury Digital Fund and that the N-MFP3 covers the OnChain class."
+  },
+  {
+   "entity": "mony",
+   "chain": "solana",
+   "method": "Solana token supply, keyless",
+   "url": "https://solscan.io/token/EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY",
+   "note": "Official mint from J.P. Morgan's release of 22 Oct 2026. Lookalike tokens with the same ticker exist on Solana; read only this address. No keyless read is wired yet."
+  },
+  {
+   "entity": "jltxx",
+   "chain": "solana",
+   "method": "Solana token supply, keyless",
+   "url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+   "note": "Official mint from J.P. Morgan's release of 22 Oct 2026. Lookalike 'JLTXX' tokens exist on Pump.fun; read only this address. No keyless read is wired yet."
   }
  ],
  "backing": [

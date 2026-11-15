@@ -1,19 +1,19 @@
 {
  "verified_at": "2026-11-14",
  "method": "Each of the 30 cited sources was fetched with WebFetch on 14 Nov 2026 (long filings and Federal Register documents in several offset windows) and every number, date, name and definition sentence in the 104 rows was compared with what the source prints; the five explorer supplies and the two Ondo pages were compared with the live values, which matched the rows to the unit. Where a row states a fact that is not in its own cited source it is a finding even if another source on this ledger supports it, unless the row itself names that other source and I verified it there. Not checked: the full text of the Federal Reserve and FDIC proposals beyond their headers, the on-chain data behind any attestation, and the Business Wire release date, which appears only in the URL id (20260805) and not in the fetched text. Second pass, 14 Nov 2026 (60 new rows: reserve components, legal wrappers and five new players): Each of the 15 cited sources was fetched with WebFetch and every figure, name, date and held-at statement in the 60 rows was compared with the text as printed; PDF tables were re-added to their printed totals, and reports were fetched a second time to search for named custodians, banks and fund managers. Live sources matched the rows exactly on the day (Blockscout total_supply 533063044200 at 4 decimals = 53,306,304.42 MONY; Ondo OUSG as of 13 Nov 2026 and USDY as of 11 Nov 2026). Limits: PDFs were read as extracted text through a summarising fetcher, not as page images; the Business Wire copy of the ICE/OKX release carries its date only in the URL (20260305), which ICE's own copy on ir.theice.com confirms as 'Mar 05, 2026'; the BDO report covers one pooled reserve for all fiat-denominated Tether tokens with no per-token split, so the USDT rows are that pool; and status labels inside claims could be checked only against what the release says. Third pass, 14 Nov 2026 (14 rows from two SEC Form N-MFP3 filings): Fetched both cited N-MFP3 XML documents from sec.gov with WebFetch (the Franklin document in two parts, characters 0-100000 and 100000-167751, through its closing tag; the WisdomTree document whole) and compared every number, date and name in each row with the printed element values, then re-summed the four components of each fund. Filing dates and the presence of later N-MFP3 filings were checked against the two data.sec.gov submissions indexes. Values were read out by the fetch tool's extraction model over two differently worded passes per document, not from a raw byte copy. Fourth pass, 14 Nov 2026 (52 rows: RLUSD, USDe, USDS, PAXG, XAUT, USYC, JLTXX, USTB, SWEEP, DTCC, Mastercard and the FCA): Each of the 19 cited sources was fetched with WebFetch (plus the J.P. Morgan AM CUSIP snapshot cited inside h-usdgo-jltxx and the EDGAR filing index), and every figure, date, name and definition sentence in the 52 rows was compared with the text as printed; the 1,068,017-character N-CSRS was read in eleven 100,000-character windows plus targeted passes on the OnChain fund's statements and notes. Gold values (ounces x US$4,157.41) and the USTB value (on-chain shares x $676,987,663 / 60,015,423.56 = $11.2802280) were recomputed and match to the dollar, and live sources read on 14 Nov 2026 matched exactly (Blockscout XAUT 827,417.63, RLUSD 2,019,899,967.19, USDe 4,909,359,615.97, USDS 5,318,034,118.92, USTB 39,660,945.507784; XRPScan RLUSD 762,824,103.291486; Ripple $2,689.9M and $2,826.5M as of 11/12/2026; Circle $312,976,695.16; Superstate $676,987,663). Limits: text was read through a summarising fetcher, not page images; the Business Wire page prints no date (URL 20251210, matched by a MarketScreener/S&P Capital IQ copy dated 12/10/2025); Circle lists 'BNB', read as BNB Smart Chain; o-ustb-ethereum matches only with the unrounded NAV (at exactly $11.2802 it would be $447,383,398); two 'missing' findings name rows that do not exist and are not counted in rows_with_findings. Passes 5 to 9 (14 Nov 2026) checked batch three, tokenized equities, plus four rows left unchecked after pass 4: 33 rows, then the 14 rows changed after pass 5, the 4 changed after pass 6 and the Nasdaq order row after passes 7 and 8, each by a fresh agent that had not seen the work, against the cited page or its mirror of the company's own release. Two pass-5 findings (Ondo and bStocks amounts shown as None) came from the check file leaving out amounts; the pages state the counted figures. Passes 10 and 11 rechecked the Ondo Stocks and bStocks readings with their amounts included; one clause in the Ondo note that rested on another page was moved to a gap note.",
- "rows_checked": 336,
+ "rows_checked": 339,
  "counts": {
   "flows": 70,
   "observations": 55,
   "metrics": 17,
   "events": 12,
-  "confirmed": 273,
+  "confirmed": 276,
   "rows_with_findings": 46,
   "findings": 56,
   "backing": 52,
   "wrappers": 17,
   "chains_listed": 7,
-  "passes": 14
+  "passes": 15
  },
  "confirmed": [
   "b-benji-1",
@@ -85,6 +85,7 @@
   "e-hk-licences",
   "e-hk-ordinance",
   "e-hood-chain",
+  "e-jpmam-solana",
   "e-mica-end",
   "e-nyse-platform",
   "e-occ-rule",
@@ -109,7 +110,9 @@
   "f-acred-on-solana",
   "f-bstocks-on-bnb",
   "f-hoodst-on-robinhoodchain",
+  "f-jltxx-on-solana",
   "f-jpmd-on-base",
+  "f-mony-on-solana",
   "f-ondostocks-on-bnb",
   "f-ondostocks-on-ethereum",
   "f-ondostocks-on-solana",
