@@ -1,0 +1,43 @@
+{
+ "id": "buidl-optimism",
+ "token": "buidl",
+ "chain": "optimism",
+ "kind": "blockscout_v2",
+ "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+ "fetched_at": "2026-11-15T05:41:11+00:00",
+ "explorer_url": "https://optimism.blockscout.com/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://optimism.blockscout.com/api/v2/tokens/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:41:12 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5\",\"circulating_market_cap\":\"1637150776\",\"circulating_supply\":\"1637150776.137649\",\"decimals\":\"6\",\"exchange_rate\":\"1.0\",\"holders_count\":\"2\",\"icon_url\":\"https://securitize-public-files.s3.us-east-2.amazonaws.com/ClientDocuments/buidl/token-logo-256.png\",\"name\":\"BlackRock USD Institutional Digital Liquidity Fund\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"BUIDL\",\"total_supply\":\"26582754330000\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"0.0\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "26582754330000",
+  "decimals": "6",
+  "holders": "2",
+  "supply_text": "26582754.330000",
+  "supply": 26582754.33
+ },
+ "ok": true,
+ "value_usd": 26582754.33
+}

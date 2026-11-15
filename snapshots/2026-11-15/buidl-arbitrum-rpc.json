@@ -1,0 +1,102 @@
+{
+ "id": "buidl-arbitrum-rpc",
+ "token": "buidl",
+ "chain": "arbitrum",
+ "kind": "evm_rpc",
+ "address": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+ "fetched_at": "2026-11-15T05:41:11+00:00",
+ "explorer_url": "https://arbitrum.blockscout.com/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://arb1.arbitrum.io/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:41:11 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x1f4157ee\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://arb1.arbitrum.io/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+       "data": "0x18160ddd"
+      },
+      "0x1f4157ee"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:41:11 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x00000000000000000000000000000000000000000000000000000b7d901542d0\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://arb1.arbitrum.io/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+       "data": "0x313ce567"
+      },
+      "0x1f4157ee"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:41:11 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "12633916130000",
+  "decimals": 6,
+  "at": {
+   "block": 524376046
+  },
+  "supply_text": "12633916.130000",
+  "supply": 12633916.13
+ },
+ "ok": true,
+ "value_usd": 12633916.13
+}

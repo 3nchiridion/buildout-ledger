@@ -1,0 +1,273 @@
+{
+ "date": "2026-11-15",
+ "finished_at": "2026-11-15T05:41:17+00:00",
+ "reads": [
+  {
+   "id": "usdt-ethereum",
+   "token": "usdt",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:02+00:00",
+   "value_usd": 84296691994.49,
+   "error": null,
+   "supply_text": "84296691994.493958",
+   "at": null
+  },
+  {
+   "id": "usdc-ethereum",
+   "token": "usdc",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:03+00:00",
+   "value_usd": 44472967504.24,
+   "error": null,
+   "supply_text": "44472967504.236475",
+   "at": null
+  },
+  {
+   "id": "pyusd-ethereum",
+   "token": "pyusd",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:04+00:00",
+   "value_usd": 1589766472.87,
+   "error": null,
+   "supply_text": "1589766472.868454",
+   "at": null
+  },
+  {
+   "id": "buidl-ethereum",
+   "token": "buidl",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:05+00:00",
+   "value_usd": 170275395.78,
+   "error": null,
+   "supply_text": "170275395.777549",
+   "at": null
+  },
+  {
+   "id": "mony-ethereum",
+   "token": "mony",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:05+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "53306304.4200",
+   "at": null
+  },
+  {
+   "id": "rlusd-ethereum",
+   "token": "rlusd",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:06+00:00",
+   "value_usd": 2019899967.19,
+   "error": null,
+   "supply_text": "2019899967.192889529286669761",
+   "at": null
+  },
+  {
+   "id": "usde-ethereum",
+   "token": "usde",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:06+00:00",
+   "value_usd": 4899631990.46,
+   "error": null,
+   "supply_text": "4899631990.460444185823503861",
+   "at": null
+  },
+  {
+   "id": "usds-ethereum",
+   "token": "usds",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:07+00:00",
+   "value_usd": 5370246212.04,
+   "error": null,
+   "supply_text": "5370246212.042699307561562136",
+   "at": null
+  },
+  {
+   "id": "ustb-ethereum",
+   "token": "ustb",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:07+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "39770123.805585",
+   "at": null
+  },
+  {
+   "id": "usdt-tron",
+   "token": "usdt",
+   "chain": "tron",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:08+00:00",
+   "value_usd": 94207597532.05,
+   "error": null,
+   "supply_text": "94207597532.054777",
+   "at": null
+  },
+  {
+   "id": "rlusd-xrpl",
+   "token": "rlusd",
+   "chain": "xrpl",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:08+00:00",
+   "value_usd": 762824103.29,
+   "error": null,
+   "supply_text": "762824103.2914848",
+   "at": null
+  },
+  {
+   "id": "buidl-ethereum-rpc",
+   "token": "buidl",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:10+00:00",
+   "value_usd": 170275395.78,
+   "error": null,
+   "supply_text": "170275395.777549",
+   "at": {
+    "block": 26418371
+   }
+  },
+  {
+   "id": "buidl-arbitrum",
+   "token": "buidl",
+   "chain": "arbitrum",
+   "ok": false,
+   "fetched_at": "2026-11-15T05:41:10+00:00",
+   "value_usd": null,
+   "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+   "supply_text": null,
+   "at": null
+  },
+  {
+   "id": "buidl-arbitrum-rpc",
+   "token": "buidl",
+   "chain": "arbitrum",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:11+00:00",
+   "value_usd": 12633916.13,
+   "error": null,
+   "supply_text": "12633916.130000",
+   "at": {
+    "block": 524376046
+   }
+  },
+  {
+   "id": "buidl-optimism",
+   "token": "buidl",
+   "chain": "optimism",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:11+00:00",
+   "value_usd": 26582754.33,
+   "error": null,
+   "supply_text": "26582754.330000",
+   "at": null
+  },
+  {
+   "id": "buidl-optimism-rpc",
+   "token": "buidl",
+   "chain": "optimism",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:12+00:00",
+   "value_usd": 26582754.33,
+   "error": null,
+   "supply_text": "26582754.330000",
+   "at": {
+    "block": 159561247
+   }
+  },
+  {
+   "id": "buidl-polygon",
+   "token": "buidl",
+   "chain": "polygon",
+   "ok": false,
+   "fetched_at": "2026-11-15T05:41:13+00:00",
+   "value_usd": null,
+   "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+   "supply_text": null,
+   "at": null
+  },
+  {
+   "id": "buidl-polygon-rpc",
+   "token": "buidl",
+   "chain": "polygon",
+   "ok": false,
+   "fetched_at": "2026-11-15T05:41:14+00:00",
+   "value_usd": null,
+   "error": "KeyError: 'result'",
+   "supply_text": null,
+   "at": null
+  },
+  {
+   "id": "buidl-avalanche",
+   "token": "buidl",
+   "chain": "avalanche",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:14+00:00",
+   "value_usd": 356469873.61,
+   "error": null,
+   "supply_text": "356469873.610000",
+   "at": {
+    "block": 100365885
+   }
+  },
+  {
+   "id": "buidl-aptos",
+   "token": "buidl",
+   "chain": "aptos",
+   "ok": false,
+   "fetched_at": "2026-11-15T05:41:15+00:00",
+   "value_usd": null,
+   "error": "KeyError: 0",
+   "supply_text": null,
+   "at": null
+  },
+  {
+   "id": "buidl-solana",
+   "token": "buidl",
+   "chain": "solana",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:16+00:00",
+   "value_usd": 467301907.66,
+   "error": null,
+   "supply_text": "467301907.660000",
+   "at": {
+    "slot": 469615858
+   }
+  },
+  {
+   "id": "mony-solana",
+   "token": "mony",
+   "chain": "solana",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:16+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "6.0000",
+   "at": {
+    "slot": 469615861
+   }
+  },
+  {
+   "id": "jltxx-solana",
+   "token": "jltxx",
+   "chain": "solana",
+   "ok": true,
+   "fetched_at": "2026-11-15T05:41:17+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "737965043.84",
+   "at": {
+    "slot": 469615863
+   }
+  }
+ ]
+}

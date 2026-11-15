@@ -1,0 +1,33 @@
+{
+ "id": "buidl-polygon",
+ "token": "buidl",
+ "chain": "polygon",
+ "kind": "blockscout_v2",
+ "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+ "fetched_at": "2026-11-15T05:41:13+00:00",
+ "explorer_url": "https://polygon.blockscout.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://polygon.blockscout.com/api/v2/tokens/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 403,
+    "headers": {},
+    "text": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-clyQMjTKBWN1xNQPY4G6JM&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-src-attr &#39;none&#39;; style-src &#39;unsafe-inline&#39;; img-src &#39;self&#39; https://challenges.cloudflare.com; connect-src &#39;self&#39; https://challenges.cloudflare.com; frame-src &#39;self&#39; https://challenges.cloudflare.com blob:; child-src &#39;self&#39; https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri &#39;self&#39;\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem auto;padding-left:1.5rem;max-width:60rem}@media (width <= 720px){.main-content{margin-top:4rem}}#challenge-error-text{background-image:url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+\");background-repeat:no-repeat;background-size:contain;padding-left:34px}</style><meta http-equiv=\"refresh\" content=\"360\"></head><body><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div class=\"h2\"><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script nonce=\"clyQMjTKBWN1xNQPY4G6JM\">(function(){window._cf_chl_opt = {cFPWv: 'b',cH: 'wPR21AQxnIHv7VZXw2JsCE1tB8FpYtwfk7_jhR.bhRk-1794721273-1.2.1.1-TUg6H3X6n1Y8z7BDzhNAe43PxhlVhxh0rxpdtEREvNwbaM7rIjqmJlDAtHCERulM',cITimeS: '1794721273',cN: 'clyQMjTKBWN1xNQPY4G6JM',cRay: 'a5abecf95992eb56',cTplC:0,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:\"/api/v2/tokens/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99?__cf_chl_tk=wZAFD9uNmnow2OJ8os47CD5uu2nc8t1RKwlKvjL4UIA-1794721273-1.0.1.1-jKBUg4TExMGw45t.a8kGGIqgDaiAyvNtQEi_yjuE8Ww\",cvId: '3',cZone: 'polygon.blockscout.com',fa:\"/api/v2/tokens/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99?__cf_chl_f_tk=wZAFD9uNmnow2OJ8os47CD5uu2nc8t1RKwlKvjL4UIA-1794721273-1.0.1.1-jKBUg4TExMGw45t.a8kGGIqgDaiAyvNtQEi_yjuE8Ww\",md: 'U66jQRgg6ghcxQ1PleEa.tIg0hROhWBnaLy49iv2BWA-1794721273-1.2.1.1-TUKuHq52VRL7b5p2xr26E8J4LOP9txDb_vhnsUnxxYDOw94D5t6SftW7g14YW15hlbgyfr1MdzMSeW4AvFtFMj7iir7pN.oVTopxcLV3Dc5J5eatRAJuxmacfBpBjn0_E.vDylyttrdBlM1aj0STazA8_34gJRNUb1LSA4nXV7UnH4aR8md4yaOl89ILKjbfHnZ_89pQNetxIu5aQ3L1ao3FBEhf5vuRHV6YKvmYLRZni8rg7kxf90.Ntf69wJ5h5xb_8jQCs.85H4y0lsW1GSBr_KyK9lEh4Qdw3AwRvn5WX0kuCbb.6k6QPXKu7T3tPHgL5Tw8NSFOfqLlX.5gNn3iw_bIrrOm967H2RNsAe.U69VrrgPETppCk2rQ1b0hWbElF42RNnAjKA59lG0C9Jq_gz4C7UWwYXzYxOdhGMb0fkKjEl_NEt9rZVZ1GKefVOJTJavr2srHOTm7KhccNtP.YG9q5oFz4blztJDyhNjo2K_55JNps3RLKS6DzP8Nn4uKSzL7C.LI_tMPdvMS2N1mg9M1cEJdHJN7C8J4Mldhqim22APcJO1Mu3ydckfuwmqUFUySSBinylxcisOPJbwzTILt7veUeBAt_DcjNQ89xgKH4F480s5CdD9mO8xJdbrcXIi4Oj86DewltX9LQPiIfhJDvUhMWx700k4AS0ZjHlFRXBmutj_bJcXOKvTXF0pxoqyKs_i8Misc8KfDnb4Ot0KBP3aJcTPiLNRKlq.lL.9pCVki3QXw3VWPYpt0qY9w7R7uRLJHr0HEqh2EwK4peGIcdymsMkmVHNNCTNQoQBPBmjlymwSoeT0JveY9qBO2oBR"
+   }
+  }
+ ],
+ "ok": false,
+ "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+}

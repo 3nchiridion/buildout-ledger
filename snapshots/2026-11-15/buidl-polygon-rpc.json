@@ -1,0 +1,38 @@
+{
+ "id": "buidl-polygon-rpc",
+ "token": "buidl",
+ "chain": "polygon",
+ "kind": "evm_rpc",
+ "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+ "fetched_at": "2026-11-15T05:41:14+00:00",
+ "explorer_url": "https://polygon.blockscout.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://polygon-rpc.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 401,
+    "headers": {},
+    "text": "{\"error\":\"message: API key disabled, reason: tenant disabled, json-rpc code: -32051, rest code: 403\"}"
+   }
+  }
+ ],
+ "ok": false,
+ "error": "KeyError: 'result'"
+}
