@@ -4,7 +4,7 @@
  "chain": "optimism",
  "kind": "evm_rpc",
  "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
- "fetched_at": "2026-11-15T05:48:54+00:00",
+ "fetched_at": "2026-11-15T05:51:20+00:00",
  "explorer_url": "https://optimistic.etherscan.io/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
  "address_source": {
   "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
@@ -29,10 +29,10 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:48:55 GMT",
+     "Date": "Sun, 15 Nov 2026 05:51:21 GMT",
      "Content-Type": "application/json"
     },
-    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x982b707\",\"id\":1}\n"
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x982b750\",\"id\":1}\n"
    }
   },
   {
@@ -48,14 +48,14 @@
        "to": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
        "data": "0x18160ddd"
       },
-      "0x982b707"
+      "0x982b750"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:48:55 GMT",
+     "Date": "Sun, 15 Nov 2026 05:51:21 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x0000000000000000000000000000000000000000000000000000182d47a10590\",\"id\":1}\n"
@@ -74,14 +74,14 @@
        "to": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
        "data": "0x313ce567"
       },
-      "0x982b707"
+      "0x982b750"
      ]
     }
    },
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:48:55 GMT",
+     "Date": "Sun, 15 Nov 2026 05:51:21 GMT",
      "Content-Type": "application/json"
     },
     "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\",\"id\":1}\n"
@@ -93,7 +93,7 @@
   "raw_supply": "26582754330000",
   "decimals": 6,
   "at": {
-   "block": 159561479
+   "block": 159561552
   },
   "supply_text": "26582754.330000",
   "supply": 26582754.33
