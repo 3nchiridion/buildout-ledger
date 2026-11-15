@@ -87,9 +87,13 @@ def read(e, calls):
         j = json.loads(r["text"])["result"]
         p["raw_supply"], p["decimals"] = j["value"]["amount"], j["value"]["decimals"]; p["at"] = {"slot": j["context"]["slot"]}
     elif k == "aptos_fa":
-        base = e["rpc"].rstrip("/")
-        s = call(base + "/view", {"function": "0x1::fungible_asset::supply", "type_arguments": ["0x1::fungible_asset::Metadata"], "arguments": [e["address"]]})
-        d = call(base + "/view", {"function": "0x1::fungible_asset::decimals", "type_arguments": ["0x1::fungible_asset::Metadata"], "arguments": [e["address"]]})
+        base = e["rpc"].rstrip("/"); meta = e["address"]
+        if e.get("metadata_view"):   # the published address is a package; its view function names the token's metadata object
+            m = call(base + "/view", {"function": e["metadata_view"], "type_arguments": [], "arguments": []})
+            mv = json.loads(m["text"])[0]; meta = mv["inner"] if isinstance(mv, dict) else mv
+            p["metadata_object"] = meta
+        s = call(base + "/view", {"function": "0x1::fungible_asset::supply", "type_arguments": ["0x1::fungible_asset::Metadata"], "arguments": [meta]})
+        d = call(base + "/view", {"function": "0x1::fungible_asset::decimals", "type_arguments": ["0x1::fungible_asset::Metadata"], "arguments": [meta]})
         sv = json.loads(s["text"])[0]; sv = sv["vec"][0] if isinstance(sv, dict) else sv
         p["raw_supply"], p["decimals"] = sv, json.loads(d["text"])[0]
         p["at"] = {"ledger_version": s["headers"].get("X-Aptos-Ledger-Version")}

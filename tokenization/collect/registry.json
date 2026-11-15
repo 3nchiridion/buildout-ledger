@@ -299,7 +299,8 @@
    "value_rule": {
     "type": "usd_per_token",
     "usd": 1
-   }
+   },
+   "metadata_view": "0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a::ds_token::metadata"
   },
   {
    "id": "buidl-solana",
@@ -347,17 +348,35 @@
    "value_rule": null
   },
   {
-   "id": "probe-buidl-aptos",
-   "token": "buidl",
-   "chain": "aptos",
+   "id": "probe-robinhood-registry",
+   "token": "hoodst",
+   "chain": "robinhoodchain",
    "kind": "probe_get",
-   "address": "0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a",
    "urls": [
-    "https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a/resources?limit=50",
-    "https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a/modules?limit=20",
-    "https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a"
-   ],
-   "address_source": null
+    "https://api.robinhood.com/rhj/assets",
+    "https://docs.robinhood.com/chain/contracts",
+    "https://docs.robinhood.com/chain/stock-tokens/"
+   ]
+  },
+  {
+   "id": "probe-ondo-registry",
+   "token": "ondostocks",
+   "chain": "all",
+   "kind": "probe_get",
+   "urls": [
+    "https://docs.ondo.finance/addresses",
+    "https://docs.ondo.finance/llms.txt"
+   ]
+  },
+  {
+   "id": "probe-prices",
+   "token": null,
+   "chain": null,
+   "kind": "probe_get",
+   "urls": [
+    "https://api.nasdaq.com/api/quote/AAPL/historical?assetclass=stocks&fromdate=2026-11-09&todate=2026-11-14&limit=5",
+    "https://stooq.com/q/d/l/?s=aapl.us&i=d"
+   ]
   }
  ]
 }
