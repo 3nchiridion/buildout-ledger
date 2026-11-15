@@ -384,7 +384,8 @@
    "value_rule": {
     "type": "supply_x_multiplier_x_close",
     "price_source": "Cboe Global Markets delayed-quote service, daily historical close"
-   }
+   },
+   "also_total": true
   }
  ]
 }

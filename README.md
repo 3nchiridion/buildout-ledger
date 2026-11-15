@@ -66,6 +66,7 @@ A scheduled agent run follows `RUNBOOK.md` each day. Every reading comes from a 
 | `tokenization/raw/readings.csv` | Every balance reading: chain reads, attestations, filings and issuer statements |
 | `tokenization/verification.json` | Results of the independent source checks |
 | `tokenization/harness.py.txt` | The build, validation and gate code (shared with the AI map) |
+| `tokenization/collect/`, `.github/workflows/tokenization-collect.yml` | The collector: a daily GitHub Actions job that reads the registry's addresses over public, keyless explorers and RPCs and commits the raw responses to the `collect` branch |
 | `tokenization/page_patch.py.txt`, `tokenization/bs_view.js.txt` | How the page is derived from the AI map's page, and the balance sheet, role and time views |
 | `tokenization/RUNBOOK.md` | The daily run, step by step |
 | `tokenization/tools/` | The run's helpers: what is due, adding a reading, packing rows for the verifier, merging its results, logging the gate, and the share card |

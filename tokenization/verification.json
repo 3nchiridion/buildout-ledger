@@ -1,19 +1,19 @@
 {
- "verified_at": "2026-11-14",
+ "verified_at": "2026-11-15",
  "method": "Each of the 30 cited sources was fetched with WebFetch on 14 Nov 2026 (long filings and Federal Register documents in several offset windows) and every number, date, name and definition sentence in the 104 rows was compared with what the source prints; the five explorer supplies and the two Ondo pages were compared with the live values, which matched the rows to the unit. Where a row states a fact that is not in its own cited source it is a finding even if another source on this ledger supports it, unless the row itself names that other source and I verified it there. Not checked: the full text of the Federal Reserve and FDIC proposals beyond their headers, the on-chain data behind any attestation, and the Business Wire release date, which appears only in the URL id (20260805) and not in the fetched text. Second pass, 14 Nov 2026 (60 new rows: reserve components, legal wrappers and five new players): Each of the 15 cited sources was fetched with WebFetch and every figure, name, date and held-at statement in the 60 rows was compared with the text as printed; PDF tables were re-added to their printed totals, and reports were fetched a second time to search for named custodians, banks and fund managers. Live sources matched the rows exactly on the day (Blockscout total_supply 533063044200 at 4 decimals = 53,306,304.42 MONY; Ondo OUSG as of 13 Nov 2026 and USDY as of 11 Nov 2026). Limits: PDFs were read as extracted text through a summarising fetcher, not as page images; the Business Wire copy of the ICE/OKX release carries its date only in the URL (20260305), which ICE's own copy on ir.theice.com confirms as 'Mar 05, 2026'; the BDO report covers one pooled reserve for all fiat-denominated Tether tokens with no per-token split, so the USDT rows are that pool; and status labels inside claims could be checked only against what the release says. Third pass, 14 Nov 2026 (14 rows from two SEC Form N-MFP3 filings): Fetched both cited N-MFP3 XML documents from sec.gov with WebFetch (the Franklin document in two parts, characters 0-100000 and 100000-167751, through its closing tag; the WisdomTree document whole) and compared every number, date and name in each row with the printed element values, then re-summed the four components of each fund. Filing dates and the presence of later N-MFP3 filings were checked against the two data.sec.gov submissions indexes. Values were read out by the fetch tool's extraction model over two differently worded passes per document, not from a raw byte copy. Fourth pass, 14 Nov 2026 (52 rows: RLUSD, USDe, USDS, PAXG, XAUT, USYC, JLTXX, USTB, SWEEP, DTCC, Mastercard and the FCA): Each of the 19 cited sources was fetched with WebFetch (plus the J.P. Morgan AM CUSIP snapshot cited inside h-usdgo-jltxx and the EDGAR filing index), and every figure, date, name and definition sentence in the 52 rows was compared with the text as printed; the 1,068,017-character N-CSRS was read in eleven 100,000-character windows plus targeted passes on the OnChain fund's statements and notes. Gold values (ounces x US$4,157.41) and the USTB value (on-chain shares x $676,987,663 / 60,015,423.56 = $11.2802280) were recomputed and match to the dollar, and live sources read on 14 Nov 2026 matched exactly (Blockscout XAUT 827,417.63, RLUSD 2,019,899,967.19, USDe 4,909,359,615.97, USDS 5,318,034,118.92, USTB 39,660,945.507784; XRPScan RLUSD 762,824,103.291486; Ripple $2,689.9M and $2,826.5M as of 11/12/2026; Circle $312,976,695.16; Superstate $676,987,663). Limits: text was read through a summarising fetcher, not page images; the Business Wire page prints no date (URL 20251210, matched by a MarketScreener/S&P Capital IQ copy dated 12/10/2025); Circle lists 'BNB', read as BNB Smart Chain; o-ustb-ethereum matches only with the unrounded NAV (at exactly $11.2802 it would be $447,383,398); two 'missing' findings name rows that do not exist and are not counted in rows_with_findings. Passes 5 to 9 (14 Nov 2026) checked batch three, tokenized equities, plus four rows left unchecked after pass 4: 33 rows, then the 14 rows changed after pass 5, the 4 changed after pass 6 and the Nasdaq order row after passes 7 and 8, each by a fresh agent that had not seen the work, against the cited page or its mirror of the company's own release. Two pass-5 findings (Ondo and bStocks amounts shown as None) came from the check file leaving out amounts; the pages state the counted figures. Passes 10 and 11 rechecked the Ondo Stocks and bStocks readings with their amounts included; one clause in the Ondo note that rested on another page was moved to a gap note.",
- "rows_checked": 339,
+ "rows_checked": 355,
  "counts": {
   "flows": 70,
   "observations": 55,
   "metrics": 17,
   "events": 12,
-  "confirmed": 276,
-  "rows_with_findings": 46,
-  "findings": 56,
+  "confirmed": 289,
+  "rows_with_findings": 47,
+  "findings": 58,
   "backing": 52,
   "wrappers": 17,
   "chains_listed": 7,
-  "passes": 15
+  "passes": 17
  },
  "confirmed": [
   "b-benji-1",
@@ -98,6 +98,7 @@
   "e-secz",
   "ent-acred",
   "ent-bstocks",
+  "ent-buidl",
   "ent-fyoxx",
   "ent-hoodst",
   "ent-ondostocks",
@@ -109,6 +110,7 @@
   "f-acred-on-ethereum",
   "f-acred-on-solana",
   "f-bstocks-on-bnb",
+  "f-buidl-on-bnb",
   "f-hoodst-on-robinhoodchain",
   "f-jltxx-on-solana",
   "f-jpmd-on-base",
@@ -173,10 +175,21 @@
   "m-wtgxx-net",
   "m-xaut-res",
   "o-bstocks-all-2026-07-29",
+  "o-buidl-aptos-2026-11-15",
+  "o-buidl-arbitrum-2026-11-15",
+  "o-buidl-avalanche-2026-11-15",
   "o-buidl-ethereum-2026-11-14",
+  "o-buidl-optimism-2026-11-15",
+  "o-buidl-polygon-2026-11-15",
+  "o-buidl-solana-2026-11-15",
   "o-fyoxx-all-2026-10-31",
+  "o-hoodst-all-2026-11-15",
+  "o-hoodst-robinhoodchain-2026-11-15",
   "o-jltxx-all-2026-08-31",
+  "o-jltxx-ethereum-2026-11-15",
+  "o-jltxx-solana-2026-11-15",
   "o-mony-ethereum-2026-11-14",
+  "o-mony-solana-2026-11-15",
   "o-ondostocks-all-2026-08-15",
   "o-ousg-all-2026-11-13",
   "o-paxg-all-2026-09-30",
@@ -700,6 +713,22 @@
    "run": "run-2026-11-14-batch-4",
    "source_url": "https://institutional.fidelity.com/app/fund/popup/item/print/FIIS_FS_70615.pdf",
    "note": "The page appears to contradict 'The fact sheet gives no net assets'. The Details section lists 'Net Assets ($M)', and the values block, read in the same order as the labels, shows '$25.71' as of 10/31/2026. The footnote reads: 'Net Assets reflect assets of the class shown'. The extracted text separates labels from values, so this pairing should be checked on the page layout. The rest is supported: header 'FYOXX Fidelity Treasury Digital Fund - OnChain Class'; 'Normally investing at least 99.5% of total assets in cash and U.S. Treasury securities.'; 'Investing in compliance with industry-standard regulatory requirements for money market funds' (the page goes on: 'for the quality, maturity, liquidity, and diversification...'); Morningstar category Money Market-Taxable."
+  },
+  {
+   "row": "f-buidl-on-bnb",
+   "severity": "finding",
+   "pass": 16,
+   "run": "run-2026-11-15-collector-1",
+   "source_url": "https://www.aap.com.au/aapreleases/cision20251114ae21339",
+   "note": "Row names 'BNB Smart Chain'; the page never uses 'Smart Chain' or 'BSC', only 'the BNB Chain network'. Supported: headline 'Launches on BNB Chain', dateline Nov. 14, 2025 (= date), no amount, no 0x address. Also: page SOURCE line is 'SOURCE Binance', while definition says 'The issuer lists this chain'; body says BUIDL 'is launching a new share class'."
+  },
+  {
+   "row": "ent-hoodst",
+   "severity": "finding",
+   "pass": 16,
+   "run": "run-2026-11-15-collector-1",
+   "source_url": "https://docs.robinhood.com/rhj/product",
+   "note": "Page has no 'ETF', 'Arbitrum', 'Classic', 'Robinhood Europe' or 'derivative', and no US stocks; it says only 'economic exposure to underlying securities'. So 'tracking US stocks and ETFs' and the Classic Stock Tokens sentence are unsupported here. Supported: 'tokenised debt securities issued by Robinhood Assets (Jersey) Limited', records 'maintained on Robinhood Chain', no 'legal or beneficial rights'. Counting clause matches the o-hoodst-all snapshot."
   }
  ]
 }
