@@ -4,7 +4,7 @@
  "chain": "ethereum",
  "kind": "blockscout_v2",
  "address": "0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
- "fetched_at": "2026-11-15T05:43:12+00:00",
+ "fetched_at": "2026-11-15T05:45:08+00:00",
  "explorer_url": "https://eth.blockscout.com/token/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
  "address_source": {
   "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
@@ -24,7 +24,7 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:43:12 GMT",
+     "Date": "Sun, 15 Nov 2026 05:45:08 GMT",
      "Content-Type": "application/json; charset=utf-8"
     },
     "text": "{\"address_hash\":\"0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD\",\"circulating_market_cap\":\"2798650565.208335\",\"circulating_supply\":null,\"decimals\":\"18\",\"exchange_rate\":\"1.0\",\"holders_count\":\"13294\",\"icon_url\":\"https://assets.coingecko.com/coins/images/39651/small/RLUSD_200x200_%281%29.png?1727376633\",\"name\":\"Ripple USD\",\"reputation\":\"ok\",\"symbol\":\"RLUSD\",\"total_supply\":\"2019899967192889529286669761\",\"type\":\"ERC-20\",\"volume_24h\":\"493301513.8371515\"}"

@@ -1,0 +1,42 @@
+{
+ "id": "probe-prices",
+ "token": null,
+ "chain": null,
+ "kind": "probe_get",
+ "address": null,
+ "fetched_at": "2026-11-15T05:45:22+00:00",
+ "explorer_url": null,
+ "address_source": null,
+ "value_rule": null,
+ "calls": [
+  {
+   "request": {
+    "url": "https://api.nasdaq.com/api/quote/AAPL/historical?assetclass=stocks&fromdate=2026-11-09&todate=2026-11-14&limit=5",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": null,
+    "headers": {},
+    "text": "TimeoutError: The read operation timed out"
+   }
+  },
+  {
+   "request": {
+    "url": "https://stooq.com/q/d/l/?s=aapl.us&i=d",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 15 Nov 2026 05:47:34 GMT",
+     "Content-Type": "text/html; charset=utf-8"
+    },
+    "text": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>This site requires JavaScript to verify your browser. Please enable JavaScript and reload.</noscript><script nonce=\"hHIWhNW39ycCIGDi1lFgdQ\">\n(async()=>{const c=\"AAAAAGr5R3as0wSTihKMNsHiT2eShRash-l2-LxrZZTesmRgGVlF-uRGNwg\",d=4,t=\"0\".repeat(d),e=new TextEncoder;let n=0;while(1){const h=await crypto.subtle.digest(\"SHA-256\",e.encode(c+n)),x=Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,\"0\")).join(\"\");if(x.startsWith(t))break;n++}const r=await fetch(\"/__verify\",{method:\"POST\",headers:{\"Content-Type\":\"application/x-www-form-urlencoded\"},body:\"c=\"+encodeURIComponent(c)+\"&n=\"+n,credentials:\"same-origin\"});if(r.ok)location.reload()})();\n</script></body></html>\n"
+   }
+  }
+ ],
+ "parsed": {},
+ "ok": true
+}

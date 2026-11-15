@@ -4,7 +4,7 @@
  "chain": "ethereum",
  "kind": "blockscout_v2",
  "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
- "fetched_at": "2026-11-15T05:43:08+00:00",
+ "fetched_at": "2026-11-15T05:45:04+00:00",
  "explorer_url": "https://eth.blockscout.com/token/0xdAC17F958D2ee523a2206206994597C13D831ec7",
  "address_source": {
   "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
@@ -24,17 +24,17 @@
    "response": {
     "status": 200,
     "headers": {
-     "Date": "Sun, 15 Nov 2026 05:43:09 GMT",
+     "Date": "Sun, 15 Nov 2026 05:45:05 GMT",
      "Content-Type": "application/json; charset=utf-8"
     },
-    "text": "{\"address_hash\":\"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\"circulating_market_cap\":\"175305420989.40686\",\"circulating_supply\":null,\"decimals\":\"6\",\"exchange_rate\":\"0.999485\",\"holders_count\":\"17168760\",\"icon_url\":\"https://assets.coingecko.com/coins/images/325/small/Tether.png?1696501661\",\"name\":\"Tether\",\"reputation\":\"ok\",\"symbol\":\"USDT\",\"total_supply\":\"84296691994493958\",\"type\":\"ERC-20\",\"volume_24h\":\"76528541834.69362\"}"
+    "text": "{\"address_hash\":\"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\"circulating_market_cap\":\"175305420989.40686\",\"circulating_supply\":null,\"decimals\":\"6\",\"exchange_rate\":\"0.999485\",\"holders_count\":\"17168766\",\"icon_url\":\"https://assets.coingecko.com/coins/images/325/small/Tether.png?1696501661\",\"name\":\"Tether\",\"reputation\":\"ok\",\"symbol\":\"USDT\",\"total_supply\":\"84296691994493958\",\"type\":\"ERC-20\",\"volume_24h\":\"76528541834.69362\"}"
    }
   }
  ],
  "parsed": {
   "raw_supply": "84296691994493958",
   "decimals": "6",
-  "holders": "17168760",
+  "holders": "17168766",
   "supply_text": "84296691994.493958",
   "supply": 84296691994.49396
  },
