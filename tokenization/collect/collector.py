@@ -7,7 +7,7 @@ every number from the saved responses.
 Usage: python3 collector.py REGISTRY.json OUT_DIR
 Writes OUT_DIR/<date>/<id>.json for each read, OUT_DIR/<date>/summary.json, and OUT_DIR/<date>/log.txt.
 Standard library only."""
-import json, os, sys, time, datetime, urllib.request, urllib.error
+import json, os, sys, time, datetime, hashlib, urllib.request, urllib.error
 
 UA = "buildoutledger-collector/1.0 (+https://buildoutledger.com/tokenization)"
 TIMEOUT = 40
@@ -97,6 +97,49 @@ def read(e, calls):
         sv = json.loads(s["text"])[0]; sv = sv["vec"][0] if isinstance(sv, dict) else sv
         p["raw_supply"], p["decimals"] = sv, json.loads(d["text"])[0]
         p["at"] = {"ledger_version": s["headers"].get("X-Aptos-Ledger-Version")}
+    elif k == "robinhood_rhj":
+        # Robinhood's own Stock Token registry (issuer RHJ), then each token's supply on Robinhood Chain at one pinned block,
+        # then the underlying's last daily close from Cboe's delayed-quote service. Value = supply x issuer multiplier x close.
+        reg = call(e["registry"]); A = [a for a in json.loads(reg["text"])["assets"] if a.get("status") == "ASSET_STATUS_ACTIVE"]
+        urls = e["rpc"] if isinstance(e["rpc"], list) else [e["rpc"]]
+        for u in urls:
+            bn = call(u, rpc(u, "eth_blockNumber", []))
+            try:
+                block = json.loads(bn["text"])["result"]; break
+            except Exception:
+                continue
+        else:
+            raise RuntimeError("no RPC answered")
+        toks = [(a, d["contractAddress"]) for a in A for d in a["deployments"] if d["chainId"] == e["chain_id"]]
+        sup = {}
+        for i in range(0, len(toks), 20):
+            batch = [{"jsonrpc": "2.0", "id": j, "method": "eth_call", "params": [{"to": addr, "data": "0x18160ddd"}, block]} for j, (_, addr) in enumerate(toks[i:i + 20], start=i)]
+            r = call(u, batch)
+            for x in json.loads(r["text"]):
+                if "result" in x: sup[x["id"]] = int(x["result"], 16)
+            time.sleep(0.5)
+        rows, total, priced, unpriced = [], 0.0, 0, []
+        for j, (a, addr) in enumerate(toks):
+            sym = a["tokenSymbol"]; dec = int(a.get("tokenDecimals", 18)); m = float(a.get("currentMultiplier") or 1)
+            raw = sup.get(j); row = {"symbol": sym, "name": a["tokenName"], "isin": a.get("isin"), "address": addr, "raw_supply": str(raw) if raw is not None else None,
+                                     "decimals": dec, "multiplier": a.get("currentMultiplier")}
+            if raw is not None:
+                row["supply_text"], row["supply"] = units(raw, dec)
+                q = http(e["price_url"].format(sym=sym.replace(".", "/")) )
+                row["price_request"] = e["price_url"].format(sym=sym.replace(".", "/")); row["price_status"] = q["status"]
+                try:
+                    h = json.loads(q["text"]); last = h["data"][-1]
+                    row["price_sha256"] = hashlib.sha256(q["text"].encode()).hexdigest(); row["price_bytes"] = len(q["text"]); row["price_generated"] = h.get("timestamp")
+                    row["price_tail"] = h["data"][-3:]; row["close_date"], row["close"] = last["date"], float(last["close"])
+                    row["value_usd"] = round(row["supply"] * m * row["close"], 2); total += row["value_usd"]; priced += 1
+                except Exception as ex:
+                    row["price_error"] = f"{type(ex).__name__}: {str(q['text'])[:200]}"; unpriced.append(sym)
+                time.sleep(0.25)
+            rows.append(row)
+        p.update({"at": {"block": int(block, 16)}, "rpc_used": u, "tokens": rows, "tokens_listed": len(toks), "priced": priced, "unpriced": unpriced,
+                  "value_usd_priced": round(total, 2)})
+        p["supply_text"] = f"{priced} of {len(toks)} tokens priced, ${total:,.2f}"
+        return p
     elif k == "probe_get":   # keep a raw GET response for inspection; parses nothing
         for u in e["urls"]:
             call(u)

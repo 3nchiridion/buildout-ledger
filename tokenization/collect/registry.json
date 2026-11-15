@@ -348,37 +348,43 @@
    "value_rule": null
   },
   {
-   "id": "probe-prices",
-   "token": null,
-   "chain": null,
-   "kind": "probe_get",
-   "urls": [
-    "https://cdn.cboe.com/api/global/delayed_quotes/quotes/AAPL.json",
-    "https://cdn.cboe.com/api/global/delayed_quotes/quotes/CRM.json",
-    "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical/AAPL.json"
-   ]
+   "id": "jltxx-ethereum",
+   "token": "jltxx",
+   "chain": "ethereum",
+   "kind": "evm_rpc",
+   "address": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+   "rpc": [
+    "https://ethereum-rpc.publicnode.com",
+    "https://eth.drpc.org"
+   ],
+   "explorer_url": "https://eth.blockscout.com/token/0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+   "address_source": {
+    "title": "J.P. Morgan Asset Management release, Launches Second Tokenized Money Market Fund on Ethereum, 13 May 2026",
+    "url": "https://am.jpmorgan.com/us/en/asset-management/per/about-us/media/press-releases/jp-morgan-asset-management-launches-second-tokenized-fund-on-ethereum/"
+   },
+   "value_rule": null
   },
   {
-   "id": "probe-ondo-registry",
-   "token": "ondostocks",
-   "chain": "all",
-   "kind": "probe_get",
-   "urls": [
-    "https://docs.ondo.finance/ondo-stocks/technical.md",
-    "https://docs.ondo.finance/ondo-stocks/available-assets.md",
-    "https://docs.ondo.finance/ondo-stocks/token-and-quote-pricing.md",
-    "https://docs.ondo.finance/ondo-stocks/corporate-actions.md"
-   ]
-  },
-  {
-   "id": "probe-robinhood-docs",
+   "id": "hoodst-robinhoodchain",
    "token": "hoodst",
    "chain": "robinhoodchain",
-   "kind": "probe_get",
-   "urls": [
-    "https://docs.robinhood.com/chain/oracles/",
-    "https://docs.robinhood.com/chain/stock-tokens/building/"
-   ]
+   "kind": "robinhood_rhj",
+   "registry": "https://api.robinhood.com/rhj/assets",
+   "chain_id": 4663,
+   "rpc": [
+    "https://rpc.mainnet.chain.robinhood.com",
+    "https://rpc.nodeflare.app/robinhood/public"
+   ],
+   "price_url": "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical/{sym}.json",
+   "explorer_url": "https://robinhoodchain.blockscout.com/tokens",
+   "address_source": {
+    "title": "Robinhood (RHJ) Stock Token registry, api.robinhood.com/rhj/assets, named in Robinhood Chain's Stock Tokens docs",
+    "url": "https://docs.robinhood.com/chain/stock-tokens/"
+   },
+   "value_rule": {
+    "type": "supply_x_multiplier_x_close",
+    "price_source": "Cboe Global Markets delayed-quote service, daily historical close"
+   }
   }
  ]
 }
