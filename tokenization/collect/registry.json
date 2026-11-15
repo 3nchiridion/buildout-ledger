@@ -190,7 +190,10 @@
    "chain": "ethereum",
    "kind": "evm_rpc",
    "address": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
-   "rpc": "https://ethereum-rpc.publicnode.com",
+   "rpc": [
+    "https://ethereum-rpc.publicnode.com",
+    "https://eth.drpc.org"
+   ],
    "explorer_url": "https://eth.blockscout.com/token/0x7712c34205737192402172409a8F7ccef8aA2AEc",
    "address_source": {
     "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
@@ -205,27 +208,13 @@
    "id": "buidl-arbitrum",
    "token": "buidl",
    "chain": "arbitrum",
-   "kind": "blockscout_v2",
-   "address": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
-   "url": "https://arbitrum.blockscout.com/api/v2/tokens/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
-   "explorer_url": "https://arbitrum.blockscout.com/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
-   "address_source": {
-    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
-    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
-   },
-   "value_rule": {
-    "type": "usd_per_token",
-    "usd": 1
-   }
-  },
-  {
-   "id": "buidl-arbitrum-rpc",
-   "token": "buidl",
-   "chain": "arbitrum",
    "kind": "evm_rpc",
    "address": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
-   "rpc": "https://arb1.arbitrum.io/rpc",
-   "explorer_url": "https://arbitrum.blockscout.com/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+   "rpc": [
+    "https://arb1.arbitrum.io/rpc",
+    "https://arbitrum-one-rpc.publicnode.com"
+   ],
+   "explorer_url": "https://arbiscan.io/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
    "address_source": {
     "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
     "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
@@ -239,27 +228,13 @@
    "id": "buidl-optimism",
    "token": "buidl",
    "chain": "optimism",
-   "kind": "blockscout_v2",
-   "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
-   "url": "https://optimism.blockscout.com/api/v2/tokens/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
-   "explorer_url": "https://optimism.blockscout.com/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
-   "address_source": {
-    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
-    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
-   },
-   "value_rule": {
-    "type": "usd_per_token",
-    "usd": 1
-   }
-  },
-  {
-   "id": "buidl-optimism-rpc",
-   "token": "buidl",
-   "chain": "optimism",
    "kind": "evm_rpc",
    "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
-   "rpc": "https://mainnet.optimism.io",
-   "explorer_url": "https://optimism.blockscout.com/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+   "rpc": [
+    "https://mainnet.optimism.io",
+    "https://optimism-rpc.publicnode.com"
+   ],
+   "explorer_url": "https://optimistic.etherscan.io/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
    "address_source": {
     "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
     "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
@@ -273,27 +248,13 @@
    "id": "buidl-polygon",
    "token": "buidl",
    "chain": "polygon",
-   "kind": "blockscout_v2",
-   "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
-   "url": "https://polygon.blockscout.com/api/v2/tokens/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
-   "explorer_url": "https://polygon.blockscout.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
-   "address_source": {
-    "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
-    "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
-   },
-   "value_rule": {
-    "type": "usd_per_token",
-    "usd": 1
-   }
-  },
-  {
-   "id": "buidl-polygon-rpc",
-   "token": "buidl",
-   "chain": "polygon",
    "kind": "evm_rpc",
    "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
-   "rpc": "https://polygon-rpc.com",
-   "explorer_url": "https://polygon.blockscout.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+   "rpc": [
+    "https://polygon-bor-rpc.publicnode.com",
+    "https://polygon.drpc.org"
+   ],
+   "explorer_url": "https://polygonscan.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
    "address_source": {
     "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
     "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
@@ -309,7 +270,10 @@
    "chain": "avalanche",
    "kind": "evm_rpc",
    "address": "0x53FC82f14F009009b440a706e31c9021E1196A2F",
-   "rpc": "https://api.avax.network/ext/bc/C/rpc",
+   "rpc": [
+    "https://api.avax.network/ext/bc/C/rpc",
+    "https://avalanche-c-chain-rpc.publicnode.com"
+   ],
    "explorer_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F",
    "address_source": {
     "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
@@ -381,6 +345,19 @@
     "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/"
    },
    "value_rule": null
+  },
+  {
+   "id": "probe-buidl-aptos",
+   "token": "buidl",
+   "chain": "aptos",
+   "kind": "probe_get",
+   "address": "0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a",
+   "urls": [
+    "https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a/resources?limit=50",
+    "https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a/modules?limit=20",
+    "https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a"
+   ],
+   "address_source": null
   }
  ]
 }

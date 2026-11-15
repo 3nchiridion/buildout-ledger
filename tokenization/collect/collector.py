@@ -68,9 +68,18 @@ def read(e, calls):
         row = rows[0] if len(rows) == 1 else next(x for x in rows if x.get("currency") in (e["currency"], e.get("currency_hex")))
         p["supply_text"] = str(row["value"]); p["supply"] = float(row["value"])
     elif k == "evm_rpc":
-        bn = call(e["rpc"], rpc(e["rpc"], "eth_blockNumber", [])); block = json.loads(bn["text"])["result"]
-        ts = call(e["rpc"], rpc(e["rpc"], "eth_call", [{"to": e["address"], "data": "0x18160ddd"}, block]))
-        dc = call(e["rpc"], rpc(e["rpc"], "eth_call", [{"to": e["address"], "data": "0x313ce567"}, block]))
+        urls = e["rpc"] if isinstance(e["rpc"], list) else [e["rpc"]]
+        for u in urls:
+            bn = call(u, rpc(u, "eth_blockNumber", []))
+            try:
+                block = json.loads(bn["text"])["result"]; break
+            except Exception:
+                continue
+        else:
+            raise RuntimeError("no RPC answered: " + ", ".join(urls))
+        ts = call(u, rpc(u, "eth_call", [{"to": e["address"], "data": "0x18160ddd"}, block]))
+        dc = call(u, rpc(u, "eth_call", [{"to": e["address"], "data": "0x313ce567"}, block]))
+        p["rpc_used"] = u
         p["raw_supply"] = int(json.loads(ts["text"])["result"], 16); p["decimals"] = int(json.loads(dc["text"])["result"], 16)
         p["at"] = {"block": int(block, 16)}
     elif k == "solana_spl":
@@ -84,6 +93,10 @@ def read(e, calls):
         sv = json.loads(s["text"])[0]; sv = sv["vec"][0] if isinstance(sv, dict) else sv
         p["raw_supply"], p["decimals"] = sv, json.loads(d["text"])[0]
         p["at"] = {"ledger_version": s["headers"].get("X-Aptos-Ledger-Version")}
+    elif k == "probe_get":   # keep a raw GET response for inspection; parses nothing
+        for u in e["urls"]:
+            call(u)
+        return p
     else:
         raise ValueError("unknown kind " + k)
     if "raw_supply" in p:
