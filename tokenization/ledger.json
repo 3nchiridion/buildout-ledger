@@ -3874,23 +3874,23 @@
    "status": "cash_moved",
    "amount_usd": 170275396,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Ethereum only. BUIDL also runs on other chains that were not read.",
+   "definition": "Total supply. 170275395.777549 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/buidl-ethereum.json, fetched 2026-11-15T06:09:47+00:00.",
    "source_title": "Blockscout, Ethereum: BUIDL contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-buidl-ethereum-2026-11-14",
+   "derivation": "latest observation o-buidl-ethereum-2026-11-15",
    "title": "BUIDL on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
+     "available": "2026-11-15",
      "amount_usd": 170275396,
-     "as_of": "2026-11-14",
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: BUIDL contract",
      "grade": "onchain"
@@ -4199,25 +4199,25 @@
    "type": "settles",
    "status": "cash_moved",
    "amount_usd": 53306304,
-   "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "amount_qualifier": "total supply (token count)",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply (533063044200 with 4 decimals) read from a public explorer API. A token count; the value per token was not read.",
+   "definition": "Total supply (token count). 53306304.4200 tokens at the explorer's current figure. A token count; the value per token was not read. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/mony-ethereum.json, fetched 2026-11-15T06:09:48+00:00.",
    "source_title": "Blockscout, Ethereum: MONY contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-mony-ethereum-2026-11-14",
+   "derivation": "latest observation o-mony-ethereum-2026-11-15",
    "title": "MONY on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
+     "available": "2026-11-15",
      "amount_usd": 53306304,
-     "as_of": "2026-11-14",
-     "amount_qualifier": "total supply",
+     "as_of": "2026-11-15",
+     "amount_qualifier": "total supply (token count)",
      "source_title": "Blockscout, Ethereum: MONY contract",
      "grade": "onchain"
     }
@@ -4547,18 +4547,18 @@
    "payee": "ethereum",
    "type": "settles",
    "status": "cash_moved",
-   "amount_usd": 1786518927,
+   "amount_usd": 1589765038,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 1589765037.854893 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/pyusd-ethereum.json, fetched 2026-11-15T06:09:47+00:00.",
    "source_title": "Blockscout, Ethereum: PYUSD contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-pyusd-ethereum-2026-11-14",
+   "derivation": "latest observation o-pyusd-ethereum-2026-11-15",
    "title": "PYUSD on Ethereum",
    "label": "On Ethereum",
    "history": [
@@ -4574,6 +4574,14 @@
      "available": "2026-11-14",
      "amount_usd": 1786518927,
      "as_of": "2026-11-14",
+     "amount_qualifier": "total supply",
+     "source_title": "Blockscout, Ethereum: PYUSD contract",
+     "grade": "onchain"
+    },
+    {
+     "available": "2026-11-15",
+     "amount_usd": 1589765038,
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: PYUSD contract",
      "grade": "onchain"
@@ -4712,23 +4720,23 @@
    "status": "cash_moved",
    "amount_usd": 2019899967,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 2019899967.192889529286669761 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/rlusd-ethereum.json, fetched 2026-11-15T06:09:48+00:00.",
    "source_title": "Blockscout, Ethereum: RLUSD contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-rlusd-ethereum-2026-11-14",
+   "derivation": "latest observation o-rlusd-ethereum-2026-11-15",
    "title": "RLUSD on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
+     "available": "2026-11-15",
      "amount_usd": 2019899967,
-     "as_of": "2026-11-14",
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: RLUSD contract",
      "grade": "onchain"
@@ -4743,23 +4751,23 @@
    "status": "cash_moved",
    "amount_usd": 762824103,
    "amount_qualifier": "issued on the XRP Ledger",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Issued on the XRP Ledger. Obligations of the RLUSD issuing account on the XRP Ledger (762,824,103.29), read from a public explorer API.",
+   "definition": "Issued on the XRP Ledger. 762824103.2914851 of obligations of the RLUSD issuing account at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/rlusd-xrpl.json, fetched 2026-11-15T06:09:52+00:00.",
    "source_title": "XRPSCAN API, XRP Ledger: RLUSD issuer obligations",
    "source_url": "https://api.xrpscan.com/api/v1/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De/obligations",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-rlusd-xrpl-2026-11-14",
+   "derivation": "latest observation o-rlusd-xrpl-2026-11-15",
    "title": "RLUSD on XRP Ledger",
    "label": "On XRP Ledger",
    "history": [
     {
-     "available": "2026-11-14",
+     "available": "2026-11-15",
      "amount_usd": 762824103,
-     "as_of": "2026-11-14",
+     "as_of": "2026-11-15",
      "amount_qualifier": "issued on the XRP Ledger",
      "source_title": "XRPSCAN API, XRP Ledger: RLUSD issuer obligations",
      "grade": "onchain"
@@ -4896,25 +4904,25 @@
    "payee": "ethereum",
    "type": "settles",
    "status": "cash_moved",
-   "amount_usd": 44578737467,
+   "amount_usd": 44474151162,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 44474151162.501845 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdc-ethereum.json, fetched 2026-11-15T06:09:46+00:00.",
    "source_title": "Blockscout, Ethereum: USDC contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-usdc-ethereum-2026-11-14",
+   "derivation": "latest observation o-usdc-ethereum-2026-11-15",
    "title": "USDC on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
-     "amount_usd": 44578737467,
-     "as_of": "2026-11-14",
+     "available": "2026-11-15",
+     "amount_usd": 44474151162,
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: USDC contract",
      "grade": "onchain"
@@ -4927,25 +4935,25 @@
    "payee": "ethereum",
    "type": "settles",
    "status": "cash_moved",
-   "amount_usd": 4909359616,
+   "amount_usd": 4899617547,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 4899617546.554844185823503861 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usde-ethereum.json, fetched 2026-11-15T06:09:49+00:00.",
    "source_title": "Blockscout, Ethereum: USDe contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-usde-ethereum-2026-11-14",
+   "derivation": "latest observation o-usde-ethereum-2026-11-15",
    "title": "USDe on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
-     "amount_usd": 4909359616,
-     "as_of": "2026-11-14",
+     "available": "2026-11-15",
+     "amount_usd": 4899617547,
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: USDe contract",
      "grade": "onchain"
@@ -5206,25 +5214,25 @@
    "payee": "ethereum",
    "type": "settles",
    "status": "cash_moved",
-   "amount_usd": 5318034119,
+   "amount_usd": 5370114411,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 5370114410.726475516858199184 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usds-ethereum.json, fetched 2026-11-15T06:09:50+00:00.",
    "source_title": "Blockscout, Ethereum: USDS contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdC035D45d973E3EC169d2276DDab16f1e407384F",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-usds-ethereum-2026-11-14",
+   "derivation": "latest observation o-usds-ethereum-2026-11-15",
    "title": "USDS on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
-     "amount_usd": 5318034119,
-     "as_of": "2026-11-14",
+     "available": "2026-11-15",
+     "amount_usd": 5370114411,
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: USDS contract",
      "grade": "onchain"
@@ -5270,23 +5278,23 @@
    "status": "cash_moved",
    "amount_usd": 84296691994,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 84296691994.493958 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdt-ethereum.json, fetched 2026-11-15T06:09:44+00:00.",
    "source_title": "Blockscout, Ethereum: USDT contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdAC17F958D2ee523a2206206994597C13D831ec7",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-usdt-ethereum-2026-11-14",
+   "derivation": "latest observation o-usdt-ethereum-2026-11-15",
    "title": "USDT on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
+     "available": "2026-11-15",
      "amount_usd": 84296691994,
-     "as_of": "2026-11-14",
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Blockscout, Ethereum: USDT contract",
      "grade": "onchain"
@@ -5301,23 +5309,23 @@
    "status": "cash_moved",
    "amount_usd": 94207597532,
    "amount_qualifier": "total supply",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "definition": "Total supply. 94207597532.054777 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdt-tron.json, fetched 2026-11-15T06:09:51+00:00.",
    "source_title": "Tronscan API, Tron: USDT contract",
    "source_url": "https://apilist.tronscanapi.com/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-usdt-tron-2026-11-14",
+   "derivation": "latest observation o-usdt-tron-2026-11-15",
    "title": "USDT on Tron",
    "label": "On Tron",
    "history": [
     {
-     "available": "2026-11-14",
+     "available": "2026-11-15",
      "amount_usd": 94207597532,
-     "as_of": "2026-11-14",
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply",
      "source_title": "Tronscan API, Tron: USDT contract",
      "grade": "onchain"
@@ -5485,25 +5493,25 @@
    "payee": "ethereum",
    "type": "settles",
    "status": "cash_moved",
-   "amount_usd": 447384509,
+   "amount_usd": 448616065,
    "amount_qualifier": "total supply times net asset value",
-   "date": "2026-11-14",
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
+   "date": "2026-11-15",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
    "grade": "onchain",
-   "definition": "Total supply times net asset value. 39,660,945.51 USTB read from the contract, times the net asset value per share derived from Superstate's page on 12 Nov 2026 (assets over all shares, about $11.2802; unrounded in the arithmetic).",
+   "definition": "Total supply times net asset value. 39,770,123.805585 USTB read from the contract (raw 39770123805585, 6 decimals), times the net asset value per share derived from Superstate's page on 12 Nov 2026 (assets over all shares, about $11.2802; unrounded in the arithmetic). Superstate's page could not be read on 15 Nov, so the 12 Nov derivation is reused. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/ustb-ethereum.json, fetched 2026-11-15T06:09:50+00:00.",
    "source_title": "Blockscout, Ethereum: USTB contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e",
    "level": "entity",
    "derived": true,
-   "derivation": "latest observation o-ustb-ethereum-2026-11-14",
+   "derivation": "latest observation o-ustb-ethereum-2026-11-15",
    "title": "USTB on Ethereum",
    "label": "On Ethereum",
    "history": [
     {
-     "available": "2026-11-14",
-     "amount_usd": 447384509,
-     "as_of": "2026-11-14",
+     "available": "2026-11-15",
+     "amount_usd": 448616065,
+     "as_of": "2026-11-15",
      "amount_qualifier": "total supply times net asset value",
      "source_title": "Blockscout, Ethereum: USTB contract",
      "grade": "onchain"
@@ -6757,12 +6765,12 @@
    "source_title": "Explorer page, Avalanche C-Chain: BUIDL contract"
   },
   {
-   "id": "o-buidl-ethereum-2026-11-14",
+   "id": "o-buidl-ethereum-2026-11-15",
    "subject": "buidl",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
+   "period_end": "2026-11-15",
    "value_usd": 170275396,
    "basis": "total supply",
    "method": "Blockscout API",
@@ -6771,9 +6779,9 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Ethereum only. BUIDL also runs on other chains that were not read.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 170275395.777549 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/buidl-ethereum.json, fetched 2026-11-15T06:09:47+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc",
    "source_title": "Blockscout, Ethereum: BUIDL contract"
   },
@@ -6967,23 +6975,23 @@
    "source_title": "Explorer page, Solana: JLTXX contract"
   },
   {
-   "id": "o-mony-ethereum-2026-11-14",
+   "id": "o-mony-ethereum-2026-11-15",
    "subject": "mony",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
+   "period_end": "2026-11-15",
    "value_usd": 53306304,
-   "basis": "total supply",
+   "basis": "total supply (token count)",
    "method": "Blockscout API",
    "derived": false,
    "derivation": null,
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply (533063044200 with 4 decimals) read from a public explorer API. A token count; the value per token was not read.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply (token count). 53306304.4200 tokens at the explorer's current figure. A token count; the value per token was not read. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/mony-ethereum.json, fetched 2026-11-15T06:09:48+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
    "source_title": "Blockscout, Ethereum: MONY contract"
   },
@@ -7261,6 +7269,27 @@
    "source_title": "Blockscout, Ethereum: PYUSD contract"
   },
   {
+   "id": "o-pyusd-ethereum-2026-11-15",
+   "subject": "pyusd",
+   "metric": "supply_ethereum",
+   "chain": "ethereum",
+   "period_start": null,
+   "period_end": "2026-11-15",
+   "value_usd": 1589765038,
+   "basis": "total supply",
+   "method": "Blockscout API",
+   "derived": false,
+   "derivation": null,
+   "grade": "onchain",
+   "accn": "Blockscout API",
+   "form": null,
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 1589765037.854893 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/pyusd-ethereum.json, fetched 2026-11-15T06:09:47+00:00.",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+   "source_title": "Blockscout, Ethereum: PYUSD contract"
+  },
+  {
    "id": "o-pyusd-ink-2026-09-30",
    "subject": "pyusd",
    "metric": "supply_ink",
@@ -7408,12 +7437,12 @@
    "source_title": "Ripple, RLUSD transparency page"
   },
   {
-   "id": "o-rlusd-ethereum-2026-11-14",
+   "id": "o-rlusd-ethereum-2026-11-15",
    "subject": "rlusd",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
+   "period_end": "2026-11-15",
    "value_usd": 2019899967,
    "basis": "total supply",
    "method": "Blockscout API",
@@ -7422,19 +7451,19 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 2019899967.192889529286669761 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/rlusd-ethereum.json, fetched 2026-11-15T06:09:48+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
    "source_title": "Blockscout, Ethereum: RLUSD contract"
   },
   {
-   "id": "o-rlusd-xrpl-2026-11-14",
+   "id": "o-rlusd-xrpl-2026-11-15",
    "subject": "rlusd",
    "metric": "supply_xrpl",
    "chain": "xrpl",
    "period_start": null,
-   "period_end": "2026-11-14",
+   "period_end": "2026-11-15",
    "value_usd": 762824103,
    "basis": "issued on the XRP Ledger",
    "method": "XRPSCAN API",
@@ -7443,9 +7472,9 @@
    "grade": "onchain",
    "accn": "XRPSCAN API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Issued on the XRP Ledger. Obligations of the RLUSD issuing account on the XRP Ledger (762,824,103.29), read from a public explorer API.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Issued on the XRP Ledger. 762824103.2914851 of obligations of the RLUSD issuing account at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/rlusd-xrpl.json, fetched 2026-11-15T06:09:52+00:00.",
    "source_url": "https://api.xrpscan.com/api/v1/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De/obligations",
    "source_title": "XRPSCAN API, XRP Ledger: RLUSD issuer obligations"
   },
@@ -7597,13 +7626,13 @@
    "source_title": "Circle USDC examination report, September 2026"
   },
   {
-   "id": "o-usdc-ethereum-2026-11-14",
+   "id": "o-usdc-ethereum-2026-11-15",
    "subject": "usdc",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
-   "value_usd": 44578737467,
+   "period_end": "2026-11-15",
+   "value_usd": 44474151162,
    "basis": "total supply",
    "method": "Blockscout API",
    "derived": false,
@@ -7611,20 +7640,20 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 44474151162.501845 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdc-ethereum.json, fetched 2026-11-15T06:09:46+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
    "source_title": "Blockscout, Ethereum: USDC contract"
   },
   {
-   "id": "o-usde-ethereum-2026-11-14",
+   "id": "o-usde-ethereum-2026-11-15",
    "subject": "usde",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
-   "value_usd": 4909359616,
+   "period_end": "2026-11-15",
+   "value_usd": 4899617547,
    "basis": "total supply",
    "method": "Blockscout API",
    "derived": false,
@@ -7632,9 +7661,9 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 4899617546.554844185823503861 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usde-ethereum.json, fetched 2026-11-15T06:09:49+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
    "source_title": "Blockscout, Ethereum: USDe contract"
   },
@@ -7849,13 +7878,13 @@
    "source_title": "Anchorage Digital Bank USDGO Reserve Report with accountant's report, 31 Jul 2026"
   },
   {
-   "id": "o-usds-ethereum-2026-11-14",
+   "id": "o-usds-ethereum-2026-11-15",
    "subject": "usds",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
-   "value_usd": 5318034119,
+   "period_end": "2026-11-15",
+   "value_usd": 5370114411,
    "basis": "total supply",
    "method": "Blockscout API",
    "derived": false,
@@ -7863,9 +7892,9 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 5370114410.726475516858199184 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usds-ethereum.json, fetched 2026-11-15T06:09:50+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdC035D45d973E3EC169d2276DDab16f1e407384F",
    "source_title": "Blockscout, Ethereum: USDS contract"
   },
@@ -7891,12 +7920,12 @@
    "source_title": "BDO assurance report on Tether International's Financial Figures and Reserves Report, 30 Sep 2026"
   },
   {
-   "id": "o-usdt-ethereum-2026-11-14",
+   "id": "o-usdt-ethereum-2026-11-15",
    "subject": "usdt",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
+   "period_end": "2026-11-15",
    "value_usd": 84296691994,
    "basis": "total supply",
    "method": "Blockscout API",
@@ -7905,19 +7934,19 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 84296691994.493958 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdt-ethereum.json, fetched 2026-11-15T06:09:44+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdAC17F958D2ee523a2206206994597C13D831ec7",
    "source_title": "Blockscout, Ethereum: USDT contract"
   },
   {
-   "id": "o-usdt-tron-2026-11-14",
+   "id": "o-usdt-tron-2026-11-15",
    "subject": "usdt",
    "metric": "supply_tron",
    "chain": "tron",
    "period_start": null,
-   "period_end": "2026-11-14",
+   "period_end": "2026-11-15",
    "value_usd": 94207597532,
    "basis": "total supply",
    "method": "Tronscan API",
@@ -7926,9 +7955,9 @@
    "grade": "onchain",
    "accn": "Tronscan API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply. 94207597532.054777 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdt-tron.json, fetched 2026-11-15T06:09:51+00:00.",
    "source_url": "https://apilist.tronscanapi.com/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1",
    "source_title": "Tronscan API, Tron: USDT contract"
   },
@@ -8038,13 +8067,13 @@
    "source_title": "Superstate, USTB page"
   },
   {
-   "id": "o-ustb-ethereum-2026-11-14",
+   "id": "o-ustb-ethereum-2026-11-15",
    "subject": "ustb",
    "metric": "supply_ethereum",
    "chain": "ethereum",
    "period_start": null,
-   "period_end": "2026-11-14",
-   "value_usd": 447384509,
+   "period_end": "2026-11-15",
+   "value_usd": 448616065,
    "basis": "total supply times net asset value",
    "method": "Blockscout API",
    "derived": false,
@@ -8052,9 +8081,9 @@
    "grade": "onchain",
    "accn": "Blockscout API",
    "form": null,
-   "available": "2026-11-14",
-   "as_of": "2026-11-14",
-   "definition": "Total supply times net asset value. 39,660,945.51 USTB read from the contract, times the net asset value per share derived from Superstate's page on 12 Nov 2026 (assets over all shares, about $11.2802; unrounded in the arithmetic).",
+   "available": "2026-11-15",
+   "as_of": "2026-11-15",
+   "definition": "Total supply times net asset value. 39,770,123.805585 USTB read from the contract (raw 39770123805585, 6 decimals), times the net asset value per share derived from Superstate's page on 12 Nov 2026 (assets over all shares, about $11.2802; unrounded in the arithmetic). Superstate's page could not be read on 15 Nov, so the 12 Nov derivation is reused. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/ustb-ethereum.json, fetched 2026-11-15T06:09:50+00:00.",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e",
    "source_title": "Blockscout, Ethereum: USTB contract"
   },
@@ -9826,36 +9855,6 @@
    "source_url": "https://ondo.finance/ousg"
   },
   {
-   "id": "e-o-buidl-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "buidl"
-   ],
-   "flow": null,
-   "observation": "o-buidl-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "BUIDL on Ethereum: $170.3M total supply at 2026-11-14",
-   "detail": "Total supply. Ethereum only. BUIDL also runs on other chains that were not read.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: BUIDL contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc"
-  },
-  {
-   "id": "e-o-mony-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "mony"
-   ],
-   "flow": null,
-   "observation": "o-mony-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "MONY on Ethereum: $53.3M total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply (533063044200 with 4 decimals) read from a public explorer API. A token count; the value per token was not read.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: MONY contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46"
-  },
-  {
    "id": "e-o-pyusd-ethereum-2026-11-14",
    "date": "2026-11-14",
    "entities": [
@@ -9869,126 +9868,6 @@
    "grade": "onchain",
    "source_title": "Blockscout, Ethereum: PYUSD contract",
    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8"
-  },
-  {
-   "id": "e-o-rlusd-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "rlusd"
-   ],
-   "flow": null,
-   "observation": "o-rlusd-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "RLUSD on Ethereum: $2.02B total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: RLUSD contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD"
-  },
-  {
-   "id": "e-o-rlusd-xrpl-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "rlusd"
-   ],
-   "flow": null,
-   "observation": "o-rlusd-xrpl-2026-11-14",
-   "level": "entity",
-   "title": "RLUSD on XRP Ledger: $762.8M issued on the XRP Ledger at 2026-11-14",
-   "detail": "Issued on the XRP Ledger. Obligations of the RLUSD issuing account on the XRP Ledger (762,824,103.29), read from a public explorer API.",
-   "grade": "onchain",
-   "source_title": "XRPSCAN API, XRP Ledger: RLUSD issuer obligations",
-   "source_url": "https://api.xrpscan.com/api/v1/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De/obligations"
-  },
-  {
-   "id": "e-o-usdc-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "usdc"
-   ],
-   "flow": null,
-   "observation": "o-usdc-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "USDC on Ethereum: $44.58B total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: USDC contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-  },
-  {
-   "id": "e-o-usde-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "usde"
-   ],
-   "flow": null,
-   "observation": "o-usde-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "USDe on Ethereum: $4.91B total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: USDe contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-  },
-  {
-   "id": "e-o-usds-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "usds"
-   ],
-   "flow": null,
-   "observation": "o-usds-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "USDS on Ethereum: $5.32B total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: USDS contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdC035D45d973E3EC169d2276DDab16f1e407384F"
-  },
-  {
-   "id": "e-o-usdt-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "usdt"
-   ],
-   "flow": null,
-   "observation": "o-usdt-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "USDT on Ethereum: $84.30B total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: USDT contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdAC17F958D2ee523a2206206994597C13D831ec7"
-  },
-  {
-   "id": "e-o-usdt-tron-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "usdt"
-   ],
-   "flow": null,
-   "observation": "o-usdt-tron-2026-11-14",
-   "level": "entity",
-   "title": "USDT on Tron: $94.21B total supply at 2026-11-14",
-   "detail": "Total supply. Token contract total supply read from a public explorer API. Includes tokens the issuer holds unissued, so it can exceed the amount in circulation.",
-   "grade": "onchain",
-   "source_title": "Tronscan API, Tron: USDT contract",
-   "source_url": "https://apilist.tronscanapi.com/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1"
-  },
-  {
-   "id": "e-o-ustb-ethereum-2026-11-14",
-   "date": "2026-11-14",
-   "entities": [
-    "ustb"
-   ],
-   "flow": null,
-   "observation": "o-ustb-ethereum-2026-11-14",
-   "level": "entity",
-   "title": "USTB on Ethereum: $447.4M total supply times net asset value at 2026-11-14",
-   "detail": "Total supply times net asset value. 39,660,945.51 USTB read from the contract, times the net asset value per share derived from Superstate's page on 12 Nov 2026 (assets over all shares, about $11.2802; unrounded in the arithmetic).",
-   "grade": "onchain",
-   "source_title": "Blockscout, Ethereum: USTB contract",
-   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e"
   },
   {
    "id": "e-o-buidl-aptos-2026-11-15",
@@ -10034,6 +9913,21 @@
    "grade": "onchain",
    "source_title": "Explorer page, Avalanche C-Chain: BUIDL contract",
    "source_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F"
+  },
+  {
+   "id": "e-o-buidl-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "buidl"
+   ],
+   "flow": null,
+   "observation": "o-buidl-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "BUIDL on Ethereum: $170.3M total supply at 2026-11-15",
+   "detail": "Total supply. 170275395.777549 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/buidl-ethereum.json, fetched 2026-11-15T06:09:47+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: BUIDL contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc"
   },
   {
    "id": "e-o-buidl-optimism-2026-11-15",
@@ -10141,6 +10035,21 @@
    "source_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz"
   },
   {
+   "id": "e-o-mony-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "mony"
+   ],
+   "flow": null,
+   "observation": "o-mony-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "MONY on Ethereum: $53.3M total supply (token count) at 2026-11-15",
+   "detail": "Total supply (token count). 53306304.4200 tokens at the explorer's current figure. A token count; the value per token was not read. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/mony-ethereum.json, fetched 2026-11-15T06:09:48+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: MONY contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46"
+  },
+  {
    "id": "e-o-mony-solana-2026-11-15",
    "date": "2026-11-15",
    "entities": [
@@ -10154,6 +10063,141 @@
    "grade": "onchain",
    "source_title": "Explorer page, Solana: MONY contract",
    "source_url": "https://solscan.io/token/EToDtBM2knZ8N1BHyUq2Riq5ngWTcoD3k6qpsgf7CKYY"
+  },
+  {
+   "id": "e-o-pyusd-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "pyusd"
+   ],
+   "flow": null,
+   "observation": "o-pyusd-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "PYUSD on Ethereum: $1.59B total supply at 2026-11-15 (-11% vs prior reading)",
+   "detail": "Total supply. 1589765037.854893 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/pyusd-ethereum.json, fetched 2026-11-15T06:09:47+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: PYUSD contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8"
+  },
+  {
+   "id": "e-o-rlusd-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "rlusd"
+   ],
+   "flow": null,
+   "observation": "o-rlusd-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "RLUSD on Ethereum: $2.02B total supply at 2026-11-15",
+   "detail": "Total supply. 2019899967.192889529286669761 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/rlusd-ethereum.json, fetched 2026-11-15T06:09:48+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: RLUSD contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD"
+  },
+  {
+   "id": "e-o-rlusd-xrpl-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "rlusd"
+   ],
+   "flow": null,
+   "observation": "o-rlusd-xrpl-2026-11-15",
+   "level": "entity",
+   "title": "RLUSD on XRP Ledger: $762.8M issued on the XRP Ledger at 2026-11-15",
+   "detail": "Issued on the XRP Ledger. 762824103.2914851 of obligations of the RLUSD issuing account at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/rlusd-xrpl.json, fetched 2026-11-15T06:09:52+00:00.",
+   "grade": "onchain",
+   "source_title": "XRPSCAN API, XRP Ledger: RLUSD issuer obligations",
+   "source_url": "https://api.xrpscan.com/api/v1/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De/obligations"
+  },
+  {
+   "id": "e-o-usdc-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "usdc"
+   ],
+   "flow": null,
+   "observation": "o-usdc-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "USDC on Ethereum: $44.47B total supply at 2026-11-15",
+   "detail": "Total supply. 44474151162.501845 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdc-ethereum.json, fetched 2026-11-15T06:09:46+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: USDC contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "id": "e-o-usde-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "usde"
+   ],
+   "flow": null,
+   "observation": "o-usde-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "USDe on Ethereum: $4.90B total supply at 2026-11-15",
+   "detail": "Total supply. 4899617546.554844185823503861 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usde-ethereum.json, fetched 2026-11-15T06:09:49+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: USDe contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
+  },
+  {
+   "id": "e-o-usds-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "usds"
+   ],
+   "flow": null,
+   "observation": "o-usds-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "USDS on Ethereum: $5.37B total supply at 2026-11-15",
+   "detail": "Total supply. 5370114410.726475516858199184 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usds-ethereum.json, fetched 2026-11-15T06:09:50+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: USDS contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdC035D45d973E3EC169d2276DDab16f1e407384F"
+  },
+  {
+   "id": "e-o-usdt-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "usdt"
+   ],
+   "flow": null,
+   "observation": "o-usdt-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "USDT on Ethereum: $84.30B total supply at 2026-11-15",
+   "detail": "Total supply. 84296691994.493958 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdt-ethereum.json, fetched 2026-11-15T06:09:44+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: USDT contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0xdAC17F958D2ee523a2206206994597C13D831ec7"
+  },
+  {
+   "id": "e-o-usdt-tron-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "usdt"
+   ],
+   "flow": null,
+   "observation": "o-usdt-tron-2026-11-15",
+   "level": "entity",
+   "title": "USDT on Tron: $94.21B total supply at 2026-11-15",
+   "detail": "Total supply. 94207597532.054777 tokens at the explorer's current figure, valued at $1 a token. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/usdt-tron.json, fetched 2026-11-15T06:09:51+00:00.",
+   "grade": "onchain",
+   "source_title": "Tronscan API, Tron: USDT contract",
+   "source_url": "https://apilist.tronscanapi.com/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1"
+  },
+  {
+   "id": "e-o-ustb-ethereum-2026-11-15",
+   "date": "2026-11-15",
+   "entities": [
+    "ustb"
+   ],
+   "flow": null,
+   "observation": "o-ustb-ethereum-2026-11-15",
+   "level": "entity",
+   "title": "USTB on Ethereum: $448.6M total supply times net asset value at 2026-11-15",
+   "detail": "Total supply times net asset value. 39,770,123.805585 USTB read from the contract (raw 39770123805585, 6 decimals), times the net asset value per share derived from Superstate's page on 12 Nov 2026 (assets over all shares, about $11.2802; unrounded in the arithmetic). Superstate's page could not be read on 15 Nov, so the 12 Nov derivation is reused. Raw response kept in the collect branch (commit bb5e7a9), snapshots/2026-11-15/ustb-ethereum.json, fetched 2026-11-15T06:09:50+00:00.",
+   "grade": "onchain",
+   "source_title": "Blockscout, Ethereum: USTB contract",
+   "source_url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e"
   }
  ],
  "ranges": [],
@@ -10827,9 +10871,9 @@
  ],
  "runs": [
   {
-   "id": "run-2026-11-15-collector-1",
+   "id": "run-2026-11-15",
    "as_of": "2026-11-15",
-   "rows": 448
+   "rows": 450
   }
  ],
  "watchlist": [
@@ -11975,7 +12019,7 @@
    "assets": 0
   },
   "shown_not_counted": {
-   "money": 10227393735,
+   "money": 10269731958,
    "assets": 0
   },
   "overlap_outside_count": 812384126,
@@ -12095,7 +12139,7 @@
    "rlusd": {
     "amount": 2782724070,
     "grade": "onchain",
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-15",
     "row": null,
     "partial": true,
     "chains": [
@@ -12127,9 +12171,9 @@
     "counted": true
    },
    "usde": {
-    "amount": 4909359616,
+    "amount": 4899617547,
     "grade": "onchain",
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-15",
     "row": null,
     "partial": true,
     "chains": [
@@ -12157,9 +12201,9 @@
     "counted": true
    },
    "usds": {
-    "amount": 5318034119,
+    "amount": 5370114411,
     "grade": "onchain",
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-15",
     "row": null,
     "partial": true,
     "chains": [
@@ -12260,19 +12304,19 @@
  "verification": {
   "verified_at": "2026-11-15",
   "method": "Each of the 30 cited sources was fetched with WebFetch on 14 Nov 2026 (long filings and Federal Register documents in several offset windows) and every number, date, name and definition sentence in the 104 rows was compared with what the source prints; the five explorer supplies and the two Ondo pages were compared with the live values, which matched the rows to the unit. Where a row states a fact that is not in its own cited source it is a finding even if another source on this ledger supports it, unless the row itself names that other source and I verified it there. Not checked: the full text of the Federal Reserve and FDIC proposals beyond their headers, the on-chain data behind any attestation, and the Business Wire release date, which appears only in the URL id (20260805) and not in the fetched text. Second pass, 14 Nov 2026 (60 new rows: reserve components, legal wrappers and five new players): Each of the 15 cited sources was fetched with WebFetch and every figure, name, date and held-at statement in the 60 rows was compared with the text as printed; PDF tables were re-added to their printed totals, and reports were fetched a second time to search for named custodians, banks and fund managers. Live sources matched the rows exactly on the day (Blockscout total_supply 533063044200 at 4 decimals = 53,306,304.42 MONY; Ondo OUSG as of 13 Nov 2026 and USDY as of 11 Nov 2026). Limits: PDFs were read as extracted text through a summarising fetcher, not as page images; the Business Wire copy of the ICE/OKX release carries its date only in the URL (20260305), which ICE's own copy on ir.theice.com confirms as 'Mar 05, 2026'; the BDO report covers one pooled reserve for all fiat-denominated Tether tokens with no per-token split, so the USDT rows are that pool; and status labels inside claims could be checked only against what the release says. Third pass, 14 Nov 2026 (14 rows from two SEC Form N-MFP3 filings): Fetched both cited N-MFP3 XML documents from sec.gov with WebFetch (the Franklin document in two parts, characters 0-100000 and 100000-167751, through its closing tag; the WisdomTree document whole) and compared every number, date and name in each row with the printed element values, then re-summed the four components of each fund. Filing dates and the presence of later N-MFP3 filings were checked against the two data.sec.gov submissions indexes. Values were read out by the fetch tool's extraction model over two differently worded passes per document, not from a raw byte copy. Fourth pass, 14 Nov 2026 (52 rows: RLUSD, USDe, USDS, PAXG, XAUT, USYC, JLTXX, USTB, SWEEP, DTCC, Mastercard and the FCA): Each of the 19 cited sources was fetched with WebFetch (plus the J.P. Morgan AM CUSIP snapshot cited inside h-usdgo-jltxx and the EDGAR filing index), and every figure, date, name and definition sentence in the 52 rows was compared with the text as printed; the 1,068,017-character N-CSRS was read in eleven 100,000-character windows plus targeted passes on the OnChain fund's statements and notes. Gold values (ounces x US$4,157.41) and the USTB value (on-chain shares x $676,987,663 / 60,015,423.56 = $11.2802280) were recomputed and match to the dollar, and live sources read on 14 Nov 2026 matched exactly (Blockscout XAUT 827,417.63, RLUSD 2,019,899,967.19, USDe 4,909,359,615.97, USDS 5,318,034,118.92, USTB 39,660,945.507784; XRPScan RLUSD 762,824,103.291486; Ripple $2,689.9M and $2,826.5M as of 11/12/2026; Circle $312,976,695.16; Superstate $676,987,663). Limits: text was read through a summarising fetcher, not page images; the Business Wire page prints no date (URL 20251210, matched by a MarketScreener/S&P Capital IQ copy dated 12/10/2025); Circle lists 'BNB', read as BNB Smart Chain; o-ustb-ethereum matches only with the unrounded NAV (at exactly $11.2802 it would be $447,383,398); two 'missing' findings name rows that do not exist and are not counted in rows_with_findings. Passes 5 to 9 (14 Nov 2026) checked batch three, tokenized equities, plus four rows left unchecked after pass 4: 33 rows, then the 14 rows changed after pass 5, the 4 changed after pass 6 and the Nasdaq order row after passes 7 and 8, each by a fresh agent that had not seen the work, against the cited page or its mirror of the company's own release. Two pass-5 findings (Ondo and bStocks amounts shown as None) came from the check file leaving out amounts; the pages state the counted figures. Passes 10 and 11 rechecked the Ondo Stocks and bStocks readings with their amounts included; one clause in the Ondo note that rested on another page was moved to a gap note.",
-  "rows_checked": 355,
+  "rows_checked": 367,
   "counts": {
    "flows": 70,
    "observations": 55,
    "metrics": 17,
    "events": 12,
-   "confirmed": 289,
-   "rows_with_findings": 47,
-   "findings": 58,
+   "confirmed": 298,
+   "rows_with_findings": 49,
+   "findings": 61,
    "backing": 52,
    "wrappers": 17,
    "chains_listed": 7,
-   "passes": 17
+   "passes": 18
   },
   "confirmed": [
    "b-benji-1",
@@ -12438,6 +12482,7 @@
    "o-buidl-arbitrum-2026-11-15",
    "o-buidl-avalanche-2026-11-15",
    "o-buidl-ethereum-2026-11-14",
+   "o-buidl-ethereum-2026-11-15",
    "o-buidl-optimism-2026-11-15",
    "o-buidl-polygon-2026-11-15",
    "o-buidl-solana-2026-11-15",
@@ -12461,6 +12506,7 @@
    "o-pyusd-arbitrum-2026-09-30",
    "o-pyusd-ethereum-2026-09-30",
    "o-pyusd-ethereum-2026-11-14",
+   "o-pyusd-ethereum-2026-11-15",
    "o-pyusd-ink-2026-09-30",
    "o-pyusd-polygon-2026-09-30",
    "o-pyusd-solana-2026-09-30",
@@ -12469,7 +12515,9 @@
    "o-pyusd-xlayer-2026-09-30",
    "o-rlusd-all-2026-11-12",
    "o-rlusd-ethereum-2026-11-14",
+   "o-rlusd-ethereum-2026-11-15",
    "o-rlusd-xrpl-2026-11-14",
+   "o-rlusd-xrpl-2026-11-15",
    "o-usd1-all-2026-07-15",
    "o-usd1-all-2026-07-31",
    "o-usd1-bnb-2026-07-31",
@@ -12478,7 +12526,9 @@
    "o-usdc-all-2026-09-04",
    "o-usdc-all-2026-09-30",
    "o-usdc-ethereum-2026-11-14",
+   "o-usdc-ethereum-2026-11-15",
    "o-usde-ethereum-2026-11-14",
+   "o-usde-ethereum-2026-11-15",
    "o-usdg-all-2026-09-30",
    "o-usdg-arbitrum-2026-09-30",
    "o-usdg-ethereum-2026-09-30",
@@ -12489,9 +12539,12 @@
    "o-usdg-xlayer-2026-09-30",
    "o-usdgo-all-2026-07-31",
    "o-usds-ethereum-2026-11-14",
+   "o-usds-ethereum-2026-11-15",
    "o-usdt-all-2026-09-30",
    "o-usdt-ethereum-2026-11-14",
+   "o-usdt-ethereum-2026-11-15",
    "o-usdt-tron-2026-11-14",
+   "o-usdt-tron-2026-11-15",
    "o-usdtb-all-2026-07-31",
    "o-usdtb-ethereum-2026-07-31",
    "o-usdtb-solana-2026-07-31",
@@ -12988,6 +13041,30 @@
     "run": "run-2026-11-15-collector-1",
     "source_url": "https://docs.robinhood.com/rhj/product",
     "note": "Page has no 'ETF', 'Arbitrum', 'Classic', 'Robinhood Europe' or 'derivative', and no US stocks; it says only 'economic exposure to underlying securities'. So 'tracking US stocks and ETFs' and the Classic Stock Tokens sentence are unsupported here. Supported: 'tokenised debt securities issued by Robinhood Assets (Jersey) Limited', records 'maintained on Robinhood Chain', no 'legal or beneficial rights'. Counting clause matches the o-hoodst-all snapshot."
+   },
+   {
+    "row": "o-mony-ethereum-2026-11-15",
+    "severity": "finding",
+    "pass": 18,
+    "run": "run-2026-11-15",
+    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+    "note": "Token count matches snapshot mony-ethereum.json (address matches, JPMorgan My OnChain Net Yield Fund/MONY, 533063044200 / 10^4 = 53306304.42). But the row puts 53306304 in amount_usd while its definition says 'the value per token was not read'; snapshot value_rule is null and exchange_rate null, so no USD amount is supported. Live explorer check not possible (WebFetch to the API URL was blocked: permission request unanswered). Address source in snapshot says the address was already on the ledger (not an issuer page), so no issuer-page address check was possible."
+   },
+   {
+    "row": "o-ustb-ethereum-2026-11-15",
+    "severity": "finding",
+    "pass": 18,
+    "run": "run-2026-11-15",
+    "source_url": "https://eth.blockscout.com/api/v2/tokens/0x43415eB6ff9DB7E26A15b704e7A3eDCe97d31C4e",
+    "note": "Token count confirmed from snapshot ustb-ethereum.json (address matches, raw 39770123805585, 6 decimals = 39,770,123.805585). Not supported: (1) the NAV per share 'derived from Superstate's page on 12 Nov 2026' is not in the cited source or snapshot (value_rule null) and the Superstate page was not readable, so amount_usd 448616065 (implies $11.28023/share) cannot be checked; (2) the raw response names the token 'Invesco Short Duration US Government Securities Fund', not Superstate, contradicting the row's attribution to Superstate. Live explorer check not possible (WebFetch to the API URL was blocked: permission request unanswered). Address source in snapshot says the address was already on the ledger (not an issuer page), so no issuer-page address check was possible."
+   },
+   {
+    "row": "h-ousg-fyoxx",
+    "severity": "unreadable",
+    "pass": 18,
+    "run": "run-2026-11-15",
+    "source_url": "https://ondo.finance/ousg",
+    "note": "WebFetch to ondo.finance/ousg was blocked (permission request unanswered); the holding, the $23,640,401 amount, the 13 Nov 2026 date and the FYOXX label could not be checked. Not guessed."
    }
   ],
   "addressed": [
@@ -13101,7 +13178,9 @@
    }
   ],
   "pending": [
-   "h-ousg-fyoxx"
+   "h-ousg-fyoxx",
+   "o-mony-ethereum-2026-11-15",
+   "o-ustb-ethereum-2026-11-15"
   ]
  }
 }
