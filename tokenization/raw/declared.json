@@ -4133,7 +4133,9 @@
   }
  ],
  "verification_pending": [
-  "h-ousg-fyoxx"
+  "h-ousg-fyoxx",
+  "o-mony-ethereum-2026-11-15",
+  "o-ustb-ethereum-2026-11-15"
  ],
  "stress": {
   "omitted": "No tower in this pass. An honest rule needs each token's reserves split by custodian or bank. Of seven attested dollar tokens, only USDC, USDtb and USDGO name where a share of reserves sits; Tether, PYUSD, USDG and USD1 name no custodian. A tower built on that would show the tokens that disclose most as the most exposed."
