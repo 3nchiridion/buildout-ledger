@@ -1,0 +1,43 @@
+{
+ "id": "buidl-ethereum",
+ "token": "buidl",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+ "fetched_at": "2026-11-16T08:27:49+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0x7712c34205737192402172409a8F7ccef8aA2AEc",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0x7712c34205737192402172409a8F7ccef8aA2AEc",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Mon, 16 Nov 2026 08:27:49 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0x7712c34205737192402172409a8F7ccef8aA2AEc\",\"circulating_market_cap\":\"1637150776\",\"circulating_supply\":\"1637150776.1376493\",\"decimals\":\"6\",\"exchange_rate\":\"1.0\",\"holders_count\":\"55\",\"icon_url\":\"https://assets.coingecko.com/coins/images/36291/small/blackrock.png?1711013223\",\"name\":\"BlackRock USD Institutional Digital Liquidity Fund\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"BUIDL\",\"total_supply\":\"170275395777549\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"0.0\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "170275395777549",
+  "decimals": "6",
+  "holders": "55",
+  "supply_text": "170275395.777549",
+  "supply": 170275395.777549
+ },
+ "ok": true,
+ "value_usd": 170275395.78
+}

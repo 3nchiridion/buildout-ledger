@@ -1,0 +1,270 @@
+{
+ "date": "2026-11-16",
+ "finished_at": "2026-11-16T08:32:40+00:00",
+ "reads": [
+  {
+   "id": "usdt-ethereum",
+   "token": "usdt",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:47+00:00",
+   "value_usd": 84296691994.49,
+   "error": null,
+   "supply_text": "84296691994.493958",
+   "at": null
+  },
+  {
+   "id": "usdc-ethereum",
+   "token": "usdc",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:47+00:00",
+   "value_usd": 44294647942.77,
+   "error": null,
+   "supply_text": "44294647942.770032",
+   "at": null
+  },
+  {
+   "id": "pyusd-ethereum",
+   "token": "pyusd",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:48+00:00",
+   "value_usd": 1548733851.73,
+   "error": null,
+   "supply_text": "1548733851.725592",
+   "at": null
+  },
+  {
+   "id": "buidl-ethereum",
+   "token": "buidl",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:49+00:00",
+   "value_usd": 170275395.78,
+   "error": null,
+   "supply_text": "170275395.777549",
+   "at": null
+  },
+  {
+   "id": "mony-ethereum",
+   "token": "mony",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:49+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "53306304.4200",
+   "at": null
+  },
+  {
+   "id": "rlusd-ethereum",
+   "token": "rlusd",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:50+00:00",
+   "value_usd": 2020124095.22,
+   "error": null,
+   "supply_text": "2020124095.222889529286669761",
+   "at": null
+  },
+  {
+   "id": "usde-ethereum",
+   "token": "usde",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:50+00:00",
+   "value_usd": 4881619563.9,
+   "error": null,
+   "supply_text": "4881619563.899986985823503861",
+   "at": null
+  },
+  {
+   "id": "usds-ethereum",
+   "token": "usds",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:51+00:00",
+   "value_usd": 5234451291.85,
+   "error": null,
+   "supply_text": "5234451291.850170791750301711",
+   "at": null
+  },
+  {
+   "id": "ustb-ethereum",
+   "token": "ustb",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:51+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "40423450.911588",
+   "at": null
+  },
+  {
+   "id": "usdt-tron",
+   "token": "usdt",
+   "chain": "tron",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:52+00:00",
+   "value_usd": 94207597532.05,
+   "error": null,
+   "supply_text": "94207597532.054777",
+   "at": null
+  },
+  {
+   "id": "rlusd-xrpl",
+   "token": "rlusd",
+   "chain": "xrpl",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:52+00:00",
+   "value_usd": 757149975.26,
+   "error": null,
+   "supply_text": "757149975.2614872",
+   "at": null
+  },
+  {
+   "id": "buidl-ethereum-rpc",
+   "token": "buidl",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:53+00:00",
+   "value_usd": 170275395.78,
+   "error": null,
+   "supply_text": "170275395.777549",
+   "at": {
+    "block": 26426390
+   }
+  },
+  {
+   "id": "buidl-arbitrum",
+   "token": "buidl",
+   "chain": "arbitrum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:54+00:00",
+   "value_usd": 12633916.13,
+   "error": null,
+   "supply_text": "12633916.130000",
+   "at": {
+    "block": 524695916
+   }
+  },
+  {
+   "id": "buidl-optimism",
+   "token": "buidl",
+   "chain": "optimism",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:55+00:00",
+   "value_usd": 26582754.33,
+   "error": null,
+   "supply_text": "26582754.330000",
+   "at": {
+    "block": 159609449
+   }
+  },
+  {
+   "id": "buidl-polygon",
+   "token": "buidl",
+   "chain": "polygon",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:56+00:00",
+   "value_usd": 10481865.02,
+   "error": null,
+   "supply_text": "10481865.020000",
+   "at": {
+    "block": 97408138
+   }
+  },
+  {
+   "id": "buidl-avalanche",
+   "token": "buidl",
+   "chain": "avalanche",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:57+00:00",
+   "value_usd": 356469873.61,
+   "error": null,
+   "supply_text": "356469873.610000",
+   "at": {
+    "block": 100461754
+   }
+  },
+  {
+   "id": "buidl-aptos",
+   "token": "buidl",
+   "chain": "aptos",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:57+00:00",
+   "value_usd": 59457399.8,
+   "error": null,
+   "supply_text": "59457399.800000",
+   "at": {
+    "ledger_version": "8074668136"
+   }
+  },
+  {
+   "id": "buidl-solana",
+   "token": "buidl",
+   "chain": "solana",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:59+00:00",
+   "value_usd": 467301907.66,
+   "error": null,
+   "supply_text": "467301907.660000",
+   "at": {
+    "slot": 470064380
+   }
+  },
+  {
+   "id": "mony-solana",
+   "token": "mony",
+   "chain": "solana",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:27:59+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "6.0000",
+   "at": {
+    "slot": 470064382
+   }
+  },
+  {
+   "id": "jltxx-solana",
+   "token": "jltxx",
+   "chain": "solana",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:28:00+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "737965043.84",
+   "at": {
+    "slot": 470064385
+   }
+  },
+  {
+   "id": "jltxx-ethereum",
+   "token": "jltxx",
+   "chain": "ethereum",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:28:00+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "29491018.99",
+   "at": {
+    "block": 26426391
+   }
+  },
+  {
+   "id": "hoodst-robinhoodchain",
+   "token": "hoodst",
+   "chain": "robinhoodchain",
+   "ok": true,
+   "fetched_at": "2026-11-16T08:28:01+00:00",
+   "value_usd": null,
+   "error": null,
+   "supply_text": "203 of 203 tokens priced, $160,802,336.03",
+   "at": {
+    "block": 115625011
+   }
+  }
+ ]
+}
