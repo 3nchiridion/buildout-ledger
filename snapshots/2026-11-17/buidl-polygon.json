@@ -1,0 +1,103 @@
+{
+ "id": "buidl-polygon",
+ "token": "buidl",
+ "chain": "polygon",
+ "kind": "evm_rpc",
+ "address": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+ "fetched_at": "2026-11-17T09:40:11+00:00",
+ "explorer_url": "https://polygonscan.com/token/0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://polygon-bor-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 17 Nov 2026 09:40:11 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x5cf40d4\",\"id\":1}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://polygon-bor-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+       "data": "0x18160ddd"
+      },
+      "0x5cf40d4"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 17 Nov 2026 09:40:11 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x00000000000000000000000000000000000000000000000000000989418cdc40\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://polygon-bor-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99",
+       "data": "0x313ce567"
+      },
+      "0x5cf40d4"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 17 Nov 2026 09:40:11 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "rpc_used": "https://polygon-bor-rpc.publicnode.com",
+  "raw_supply": "10485114920000",
+  "decimals": 6,
+  "at": {
+   "block": 97468628
+  },
+  "supply_text": "10485114.920000",
+  "supply": 10485114.92
+ },
+ "ok": true,
+ "value_usd": 10485114.92
+}
