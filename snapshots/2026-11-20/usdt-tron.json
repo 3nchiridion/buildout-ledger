@@ -1,0 +1,42 @@
+{
+ "id": "usdt-tron",
+ "token": "usdt",
+ "chain": "tron",
+ "kind": "tronscan_trc20",
+ "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+ "fetched_at": "2026-11-20T08:59:41+00:00",
+ "explorer_url": "https://tronscan.org/#/token20/TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://apilist.tronscanapi.com/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Fri, 20 Nov 2026 08:59:41 GMT",
+     "Content-Type": "application/json;charset=utf-8"
+    },
+    "text": "{\"total\":1,\"contractMap\":{},\"rangeTotal\":1,\"trc20_tokens\":[{\"issue_ts\":0,\"symbol\":\"USDT\",\"redTag\":\"\",\"token_desc\":\"USDT is the official stablecoin issued by Tether on the TRON network.\",\"price_trx\":0,\"fromThirdParty\":false,\"price\":\"\",\"vip\":true,\"announcement\":\"\",\"icon_url\":\"https://static.tronscan.org/production/logo/usdtlogo.png\",\"level\":\"2\",\"volume24h\":65456185594.92,\"index\":1,\"market_cap_usd\":\"94106758033.639055\",\"transfer24h_rate\":-0.0686,\"market_info\":{\"fPrecision\":6,\"fShortName\":\"USDT\",\"fTokenAddr\":\"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t\",\"filter\":false,\"gain\":-0.0000188374,\"liquidity\":90171106.15793969118688993,\"pairUrl\":\"https://sun.io/#/scan/tokenDetail?tokenAddress=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&version=v2\",\"priceFrom\":\"SUNSWAPV2\",\"priceInTrx\":3.236534196419131342,\"priceInUsd\":\"0.998929603332879700\",\"sPrecision\":6,\"sShortName\":\"TRX\",\"volume24hGain\":0.078673,\"volume24hInTrx\":217948580695.43790944446660303062336},\"volume\":0,\"liquidity24h\":100372293.478790446251803972,\"name\":\"Tether USD\",\"white_paper_level\":0,\"tokenType\":\"trc20\",\"social_media\":\"\",\"totalTurnOver\":\"94207596093207088\",\"greyTag\":\"\",\"contract_address\":\"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t\",\"publicTag\":\"\",\"gain\":\"\",\"home_page\":\"https://tether.to/\",\"inTvcToken\":true,\"justSwapVolume24h\":66872462.007110092469793330,\"git_hub\":\"\",\"total_supply_with_decimals\":\"94207597532054777\",\"transfer24h\":2297178,\"specific_token\":false,\"social_media_list\":[{\"name\":\"Twitter\",\"links\":[{\"url\":\"https://twitter.com/Tether_to\",\"url_level\":0}]}],\"justSwapVolume24h_rate\":0.0435,\"volume24h_rate\":0.0254,\"email\":\"\",\"liquidity24h_rate\":0.0010,\"total_supply\":0,\"date_created\":1555400628,\"total_supply_str\":\"\",\"symbolShow\":true,\"contract_name\":\"TetherToken\",\"blueTag\":\"\",\"totalTurnOverInUsd\":\"94106756596.331504\",\"issue_address\":\"THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC\",\"home_page_level\":0,\"transfer_num\":3815174329,\"holders_count\":77612672,\"tokenPriceLine\":{\"total\":25,\"data\":[{\"priceUsd\":\"0.9989467668822934\",\"time\":\"1795075200\"},{\"priceUsd\":\"0.9989387135385623\",\"time\":\"1795078800\"},{\"priceUsd\":\"0.9988942773200169\",\"time\":\"1795082400\"},{\"priceUsd\":\"0.9988708452244056\",\"time\":\"1795086000\"},{\"priceUsd\":\"0.9989913040381468\",\"time\":\"1795089600\"},{\"priceUsd\":\"0.9988677012649366\",\"time\":\"1795093200\"},{\"priceUsd\":\"0.9993636977174223\",\"time\":\"1795096800\"},{\"priceUsd\":\"0.9988906832861456\",\"time\":\"1795100400\"},{\"priceUsd\":\"0.9990371418117863\",\"time\":\"1795104000\"},{\"priceUsd\":\"0.9988681922623356\",\"time\":\"1795107600\"},{\"priceUsd\":\"0.9988853010320969\",\"time\":\"1795111200\"},{\"priceUsd\":\"0.9988478906478094\",\"time\":\"1795114800\"},{\"priceUsd\":\"0.9989540244743902\",\"time\":\"1795118400\"},{\"priceUsd\":\"0.9988786637497407\",\"time\":\"1795122000\"},{\"priceUsd\":\"0.9988988732807612\",\"time\":\"1795125600\"},{\"priceUsd\":\"0.9988900620772686\",\"time\":\"1795129200\"},{\"priceUsd\":\"0.9988380608202515\",\"time\":\"1795132800\"},{\"priceUsd\":\"0.998974931375853\",\"time\":\"1795136400\"},{\"priceUsd\":\"0.9990384439389378\",\"time\":\"1795140000\"},{\"priceUsd\":\"0.9988765442679897\",\"time\":\"1795143600\"},{\"priceUsd\":\"0.9988769005396184\",\"time\":\"1795147200\"},{\"priceUsd\":\"0.9989443606467846\",\"time\":\"1795150800\"},{\"priceUsd\":\"0.9990501091707944\",\"time\":\"1795154400\"},{\"priceUsd\":\"0.999130456988879\",\"time\":\"1795158000\"},{\"priceUsd\":\"0.998974658537111\",\"time\":\"1795161600\"}]},\"decimals\":6,\"issue_time\":\"2019-04-16 20:41:20\",\"white_paper\":\"https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf\"}]}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "94207597532054777",
+  "decimals": 6,
+  "supply_text": "94207597532.054777",
+  "supply": 94207597532.05478
+ },
+ "ok": true,
+ "value_usd": 94207597532.05
+}

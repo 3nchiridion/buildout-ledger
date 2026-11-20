@@ -1,0 +1,99 @@
+{
+ "id": "jltxx-ethereum",
+ "token": "jltxx",
+ "chain": "ethereum",
+ "kind": "evm_rpc",
+ "address": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+ "fetched_at": "2026-11-20T08:59:49+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+ "address_source": {
+  "title": "J.P. Morgan Asset Management release, Launches Second Tokenized Money Market Fund on Ethereum, 13 May 2026",
+  "url": "https://am.jpmorgan.com/us/en/asset-management/per/about-us/media/press-releases/jp-morgan-asset-management-launches-second-tokenized-fund-on-ethereum/"
+ },
+ "value_rule": null,
+ "calls": [
+  {
+   "request": {
+    "url": "https://ethereum-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Fri, 20 Nov 2026 08:59:49 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x193ace6\",\"id\":1}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://ethereum-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+       "data": "0x18160ddd"
+      },
+      "0x193ace6"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Fri, 20 Nov 2026 08:59:49 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x00000000000000000000000000000000000000000000000000000000afdab212\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://ethereum-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x09864f52B035AE22eE739dFa5c748fA080D07bD8",
+       "data": "0x313ce567"
+      },
+      "0x193ace6"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Fri, 20 Nov 2026 08:59:50 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000002\"}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "rpc_used": "https://ethereum-rpc.publicnode.com",
+  "raw_supply": "2950345234",
+  "decimals": 2,
+  "at": {
+   "block": 26455270
+  },
+  "supply_text": "29503452.34",
+  "supply": 29503452.34
+ },
+ "ok": true
+}
