@@ -1,0 +1,43 @@
+{
+ "id": "pyusd-ethereum",
+ "token": "pyusd",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+ "fetched_at": "2026-11-21T08:40:26+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sat, 21 Nov 2026 08:40:26 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0x6c3ea9036406852006290770BEdFcAbA0e23A0e8\",\"circulating_market_cap\":\"2355618527\",\"circulating_supply\":\"2355841707.349321\",\"decimals\":\"6\",\"exchange_rate\":\"0.999927\",\"holders_count\":\"115504\",\"icon_url\":\"https://assets.coingecko.com/coins/images/31212/small/PYUSD_Token_Logo_2x.png?1765987788\",\"name\":\"PayPal USD\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"PYUSD\",\"total_supply\":\"1370528624300554\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"173340485\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "1370528624300554",
+  "decimals": "6",
+  "holders": "115504",
+  "supply_text": "1370528624.300554",
+  "supply": 1370528624.300554
+ },
+ "ok": true,
+ "value_usd": 1370528624.3
+}

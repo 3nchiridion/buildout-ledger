@@ -1,0 +1,103 @@
+{
+ "id": "buidl-arbitrum",
+ "token": "buidl",
+ "chain": "arbitrum",
+ "kind": "evm_rpc",
+ "address": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+ "fetched_at": "2026-11-21T08:40:32+00:00",
+ "explorer_url": "https://arbiscan.io/token/0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://arb1.arbitrum.io/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sat, 21 Nov 2026 08:40:32 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x1f5d068c\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://arb1.arbitrum.io/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+       "data": "0x18160ddd"
+      },
+      "0x1f5d068c"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sat, 21 Nov 2026 08:40:32 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x00000000000000000000000000000000000000000000000000000b7f873ffdb0\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://arb1.arbitrum.io/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872",
+       "data": "0x313ce567"
+      },
+      "0x1f5d068c"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sat, 21 Nov 2026 08:40:32 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "rpc_used": "https://arb1.arbitrum.io/rpc",
+  "raw_supply": "12642357870000",
+  "decimals": 6,
+  "at": {
+   "block": 526190220
+  },
+  "supply_text": "12642357.870000",
+  "supply": 12642357.87
+ },
+ "ok": true,
+ "value_usd": 12642357.87
+}
