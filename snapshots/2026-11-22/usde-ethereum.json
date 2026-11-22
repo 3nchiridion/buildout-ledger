@@ -1,0 +1,43 @@
+{
+ "id": "usde-ethereum",
+ "token": "usde",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+ "fetched_at": "2026-11-22T08:39:18+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 22 Nov 2026 08:39:18 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0x4c9EDD5852cd905f086C759E8383e09bff1E68B3\",\"circulating_market_cap\":\"4850527429\",\"circulating_supply\":\"4856359286.22002\",\"decimals\":\"18\",\"exchange_rate\":\"0.998779\",\"holders_count\":\"47161\",\"icon_url\":\"https://assets.coingecko.com/coins/images/33613/small/usde.png?1733810059\",\"name\":\"Ethena USDe\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"USDE\",\"total_supply\":\"4887021717418796165823503861\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"43715237\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "4887021717418796165823503861",
+  "decimals": "18",
+  "holders": "47161",
+  "supply_text": "4887021717.418796165823503861",
+  "supply": 4887021717.418797
+ },
+ "ok": true,
+ "value_usd": 4887021717.42
+}

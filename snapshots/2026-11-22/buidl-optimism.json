@@ -1,0 +1,103 @@
+{
+ "id": "buidl-optimism",
+ "token": "buidl",
+ "chain": "optimism",
+ "kind": "evm_rpc",
+ "address": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+ "fetched_at": "2026-11-22T08:39:23+00:00",
+ "explorer_url": "https://optimistic.etherscan.io/token/0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://mainnet.optimism.io",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 22 Nov 2026 08:39:23 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x9876841\",\"id\":1}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://mainnet.optimism.io",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+       "data": "0x18160ddd"
+      },
+      "0x9876841"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 22 Nov 2026 08:39:24 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x000000000000000000000000000000000000000000000000000018316a4f3540\",\"id\":1}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://mainnet.optimism.io",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5",
+       "data": "0x313ce567"
+      },
+      "0x9876841"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 22 Nov 2026 08:39:24 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\",\"id\":1}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "rpc_used": "https://mainnet.optimism.io",
+  "raw_supply": "26600516040000",
+  "decimals": 6,
+  "at": {
+   "block": 159868993
+  },
+  "supply_text": "26600516.040000",
+  "supply": 26600516.04
+ },
+ "ok": true,
+ "value_usd": 26600516.04
+}

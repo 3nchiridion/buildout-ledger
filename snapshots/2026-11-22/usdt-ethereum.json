@@ -1,0 +1,43 @@
+{
+ "id": "usdt-ethereum",
+ "token": "usdt",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+ "fetched_at": "2026-11-22T08:39:15+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Sun, 22 Nov 2026 08:39:15 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\"circulating_market_cap\":\"174567564889\",\"circulating_supply\":\"174843700863.34244\",\"decimals\":\"6\",\"exchange_rate\":\"0.998401\",\"holders_count\":\"17208017\",\"icon_url\":\"https://assets.coingecko.com/coins/images/325/small/Tether.png?1696501661\",\"name\":\"Tether\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"USDT\",\"total_supply\":\"80284169409652753\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"61126093173\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "80284169409652753",
+  "decimals": "6",
+  "holders": "17208017",
+  "supply_text": "80284169409.652753",
+  "supply": 80284169409.65276
+ },
+ "ok": true,
+ "value_usd": 80284169409.65
+}
