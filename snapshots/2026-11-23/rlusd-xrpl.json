@@ -1,0 +1,40 @@
+{
+ "id": "rlusd-xrpl",
+ "token": "rlusd",
+ "chain": "xrpl",
+ "kind": "xrpscan_obligations",
+ "address": "rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
+ "fetched_at": "2026-11-23T09:37:05+00:00",
+ "explorer_url": "https://xrpscan.com/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://api.xrpscan.com/api/v1/account/rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De/obligations",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Mon, 23 Nov 2026 09:37:05 GMT",
+     "Content-Type": "text/html; charset=utf-8"
+    },
+    "text": "[{\"currency\":\"524C555344000000000000000000000000000000\",\"value\":\"773103635.2215156\"}]"
+   }
+  }
+ ],
+ "parsed": {
+  "supply_text": "773103635.2215156",
+  "supply": 773103635.2215157
+ },
+ "ok": true,
+ "value_usd": 773103635.22
+}
