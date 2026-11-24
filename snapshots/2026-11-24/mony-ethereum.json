@@ -1,0 +1,39 @@
+{
+ "id": "mony-ethereum",
+ "token": "mony",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+ "fetched_at": "2026-11-24T11:29:51+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": null,
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 24 Nov 2026 11:29:51 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0x6a7c6aa2b8b8a6A891dE552bDEFFa87c3F53bD46\",\"circulating_market_cap\":null,\"circulating_supply\":null,\"decimals\":\"4\",\"exchange_rate\":null,\"holders_count\":\"2\",\"icon_url\":\"https://assets.coingecko.com/coins/images/71118/small/jpm_400x400.png?1765872616\",\"name\":\"JPMorgan My OnChain Net Yield Fund\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"MONY\",\"total_supply\":\"533515836000\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":null}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "533515836000",
+  "decimals": "4",
+  "holders": "2",
+  "supply_text": "53351583.6000",
+  "supply": 53351583.6
+ },
+ "ok": true
+}

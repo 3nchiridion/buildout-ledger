@@ -1,0 +1,51 @@
+{
+ "id": "jltxx-solana",
+ "token": "jltxx",
+ "chain": "solana",
+ "kind": "solana_spl",
+ "address": "J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+ "fetched_at": "2026-11-24T11:30:02+00:00",
+ "explorer_url": "https://solscan.io/token/J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+ "address_source": {
+  "title": "J.P. Morgan Asset Management release, Expands Access to Its Tokenized Money Market Funds on Solana, 22 Oct 2026",
+  "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-asset-management-expands-access-to-tokenized-money-market-funds-solana/"
+ },
+ "value_rule": null,
+ "calls": [
+  {
+   "request": {
+    "url": "https://api.mainnet-beta.solana.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "getTokenSupply",
+     "params": [
+      "J4cTuCH6frt4AnEmKfMS2k8hsUf7K94PV62sjUJno8Cz",
+      {
+       "commitment": "finalized"
+      }
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 24 Nov 2026 11:30:02 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":{\"context\":{\"apiVersion\":\"4.4.0\",\"slot\":473328125},\"value\":{\"amount\":\"69758386585\",\"decimals\":2,\"uiAmount\":697583865.85,\"uiAmountString\":\"697583865.85\"}},\"id\":1}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "69758386585",
+  "decimals": 2,
+  "at": {
+   "slot": 473328125
+  },
+  "supply_text": "697583865.85",
+  "supply": 697583865.85
+ },
+ "ok": true
+}

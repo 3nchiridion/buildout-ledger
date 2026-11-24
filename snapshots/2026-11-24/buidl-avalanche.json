@@ -1,0 +1,103 @@
+{
+ "id": "buidl-avalanche",
+ "token": "buidl",
+ "chain": "avalanche",
+ "kind": "evm_rpc",
+ "address": "0x53FC82f14F009009b440a706e31c9021E1196A2F",
+ "fetched_at": "2026-11-24T11:29:59+00:00",
+ "explorer_url": "https://snowtrace.io/token/0x53FC82f14F009009b440a706e31c9021E1196A2F",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://api.avax.network/ext/bc/C/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 24 Nov 2026 11:30:00 GMT",
+     "Content-Type": "application/json;charset=utf-8"
+    },
+    "text": "{\"result\":\"0x608ff2e\",\"id\":1,\"jsonrpc\":\"2.0\"}"
+   }
+  },
+  {
+   "request": {
+    "url": "https://api.avax.network/ext/bc/C/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x53FC82f14F009009b440a706e31c9021E1196A2F",
+       "data": "0x18160ddd"
+      },
+      "0x608ff2e"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 24 Nov 2026 11:30:00 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000001448b61bd9cf0\"}"
+   }
+  },
+  {
+   "request": {
+    "url": "https://api.avax.network/ext/bc/C/rpc",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x53FC82f14F009009b440a706e31c9021E1196A2F",
+       "data": "0x313ce567"
+      },
+      "0x608ff2e"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Tue, 24 Nov 2026 11:30:00 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "rpc_used": "https://api.avax.network/ext/bc/C/rpc",
+  "raw_supply": "356840407670000",
+  "decimals": 6,
+  "at": {
+   "block": 101252910
+  },
+  "supply_text": "356840407.670000",
+  "supply": 356840407.67
+ },
+ "ok": true,
+ "value_usd": 356840407.67
+}
