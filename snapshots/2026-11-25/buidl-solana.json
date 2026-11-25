@@ -1,0 +1,55 @@
+{
+ "id": "buidl-solana",
+ "token": "buidl",
+ "chain": "solana",
+ "kind": "solana_spl",
+ "address": "GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+ "fetched_at": "2026-11-25T10:17:25+00:00",
+ "explorer_url": "https://solscan.io/token/GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+ "address_source": {
+  "title": "Securitize release, BlackRock and Securitize Debut New BUIDL Share Class on Solana Network, 25 Mar 2025 (PR Newswire)",
+  "url": "https://www.prnewswire.com/news-releases/blackrock-and-securitize-debut-new-buidl-share-class-on-solana-network-302410160.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://api.mainnet-beta.solana.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "getTokenSupply",
+     "params": [
+      "GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
+      {
+       "commitment": "finalized"
+      }
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Wed, 25 Nov 2026 10:17:25 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":{\"context\":{\"apiVersion\":\"4.4.0\",\"slot\":473709890},\"value\":{\"amount\":\"382999391480000\",\"decimals\":6,\"uiAmount\":382999391.48,\"uiAmountString\":\"382999391.48\"}},\"id\":1}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "382999391480000",
+  "decimals": 6,
+  "at": {
+   "slot": 473709890
+  },
+  "supply_text": "382999391.480000",
+  "supply": 382999391.48
+ },
+ "ok": true,
+ "value_usd": 382999391.48
+}

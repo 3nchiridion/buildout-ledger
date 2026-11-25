@@ -1,0 +1,43 @@
+{
+ "id": "usds-ethereum",
+ "token": "usds",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+ "fetched_at": "2026-11-25T10:17:17+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Wed, 25 Nov 2026 10:17:17 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0xdC035D45d973E3EC169d2276DDab16f1e407384F\",\"circulating_market_cap\":\"6355506096\",\"circulating_supply\":\"6355785693.357599\",\"decimals\":\"18\",\"exchange_rate\":\"0.999956\",\"holders_count\":\"17382\",\"icon_url\":\"https://assets.coingecko.com/coins/images/39926/small/usds.webp?1726666683\",\"name\":\"USDS\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"USDS\",\"total_supply\":\"3151478982353013587064553315\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"199986638\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "3151478982353013587064553315",
+  "decimals": "18",
+  "holders": "17382",
+  "supply_text": "3151478982.353013587064553315",
+  "supply": 3151478982.3530135
+ },
+ "ok": true,
+ "value_usd": 3151478982.35
+}
