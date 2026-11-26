@@ -1,0 +1,103 @@
+{
+ "id": "buidl-ethereum-rpc",
+ "token": "buidl",
+ "chain": "ethereum",
+ "kind": "evm_rpc",
+ "address": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+ "fetched_at": "2026-11-26T09:56:50+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0x7712c34205737192402172409a8F7ccef8aA2AEc",
+ "address_source": {
+  "title": "Securitize release, BlackRock Launches New BUIDL Share Classes Across Multiple Blockchains, 13 Nov 2024 (PR Newswire)",
+  "url": "https://prnewswire.com/news-releases/blackrock-launches-new-buidl-share-classes-across-multiple-blockchains-to-expand-access-and-potential-of-buidl-ecosystem-302304035.html"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://ethereum-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_blockNumber",
+     "params": []
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Thu, 26 Nov 2026 09:56:50 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"result\":\"0x1945639\",\"id\":1}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://ethereum-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+       "data": "0x18160ddd"
+      },
+      "0x1945639"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Thu, 26 Nov 2026 09:56:50 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x000000000000000000000000000000000000000000000000000097dd2eec57fd\"}\n"
+   }
+  },
+  {
+   "request": {
+    "url": "https://ethereum-rpc.publicnode.com",
+    "method": "POST",
+    "body": {
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "eth_call",
+     "params": [
+      {
+       "to": "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+       "data": "0x313ce567"
+      },
+      "0x1945639"
+     ]
+    }
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Thu, 26 Nov 2026 09:56:51 GMT",
+     "Content-Type": "application/json"
+    },
+    "text": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x0000000000000000000000000000000000000000000000000000000000000006\"}\n"
+   }
+  }
+ ],
+ "parsed": {
+  "rpc_used": "https://ethereum-rpc.publicnode.com",
+  "raw_supply": "166976230807549",
+  "decimals": 6,
+  "at": {
+   "block": 26498617
+  },
+  "supply_text": "166976230.807549",
+  "supply": 166976230.807549
+ },
+ "ok": true,
+ "value_usd": 166976230.81
+}

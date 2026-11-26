@@ -1,0 +1,43 @@
+{
+ "id": "usdc-ethereum",
+ "token": "usdc",
+ "chain": "ethereum",
+ "kind": "blockscout_v2",
+ "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+ "fetched_at": "2026-11-26T09:56:43+00:00",
+ "explorer_url": "https://eth.blockscout.com/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+ "address_source": {
+  "title": "Address already on the ledger (on-chain reading since 14 Nov 2026); checked by the verifier",
+  "url": "https://buildoutledger.com/tokenization/"
+ },
+ "value_rule": {
+  "type": "usd_per_token",
+  "usd": 1
+ },
+ "calls": [
+  {
+   "request": {
+    "url": "https://eth.blockscout.com/api/v2/tokens/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "method": "GET",
+    "body": null
+   },
+   "response": {
+    "status": 200,
+    "headers": {
+     "Date": "Thu, 26 Nov 2026 09:56:44 GMT",
+     "Content-Type": "application/json; charset=utf-8"
+    },
+    "text": "{\"address_hash\":\"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\"circulating_market_cap\":\"69288831071\",\"circulating_supply\":\"69323358342.4566\",\"decimals\":\"6\",\"exchange_rate\":\"0.999503\",\"holders_count\":\"9638213\",\"icon_url\":\"https://raw.githubusercontent.com/ulyanas/frontend-configs/add-usdc-eurc-latest-token-icons/configs/token-icons/USDC_latest.svg\",\"name\":\"USDC\",\"new_ui_multiplier\":null,\"reputation\":\"ok\",\"symbol\":\"USDC\",\"total_supply\":\"44681098989504600\",\"type\":\"ERC-20\",\"ui_multiplier\":null,\"ui_multiplier_effective_at\":null,\"volume_24h\":\"15525080311\"}"
+   }
+  }
+ ],
+ "parsed": {
+  "raw_supply": "44681098989504600",
+  "decimals": "6",
+  "holders": "9638213",
+  "supply_text": "44681098989.504600",
+  "supply": 44681098989.5046
+ },
+ "ok": true,
+ "value_usd": 44681098989.5
+}
